@@ -9,7 +9,10 @@
   </p>
 </div>
 
-![Figure](docs/images/Figure_01.jpg)
+<p align="center">
+  <img src="docs/images/Figure_01.jpg" width="60%">
+</p>
+
 
 
 
