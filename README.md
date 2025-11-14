@@ -9,11 +9,8 @@
   </p>
 </div>
 
-<!-- ![biplanar-spine](https://github.com/user-attachments/assets/your-image-id-here)-->
+![Figure](docs/images/Figure01.jpg)
 
-<p align="center">
-  <img src="Figure_01.jpg" width="50%" />
-</p>
 
 
 ---
