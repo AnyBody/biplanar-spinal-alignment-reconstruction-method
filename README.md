@@ -29,27 +29,24 @@
 - [Outputs](#outputs)
 - [Validation & Limitations](#validation--limitations)
 - [How to Cite](#how-to-cite)
-- [Contributing](#contributing)
+- [Contributions](#contributions)
 - [Contact](#contact)
 
 ---
 
 ## About
 
-This repository provides an AnyBody-based implementation of a biplanar spinal alignment
-reconstruction method. Based on vertebral landmark annotations of sagittal or biplanar radiographs (sagittal & coronal), 
-the model reconstructs the 3D spinal alignment, i.e. vertebral centroid positions and inclinations in the respective planes.
+This repository provides an AnyBody-based implementation of a spinal alignment reconstruction method. Using vertebral landmark annotations extracted from single- or biplanar radiographs, the model reconstructs the 3D spinal alignment, including vertebral centroid positions and segmental orientations.
 
-The code is designed as a **standalone pipeline** for researchers working with
-biplanar radiographs who want to:
-- Calibrate 3D spinal alignment AnyBody models from 2D projections
-- Integrate subject-specific alignments into downstream musculoskeletal models
+The implementation provides an improved posture-reconstruction approach for researchers evaluating spine biomechanics through Musculoskeletal Modeling (MSK) based on single- or biplanar radiographs. It functions as a supplementary module to the AnyBody Modeling System and enables users to:
+- Calibrate 3D spinal alignment models in AnyBody from 2D radiographic projections
+- Integrate subject-specific spinal alignments into downstream musculoskeletal simulations
 
 ---
 
 ## Features
 
-- ✅ AnyBody Modeling System implementation (version X.X+)
+- ✅ AnyBody Modeling System implementation (version 8.0+)
 - ✅ Biplanar (coronal + sagittal) landmark-based posture reconstruction
 - ✅ Automatic computation of global and segmental alignment parameters
 - ✅ Example datasets and scripts for running the full pipeline
@@ -140,6 +137,12 @@ biplanar-spinal-alignment/
 ## How to cite
 
 todo
+
+---
+
+## Contributions
+
+Special thanks to all co-authors for their contributions, as well as the European Spine Study Group (ESSG) for constantly collecting clinically relevant data.
 
 ---
 
