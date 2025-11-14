@@ -38,8 +38,8 @@
 
 This repository provides an AnyBody-based implementation of a spinal alignment reconstruction method. Using vertebral landmark annotations extracted from single- or biplanar radiographs, the model reconstructs the 3D spinal alignment, including vertebral centroid positions and segmental orientations.
 
-The implementation provides an improved posture-reconstruction approach for researchers evaluating spine biomechanics through Musculoskeletal Modeling (MSK) based on single- or biplanar radiographs. It functions as a supplementary module to the AnyBody Modeling System and enables users to:
-- Calibrate 3D spinal alignment models in AnyBody from 2D radiographic projections
+The implementation provides an improved posture-reconstruction approach for researchers evaluating spine biomechanics through Musculoskeletal Modeling (MSK) based on single- or biplanar radiographs. It serves as a supplementary module to the AnyBody Modeling System and enables users to:
+- Calibrate 3D spinal alignment models in AnyBody from sagittal or coronal radiographic projections
 - Integrate subject-specific spinal alignments into downstream musculoskeletal simulations
 
 ---
@@ -55,15 +55,17 @@ The implementation provides an improved posture-reconstruction approach for rese
 
 ## Methods Overview
 
-High-level pipeline (adapt to what you actually do):
+High-level pipeline:
 
-1. **Input**: Biplanar radiographs (or extracted landmarks) in sagittal and coronal planes  
-2. **Landmark definition**: 2D coordinates of vertebral reference points (e.g. T1–L5)  
-3. **3D reconstruction**: Optimization that fits a parametric 3D spine model to the 2D projections  
-4. **Alignment metrics**: Computation of sagittal and coronal angles, offsets, and global alignment parameters  
-5. **Export**: 3D vertebral positions and orientations for downstream use
+1. **Input**: Extracted landmarks of biplanar radiographs in sagittal and (optionally) coronal planes  
+2. **Landmark definition**: 2D coordinates of vertebral corner nodes and spinopelvic parameters Pelvic Incidence (PI), Pelvic Tilt (PT), Sacral Slope (SS) and Pelvic Obliquity (PO)
+3. **Inputs**: Vertebral inclinations in the sagittal and coronal plane and vertebral centroids coordinates
+4. **3D reconstruction**: Posture reconstruction drivers that integrate the degrees of freedom in the model setup
+5. **Alignment metrics**: Computation of sagittal and coronal angles, offsets, and global alignment parameters  
 
-Include a small schematic figure in `docs/` if you have one and link it here.
+<p align="center">
+  <img src="docs/images/Scenario_overview_S3_and_SC3.jpg" width="60%">
+</p>
 
 ---
 
@@ -71,8 +73,7 @@ Include a small schematic figure in `docs/` if you have one and link it here.
 
 ### Requirements
 
-- **AnyBody Modeling System** version X.X or higher
-- (Optional) **Python 3.10+** for pre- and post-processing scripts
+- **AnyBody Modeling System** version 8.0 or higher
 
 ### Get the repository
 
