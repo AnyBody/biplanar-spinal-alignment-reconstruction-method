@@ -1,8 +1,7 @@
 <div align="center">
   <h1>Biplanar Spinal Alignment Reconstruction Method</h1>
   <p>
-    AnyBody model high fidelity calibration implementation for reconstructing 3D spinal alignment
-    from biplanar radiographs and extracting subject-specific sagittal and coronal alignment parameters.
+    AnyBody plugin for high fidelity reconstructing of 3D spinal alignment from biplanar radiographs.
     <br />
     <!-- Optional: link to preprint/paper -->
     <a href="https://doi.org/XX.XXXX/your-doi-here"><strong>Caimi et Rieger et al. (202X)</strong></a>
