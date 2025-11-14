@@ -67,10 +67,6 @@ High-level pipeline:
 4. **3D reconstruction**: Posture reconstruction drivers that integrate the degrees of freedom in the model setup
 5. **Alignment metrics**: Computation of sagittal and coronal angles, offsets, and global alignment parameters  
 
-<p align="center">
-  <img src="docs/images/Scenario_overview_S3_and_SC3.jpg" width="70%">
-</p>
-
 ---
 
 ## Installation
