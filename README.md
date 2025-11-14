@@ -8,10 +8,10 @@
   </p>
 </div>
 
-<p align="center">
-  <img src="docs/images/Figure_01.jpg" width="60%">
-</p>
 
+<p align="center">
+  <img src="docs/images/Title_picture.jpg" width="60%">
+</p>
 
 
 
@@ -41,6 +41,10 @@ This repository provides an AnyBody-based implementation of a spinal alignment r
 The implementation provides an improved posture-reconstruction approach for researchers evaluating spine biomechanics through Musculoskeletal Modeling (MSK) based on single- or biplanar radiographs. It serves as a supplementary module to the AnyBody Modeling System and enables users to:
 - Calibrate 3D spinal alignment models in AnyBody from sagittal or coronal radiographic projections
 - Integrate subject-specific spinal alignments into downstream musculoskeletal simulations
+
+<p align="center">
+  <img src="docs/images/Figure_01.jpg" width="60%">
+</p>
 
 ---
 
