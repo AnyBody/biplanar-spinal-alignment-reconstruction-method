@@ -9,7 +9,7 @@
   </p>
 </div>
 
-![Figure](docs/images/Figure01.jpg)
+![Figure](docs/images/Figure_01.jpg)
 
 
 
