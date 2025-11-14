@@ -46,10 +46,10 @@ The implementation provides an improved posture-reconstruction approach for rese
 
 ## Features
 
-- ✅ AnyBody Modeling System implementation (version 8.0+)
-- ✅ Biplanar (coronal + sagittal) landmark-based posture reconstruction
-- ✅ Automatic computation of global and segmental alignment parameters
-- ✅ Example datasets and scripts for running the full pipeline
+- AnyBody Modeling System implementation (version 8.0+)
+- Biplanar (coronal + sagittal) landmark-based posture reconstruction
+- Automatic computation of global and segmental alignment parameters
+- Example datasets and scripts for running the full pipeline
 
 ---
 
@@ -64,7 +64,7 @@ High-level pipeline:
 5. **Alignment metrics**: Computation of sagittal and coronal angles, offsets, and global alignment parameters  
 
 <p align="center">
-  <img src="docs/images/Scenario_overview_S3_and_SC3.jpg" width="60%">
+  <img src="docs/images/Scenario_overview_S3_and_SC3.jpg" width="70%">
 </p>
 
 ---
