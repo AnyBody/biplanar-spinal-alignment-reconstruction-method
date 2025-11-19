@@ -128,7 +128,7 @@ __Sagittal plane landmarks (x–y plane):__
 These consist of vertebral sagittal inclinations from T1 (_Angle_T1_) to L5 (_Angle_L5_), vertebral centroid coordinates from T1 (_T1_x_, _T1_y_) to L5 (_L5_x_, _L5_y_), anterior and posterior sacral reference points (_S1_ant_x_, _S1_ant_y_, _S1_post_x_, _S1_post_y_), the bi-femoral head axis (_FH_x_, _FH_y_), and the spinopelvic parameters Pelvic Incidence (_PI_) and Sacral Slope (_SS_).
 
 __Coronal plane landmarks (y–z plane):__
-These include vertebral coronal inclinations from T1 (_CorAngle_T1_) to L5 (_CorAngle_L5_), vertebral centroid z-coordinates from T1 (_T1_z_) to L5 (_L5_z_), the bi-femoral head axis (_FH_z_, _FH_y_), and the spinopelvic parameters Sacral Obliquity (_SacrObl_) and Pelvic Obliquity (_PelvicObl_).
+These include vertebral coronal inclinations from T1 (_CorAngle_T1_) to L5 (_CorAngle_L5_), vertebral centroid z-coordinates from T1 (_T1_z_) to L5 (_L5_z_), the bi-femoral head axis (_FH_z_, _FH_y_), and the spinopelvic parameter Pelvic Obliquity (_PelvicObl_).
 
 __Patient covariates:__
 Body height (_BH_) and body mass (_BM_) are provided in SI units.
