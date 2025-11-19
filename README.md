@@ -10,7 +10,7 @@
 
 
 <p align="center">
-  <img src="docs/images/Title_picture.jpg" width="80%">
+  <img src="docs/images/Title_picture.jpg" width="90%">
 </p>
 
 
