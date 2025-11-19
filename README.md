@@ -133,7 +133,7 @@ These include vertebral coronal inclinations from T1 (_CorAngle_T1_) to L5 (_Cor
 __Patient covariates:__
 Body height (_BH_) and body mass (_BM_) are provided in SI units.
 
-An examplatory ANYBODY input file is provided here:
+An example ANYBODY input file is provided here:
 [docs/input/Example_Patient.any](docs/input/Example_Patient.any)
 
 
