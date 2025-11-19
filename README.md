@@ -98,8 +98,6 @@ cd biplanar-spinal-alignment
 biplanar-spinal-alignment/
 ├─ Application/
 │  ├─ Main.any             # Entry point for the AnyBody model
-│  ├─ ModelSetup.any       # Global settings, parameters, folders
-│  └─ SpineModel.any       # Spine definition, joint chains, drivers
 ├─ Model/
 │  ├─ Segments/            # Vertebra/pelvis segment definitions
 │  ├─ Drivers/             # Kinematic drivers for the reconstruction
@@ -108,14 +106,9 @@ biplanar-spinal-alignment/
 │  ├─ landmarks/           # Example 2D landmark CSV files
 │  └─ config/              # Subject-specific parameter files
 ├─ Scripts/
-│  ├─ run_single_subject.anym   # AnyBody macro(s)
-│  ├─ run_batch_reconstruction.py
-│  └─ postprocess_results.py
-├─ Results/
-│  └─ subject_xxx/         # Example output folders (can be in .gitignore)
 ├─ docs/
-│  ├─ figures/             # Method schematics, README images
-│  └─ method_description.md
+│  ├─ images/             
+│  └─ input
 ├─ tests/                  # (Optional) regression tests or small checks
 ├─ LICENSE
 └─ README.md
@@ -124,6 +117,11 @@ biplanar-spinal-alignment/
 ---
 
 ## Input Data
+
+A complete example input file is provided here:
+
+[docs/input/example_input_file.any](docs/input/example_input_file.any)
+
 
 ---
 
