@@ -125,13 +125,13 @@ biplanar-spinal-alignment/
 Patient-specific input parameters are extracted from annotated (bi-)planar X-ray landmarks. These include sagittal and coronal geometric descriptors, as well as patient covariates used for model scaling. The right-handed orthogonal reference frame is defined in the sagittal plane and originates at the posterior sacral reference point. The x-axis points in the anterior–posterior (AP) direction, the y-axis in the superior–inferior (Sup–Inf) direction, and the z-axis in the medial–lateral (ML) direction.
 
 __Sagittal plane landmarks (x–y plane):__
-These consist of vertebral sagittal inclinations from T1 (Angle_T1) to L5 (Angle_L5), vertebral centroid coordinates from T1 (T1_x, T1_y) to L5 (L5_x, L5_y), anterior and posterior sacral reference points (S1_ant_x, S1_ant_y, S1_post_x, S1_post_y), the bi-femoral head axis (FH_x, FH_y), and the spinopelvic parameters Pelvic Incidence (PI) and Sacral Slope (SS).
+These consist of vertebral sagittal inclinations from T1 (_Angle_T1_) to L5 (_Angle_L5_), vertebral centroid coordinates from T1 (_T1_x_, _T1_y_) to L5 (_L5_x_, _L5_y_), anterior and posterior sacral reference points (_S1_ant_x_, _S1_ant_y_, _S1_post_x_, _S1_post_y_), the bi-femoral head axis (_FH_x_, _FH_y_), and the spinopelvic parameters Pelvic Incidence (_PI_) and Sacral Slope (_SS_).
 
 __Coronal plane landmarks (y–z plane):__
-These include vertebral coronal inclinations from T1 (CorAngle_T1) to L5 (CorAngle_L5), vertebral centroid z-coordinates from T1 (T1_z) to L5 (L5_z), the bi-femoral head axis (FH_z, FH_y), and the spinopelvic parameters Sacral Obliquity (SacrObl) and Pelvic Obliquity (PelvicObl).
+These include vertebral coronal inclinations from T1 (_CorAngle_T1_) to L5 (_CorAngle_L5_), vertebral centroid z-coordinates from T1 (_T1_z_) to L5 (_L5_z_), the bi-femoral head axis (_FH_z_, _FH_y_), and the spinopelvic parameters Sacral Obliquity (_SacrObl_) and Pelvic Obliquity (_PelvicObl_).
 
 __Patient covariates:__
-Body height (BH) and body mass (BM) are provided in SI units.
+Body height (_BH_) and body mass (_BM_) are provided in SI units.
 
 An examplatory ANYBODY input file is provided here:
 [docs/input/Example_Patient.any](docs/input/Example_Patient.any)
