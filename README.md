@@ -62,8 +62,8 @@ The implementation provides an improved posture-reconstruction approach for rese
 High-level pipeline:
 
 1. **Input**: Extracted landmarks of biplanar radiographs in sagittal and (optionally) coronal planes  
-2. **Landmark definition**: 2D coordinates of vertebral corner nodes and spinopelvic parameters Pelvic Incidence (PI), Pelvic Tilt (PT), Sacral Slope (SS) and Pelvic Obliquity (PO)
-3. **Inputs**: Vertebral inclinations in the sagittal and coronal plane and vertebral centroids coordinates
+2. **Anatomical Landmark definition**: 2D coordinates of vertebral corner nodes (T1-L5), sacral endolate and bi-femoral head axis, as well as spinopelvic parameters Pelvic Incidence (PI), Pelvic Tilt (PT), Sacral Slope (SS) and Pelvic Obliquity (PO)
+3. **Inputs**: Vertebral inclinations and vertebral centroids coordinates, derrived from Anatomical Landmarks in the sagittal and coronal plane
 4. **3D reconstruction**: Posture reconstruction drivers that integrate the degrees of freedom in the model setup
 5. **Alignment metrics**: Computation of sagittal and coronal angles, offsets, and global alignment parameters  
 
