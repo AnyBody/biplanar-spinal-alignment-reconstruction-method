@@ -118,9 +118,19 @@ biplanar-spinal-alignment/
 
 ## Input Data
 
-A complete example input file is provided here:
+Patient-specific input parameters are extracted from annotated (bi-)planar X-ray landmarks. These include sagittal and coronal geometric descriptors, as well as patient covariates used for model scaling. The right-handed orthogonal reference frame is defined in the sagittal plane and originates at the posterior sacral reference point. The x-axis points in the anterior–posterior (AP) direction, the y-axis in the superior–inferior (Sup–Inf) direction, and the z-axis in the medial–lateral (ML) direction.
 
-[docs/input/example_input_file.any](docs/input/example_input_file.any)
+__Sagittal plane landmarks (x–y plane):__
+These consist of vertebral sagittal inclinations from T1 (Angle_T1) to L5 (Angle_L5), vertebral centroid coordinates from T1 (T1_x, T1_y) to L5 (L5_x, L5_y), anterior and posterior sacral reference points (S1_ant_x, S1_ant_y, S1_post_x, S1_post_y), the bi-femoral head axis (FH_x, FH_y), and the spinopelvic parameters Pelvic Incidence (PI) and Sacral Slope (SS).
+
+__Coronal plane landmarks (y–z plane):__
+These include vertebral coronal inclinations from T1 (CorAngle_T1) to L5 (CorAngle_L5), vertebral centroid z-coordinates from T1 (T1_z) to L5 (L5_z), the bi-femoral head axis (FH_z, FH_y), and the spinopelvic parameters Sacral Obliquity (SacrObl) and Pelvic Obliquity (PelvicObl).
+
+__Patient covariates:__
+Body height (BH) and body mass (BM) are provided in SI units.
+
+An examplatory ANYBODY input file is provided here:
+[docs/input/Example_Patient.any](docs/input/Example_Patient.any)
 
 
 ---
