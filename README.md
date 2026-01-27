@@ -10,7 +10,7 @@
 
 
 <p align="center">
-  <img src="docs/images/Title_picture.jpg" width="90%">
+  <img src="docs/images/Scenario overview GitHub.jpg" width="90%">
 </p>
 
 
