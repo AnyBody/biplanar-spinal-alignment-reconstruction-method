@@ -43,7 +43,7 @@ The implementation provides an improved posture-reconstruction approach for rese
 - Integrate subject-specific spinal alignments into downstream musculoskeletal simulations
 
 <p align="center">
-  <img src="docs/images/Figure_01.jpg" width="60%">
+  <img src="docs/images/Figure 01 V2.jpg" width="60%">
 </p>
 
 ---
