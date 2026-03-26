@@ -143,10 +143,6 @@ An example ANYBODY input file is provided here:
 
 ---
 
-## Validation & Limitations
-
----
-
 ## How to cite
 
 todo
