@@ -4,7 +4,7 @@
     AnyBody plugin for high fidelity reconstructing of 3D spinal alignment from biplanar radiographs.
     <br />
     <!-- Optional: link to preprint/paper -->
-    <a href="https://doi.org/XX.XXXX/your-doi-here"><strong>Caimi et Rieger et al. (202X)</strong></a>
+    <a href="https://doi.org/XX.XXXX/your-doi-here"><strong>Caimi et Rieger et al. (2026)</strong></a>
   </p>
 </div>
 
