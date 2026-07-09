@@ -144,7 +144,9 @@ An example ANYBODY input file is provided here:
 
 ## How to cite
 
-todo
+A. Caimi, F. Rieger, K. Cybulski, F. Galbusera, S. Richner-Wunderlin, F. Kleinstück, D. Haschtmann, D. Jeszensky, T.F. Fekete, M. Loibl, F. Pellisé, I. Obeid, J. Pizones, A. Alanay, C. Yilgor, C. Netzer, S.J. Ferguson, D. Ignasiak,
+Sensitivity of musculoskeletal model-predicted loads to spinal alignment individualization in adult spinal deformity,
+Journal of Biomechanics, 2026, 113459, ISSN 0021-9290, https://doi.org/10.1016/j.jbiomech.2026.113459.
 
 ---
 
