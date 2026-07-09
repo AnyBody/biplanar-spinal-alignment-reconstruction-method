@@ -86,7 +86,6 @@ cd biplanar-spinal-alignment
 
 ## Usage
 
-toDo: Alice model flags
 
 ---
 
