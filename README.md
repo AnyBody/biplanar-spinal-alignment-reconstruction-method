@@ -92,21 +92,10 @@ cd biplanar-spinal-alignment
 
 ```
 biplanar-spinal-alignment/
-├─ Application/
-│  ├─ Main.any             # Entry point for the AnyBody model
-├─ Model/
-│  ├─ Segments/            # Vertebra/pelvis segment definitions
-│  ├─ Drivers/             # Kinematic drivers for the reconstruction
-│  └─ Measures/            # Alignment measures, output measures
-├─ Input/
-│  ├─ landmarks/           # Example 2D landmark CSV files
-│  └─ config/              # Subject-specific parameter files
-├─ Scripts/
+├─ Anybody_model/
+│  ├─ Main.any             
 ├─ docs/
-│  ├─ images/             
-│  └─ input
-├─ tests/                  # (Optional) regression tests or small checks
-├─ LICENSE
+│  ├─ Segments/            
 └─ README.md
 ```
 
