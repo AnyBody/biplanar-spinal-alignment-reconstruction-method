@@ -95,7 +95,9 @@ biplanar-spinal-alignment/
 ├─ Anybody_model/
 │  ├─ Main.any             
 ├─ docs/
-│  ├─ Segments/            
+│  ├─ images/      
+│  ├─ input/        
+│  │  ├─ Example_Patient.any        #example input file
 └─ README.md
 ```
 
