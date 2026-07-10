@@ -27,7 +27,6 @@
 - [Repository Structure](#repository-structure)
 - [Input Data](#input-data)
 - [Outputs](#outputs)
-- [Validation & Limitations](#validation--limitations)
 - [How to Cite](#how-to-cite)
 - [Contributions](#contributions)
 - [Contact](#contact)
@@ -86,12 +85,6 @@ cd biplanar-spinal-alignment
 
 ## Usage
 
-
----
-
-## Installation
-
-redundant?
 
 ---
 
