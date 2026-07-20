@@ -77,7 +77,7 @@ High-level pipeline:
 ### Get the repository
 
 ```bash
-git clone https://github.com/USERNAME/biplanar-spinal-alignment.git
+git clone https://github.com/Anybody/biplanar-spinal-alignment-reconstruction-method.git
 cd biplanar-spinal-alignment
 ```
 
