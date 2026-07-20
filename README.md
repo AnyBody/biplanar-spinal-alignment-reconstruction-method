@@ -52,7 +52,7 @@ The implementation provides an improved posture-reconstruction approach for rese
 - AnyBody Modeling System implementation (version 8.0+)
 - Biplanar (coronal + sagittal) landmark-based posture reconstruction
 - Automatic computation of global and segmental alignment parameters
-- Example datasets and scripts for running the full pipeline
+- Example AnyBody input file
 
 ---
 
