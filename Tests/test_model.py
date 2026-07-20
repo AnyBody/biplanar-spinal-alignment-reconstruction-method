@@ -16,7 +16,7 @@ def test_model():
     app = AnyPyProcess()
 
     macro = [
-        mc.Load(model_path, defs={'"PatientID"': '"Example_Patient"'}),
+        mc.Load(model_path),
         mc.OperationRun("Main.RunApplication"),
     ]
 
