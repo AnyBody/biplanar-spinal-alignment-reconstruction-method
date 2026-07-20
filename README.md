@@ -206,7 +206,7 @@ Journal of Biomechanics, 2026, 113459, ISSN 0021-9290, https://doi.org/10.1016/j
 
 ## Contributions
 
-We would like to acknowledge Morten Enemark Lund for maintaining the Anybody Github repository and his help during the setup of this Github page. Special thanks to all co-authors for their contributions, as well as the European Spine Study Group (ESSG) for constantly collecting clinically relevant data.
+We thank Morten Enemark Lund for maintaining the AnyBody GitHub repository and for his help in setting up this page. Special thanks to all co-authors for their contributions, as well as the European Spine Study Group (ESSG) for constantly collecting clinically relevant data.
 
 ---
 
