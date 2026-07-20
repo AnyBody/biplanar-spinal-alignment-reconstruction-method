@@ -19,6 +19,10 @@ jobs:
           manifest-path: pixi.toml
           activate-environment: true
 
+      - name: Update AnyBodyCon (scheduled tests)
+        if: github.event_name == 'schedule'
+        run: pixi update anybodycon
+
       - name: Run tests
         run: |
           cd Tests
