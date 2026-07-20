@@ -1,0 +1,79 @@
+  // Pelvis-T12 rotation driver
+  AnyKinEqFourierDriver PostureDriver = {
+    AnyKinMeasureOrg &Ref2 = .BodyModel.Interface.Trunk.PelvisT12LateralBending;
+    AnyKinMeasureOrg &Ref3 = .BodyModel.Interface.Trunk.PelvisT12Rotation;
+    AnyKinMeasureOrg &Ref1 = .BodyModel.Interface.Trunk.PelvisT12Extension;
+
+    Type = Sin;
+    Freq = 1 / (Main.Study.tEnd * 4); // omega = 2*pi*Freq (fundamental frequency)
+
+    A = {{0, 0}, {0, 0}, {0, 0}};
+    B = {{0, 0}, {0, 0}, {0, 0}};
+
+    Reaction.Type = {Off, Off, Off};
+  };
+
+  // T12-T1 rotation driver
+  AnyKinEqFourierDriver PostureDriverT12T1 = {
+    AnyKinMeasureOrg &Ref2 = .BodyModel.Interface.Trunk.T12T1LateralBending;
+    AnyKinMeasureOrg &Ref3 = .BodyModel.Interface.Trunk.T12T1Rotation;
+    AnyKinMeasureOrg &Ref1 = .BodyModel.Interface.Trunk.T12T1Extension;
+
+    Type = Sin;
+    Freq = 1 / (Main.Study.tEnd * 4); // omega = 2*pi*Freq (fundamental frequency)
+
+    A = {{0, 0}, {0, 0}, {0, 0}};
+    B = {{0, 0}, {0, 0}, {0, 0}};
+
+    Reaction.Type = {Off, Off, Off};
+  };
+
+  // Neck drivers
+  AnyFolder &CervicalJnts = Main.HumanModel.BodyModel.Trunk.Joints.Cervical;
+
+  AnyKinEqSimpleDriver CervicalNoFlexionDrv = {
+
+    AnyKinMeasure &u1 = .CervicalJnts.C1C0;
+    AnyKinMeasure &u2 = .CervicalJnts.Flexion.C2C3JntFlexion;
+    AnyKinMeasure &u3 = .CervicalJnts.Flexion.C3C4JntFlexion;
+    AnyKinMeasure &u4 = .CervicalJnts.Flexion.C4C5JntFlexion;
+    AnyKinMeasure &u5 = .CervicalJnts.Flexion.C5C6JntFlexion;
+    AnyKinMeasure &u6 = .CervicalJnts.Flexion.C6C7JntFlexion;
+    AnyKinMeasure &u7 = .CervicalJnts.Flexion.C7T1JntFlexion;
+
+    DriverPos = {0, 0, 0, 0, 0, 0, 0};
+    DriverVel = {0, 0, 0, 0, 0, 0, 0};
+    Reaction.Type = {On, On, On, On, On, On, Off};
+
+  }; // CervicalFlexionRhythmDrv
+
+  AnyKinEqSimpleDriver CervicalNoRotationDrv = {
+
+    AnyKinMeasure &u1 = .CervicalJnts.C2C1;
+    AnyKinMeasure &u2 = .CervicalJnts.Rotation.C2C3JntRotation;
+    AnyKinMeasure &u3 = .CervicalJnts.Rotation.C3C4JntRotation;
+    AnyKinMeasure &u4 = .CervicalJnts.Rotation.C4C5JntRotation;
+    AnyKinMeasure &u5 = .CervicalJnts.Rotation.C5C6JntRotation;
+    AnyKinMeasure &u6 = .CervicalJnts.Rotation.C6C7JntRotation;
+    AnyKinMeasure &u7 = .CervicalJnts.Rotation.C7T1JntRotation;
+
+    DriverPos = {0, 0, 0, 0, 0, 0, 0};
+    DriverVel = {0, 0, 0, 0, 0, 0, 0};
+    Reaction.Type = {On, On, On, On, On, On, On};
+
+  }; // CervicalRotationRhythmDrv
+
+  AnyKinEqSimpleDriver CervicalNoLatBendDrv = {
+
+    AnyKinMeasure &u2 = .CervicalJnts.LateralBending.C2C3JntLateralBending;
+    AnyKinMeasure &u3 = .CervicalJnts.LateralBending.C3C4JntLateralBending;
+    AnyKinMeasure &u4 = .CervicalJnts.LateralBending.C4C5JntLateralBending;
+    AnyKinMeasure &u5 = .CervicalJnts.LateralBending.C5C6JntLateralBending;
+    AnyKinMeasure &u6 = .CervicalJnts.LateralBending.C6C7JntLateralBending;
+    AnyKinMeasure &u7 = .CervicalJnts.LateralBending.C7T1JntLateralBending;
+
+    DriverPos = {0, 0, 0, 0, 0, 0};
+    DriverVel = {0, 0, 0, 0, 0, 0};
+    Reaction.Type = {On, On, On, On, On, On};
+
+  }; // CervicalLatBendRhythmDrv

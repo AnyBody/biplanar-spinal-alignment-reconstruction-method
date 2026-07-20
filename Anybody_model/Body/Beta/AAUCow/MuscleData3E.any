@@ -1,0 +1,330 @@
+AnyMuscleModel3E Coracobrachialis = 
+{
+  F0 = 608;
+  Lf0 = 0.035;
+  Gamma0 = 0.61;
+  Epsilon0 = 0.05;
+  Lt0 = 0.0;
+  //Fcfast = 0;
+  //Jt = 0;
+  //Jpe = 0;
+  K1 = 2;
+  //K2 = 8;
+  //PEFactor = 0;
+};
+
+AnyMuscleModel3E Supraspinatus1 = 
+{
+  F0 = 3248;
+  Lf0 = 0.09;
+  Gamma0 = 0.52;
+  Epsilon0 = 0.05;
+  Lt0 = 0.42;
+  //Fcfast = 0;
+  //Jt = 0;
+  //Jpe = 0;
+  K1 = 2;
+  //K2 = 8;
+  //PEFactor = 0;
+};
+
+AnyMuscleModel3E Supraspinatus2 = 
+{
+  F0 = 3248;
+  Lf0 = 0.09;
+  Gamma0 = 0.52;
+  Epsilon0 = 0.05;
+  Lt0 = 0.36;
+  //Fcfast = 0;
+  //Jt = 0;
+  //Jpe = 0;
+  K1 = 2;
+  //K2 = 8;
+  //PEFactor = 0;
+  
+};
+
+AnyMuscleModel3E Subscapularis = 
+{
+  F0 = 9391;
+  Lf0 = 0.03;
+  Gamma0 = 0.35;
+  Epsilon0 = 0.05;
+  Lt0 = 0.4;
+  //Fcfast = 0;
+  //Jt = 0;
+  //Jpe = 0;
+  K1 = 2;
+  //K2 = 8;
+  //PEFactor = 0;
+};
+
+AnyMuscleModel3E Infraspinatus = 
+{
+  F0 = 8677;
+  Lf0 = 0.04;
+  Gamma0 = 0.47;
+  Epsilon0 = 0.05;
+  Lt0 = 0.475;
+  //Fcfast = 0;
+  //Jt = 0;
+  //Jpe = 0;
+  K1 = 2;
+  //K2 = 8;
+  //PEFactor = 0;
+};
+
+AnyMuscleModel3E BicepsBrachii = 
+{
+  F0 = 2093;
+  Lf0 = 0.04;
+  Gamma0 = 0.66;
+  Epsilon0 = 0.05;
+  Lt0 = 0.27;
+  //Fcfast = 0;
+  //Jt = 0;
+  //Jpe = 0;
+  K1 = 2;
+  //K2 = 8;
+  //PEFactor = 0;
+};
+
+AnyMuscleModel3E TricepsBrachii = 
+{
+  F0 = 100;
+  Lf0 = 0;
+  Gamma0 = 0;
+  Epsilon0 = 0.05;
+  Lt0 = 0;
+  //Fcfast = 0;
+  //Jt = 0;
+  //Jpe = 0;
+  K1 = 2;
+  //K2 = 8;
+  //PEFactor = 0;
+};
+
+AnyMuscleModel3E Brachialis = 
+{
+  F0 = 400;
+  Lf0 = 0.18;
+  Gamma0 = 0.17;
+  Epsilon0 = 0.05;
+  Lt0 = 0.28;
+  //Fcfast = 0;
+  //Jt = 0;
+  //Jpe = 0;
+  K1 = 2;
+  //K2 = 8;
+  //PEFactor = 0;
+};
+
+AnyMuscleModel3E Anconeus = 
+{
+  F0 = 177;
+  Lf0 = 0.12;
+  Gamma0 = 0;
+  Epsilon0 = 0.05;
+  Lt0 = 0.18;
+  //Fcfast = 0;
+  //Jt = 0;
+  //Jpe = 0;
+  K1 = 2;
+  //K2 = 8;
+  //PEFactor = 0;
+};
+
+AnyMuscleModel3E TricepsBrachiiMed = 
+{
+  F0 = 0;
+  Lf0 = 0;
+  Gamma0 = 0;
+  Epsilon0 = 0.05;
+  Lt0 = 0;
+  //Fcfast = 0;
+  //Jt = 0;
+  //Jpe = 0;
+  K1 = 2;
+  //K2 = 8;
+  //PEFactor = 0;
+};
+
+AnyMuscleModel3E TricepsBrachiiLat = 
+{
+  F0 = 0;
+  Lf0 = 0;
+  Gamma0 = 0;
+  Epsilon0 = 0.05;
+  Lt0 = 0;
+  //Fcfast = 0;
+  //Jt = 0;
+  //Jpe = 0;
+  K1 = 2;
+  //K2 = 8;
+  //PEFactor = 0;
+};
+
+AnyMuscleModel3E TricepsBrachiiCau = 
+{
+  F0 = 0;
+  Lf0 = 0;
+  Gamma0 = 0;
+  Epsilon0 = 0.05;
+  Lt0 = 0;
+  //Fcfast = 0;
+  //Jt = 0;
+  //Jpe = 0;
+  K1 = 2;
+  //K2 = 8;
+  //PEFactor = 0;
+};
+
+AnyMuscleModel3E FlexorCarpiRadialis = 
+{
+  F0 = 0;
+  Lf0 = 0;
+  Gamma0 = 0;
+  Epsilon0 = 0.05;
+  Lt0 = 0;
+  //Fcfast = 0;
+  //Jt = 0;
+  //Jpe = 0;
+  K1 = 2;
+  //K2 = 8;
+  //PEFactor = 0;
+};
+
+AnyMuscleModel3E FlexorCarpiUlnaris1 = 
+{
+  F0 = 0;
+  Lf0 = 0;
+  Gamma0 = 0;
+  Epsilon0 = 0.05;
+  Lt0 = 0;
+  //Fcfast = 0;
+  //Jt = 0;
+  //Jpe = 0;
+  K1 = 2;
+  //K2 = 8;
+  //PEFactor = 0;
+};
+
+AnyMuscleModel3E FlexorCarpiUlnaris2 = 
+{
+  F0 = 0;
+  Lf0 = 0;
+  Gamma0 = 0;
+  Epsilon0 = 0.05;
+  Lt0 = 0;
+  //Fcfast = 0;
+  //Jt = 0;
+  //Jpe = 0;
+  K1 = 2;
+  //K2 = 8;
+  //PEFactor = 0;
+};
+
+AnyMuscleModel3E ExtensorCarpiRadialis = 
+{
+  F0 = 0;
+  Lf0 = 0;
+  Gamma0 = 0;
+  Epsilon0 = 0.05;
+  Lt0 = 0;
+  //Fcfast = 0;
+  //Jt = 0;
+  //Jpe = 0;
+  K1 = 2;
+  //K2 = 8;
+  //PEFactor = 0;
+};
+
+AnyMuscleModel3E ExtensorCarpiUlnaris = 
+{
+  F0 = 0;
+  Lf0 = 0;
+  Gamma0 = 0;
+  Epsilon0 = 0.05;
+  Lt0 = 0;
+  //Fcfast = 0;
+  //Jt = 0;
+  //Jpe = 0;
+  K1 = 2;
+  //K2 = 8;
+  //PEFactor = 0;
+};
+
+AnyMuscleModel3E FlexorDigiSuperficialis = 
+{
+  F0 = 0;
+  Lf0 = 0;
+  Gamma0 = 0;
+  Epsilon0 = 0.05;
+  Lt0 = 0;
+  //Fcfast = 0;
+  //Jt = 0;
+  //Jpe = 0;
+  K1 = 2;
+  //K2 = 8;
+  //PEFactor = 0;
+};
+
+AnyMuscleModel3E ExtensorDigitorumCommunisMed = 
+{
+  F0 = 0;
+  Lf0 = 0;
+  Gamma0 = 0;
+  Epsilon0 = 0.05;
+  Lt0 = 0;
+  //Fcfast = 0;
+  //Jt = 0;
+  //Jpe = 0;
+  K1 = 2;
+  //K2 = 8;
+  //PEFactor = 0;
+};
+
+AnyMuscleModel3E ExtensorDigitorumCommunisLat = 
+{
+  F0 = 0;
+  Lf0 = 0;
+  Gamma0 = 0;
+  Epsilon0 = 0.05;
+  Lt0 = 0;
+  //Fcfast = 0;
+  //Jt = 0;
+  //Jpe = 0;
+  K1 = 2;
+  //K2 = 8;
+  //PEFactor = 0;
+};
+
+AnyMuscleModel3E ExtensorDigitorumLateralis = 
+{
+  F0 = 0;
+  Lf0 = 0;
+  Gamma0 = 0;
+  Epsilon0 = 0.05;
+  Lt0 = 0;
+  //Fcfast = 0;
+  //Jt = 0;
+  //Jpe = 0;
+  K1 = 2;
+  //K2 = 8;
+  //PEFactor = 0;
+};
+
+AnyMuscleModel3E ExtensorDigitorumCommunis = 
+{
+  F0 = 0;
+  Lf0 = 0;
+  Gamma0 = 0;
+  Epsilon0 = 0.05;
+  Lt0 = 0;
+  //Fcfast = 0;
+  //Jt = 0;
+  //Jpe = 0;
+  K1 = 2;
+  //K2 = 8;
+  //PEFactor = 0;
+};

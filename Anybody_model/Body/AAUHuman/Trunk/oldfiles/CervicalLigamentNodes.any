@@ -1,0 +1,298 @@
+//description
+
+#define VisualizeLigamentNodes 1
+
+
+Main.HumanModel.BodyModel.Trunk.Segments.C2Seg = {
+  
+  // anterior longitudinal
+  AnyRefNode ALLNodeSuperior = {sRel = .Scale({0.040,0.567,0});};
+  AnyRefNode ALLNodeInferior = {sRel = .Scale({0.043,0.5555,0});};
+  
+  // posterior longitudinal
+  AnyRefNode PLLNodeSuperior = {sRel = .Scale({0.028, 0.569, 0});};
+  AnyRefNode PLLNodeInferior = {sRel = .Scale({0.0265,0.554,0});};
+  
+  #if VisualizeLigamentNodes
+  
+  AnyDrawSphere Draw_ALLNodeInferior = 
+  { //RGB = {0.8, 0.2, 0.2};
+    ScaleXYZ = {0.002, 0.002, 0.002};
+    Position = .ALLNodeInferior.sRel;
+    //GlobalCoord = Off;
+  };
+  
+  AnyDrawSphere Draw_ALLNodeSuperior = 
+  { //RGB = {0.8, 0.2, 0.2};
+    ScaleXYZ = {0.002, 0.002, 0.002};
+    Position = .ALLNodeSuperior.sRel;
+    //GlobalCoord = Off;
+  };
+  
+   AnyDrawSphere Draw_PLLNodeSuper = 
+  { //RGB = {0.8, 0.2, 0.2};
+    ScaleXYZ = {0.002, 0.002, 0.002};
+    Position = .PLLNodeSuperior.sRel;
+    //GlobalCoord = Off;
+  };
+  
+  AnyDrawSphere Draw_PLLNodeInferior = 
+  { //RGB = {0.8, 0.2, 0.2};
+    ScaleXYZ = {0.002, 0.002, 0.002};
+    Position = .PLLNodeInferior.sRel;
+    //GlobalCoord = Off;
+  };
+  
+  #endif
+  
+}; //C2Seg
+
+Main.HumanModel.BodyModel.Trunk.Segments.C3Seg = {
+  
+  // anterior longitudinal
+  AnyRefNode ALLNodeSuperior = {sRel = .Scale({0.043,0.5475,0});};
+  AnyRefNode ALLNodeInferior = {sRel = .Scale({0.0434,0.536,0});};
+  
+  // posterior longitudinal
+  AnyRefNode PLLNodeSuperior = {sRel = .Scale({0.030, 0.552, 0});};
+  AnyRefNode PLLNodeInferior = {sRel = .Scale({0.0273,0.5365,0});};
+  
+  #if VisualizeLigamentNodes
+  
+  AnyDrawSphere Draw_ALLNodeInferior = 
+  { //RGB = {0.8, 0.2, 0.2};
+    ScaleXYZ = {0.002, 0.002, 0.002};
+    Position = .ALLNodeInferior.sRel;
+    //GlobalCoord = Off;
+  };
+  
+  AnyDrawSphere Draw_ALLNodeSuperior = 
+  { //RGB = {0.8, 0.2, 0.2};
+    ScaleXYZ = {0.002, 0.002, 0.002};
+    Position = .ALLNodeSuperior.sRel;
+    //GlobalCoord = Off;
+  };
+  
+   AnyDrawSphere Draw_PLLNodeSuper = 
+  { //RGB = {0.8, 0.2, 0.2};
+    ScaleXYZ = {0.002, 0.002, 0.002};
+    Position = .PLLNodeSuperior.sRel;
+    //GlobalCoord = Off;
+  };
+  
+  AnyDrawSphere Draw_PLLNodeInferior = 
+  { //RGB = {0.8, 0.2, 0.2};
+    ScaleXYZ = {0.002, 0.002, 0.002};
+    Position = .PLLNodeInferior.sRel;
+    //GlobalCoord = Off;
+  };
+  
+  #endif
+  
+}; //C3Seg
+
+
+Main.HumanModel.BodyModel.Trunk.Segments.C4Seg = {
+  
+  
+  // anterior longitudinal
+  AnyRefNode ALLNodeSuperior = {sRel = .Scale({0.042,0.5298,0});};
+  AnyRefNode ALLNodeInferior = {sRel = .Scale({0.0403,0.5186,0});};
+  
+  // posterior longitudinal
+  AnyRefNode PLLNodeSuperior = {sRel = .Scale({0.0286, 0.536, 0});};
+  AnyRefNode PLLNodeInferior = {sRel = .Scale({0.0234,0.5227,0});};
+  
+  #if VisualizeLigamentNodes
+  
+  AnyDrawSphere Draw_ALLNodeInferior = 
+  { //RGB = {0.8, 0.2, 0.2};
+    ScaleXYZ = {0.002, 0.002, 0.002};
+    Position = .ALLNodeInferior.sRel;
+    //GlobalCoord = Off;
+  };
+  
+  AnyDrawSphere Draw_ALLNodeSuperior = 
+  { //RGB = {0.8, 0.2, 0.2};
+    ScaleXYZ = {0.002, 0.002, 0.002};
+    Position = .ALLNodeSuperior.sRel;
+    //GlobalCoord = Off;
+  };
+  
+   AnyDrawSphere Draw_PLLNodeSuper = 
+  { //RGB = {0.8, 0.2, 0.2};
+    ScaleXYZ = {0.002, 0.002, 0.002};
+    Position = .PLLNodeSuperior.sRel;
+    //GlobalCoord = Off;
+  };
+  
+  AnyDrawSphere Draw_PLLNodeInferior = 
+  { //RGB = {0.8, 0.2, 0.2};
+    ScaleXYZ = {0.002, 0.002, 0.002};
+    Position = .PLLNodeInferior.sRel;
+    //GlobalCoord = Off;
+  };
+  
+  #endif
+  
+}; //C4Seg
+
+
+Main.HumanModel.BodyModel.Trunk.Segments.C5Seg = {
+  
+  
+  // anterior longitudinal
+  AnyRefNode ALLNodeSuperior = {sRel = .Scale({0.039,0.5105,0});};
+  AnyRefNode ALLNodeInferior = {sRel = .Scale({0.037,0.499,0});};
+  
+  // posterior longitudinal
+  AnyRefNode PLLNodeSuperior = {sRel = .Scale({0.0265, 0.517, 0});};
+  AnyRefNode PLLNodeInferior = {sRel = .Scale({0.0205,0.5035,0});};
+  
+  #if VisualizeLigamentNodes
+  
+  AnyDrawSphere Draw_ALLNodeInferior = 
+  { //RGB = {0.8, 0.2, 0.2};
+    ScaleXYZ = {0.002, 0.002, 0.002};
+    Position = .ALLNodeInferior.sRel;
+    //GlobalCoord = Off;
+  };
+  
+  AnyDrawSphere Draw_ALLNodeSuperior = 
+  { //RGB = {0.8, 0.2, 0.2};
+    ScaleXYZ = {0.002, 0.002, 0.002};
+    Position = .ALLNodeSuperior.sRel;
+    //GlobalCoord = Off;
+  };
+  
+   AnyDrawSphere Draw_PLLNodeSuper = 
+  { //RGB = {0.8, 0.2, 0.2};
+    ScaleXYZ = {0.002, 0.002, 0.002};
+    Position = .PLLNodeSuperior.sRel;
+    //GlobalCoord = Off;
+  };
+  
+  AnyDrawSphere Draw_PLLNodeInferior = 
+  { //RGB = {0.8, 0.2, 0.2};
+    ScaleXYZ = {0.002, 0.002, 0.002};
+    Position = .PLLNodeInferior.sRel;
+    //GlobalCoord = Off;
+  };
+  
+  #endif
+  
+}; //C5Seg
+
+
+
+Main.HumanModel.BodyModel.Trunk.Segments.C6Seg = {
+  
+  
+  // anterior longitudinal
+  AnyRefNode ALLNodeSuperior = {sRel = .Scale({0.035,0.492,0});};
+  AnyRefNode ALLNodeInferior = {sRel = .Scale({0.033,0.481,0});};
+  
+  // posterior longitudinal
+  AnyRefNode PLLNodeSuperior = {sRel = .Scale({0.023, 0.498, 0});};
+  AnyRefNode PLLNodeInferior = {sRel = .Scale({0.017,0.485,0});};
+  
+  #if VisualizeLigamentNodes
+  
+  AnyDrawSphere Draw_ALLNodeInferior = 
+  { //RGB = {0.8, 0.2, 0.2};
+    ScaleXYZ = {0.002, 0.002, 0.002};
+    Position = .ALLNodeInferior.sRel;
+    //GlobalCoord = Off;
+  };
+  
+  AnyDrawSphere Draw_ALLNodeSuperior = 
+  { //RGB = {0.8, 0.2, 0.2};
+    ScaleXYZ = {0.002, 0.002, 0.002};
+    Position = .ALLNodeSuperior.sRel;
+    //GlobalCoord = Off;
+  };
+  
+   AnyDrawSphere Draw_PLLNodeSuper = 
+  { //RGB = {0.8, 0.2, 0.2};
+    ScaleXYZ = {0.002, 0.002, 0.002};
+    Position = .PLLNodeSuperior.sRel;
+    //GlobalCoord = Off;
+  };
+  
+  AnyDrawSphere Draw_PLLNodeInferior = 
+  { //RGB = {0.8, 0.2, 0.2};
+    ScaleXYZ = {0.002, 0.002, 0.002};
+    Position = .PLLNodeInferior.sRel;
+    //GlobalCoord = Off;
+  };
+  
+  #endif
+  
+}; //C6Seg
+
+
+
+Main.HumanModel.BodyModel.Trunk.Segments.C7Seg = {
+  
+  
+  // anterior longitudinal
+  AnyRefNode ALLNodeInferior = {sRel = .Scale({0.026,0.460,0});};
+  AnyRefNode ALLNodeSuperior = {sRel = .Scale({0.0315,0.4745,0});};
+  
+  // posterior longitudinal
+  AnyRefNode PLLNodeSuperior = {sRel = .Scale({0.012, 0.4815, 0});};
+  AnyRefNode PLLNodeInferior = {sRel = .Scale({0.0045,0.4665,0});};
+  
+  AnyRefNode &PostSup = PLLNodeSuperior;
+AnyRefNode &AntSup = ALLNodeSuperior;
+AnyRefNode &PostInf = PLLNodeInferior;
+AnyRefNode &AntInf = ALLNodeInferior;
+
+
+// Superior endplate
+AnyRefNode Endplate_sup = {
+  sRel = .PostSup.sRel;
+  ARel = RotMat(sRel, .AntSup.sRel, sRel +{0.0,0.1,0.0});   
+};
+
+// Inferior endplate
+AnyRefNode Endplate_inf = {
+  sRel = .PostInf.sRel;
+  ARel = RotMat(sRel, .AntInf.sRel, sRel +{0.0,0.1,0.0});
+};
+
+  
+  #if VisualizeLigamentNodes
+  
+  AnyDrawSphere Draw_ALLNodeInferior = 
+  { //RGB = {0.8, 0.2, 0.2};
+    ScaleXYZ = {0.002, 0.002, 0.002};
+    Position = .ALLNodeInferior.sRel;
+    //GlobalCoord = Off;
+  };
+  
+  AnyDrawSphere Draw_ALLNodeSuperior = 
+  { //RGB = {0.8, 0.2, 0.2};
+    ScaleXYZ = {0.002, 0.002, 0.002};
+    Position = .ALLNodeSuperior.sRel;
+    //GlobalCoord = Off;
+  };
+  
+  AnyDrawSphere Draw_PLLNodeSuper = 
+  { //RGB = {0.8, 0.2, 0.2};
+    ScaleXYZ = {0.002, 0.002, 0.002};
+    Position = .PLLNodeSuperior.sRel;
+    //GlobalCoord = Off;
+  };
+  
+  AnyDrawSphere Draw_PLLNodeInferior = 
+  { //RGB = {0.8, 0.2, 0.2};
+    ScaleXYZ = {0.002, 0.002, 0.002};
+    Position = .PLLNodeInferior.sRel;
+    //GlobalCoord = Off;
+  };
+  
+  #endif
+  
+}; //C7Seg
+

@@ -1,0 +1,133 @@
+//
+// ------------------------------------------------------------
+// Items necessary to calibrate posture according to input
+// ------------------------------------------------------------
+//
+
+AnyFolder PostureCalibration = {
+  
+//    // Display joint axes - activate to observe calibration effects
+//    #include "DrawJntAxes.any"
+  
+  // Operations setting joint orientations  
+  #include "DefineJntOrientations.any"
+  
+  // Operations setting joint positions according to centroids  
+  #include "DefineJntFramePositions.any"
+  
+  // Calibration setting alignment according to VERTEBRAL CENTROIDS
+  #include "JointCalStudy_centroids.any"
+  
+  // Study to verify if Calibration works properly 
+  #include "JointCalStudy_verification.any"
+  
+};
+
+
+// Align vertebrae centroids based to input file 
+AnyOperationSequence Calibrate_VertebralCentroids = {
+  
+  // ------------------------ 1 ----------------------------
+  // Use vertebral centroids to calibrate posture 
+  AnyOperation &PositionSegmentCentroids = .PostureCalibration.CalStudy_centroids.LigamentLengthAdjustment;
+  
+  AnyOperationMacro UpdateValues0 = {
+    MacroStr = { "classoperation Main "+strquote("Update Values") };
+  };
+  
+  // ------------------------ 2 ----------------------------
+  // Set joint positions accordingly 
+  AnyOperation &SetJointPos_SacrumPelvis   = .PostureCalibration.DefineJointPositions.SetJntPos_SacrumPelvis;
+  AnyOperation &SetJointPos_L5Sacrum   = .PostureCalibration.DefineJointPositions.SetJntPos_L5Sacrum;
+  AnyOperation &SetJointPos_L4L5       = .PostureCalibration.DefineJointPositions.SetJntPos_L4L5;
+  AnyOperation &SetJointPos_L3L4       = .PostureCalibration.DefineJointPositions.SetJntPos_L3L4;
+  AnyOperation &SetJointPos_L2L3       = .PostureCalibration.DefineJointPositions.SetJntPos_L2L3;
+  AnyOperation &SetJointPos_L1L2       = .PostureCalibration.DefineJointPositions.SetJntPos_L1L2;
+  AnyOperation &SetJointPos_T12L1      = .PostureCalibration.DefineJointPositions.SetJntPos_T12L1;
+  AnyOperation &SetJointPos_T11T12     = .PostureCalibration.DefineJointPositions.SetJntPos_T11T12;
+  AnyOperation &SetJointPos_T10T11     = .PostureCalibration.DefineJointPositions.SetJntPos_T10T11;
+  AnyOperation &SetJointPos_T9T10      = .PostureCalibration.DefineJointPositions.SetJntPos_T9T10;
+  AnyOperation &SetJointPos_T8T9       = .PostureCalibration.DefineJointPositions.SetJntPos_T8T9;
+  AnyOperation &SetJointPos_T7T8       = .PostureCalibration.DefineJointPositions.SetJntPos_T7T8;
+  AnyOperation &SetJointPos_T6T7       = .PostureCalibration.DefineJointPositions.SetJntPos_T6T7;
+  AnyOperation &SetJointPos_T5T6       = .PostureCalibration.DefineJointPositions.SetJntPos_T5T6;
+  AnyOperation &SetJointPos_T4T5       = .PostureCalibration.DefineJointPositions.SetJntPos_T4T5;
+  AnyOperation &SetJointPos_T3T4       = .PostureCalibration.DefineJointPositions.SetJntPos_T3T4;
+  AnyOperation &SetJointPos_T2T3       = .PostureCalibration.DefineJointPositions.SetJntPos_T2T3;
+  AnyOperation &SetJointPos_T1T2       = .PostureCalibration.DefineJointPositions.SetJntPos_T1T2;
+  
+  #if IncludeNeckCalibration == 1
+  AnyOperation &SetJointPos_C7T1       = .PostureCalibration.DefineJointPositions.SetJntPos_C7T1;
+  AnyOperation &SetJointPos_C6C7       = .PostureCalibration.DefineJointPositions.SetJntPos_C6C7;
+  AnyOperation &SetJointPos_C5C6       = .PostureCalibration.DefineJointPositions.SetJntPos_C5C6;
+  AnyOperation &SetJointPos_C4C5       = .PostureCalibration.DefineJointPositions.SetJntPos_C4C5;
+  AnyOperation &SetJointPos_C3C4       = .PostureCalibration.DefineJointPositions.SetJntPos_C3C4;
+  AnyOperation &SetJointPos_C2C3       = .PostureCalibration.DefineJointPositions.SetJntPos_C2C3;
+  #endif
+  
+  // ------------------------ 3 ----------------------------
+  // Set joint and segment axes in the new alignment 
+  AnyOperation &SetJointOrient_SP      = .PostureCalibration.DefineJointOrientations.SetJntAxes_SacrPelv;
+  AnyOperation &SetJointOrient_L5S1 = .PostureCalibration.DefineJointOrientations.SetJntAxes_L5S1;
+  AnyOperation &SetJointOrient_L4L5 = .PostureCalibration.DefineJointOrientations.SetJntAxes_L4L5;
+  AnyOperation &SetJointOrient_L3L4 = .PostureCalibration.DefineJointOrientations.SetJntAxes_L3L4;
+  AnyOperation &SetJointOrient_L2L3 = .PostureCalibration.DefineJointOrientations.SetJntAxes_L2L3;
+  AnyOperation &SetJointOrient_L1L2 = .PostureCalibration.DefineJointOrientations.SetJntAxes_L1L2;
+  AnyOperation &SetJointOrient_T12L1 = .PostureCalibration.DefineJointOrientations.SetJntAxes_T12L1; 
+  AnyOperation &SetJointOrient_T11T12 = .PostureCalibration.DefineJointOrientations.SetJntAxes_T11T12;
+  AnyOperation &SetJointOrient_T10T11 = .PostureCalibration.DefineJointOrientations.SetJntAxes_T10T11;
+  AnyOperation &SetJointOrient_T9T10 = .PostureCalibration.DefineJointOrientations.SetJntAxes_T9T10;
+  AnyOperation &SetJointOrient_T8T9 = .PostureCalibration.DefineJointOrientations.SetJntAxes_T8T9;
+  AnyOperation &SetJointOrient_T7T8 = .PostureCalibration.DefineJointOrientations.SetJntAxes_T7T8;
+  AnyOperation &SetJointOrient_T6T7 = .PostureCalibration.DefineJointOrientations.SetJntAxes_T6T7;
+  AnyOperation &SetJointOrient_T5T6 = .PostureCalibration.DefineJointOrientations.SetJntAxes_T5T6;
+  AnyOperation &SetJointOrient_T4T5 = .PostureCalibration.DefineJointOrientations.SetJntAxes_T4T5;
+  AnyOperation &SetJointOrient_T3T4 = .PostureCalibration.DefineJointOrientations.SetJntAxes_T3T4;
+  AnyOperation &SetJointOrient_T2T3 = .PostureCalibration.DefineJointOrientations.SetJntAxes_T2T3;
+  AnyOperation &SetJointOrient_T1T2 = .PostureCalibration.DefineJointOrientations.SetJntAxes_T1T2;
+  AnyOperation &SetJointOrient_C7T1 = .PostureCalibration.DefineJointOrientations.SetJntAxes_C7T1;  
+    
+  #if IncludeNeckCalibration == 1
+  AnyOperation &SetJointOrient_C6C7 = .PostureCalibration.DefineJointOrientations.SetJntAxes_C6C7;
+  AnyOperation &SetJointOrient_C5C6 = .PostureCalibration.DefineJointOrientations.SetJntAxes_C5C6;
+  AnyOperation &SetJointOrient_C4C5 = .PostureCalibration.DefineJointOrientations.SetJntAxes_C4C5;
+  AnyOperation &SetJointOrient_C3C4 = .PostureCalibration.DefineJointOrientations.SetJntAxes_C3C4;
+  AnyOperation &SetJointOrient_C2C3 = .PostureCalibration.DefineJointOrientations.SetJntAxes_C2C3;
+  #endif
+  
+  AnyOperation &SetJointOrient_SkullC1 = .PostureCalibration.DefineJointOrientations.SetJntAxes_SkullC1;
+  AnyOperation &SetSegAxes       = .PostureCalibration.DefineJointOrientations.SetSegAxes;
+  
+  AnyOperationMacro UpdateValues1 = {
+    MacroStr = { "classoperation Main "+strquote("Update Values") };
+  };
+  
+};
+
+
+
+//
+// ------------------------------------------------------------
+// ---- Errors between model and input - should be zero! ------
+// ------------------------------------------------------------
+//
+
+AnyFolder CheckPostureReconstruction = {
+  AnyFolder &Input = Main.SubjectData.Alignment;
+  AnyFolder &Model = Main.HumanModel.BodyModel.Trunk.PosturalMeasures;
+  
+  //Check the error of centroids calibration wrt. the calibration reference system
+  #include "Check_centroids_calibration_error.any"
+
+  
+};
+
+
+
+
+
+
+
+
+
+

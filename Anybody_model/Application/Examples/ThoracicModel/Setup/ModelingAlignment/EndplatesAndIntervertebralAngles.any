@@ -1,0 +1,481 @@
+// Add reference frames that are aligned with vertebral endplates
+
+//cervical C7 - C2
+#if IncludeNeckCalibration == 1
+
+HumanModel.BodyModel.Trunk.Segments.C2Seg = {
+  #include "EndplateDefinition.any"
+  #include "InferiorEndplateDefinition.any"
+};
+
+HumanModel.BodyModel.Trunk.Segments.C3Seg = {
+  #include "EndplateDefinition.any"  
+};
+
+HumanModel.BodyModel.Trunk.Segments.C4Seg = {
+  #include "EndplateDefinition.any"  
+};
+
+HumanModel.BodyModel.Trunk.Segments.C5Seg = {
+  #include "EndplateDefinition.any"  
+};
+
+HumanModel.BodyModel.Trunk.Segments.C6Seg = {
+  #include "EndplateDefinition.any"  
+};
+
+HumanModel.BodyModel.Trunk.Segments.C7Seg = {
+  #include "EndplateDefinition.any"  
+};
+
+
+#else 
+
+HumanModel.BodyModel.Trunk.Segments.C2Seg = {
+  #include "InferiorEndplateDefinition.any"
+  
+};
+
+#endif
+
+
+
+//Trunk Sacrum - T1
+HumanModel.BodyModel.Trunk.Segments.T1Seg = {
+  #include "EndplateDefinition.any"  
+};  
+
+HumanModel.BodyModel.Trunk.Segments.T2Seg = {
+  #include "EndplateDefinition.any"  
+};   
+
+HumanModel.BodyModel.Trunk.Segments.T3Seg = {
+  #include "EndplateDefinition.any"  
+}; 
+
+HumanModel.BodyModel.Trunk.Segments.T4Seg = {
+  #include "EndplateDefinition.any"  
+}; 
+
+HumanModel.BodyModel.Trunk.Segments.T5Seg = {
+  #include "EndplateDefinition.any"  
+}; 
+
+HumanModel.BodyModel.Trunk.Segments.T6Seg = {
+  #include "EndplateDefinition.any"  
+}; 
+
+HumanModel.BodyModel.Trunk.Segments.T7Seg = {
+  #include "EndplateDefinition.any"  
+}; 
+
+HumanModel.BodyModel.Trunk.Segments.T8Seg = {
+  #include "EndplateDefinition.any"  
+}; 
+
+HumanModel.BodyModel.Trunk.Segments.T9Seg = {
+  #include "EndplateDefinition.any"  
+}; 
+
+HumanModel.BodyModel.Trunk.Segments.T10Seg = {
+  #include "EndplateDefinition.any"  
+}; 
+
+HumanModel.BodyModel.Trunk.Segments.T11Seg = {
+  #include "EndplateDefinition.any"  
+}; 
+
+HumanModel.BodyModel.Trunk.Segments.T12Seg = {
+  #include "EndplateDefinition.any"  
+}; 
+
+HumanModel.BodyModel.Trunk.Segments.L1Seg = {
+  #include "EndplateDefinition.any"  
+}; 
+
+HumanModel.BodyModel.Trunk.Segments.L2Seg = {
+  #include "EndplateDefinition.any"   
+}; 
+
+HumanModel.BodyModel.Trunk.Segments.L3Seg = {
+  #include "EndplateDefinition.any"  
+}; 
+
+HumanModel.BodyModel.Trunk.Segments.L4Seg = {
+  #include "EndplateDefinition.any"  
+}; 
+
+HumanModel.BodyModel.Trunk.Segments.L5Seg = {   
+  #include "EndplateDefinition.any"   
+}; 
+
+HumanModel.BodyModel.Trunk.Segments.SacrumSeg = {
+  
+  AnyRefNode &PostSup = PLLNodeSuperior;
+  AnyRefNode &AntSup = ALLNodeSuperior;
+  
+  AnyRefNode Endplate_sup = {
+    sRel = .PostSup.sRel;
+    ARel = RotMat(sRel, .AntSup.sRel, sRel +{0.0,0.1,0.0});  
+    AnyDrawRefFrame Endplate_sup = {
+      ScaleXYZ = 0.05*{1,0,0};
+      RGB = {0,0.8,0.2};
+    };    
+  };
+  
+}; 
+
+
+//    *** INTERVERTEBRAL ANGLES ***
+
+HumanModel.BodyModel.Trunk = {
+  
+  AnyFolder IntervertebralAngles = {
+    AnyFolder &lsegs = Main.HumanModel.BodyModel.Trunk.Segments;
+    AnyFolder &tsegs = Main.HumanModel.BodyModel.Trunk.Segments;
+    
+    // Angles between superior endplate of inferior VB and inferior endplate of superior VB
+    AnyFolder AnglesSup2Inf = {
+      
+      AnyKinRotational S1L5 = {
+        AnyRefFrame &a0 = ..lsegs.SacrumSeg.Endplate_sup;
+        AnyRefFrame &a1 = ..lsegs.L5Seg.Endplate_inf;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      }; 
+      
+      AnyKinRotational L5L4 = {
+        AnyRefFrame &a0 = ..lsegs.L5Seg.Endplate_sup;
+        AnyRefFrame &a1 = ..lsegs.L4Seg.Endplate_inf;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational L4L3 = {
+        AnyRefFrame &a0 = ..lsegs.L4Seg.Endplate_sup;
+        AnyRefFrame &a1 = ..lsegs.L3Seg.Endplate_inf;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational L3L2 = {
+        AnyRefFrame &a0 = ..lsegs.L3Seg.Endplate_sup;
+        AnyRefFrame &a1 = ..lsegs.L2Seg.Endplate_inf;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational L2L1 = {
+        AnyRefFrame &a0 = ..lsegs.L2Seg.Endplate_sup;
+        AnyRefFrame &a1 = ..lsegs.L1Seg.Endplate_inf;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational L1T12 = {
+        AnyRefFrame &a0 = ..lsegs.L1Seg.Endplate_sup;
+        AnyRefFrame &a1 = ..tsegs.T12Seg.Endplate_inf;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational T12T11 = {
+        AnyRefFrame &a0 = ..tsegs.T12Seg.Endplate_sup;
+        AnyRefFrame &a1 = ..tsegs.T11Seg.Endplate_inf;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational T11T10 = {
+        AnyRefFrame &a0 = ..tsegs.T11Seg.Endplate_sup;
+        AnyRefFrame &a1 = ..tsegs.T10Seg.Endplate_inf;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational T10T9 = {
+        AnyRefFrame &a0 = ..tsegs.T10Seg.Endplate_sup;
+        AnyRefFrame &a1 = ..tsegs.T9Seg.Endplate_inf;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational T9T8 = {
+        AnyRefFrame &a0 = ..tsegs.T9Seg.Endplate_sup;
+        AnyRefFrame &a1 = ..tsegs.T8Seg.Endplate_inf;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational T8T7 = {
+        AnyRefFrame &a0 = ..tsegs.T8Seg.Endplate_sup;
+        AnyRefFrame &a1 = ..tsegs.T7Seg.Endplate_inf;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational T7T6 = {
+        AnyRefFrame &a0 = ..tsegs.T7Seg.Endplate_sup;
+        AnyRefFrame &a1 = ..tsegs.T6Seg.Endplate_inf;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational T6T5 = {
+        AnyRefFrame &a0 = ..tsegs.T6Seg.Endplate_sup;
+        AnyRefFrame &a1 = ..tsegs.T5Seg.Endplate_inf;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational T5T4 = {
+        AnyRefFrame &a0 = ..tsegs.T5Seg.Endplate_sup;
+        AnyRefFrame &a1 = ..tsegs.T4Seg.Endplate_inf;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational T4T3 = {
+        AnyRefFrame &a0 = ..tsegs.T4Seg.Endplate_sup;
+        AnyRefFrame &a1 = ..tsegs.T3Seg.Endplate_inf;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational T3T2 = {
+        AnyRefFrame &a0 = ..tsegs.T3Seg.Endplate_sup;
+        AnyRefFrame &a1 = ..tsegs.T2Seg.Endplate_inf;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational T2T1 = {
+        AnyRefFrame &a0 = ..tsegs.T2Seg.Endplate_sup;
+        AnyRefFrame &a1 = ..tsegs.T1Seg.Endplate_inf;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      // Positive values indicate lordotic angle, negative - kyphotic
+      AnyFloat IVA_L5S1 = S1L5.Pos[0]/pi*180;
+      AnyFloat IVA_L5L4 = L5L4.Pos[0]/pi*180;
+      AnyFloat IVA_L4L3 = L4L3.Pos[0]/pi*180;
+      AnyFloat IVA_L3L2 = L3L2.Pos[0]/pi*180;
+      AnyFloat IVA_L2L1 = L2L1.Pos[0]/pi*180;
+      AnyFloat IVA_L1T12 = L1T12.Pos[0]/pi*180;
+      AnyFloat IVA_T12T11 = T12T11.Pos[0]/pi*180;
+      AnyFloat IVA_T11T10 = T11T10.Pos[0]/pi*180;
+      AnyFloat IVA_T10T9 = T10T9.Pos[0]/pi*180;
+      AnyFloat IVA_T9T8 = T9T8.Pos[0]/pi*180;
+      AnyFloat IVA_T8T7 = T8T7.Pos[0]/pi*180;
+      AnyFloat IVA_T7T6 = T7T6.Pos[0]/pi*180;
+      AnyFloat IVA_T6T5 = T6T5.Pos[0]/pi*180;
+      AnyFloat IVA_T5T4 = T5T4.Pos[0]/pi*180;
+      AnyFloat IVA_T4T3 = T4T3.Pos[0]/pi*180;
+      AnyFloat IVA_T3T2 = T3T2.Pos[0]/pi*180;
+      AnyFloat IVA_T2T1 = T2T1.Pos[0]/pi*180;    
+    };
+    
+         
+    // Angles between axes indicating overall vertebral orientation
+    AnyFolder AnglesBetweenSegments = {
+      
+      AnyKinRotational SacralSlope = {
+        AnyRefFrame &a0 = ..lsegs.SacrumSeg.Endplate_sup;
+        AnyRefFrame &global = Main.EnvironmentModel.GlobalRef;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      }; 
+
+      
+      AnyKinRotational S1L5 = {
+        AnyRefFrame &a0 = ..lsegs.SacrumSeg.Endplate_sup;
+        AnyRefFrame &a1 = ..lsegs.L5Seg.Vertebral_orient;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      }; 
+      
+      AnyKinRotational L5L4 = {
+        AnyRefFrame &a0 = ..lsegs.L5Seg.Vertebral_orient;
+        AnyRefFrame &a1 = ..lsegs.L4Seg.Vertebral_orient;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational L4L3 = {
+        AnyRefFrame &a0 = ..lsegs.L4Seg.Vertebral_orient;
+        AnyRefFrame &a1 = ..lsegs.L3Seg.Vertebral_orient;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational L3L2 = {
+        AnyRefFrame &a0 = ..lsegs.L3Seg.Vertebral_orient;
+        AnyRefFrame &a1 = ..lsegs.L2Seg.Vertebral_orient;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational L2L1 = {
+        AnyRefFrame &a0 = ..lsegs.L2Seg.Vertebral_orient;
+        AnyRefFrame &a1 = ..lsegs.L1Seg.Vertebral_orient;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational L1T12 = {
+        AnyRefFrame &a0 = ..lsegs.L1Seg.Vertebral_orient;
+        AnyRefFrame &a1 = ..tsegs.T12Seg.Vertebral_orient;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational T12T11 = {
+        AnyRefFrame &a0 = ..tsegs.T12Seg.Vertebral_orient;
+        AnyRefFrame &a1 = ..tsegs.T11Seg.Vertebral_orient;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational T11T10 = {
+        AnyRefFrame &a0 = ..tsegs.T11Seg.Vertebral_orient;
+        AnyRefFrame &a1 = ..tsegs.T10Seg.Vertebral_orient;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational T10T9 = {
+        AnyRefFrame &a0 = ..tsegs.T10Seg.Vertebral_orient;
+        AnyRefFrame &a1 = ..tsegs.T9Seg.Vertebral_orient;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational T9T8 = {
+        AnyRefFrame &a0 = ..tsegs.T9Seg.Vertebral_orient;
+        AnyRefFrame &a1 = ..tsegs.T8Seg.Vertebral_orient;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational T8T7 = {
+        AnyRefFrame &a0 = ..tsegs.T8Seg.Vertebral_orient;
+        AnyRefFrame &a1 = ..tsegs.T7Seg.Vertebral_orient;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational T7T6 = {
+        AnyRefFrame &a0 = ..tsegs.T7Seg.Vertebral_orient;
+        AnyRefFrame &a1 = ..tsegs.T6Seg.Vertebral_orient;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational T6T5 = {
+        AnyRefFrame &a0 = ..tsegs.T6Seg.Vertebral_orient;
+        AnyRefFrame &a1 = ..tsegs.T5Seg.Vertebral_orient;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational T5T4 = {
+        AnyRefFrame &a0 = ..tsegs.T5Seg.Vertebral_orient;
+        AnyRefFrame &a1 = ..tsegs.T4Seg.Vertebral_orient;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational T4T3 = {
+        AnyRefFrame &a0 = ..tsegs.T4Seg.Vertebral_orient;
+        AnyRefFrame &a1 = ..tsegs.T3Seg.Vertebral_orient;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational T3T2 = {
+        AnyRefFrame &a0 = ..tsegs.T3Seg.Vertebral_orient;
+        AnyRefFrame &a1 = ..tsegs.T2Seg.Vertebral_orient;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      AnyKinRotational T2T1 = {
+        AnyRefFrame &a0 = ..tsegs.T2Seg.Vertebral_orient;
+        AnyRefFrame &a1 = ..tsegs.T1Seg.Vertebral_orient;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      
+      // Positive values indicate lordotic angle, negative - kyphotic
+      AnyFloat IVA_L5S1 = S1L5.Pos[0]/pi*180;
+      AnyFloat IVA_L5L4 = L5L4.Pos[0]/pi*180;
+      AnyFloat IVA_L4L3 = L4L3.Pos[0]/pi*180;
+      AnyFloat IVA_L3L2 = L3L2.Pos[0]/pi*180;
+      AnyFloat IVA_L2L1 = L2L1.Pos[0]/pi*180;
+      AnyFloat IVA_L1T12 = L1T12.Pos[0]/pi*180;
+      AnyFloat IVA_T12T11 = T12T11.Pos[0]/pi*180;
+      AnyFloat IVA_T11T10 = T11T10.Pos[0]/pi*180;
+      AnyFloat IVA_T10T9 = T10T9.Pos[0]/pi*180;
+      AnyFloat IVA_T9T8 = T9T8.Pos[0]/pi*180;
+      AnyFloat IVA_T8T7 = T8T7.Pos[0]/pi*180;
+      AnyFloat IVA_T7T6 = T7T6.Pos[0]/pi*180;
+      AnyFloat IVA_T6T5 = T6T5.Pos[0]/pi*180;
+      AnyFloat IVA_T5T4 = T5T4.Pos[0]/pi*180;
+      AnyFloat IVA_T4T3 = T4T3.Pos[0]/pi*180;
+      AnyFloat IVA_T3T2 = T3T2.Pos[0]/pi*180;
+      AnyFloat IVA_T2T1 = T2T1.Pos[0]/pi*180;  
+
+    };
+    
+    // Default values in AnyBody generic model
+    // Positive values indicate lordotic angle, negative - kyphotic
+    
+    AnyFolder AnglesSup2Inf_Default = {
+      AnyFloat IVA_L5S1 = 22.231510813499671;
+      AnyFloat IVA_L5L4 = 11.143067123184265;
+      AnyFloat IVA_L4L3 = 14.510018762278362;
+      AnyFloat IVA_L3L2 = 8.2555154518971428;
+      AnyFloat IVA_L2L1 = 1.3233565382104775;
+      AnyFloat IVA_L1T12 = 6.2932841769280277;
+      AnyFloat IVA_T12T11 = 9.0488902048817916;
+      AnyFloat IVA_T11T10 = 1.7013546053258106;
+      AnyFloat IVA_T10T9 = -0.18972043082375134;
+      AnyFloat IVA_T9T8 = 0.16993260952649752;
+      AnyFloat IVA_T8T7 = -1.7899106082460761;
+      AnyFloat IVA_T7T6 = -1.9693720698513539;
+      AnyFloat IVA_T6T5 = -6.4058602323568525;
+      AnyFloat IVA_T5T4 = -4.5770111471605013;
+      AnyFloat IVA_T4T3 = 0.61795825110266711;
+      AnyFloat IVA_T3T2 = -0.74405920288851113;
+      AnyFloat IVA_T2T1 = 0.0;
+    };
+    
+    AnyFolder AnglesBetweenSegments_Default = {
+      AnyFloat IVA_L5S1 = 24.468252335415531;
+      AnyFloat IVA_L5L4 = 13.379808645100107;
+      AnyFloat IVA_L4L3 = 13.469197277716299;
+      AnyFloat IVA_L3L2 = 6.4010523061381832;
+      AnyFloat IVA_L2L1 = -1.7381051054168528;
+      AnyFloat IVA_L1T12 = -3.3797049549945593;
+      AnyFloat IVA_T12T11 = -0.70137136955345691;
+      AnyFloat IVA_T11T10 = -4.4274856791652404;
+      AnyFloat IVA_T10T9 = -8.402285241075516;
+      AnyFloat IVA_T9T8 = -5.1896220302755252;
+      AnyFloat IVA_T8T7 = -3.6952245138467905;
+      AnyFloat IVA_T7T6 = -3.0274944249129025;
+      AnyFloat IVA_T6T5 = -6.5094063709203445;
+      AnyFloat IVA_T5T4 = -5.1728694215704589;
+      AnyFloat IVA_T4T3 = -1.3742512061633922;
+      AnyFloat IVA_T3T2 = -3.6754182014461061;
+      AnyFloat IVA_T2T1 = -2.5243686460717343;
+    };
+    
+
+    
+  };
+};
+
+
+
+

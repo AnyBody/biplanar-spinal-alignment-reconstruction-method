@@ -1,0 +1,23 @@
+// Switch on/off alignment modeling
+#define AlignmentModeling 1
+
+// The current alignmnet model works for thoraco-lumbar spine
+#define IncludeNeckCalibration 0
+
+// Select input file with patient-specific alignment data
+// Files are located in "InputAlignment". PatientID must match the filename (without extension)
+#define PatientID "Patient79314"
+
+// Save selected trunk outputs 
+#define SaveSelectedOutput 1
+
+// Make FileID for saving output depend on the simulated case
+AnyFolder FileNameConstruction = {
+  #if AlignmentModeling == 0 
+    AnyStringVar AlignmentName = "GenericAlignment";
+  #else
+    AnyStringVar AlignmentName = "Alignment_" + PatientID;
+  #endif
+
+  AnyStringVar fileID = AlignmentName;
+};

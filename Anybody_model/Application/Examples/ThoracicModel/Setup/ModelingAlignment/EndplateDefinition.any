@@ -1,0 +1,58 @@
+// *** Define endplate frames ***
+
+AnyRefNode &PostSup = PLLNodeSuperior;
+AnyRefNode &AntSup = ALLNodeSuperior;
+AnyRefNode &PostInf = PLLNodeInferior;
+AnyRefNode &AntInf = ALLNodeInferior;
+
+// Superior endplate
+AnyRefNode Endplate_sup = {
+  sRel = .PostSup.sRel;
+  ARel = RotMat(sRel, .AntSup.sRel, sRel +{0.0,0.1,0.0});   
+};
+
+// Inferior endplate
+AnyRefNode Endplate_inf = {
+  sRel = .PostInf.sRel;
+  ARel = RotMat(sRel, .AntInf.sRel, sRel +{0.0,0.1,0.0});
+};
+
+// Find general orientation of the vertebra
+// determined as half of the angle delimited by sup and inf endplates
+AnyRefNode Vertebral_orient = {
+  sRel = (.PostSup.sRel+ .AntSup.sRel + .PostInf.sRel + .AntInf.sRel)/4;
+  ARel = RotMat(sRel, (.AntSup.sRel + .AntInf.sRel)/2, sRel +{0.0,0.1,0.0});
+};
+
+
+// *** Display the frames ***
+// Outcommend below to hide from model view
+//
+// Superior endplate frame
+//Endplate_sup = {
+//  AnyDrawRefFrame Endplate_sup = {
+//    ScaleXYZ = 0.05*{1,0,0};
+//    RGB = {0,0.8,0.2};
+//  };  
+//};
+//
+//// Inferior endplate
+//Endplate_inf = {
+//  AnyDrawRefFrame T2endplate_inf = {
+//    ScaleXYZ = 0.05*{1,0,0};
+//    RGB = {0,0.2,0.8};
+//  };
+//};
+
+#if AlignmentModeling == 1 
+
+// Vertebra inclination 
+Vertebral_orient = {
+  AnyDrawRefFrame VB_orient = {
+    ScaleXYZ = 0.05*{1,0,1};
+    RGB = {0.4,0,0.4};
+  };
+};
+
+#endif
+

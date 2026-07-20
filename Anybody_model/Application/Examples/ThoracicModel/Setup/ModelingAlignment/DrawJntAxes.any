@@ -1,0 +1,84 @@
+// Draw superior (wrt disc space) joint frames - blue frames
+
+Main.HumanModel.BodyModel.Trunk.Segments.SegmentsLumbar = {
+  SacrumSeg.SacrumPelvisJntNode.viewRefFrame.Visible = On;
+  L5Seg.L5SacrumJntNode.viewRefFrame.Visible = On;
+  L4Seg.L4L5JntNode.viewRefFrame.Visible = On;
+  L3Seg.L3L4JntNode.viewRefFrame.Visible = On;
+  L2Seg.L2L3JntNode.viewRefFrame.Visible = On;
+  L1Seg.L1L2JntNode.viewRefFrame.Visible = On; 
+};
+
+Main.HumanModel.BodyModel.Trunk.Segments.SegmentsThorax = {
+  T12Seg.T12L1JntNode.viewRefFrame.Visible = On;
+  T11Seg.T11T12JntNode.viewRefFrame.Visible = On;
+  T10Seg.T10T11JntNode.viewRefFrame.Visible = On;
+  T9Seg.T9T10JntNode.viewRefFrame.Visible = On; 
+  T8Seg.T8T9JntNode.viewRefFrame.Visible = On;
+  T7Seg.T7T8JntNode.viewRefFrame.Visible = On;
+  T6Seg.T6T7JntNode.viewRefFrame.Visible = On;
+  T5Seg.T5T6JntNode.viewRefFrame.Visible = On;
+  T4Seg.T4T5JntNode.viewRefFrame.Visible = On;
+  T3Seg.T3T4JntNode.viewRefFrame.Visible = On;
+  T2Seg.T2T3JntNode.viewRefFrame.Visible = On;
+  T1Seg.T1T2JntNode.viewRefFrame.Visible = On; 
+};
+
+Main.HumanModel.BodyModel.Trunk.Segments.SegmentsCervicalSpine.C7Seg.C7T1JntNode.viewRefFrame.Visible = On;
+
+
+// Draw inferior (wrt to disc space) frames - magenta frames
+
+Main.HumanModel.BodyModel.Trunk.Segments.SegmentsLumbar = {
+  
+  PelvisSeg.PelvisSacrumJntNode.viewRefFrame.Visible = On;
+  PelvisSeg.PelvisSacrumJntNode.viewRefFrame.RGB = {0.8, 0.2, 0.8}; 
+  
+  SacrumSeg.SacrumL5JntNode.viewRefFrame.Visible = On;
+  SacrumSeg.SacrumL5JntNode.viewRefFrame.RGB = {0.8, 0.2, 0.8};
+  
+  L5Seg.L4L5JntNode.viewRefFrame.Visible = On;
+  L4Seg.L3L4JntNode.viewRefFrame.Visible = On;
+  L3Seg.L2L3JntNode.viewRefFrame.Visible = On;
+  L2Seg.L1L2JntNode.viewRefFrame.Visible = On;
+  L1Seg.T12L1JntNode.viewRefFrame.Visible = On;
+  
+  L5Seg.L4L5JntNode.viewRefFrame.RGB = {0.8, 0.2, 0.8};
+  L4Seg.L3L4JntNode.viewRefFrame.RGB = {0.8, 0.2, 0.8};
+  L3Seg.L2L3JntNode.viewRefFrame.RGB = {0.8, 0.2, 0.8};
+  L2Seg.L1L2JntNode.viewRefFrame.RGB = {0.8, 0.2, 0.8};
+  L1Seg.T12L1JntNode.viewRefFrame.RGB = {0.8, 0.2, 0.8};
+  
+};
+
+
+Main.HumanModel.BodyModel.Trunk.Segments.SegmentsThorax = {
+  
+  T12Seg.T11T12JntNode.viewRefFrame.Visible = On;
+  T11Seg.T10T11JntNode.viewRefFrame.Visible = On;
+  T10Seg.T9T10JntNode.viewRefFrame.Visible = On;
+  T9Seg.T8T9JntNode.viewRefFrame.Visible = On;
+  T8Seg.T7T8JntNode.viewRefFrame.Visible = On;
+  T7Seg.T6T7JntNode.viewRefFrame.Visible = On;
+  T6Seg.T5T6JntNode.viewRefFrame.Visible = On;
+  T5Seg.T4T5JntNode.viewRefFrame.Visible = On;
+  T4Seg.T3T4JntNode.viewRefFrame.Visible = On;
+  T3Seg.T2T3JntNode.viewRefFrame.Visible = On;
+  T2Seg.T1T2JntNode.viewRefFrame.Visible = On;
+  T1Seg.C7T1JntNode.viewRefFrame.Visible = On;
+  
+  T12Seg.T11T12JntNode.viewRefFrame.RGB = {0.8, 0.2, 0.8};
+  T11Seg.T10T11JntNode.viewRefFrame.RGB = {0.8, 0.2, 0.8};
+  T10Seg.T9T10JntNode.viewRefFrame.RGB = {0.8, 0.2, 0.8};
+  T9Seg.T8T9JntNode.viewRefFrame.RGB = {0.8, 0.2, 0.8};
+  T8Seg.T7T8JntNode.viewRefFrame.RGB = {0.8, 0.2, 0.8};
+  T7Seg.T6T7JntNode.viewRefFrame.RGB = {0.8, 0.2, 0.8};
+  T6Seg.T5T6JntNode.viewRefFrame.RGB = {0.8, 0.2, 0.8};
+  T5Seg.T4T5JntNode.viewRefFrame.RGB = {0.8, 0.2, 0.8};
+  T4Seg.T3T4JntNode.viewRefFrame.RGB = {0.8, 0.2, 0.8};
+  T3Seg.T2T3JntNode.viewRefFrame.RGB = {0.8, 0.2, 0.8};
+  T2Seg.T1T2JntNode.viewRefFrame.RGB = {0.8, 0.2, 0.8};
+  T1Seg.C7T1JntNode.viewRefFrame.RGB = {0.8, 0.2, 0.8};
+};
+
+

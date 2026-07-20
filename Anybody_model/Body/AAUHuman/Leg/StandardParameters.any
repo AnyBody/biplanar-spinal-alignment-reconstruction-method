@@ -1,0 +1,41 @@
+//This is the standard parameters for the leg for the unscaled model
+
+/// Standard parameter for the foot
+AnyFolder Foot = {
+  AnyVar Mass = 0.0145*..BodyParameters.BodyMass; // Winter
+  AnyVar Length = ( (0.06+0.012)^2 + (0.06+0.126)^2 + 0.023^2 )^0.5;
+  AnyVar Density = ..BodyParameters.Density;
+  AnyVar Height=0.05128772;  //< Not used but needs to be here taken from TLEM2 
+  AnyVar Width=0.07388748;   //< Not used but needs to be here taken from TLEM2
+};
+
+/// Standard parameter for the shank
+AnyFolder Shank = {
+  AnyVar Mass =0.0465*..BodyParameters.BodyMass; // Winter
+  AnyVar Length = 0.1992- (-0.2608);
+  AnyVar Density = ..BodyParameters.Density;
+};
+
+/// Standard parameter for the thigh
+AnyFolder Thigh = {
+  AnyVar Mass = 0.1*..BodyParameters.BodyMass; // Winter
+  AnyVar Length = ( (-0.025)^2 + (0.197+0.2580)^2 + (-0.028+0.038)^2 )^0.5;
+  AnyVar Density = ..BodyParameters.Density;
+};
+
+// Talus and Patella are not part of the old simple leg model. Values
+// are only here to provide a similar interface to other parts of the model.
+
+AnyFolder Talus = 
+{
+  AnyVar Mass = 1e10;
+  AnyVar Length = 1e10;
+  AnyVar Density = ..BodyParameters.Density;
+};
+
+AnyFolder Patella = {
+  AnyVar Mass = 1e10;
+  AnyVar Length = 1e10;
+  AnyVar Density = ..BodyParameters.Density;
+};
+

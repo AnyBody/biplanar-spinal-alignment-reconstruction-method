@@ -1,0 +1,371 @@
+/* -------------------------------------------------------------------------------------------
+This file implements a scaling law based on segment length and mass. The y (length) direction
+of each segment is scaled according to Anthro joint center distances. The cross sectional
+directions, x and z, are scaled according to the segment mass, and so is the strength.
+
+John Rasmussen & Mark de Zee, 2004.11.23
+------------------------------------------------------------------------------------------- */
+
+// Scaling law.
+// Main.HumanModel.Scaling
+
+  
+  AnyFolder MassScaling = {
+    AnyFolder Pelvis = { AnyVar MassScale = ...Anthropometrics.SegmentMasses.Pelvis / ..StandardParameters.Pelvis.Mass; };
+    AnyFolder Head = { AnyVar MassScale = (...Anthropometrics.SegmentMasses.Head) / (..StandardParameters.Head.Mass); };
+    AnyFolder Cervical = { AnyVar MassScale = .Head.MassScale;};
+    AnyFolder Thorax = { AnyVar MassScale = ( ...Anthropometrics.SegmentMasses.Thorax) / (..StandardParameters.Trunk.Mass  ); }; //Ratio of mass of thorax plus lumbar mass
+    AnyFolder Lumbar = { AnyVar MassScale = (...Anthropometrics.SegmentMasses.Lumbar) / (..StandardParameters.Lumbar.Mass); };//Ratio of mass of lumbar mass
+    AnyFolder Right = 
+    {
+      AnyFolder Clavicula = { AnyVar MassScale = ....Anthropometrics.SegmentMasses.Right.Shoulder / (...StandardParameters.Clavicula.Mass + ...StandardParameters.Scapula.Mass); };   
+      AnyFolder Scapula   = { AnyVar MassScale = ....Anthropometrics.SegmentMasses.Right.Shoulder / (...StandardParameters.Clavicula.Mass + ...StandardParameters.Scapula.Mass); };       
+      AnyFolder Humerus   = { AnyVar MassScale = ....Anthropometrics.SegmentMasses.Right.UpperArm / ...StandardParameters.Humerus.Mass; };
+      AnyFolder Ulna      = { AnyVar MassScale = ....Anthropometrics.SegmentMasses.Right.LowerArm / (...StandardParameters.Ulna.Mass+ ...StandardParameters.Radius.Mass); };
+      AnyFolder Radius    = { AnyVar MassScale = ....Anthropometrics.SegmentMasses.Right.LowerArm / (...StandardParameters.Ulna.Mass+ ...StandardParameters.Radius.Mass);  };
+      AnyFolder Hand      = { AnyVar MassScale = ....Anthropometrics.SegmentMasses.Right.Hand / ...StandardParameters.Hand.Mass; };    
+      AnyFolder Foot      = { AnyVar MassScale = ....Anthropometrics.SegmentMasses.Right.Foot  / ...StandardParameters.Right.Foot.Mass; };
+      AnyFolder Talus     = { AnyVar MassScale = ....Anthropometrics.SegmentMasses.Right.Talus / ...StandardParameters.Right.Talus.Mass; };  
+      AnyFolder Shank     = { AnyVar MassScale = (....Anthropometrics.SegmentMasses.Right.Shank) / (...StandardParameters.Right.Shank.Mass+...StandardParameters.Right.Patella.Mass); };
+      AnyFolder Thigh     = { AnyVar MassScale = ....Anthropometrics.SegmentMasses.Right.Thigh / ...StandardParameters.Right.Thigh.Mass; };  
+    };
+    AnyFolder Left = 
+    {
+      AnyFolder Clavicula = { AnyVar MassScale = ....Anthropometrics.SegmentMasses.Left.Shoulder / (...StandardParameters.Clavicula.Mass + ...StandardParameters.Scapula.Mass); };   
+      AnyFolder Scapula   = { AnyVar MassScale = ....Anthropometrics.SegmentMasses.Left.Shoulder / (...StandardParameters.Clavicula.Mass + ...StandardParameters.Scapula.Mass); };       
+      AnyFolder Humerus   = { AnyVar MassScale = ....Anthropometrics.SegmentMasses.Left.UpperArm / ...StandardParameters.Humerus.Mass; };
+      AnyFolder Ulna      = { AnyVar MassScale = ....Anthropometrics.SegmentMasses.Left.LowerArm / (...StandardParameters.Ulna.Mass+ ...StandardParameters.Radius.Mass); };
+      AnyFolder Radius    = { AnyVar MassScale = ....Anthropometrics.SegmentMasses.Left.LowerArm / (...StandardParameters.Ulna.Mass+ ...StandardParameters.Radius.Mass);  };
+      AnyFolder Hand      = { AnyVar MassScale = ....Anthropometrics.SegmentMasses.Left.Hand / ...StandardParameters.Hand.Mass; };    
+      AnyFolder Foot      = { AnyVar MassScale = ....Anthropometrics.SegmentMasses.Left.Foot  / ...StandardParameters.Left.Foot.Mass; };
+      AnyFolder Talus     = { AnyVar MassScale = ....Anthropometrics.SegmentMasses.Left.Talus / ...StandardParameters.Left.Talus.Mass; };  
+      AnyFolder Shank     = { AnyVar MassScale = (....Anthropometrics.SegmentMasses.Left.Shank) / (...StandardParameters.Right.Shank.Mass+...StandardParameters.Left.Patella.Mass); };
+      AnyFolder Thigh     = { AnyVar MassScale = ....Anthropometrics.SegmentMasses.Left.Thigh / ...StandardParameters.Left.Thigh.Mass; };  
+    };
+  };
+  
+  AnyFolder StrengthScaling = {
+    AnyFolder Pelvis = { AnyVar StrengthScale = ..MassScaling.Pelvis.MassScale / ..GeometricalScaling.Pelvis.LengthScale; };
+    AnyFolder Spine = { AnyVar StrengthScale = ..MassScaling.Thorax.MassScale / ..GeometricalScaling.Thorax.LengthScale; };
+    
+    AnyFolder Right =
+    {
+      AnyFolder Humerus = { AnyVar StrengthScale = ...MassScaling.Right.Humerus.MassScale / ...GeometricalScaling.Right.Humerus.LengthScale; };
+      AnyFolder Ulna    = { AnyVar StrengthScale = ...MassScaling.Right.Ulna.MassScale /    ...GeometricalScaling.Right.Ulna.LengthScale; };
+      AnyFolder Hand    = { AnyVar StrengthScale = ...MassScaling.Right.Hand.MassScale /    ...GeometricalScaling.Right.Hand.ScaleFunction.LengthScale; };
+      
+      // Strength scaling factors for the leg strength is not normalized with respect to segment length because 
+      // PSCA is calculated based on the muscle fibers which are also scaled separately. 
+      AnyFolder Foot = { AnyVar StrengthScale = ...MassScaling.Right.Foot.MassScale; };
+      AnyFolder Shank = { AnyVar StrengthScale = ...MassScaling.Right.Shank.MassScale; };
+      AnyFolder Thigh = { AnyVar StrengthScale = ...MassScaling.Right.Thigh.MassScale; };
+    };
+    AnyFolder Left =
+    {
+      AnyFolder Humerus = { AnyVar StrengthScale = ...MassScaling.Left.Humerus.MassScale / ...GeometricalScaling.Left.Humerus.LengthScale; };
+      AnyFolder Ulna    = { AnyVar StrengthScale = ...MassScaling.Left.Ulna.MassScale /    ...GeometricalScaling.Left.Ulna.LengthScale; };
+      AnyFolder Hand    = { AnyVar StrengthScale = ...MassScaling.Left.Hand.MassScale /    ...GeometricalScaling.Left.Hand.ScaleFunction.LengthScale; };
+      
+      // Strength scaling factors for the leg strength is not normalized with respect to segment length because 
+      // PSCA is calculated based on the muscle fibers which are also scaled separately. 
+      AnyFolder Foot = { AnyVar StrengthScale = ...MassScaling.Left.Foot.MassScale; };
+      AnyFolder Shank = { AnyVar StrengthScale = ...MassScaling.Left.Shank.MassScale; };
+      AnyFolder Thigh = { AnyVar StrengthScale = ...MassScaling.Left.Thigh.MassScale; };
+    };
+  };
+  
+  AnyFolder FiberLengthScaling = {    
+    AnyFolder Pelvis = { AnyVar FiberLengthScale = ...Anthropometrics.SegmentDimensions.PelvisWidth / ..StandardParameters.Pelvis.Width; };
+    
+    AnyFolder Right =
+    {
+      AnyFolder Foot = { AnyVar FiberLengthScale = ....Anthropometrics.SegmentDimensions.Right.FootLength / ...StandardParameters.Right.Foot.Length; };
+      AnyFolder Shank = { AnyVar FiberLengthScale = ....Anthropometrics.SegmentDimensions.Right.ShankLength / ...StandardParameters.Right.Shank.Length; };
+      AnyFolder Thigh = { AnyVar FiberLengthScale = ....Anthropometrics.SegmentDimensions.Right.ThighLength / ...StandardParameters.Right.Thigh.Length; };
+    };
+    AnyFolder Left =
+    {
+      AnyFolder Foot = { AnyVar FiberLengthScale = ....Anthropometrics.SegmentDimensions.Left.FootLength / ...StandardParameters.Left.Foot.Length; };         
+      AnyFolder Shank = { AnyVar FiberLengthScale = ....Anthropometrics.SegmentDimensions.Left.ShankLength / ...StandardParameters.Left.Shank.Length; };
+      AnyFolder Thigh = { AnyVar FiberLengthScale = ....Anthropometrics.SegmentDimensions.Left.ThighLength / ...StandardParameters.Left.Thigh.Length; };
+    };
+  };  
+  
+  AnyFolder GeometricalScaling = {
+    
+    AnyFolder Right ={
+        AnyFolder Clavicula = {
+        AnyFunTransform3DLin ScaleFunction = {
+          AnyMat33 ARel= {      {-0.280836,  0.188095, -0.941144},      {-0.004752,  0.980323, 0.197343},       { 0.959744, 0.059893,  -0.274416}}';
+          ScaleMat = ARel*...Thorax.ScaleFunction.ScaleMat*(ARel');
+          Offset = {0,0,0}*ARel';
+        };
+        
+      };
+      
+      AnyFolder Scapula = {
+        AnyFunTransform3DLin ScaleFunction = {
+          AnyMat33 ARel ={{0.561294, -0.097357, -0.821870},    {0.151325, 0.988389, -0.013736},    {0.813664, -0.116660, 0.569509}}';
+          ScaleMat = ARel*...Thorax.ScaleFunction.ScaleMat*(ARel');
+          Offset = {0,0,0}*ARel';
+        };
+      };
+      
+      AnyFolder Humerus = {
+        AnyVar LengthScale = (....Anthropometrics.SegmentDimensions.Right.UpperArmLength / ...StandardParameters.Humerus.Length);
+        AnyVar ms = ...MassScaling.Right.Humerus.MassScale;
+        AnyVar ls = LengthScale;      
+        AnyFunTransform3DLin ScaleFunction = {
+          ScaleMat = {{(.ms/.ls)^0.5, 0, 0},{0, .ls, 0},{0, 0, (.ms/.ls)^0.5}};
+          Offset = {0,0,0};
+        };
+      };
+      
+      AnyFolder Ulna = {
+        AnyVar LengthScale = (....Anthropometrics.SegmentDimensions.Right.LowerArmLength / ...StandardParameters.Ulna.Length);
+        AnyVar ms = ...MassScaling.Right.Ulna.MassScale;
+        AnyVar ls = LengthScale;
+        AnyFunTransform3DLin ScaleFunction = {
+          ScaleMat = {{(.ms/.ls)^0.5, 0, 0},{0, .ls, 0},{0, 0, (.ms/.ls)^0.5}};
+          Offset = {0,0,0};
+        };
+      };
+      
+      AnyFolder Radius = {
+        AnyFunTransform3DLin ScaleFunction = {
+          //This Arel is used for mapping the scaling of ulna into the radius coordinate system 
+          //which is rotated, Arel has been found for a neutral position
+          AnyMat33 ARel = {{-0.145873, -0.989303, -0.000001}, {0.989303, -0.145873, 0.000001}, {-0.000001, -0.000000, 1.000000}};
+          AnyMat33 ScaleXYZ = ..Ulna.ScaleFunction.ScaleMat;
+          ScaleMat = ARel'*ScaleXYZ*ARel;
+          Offset = {0,0,0}*ARel;      };
+      };
+      
+      AnyFolder Hand = {
+        AnyVar HandLength = ....Anthropometrics.SegmentDimensions.Right.HandLength;
+        AnyVar HandBreadth = ....Anthropometrics.SegmentDimensions.Right.HandBreadth;
+        AnyFunTransform3DLin ScaleFunction = {
+          AnyVar BreadthScale = .HandBreadth/....StandardParameters.Hand.HandBreadth;
+          AnyVar LengthScale =  .HandLength/....StandardParameters.Hand.HandLength;
+          
+          ScaleMat ={{LengthScale,0,0},{0,BreadthScale,0},{0,0,BreadthScale}};
+          
+          Offset = {0,0,0};
+        };
+      };	
+	  
+      // Talus uses the scaling function of the Foot segment
+      AnyFolder &Talus = Foot;
+      
+      AnyFolder Foot  = {
+        AnyVar LengthScale = ....Anthropometrics.SegmentDimensions.Right.FootLength / ...StandardParameters.Right.Foot.Length;    
+        AnyVar ms = ...MassScaling.Right.Foot.MassScale;
+        AnyVar ls = LengthScale;
+        AnyFunTransform3DLin ScaleFunction = {
+          ScaleMat = {{.ls, 0, 0},{0, (.ms/.ls)^0.5, 0},{0, 0, (.ms/.ls)^0.5}};
+          Offset = {0, 0, 0};
+        };
+      };
+      
+      AnyFolder Shank = {
+        AnyVar LengthScale  = ....Anthropometrics.SegmentDimensions.Right.ShankLength / ...StandardParameters.Right.Shank.Length;
+        AnyVar ms = ...MassScaling.Right.Shank.MassScale;
+        AnyVar ls = LengthScale;
+        AnyFunTransform3DLin ScaleFunction = {
+          ScaleMat = {{(.ms/.ls)^0.5, 0, 0},{0, .ls, 0},{0, 0, (.ms/.ls)^0.5}};
+          Offset = {0, 0, 0};
+        };
+      };
+      
+      AnyFolder Thigh = {
+        AnyVar LengthScale  = ....Anthropometrics.SegmentDimensions.Right.ThighLength / ...StandardParameters.Right.Thigh.Length;
+        AnyVar ms = ...MassScaling.Right.Thigh.MassScale;
+        AnyVar ls = LengthScale;
+        AnyFunTransform3DLin ScaleFunction = {
+          ScaleMat = {{(.ms/.ls)^0.5, 0, 0},{0, .ls, 0},{0, 0, (.ms/.ls)^0.5}};
+          Offset = {0, 0, 0};
+        };
+      };
+
+      // Patella uses the scaling function of the Thigh segment.
+      AnyFolder &Patella = Thigh;
+      
+    }; // Right
+    
+    AnyFolder Left ={
+      AnyFolder Clavicula = {
+        AnyFunTransform3DLin ScaleFunction = {
+          AnyMat33 ARel= {      {-0.280836,  -0.188095, -0.941144},      {0.004752,  0.980323, -0.197343},       { 0.959744, -0.059893,  -0.274416}}';
+          ScaleMat = ARel*...Thorax.ScaleFunction.ScaleMat*(ARel');
+          Offset = {0,0,0}*ARel';
+        };
+        
+      };
+      
+      AnyFolder Scapula = {
+        AnyFunTransform3DLin ScaleFunction = {
+          AnyMat33 ARel ={{0.561294,  0.097357, -0.821870},    {-0.151325, 0.988389, 0.013736},    {0.813664, 0.116660, 0.569509}}';
+          ScaleMat = ARel*...Thorax.ScaleFunction.ScaleMat*(ARel');
+          Offset = {0,0,0}*ARel';
+        };
+      };
+      
+      AnyFolder Humerus = {
+        AnyVar LengthScale = (....Anthropometrics.SegmentDimensions.Left.UpperArmLength / ...StandardParameters.Humerus.Length);
+        AnyVar ms = ...MassScaling.Left.Humerus.MassScale;
+        AnyVar ls = LengthScale;      
+        AnyFunTransform3DLin ScaleFunction = {
+          ScaleMat = {{(.ms/.ls)^0.5, 0, 0},{0, .ls, 0},{0, 0, (.ms/.ls)^0.5}};
+          Offset = {0,0,0};
+        };
+      };
+      
+      AnyFolder Ulna = {
+        AnyVar LengthScale = (....Anthropometrics.SegmentDimensions.Left.LowerArmLength / ...StandardParameters.Ulna.Length);
+        AnyVar ms = ...MassScaling.Left.Ulna.MassScale;
+        AnyVar ls = LengthScale;
+        AnyFunTransform3DLin ScaleFunction = {
+          ScaleMat = {{(.ms/.ls)^0.5, 0, 0},{0, .ls, 0},{0, 0, (.ms/.ls)^0.5}};
+          Offset = {0,0,0};
+        };
+      };
+      
+      AnyFolder Radius = {
+        AnyFunTransform3DLin ScaleFunction = {
+          //This Arel is used for mapping the scaling of ulna into the radius coordinate system 
+          //which is rotated, Arel has been found for a neutral position
+          AnyMat33 ARel = {{-0.145873, 0.989303, -0.000001}, {-0.989303, -0.145873, -0.000001}, {-0.000001, 0.000000, 1.000000}};
+          AnyMat33 ScaleXYZ = ..Ulna.ScaleFunction.ScaleMat;
+          ScaleMat = ARel'*ScaleXYZ*ARel;
+          Offset = {0,0,0}*ARel;      };
+      };
+      
+      AnyFolder Hand = {
+        AnyVar HandLength = ....Anthropometrics.SegmentDimensions.Left.HandLength;
+        AnyVar HandBreadth = ....Anthropometrics.SegmentDimensions.Left.HandBreadth;
+        AnyFunTransform3DLin ScaleFunction = {
+          AnyVar BreadthScale = .HandBreadth/....StandardParameters.Hand.HandBreadth;
+          AnyVar LengthScale =  .HandLength/....StandardParameters.Hand.HandLength;
+          
+          ScaleMat ={{LengthScale,0,0},{0,BreadthScale,0},{0,0,BreadthScale}};
+          
+          Offset = {0,0,0};
+        };
+      };	
+	
+      // Talus uses the scaling function of the Foot segment
+      AnyFolder &Talus = Foot;
+      
+      AnyFolder Foot  = {
+        AnyVar LengthScale  = ....Anthropometrics.SegmentDimensions.Left.FootLength / ...StandardParameters.Left.Foot.Length;    
+        AnyVar ms = ...MassScaling.Left.Foot.MassScale;
+        AnyVar ls = LengthScale;
+        AnyFunTransform3DLin ScaleFunction = {
+          ScaleMat = {{.ls, 0, 0},{0, (.ms/.ls)^0.5, 0},{0, 0, (.ms/.ls)^0.5}};
+          Offset = {0, 0, 0};
+        };
+      };
+      
+      AnyFolder Shank = {
+        AnyVar LengthScale  = ....Anthropometrics.SegmentDimensions.Left.ShankLength / ...StandardParameters.Left.Shank.Length;
+        AnyVar ms = ...MassScaling.Left.Shank.MassScale;
+        AnyVar ls = LengthScale;
+        AnyFunTransform3DLin ScaleFunction = {
+          ScaleMat = {{(.ms/.ls)^0.5, 0, 0},{0, .ls, 0},{0, 0, (.ms/.ls)^0.5}};
+          Offset = {0, 0, 0};
+        };
+      };
+      
+      AnyFolder Thigh = {
+        AnyVar LengthScale  = ....Anthropometrics.SegmentDimensions.Left.ThighLength / ...StandardParameters.Left.Thigh.Length;
+        AnyVar ms = ...MassScaling.Left.Thigh.MassScale;
+        AnyVar ls = LengthScale;
+        AnyFunTransform3DLin ScaleFunction = {
+          ScaleMat = {{(.ms/.ls)^0.5, 0, 0},{0, .ls, 0},{0, 0, (.ms/.ls)^0.5}};
+          Offset = {0, 0, 0};
+        };
+      };
+
+      // Patella uses the scaling function of the Thigh segment.
+      AnyFolder &Patella = Thigh;
+      
+    }; // Left
+    
+    
+    
+    // Common law for the upper body
+    // *****************************
+    
+    AnyFolder Pelvis = {
+      AnyVar LengthScale = ...Anthropometrics.SegmentDimensions.PelvisWidth / ..StandardParameters.Pelvis.Width;
+      AnyVar ms = ..MassScaling.Pelvis.MassScale;
+      AnyVar ls = LengthScale;
+      AnyFunTransform3DLin ScaleFunction = {
+        ScaleMat = diag({(.ms/.ls)^0.5, (.ms/.ls)^0.5, .ls});
+        AnyMat33 ScaleMatInverse = diag({1/((.ms/.ls)^0.5), 1/((.ms/.ls)^0.5), 1/.ls});
+        Offset = {0, 0, 0};
+      };
+    };
+    
+    AnyFolder Thorax = {
+      AnyVar LengthScale = (...Anthropometrics.SegmentDimensions.TrunkHeight / ..StandardParameters.Trunk.Height);
+      AnyVar ms = ..MassScaling.Thorax.MassScale;
+      AnyVar ls = LengthScale;
+      
+      AnyFloat OriginUnscaled ??= warn(
+        0, "To ensure continuity in the scaling law the thorax origin must be specified"
+      );
+
+      AnyFunTransform3DLin ScaleFunction = {
+        ScaleMat = diag({(.ms/.ls)^0.5, .ls, (.ms/.ls)^0.5});
+        AnyMat33 ScaleMatInverse = diag({1/((.ms/.ls)^0.5), 1/.ls, 1/((.ms/.ls)^0.5)});
+        Offset = (
+          ..Lumbar.ScaleFunction(.OriginUnscaled) - (.OriginUnscaled * ScaleMat')
+        ) * ScaleMatInverse;
+      };
+    };
+    
+    AnyFolder Head = {
+      AnyVar LengthScale = (...Anthropometrics.SegmentDimensions.HeadHeight / ..StandardParameters.Head.Height);
+      AnyVar ms = ..MassScaling.Head.MassScale;
+      AnyVar ls = LengthScale;
+      AnyFunTransform3DLin ScaleFunction = {
+        ScaleMat = diag({(.ms/.ls)^0.5, .ls, (.ms/.ls)^0.5});
+        AnyMat33 ScaleMatInverse = diag({1/((.ms/.ls)^0.5), 1/.ls, 1/((.ms/.ls)^0.5)});
+        Offset = {0,0,0};
+      };
+    };
+    
+    AnyFolder &Cervical = Thorax;
+    
+    AnyFolder Lumbar = {
+      AnyVar LengthScale = (...Anthropometrics.SegmentDimensions.TrunkHeight / ..StandardParameters.Trunk.Height);
+      AnyVar ms = ..MassScaling.Lumbar.MassScale;
+      AnyVar ls = LengthScale;
+
+      AnyFloat OriginUnscaled ??= warn(
+        0, "To ensure continuity in the scaling law the lumbar origin must be specified"
+      );
+
+      AnyFunTransform3DLin ScaleFunction = {
+        ScaleMat = diag({(.ms/.ls)^0.5, .ls, (.ms/.ls)^0.5});
+        AnyMat33 ScaleMatInverse = diag({1/((.ms/.ls)^0.5), 1/.ls, 1/((.ms/.ls)^0.5)});
+
+        Offset = (
+          ..Pelvis.ScaleFunction(.OriginUnscaled) - (.OriginUnscaled * ScaleMat')
+        ) * ScaleMatInverse;
+      };
+    };
+    
+  };
+  
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,75 @@
+AnyFolder SubjectData = {
+
+  #if AlignmentModeling == 1 
+  
+    AnyStringVar AlignmentID = PatientID;
+
+    AnyFolder Alignment = {
+
+      #path ALIGNMENT_INPUT "../InputAlignment/" + PatientID + ".any"
+
+      #include "<ALIGNMENT_INPUT>"
+      
+      AnyVar PT = PI - SS;
+    };
+
+    // Visualize centroids (input points)
+    #include "../ModelingAlignment/DrawInputPoints.any"
+
+  #else
+
+    AnyFolder Alignment = {
+
+      AnyKinMeasureOrg PT = {
+        AnyKinRotational RotMeasure = {
+          AnyRefFrame &rf0 = Main.HumanModel.BodyModel.Trunk.Segments.PelvisSeg.HipCenter_S1Mid_Frame;
+          AnyRefFrame &rf1 = Main.EnvironmentModel.GlobalRef;
+          Type = RotAxesAngles;
+          Axis1 = z;
+        };
+        MeasureOrganizer = {0};
+        AnyFloat AngleDeg = (-1) * Pos[0] / pi * 180;
+      };
+
+      AnyKinMeasureOrg SS = {
+        AnyKinRotational RotMeasure = {
+          AnyRefFrame &rf0 = Main.HumanModel.BodyModel.Trunk.Segments.SacrumSeg.Endplate_Frame;
+          AnyRefFrame &rf1 = Main.EnvironmentModel.GlobalRef;
+          Type = RotAxesAngles;
+          Axis1 = z;
+        };
+        MeasureOrganizer = {0};
+        AnyFloat AngleDeg = Pos[0] / pi * 180;
+      };
+
+      AnyVar PI = PT.Pos[0] + SS.Pos[0];
+    };
+
+  #endif
+
+  // If personal alignment is used, apply patient-specific body parameters (BM and BH defined in Alignment file)
+  #if AlignmentModeling == 1 
+  
+    AnyFloat BM = Alignment.BM;
+    AnyFloat BH = Alignment.BH;
+
+    Main.HumanModel.Anthropometrics = {
+      BodyHeight = Main.SubjectData.BH;
+      BodyMass   = Main.SubjectData.BM;
+
+      AnyKinLinear distance = {
+        AnyRefFrame &L5     = Main.HumanModel.BodyModel.Trunk.Segments.L5Seg.Vertebral_orient;
+        AnyRefFrame &Pelvis = Main.HumanModel.BodyModel.Trunk.Segments.PelvisSeg.HipJointsCenter;
+        Ref = 0;
+      };
+    };
+
+  #else
+
+    // Otherwise, use standard parameters of the generic model (no body size scaling)
+    AnyFloat BM = 75;
+    AnyFloat BH = 1.80;
+
+  #endif
+
+};

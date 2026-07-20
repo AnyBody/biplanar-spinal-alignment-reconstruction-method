@@ -1,0 +1,253 @@
+
+AnyFolder JointAngleOutputs = {  
+ 
+ 
+  
+  AnyOutputFile OutputFile_TrunkFull = {
+    FileName = TEMP_PATH+"/"+ MOCAP_TEST_FILENAME_PREFIX + MOCAP_OUTPUT_FILENAME_PREFIX + Main.ModelSetup.TrialSpecificData.TrialFileName + "-rotvec-trunk-full.txt";
+    SepSign = ",";
+    SepSpaceAutoOnOff = Off;
+    Header.TitleSectionOnOff = Off;
+    Header.ConstSectionOnOff = Off;
+    Header.ConstSectionSaveOptionsOnOff = Off;
+    Header.VarSectionOnOff = Off;
+    
+    AnyVector PelvisPosX = ..BodyModel.Interface.Trunk.PelvisPosX.Pos;
+    AnyVector PelvisPosY = ..BodyModel.Interface.Trunk.PelvisPosY.Pos;
+    AnyVector PelvisPosZ = ..BodyModel.Interface.Trunk.PelvisPosZ.Pos;
+    
+    AnyVector PelvisRotVec = ..BodyModel.Interface.Trunk.PelvisRotVec.Pos;
+    
+    AnyVector SacrumPelvis = ..BodyModel.Interface.Trunk.IntervertebralAngles.SacrumPelvis.Jnt.Pos;
+    AnyVector L5Sacrum =..BodyModel.Interface.Trunk.IntervertebralAngles.L5Sacrum.Jnt.Pos;
+    AnyVector L4L5 =..BodyModel.Interface.Trunk.IntervertebralAngles.L4L5.Jnt.Pos;
+    AnyVector L3L4 =..BodyModel.Interface.Trunk.IntervertebralAngles.L3L4.Jnt.Pos;
+    AnyVector L2L3 =..BodyModel.Interface.Trunk.IntervertebralAngles.L2L3.Jnt.Pos;
+    AnyVector L1L2 =..BodyModel.Interface.Trunk.IntervertebralAngles.L1L2.Jnt.Pos;
+    AnyVector T12L1 =..BodyModel.Interface.Trunk.IntervertebralAngles.T12L1.Jnt.Pos;
+#if BM_TRUNK_THORACIC_MODEL != _THORACIC_MODEL_RIGID_
+    AnyVector T11T12 =..BodyModel.Interface.Trunk.IntervertebralAngles.T11T12.Jnt.Pos;
+    AnyVector T10T11 =..BodyModel.Interface.Trunk.IntervertebralAngles.T10T11.Jnt.Pos;
+    AnyVector T9T10 =..BodyModel.Interface.Trunk.IntervertebralAngles.T9T10.Jnt.Pos;
+    AnyVector T8T9 =..BodyModel.Interface.Trunk.IntervertebralAngles.T8T9.Jnt.Pos;
+    AnyVector T7T8 =..BodyModel.Interface.Trunk.IntervertebralAngles.T7T8.Jnt.Pos;
+    AnyVector T6T7 =..BodyModel.Interface.Trunk.IntervertebralAngles.T6T7.Jnt.Pos;
+    AnyVector T5T6 =..BodyModel.Interface.Trunk.IntervertebralAngles.T5T6.Jnt.Pos;
+    AnyVector T4T5 =..BodyModel.Interface.Trunk.IntervertebralAngles.T4T5.Jnt.Pos;
+    AnyVector T3T4 =..BodyModel.Interface.Trunk.IntervertebralAngles.T3T4.Jnt.Pos;
+    AnyVector T2T3 =..BodyModel.Interface.Trunk.IntervertebralAngles.T2T3.Jnt.Pos;
+    AnyVector T1T2 =..BodyModel.Interface.Trunk.IntervertebralAngles.T1T2.Jnt.Pos;
+#endif
+    AnyVector T1C7 =..BodyModel.Interface.Trunk.IntervertebralAngles.T1C7.Jnt.Pos;
+    AnyVector C7C6 =..BodyModel.Interface.Trunk.IntervertebralAngles.C7C6.Jnt.Pos;
+    AnyVector C6C5 =..BodyModel.Interface.Trunk.IntervertebralAngles.C6C5.Jnt.Pos;
+    AnyVector C5C4 =..BodyModel.Interface.Trunk.IntervertebralAngles.C5C4.Jnt.Pos;
+    AnyVector C4C3 =..BodyModel.Interface.Trunk.IntervertebralAngles.C4C3.Jnt.Pos;
+    AnyVector C3C2 =..BodyModel.Interface.Trunk.IntervertebralAngles.C3C2.Jnt.Pos;
+    AnyVector C2C1 =..BodyModel.Interface.Trunk.IntervertebralAngles.C2C1.Jnt.Pos;
+    AnyVector C1C0 =..BodyModel.Interface.Trunk.IntervertebralAngles.C1C0.Jnt.Pos;
+   
+  };
+  
+  
+#if BM_LEG_LEFT & BM_LEG_MODEL_IS_TLEM
+  AnyOutputFile OutputFile_LeftLeg = {
+    FileName = TEMP_PATH+"/"+ MOCAP_TEST_FILENAME_PREFIX + MOCAP_OUTPUT_FILENAME_PREFIX + Main.ModelSetup.TrialSpecificData.TrialFileName + "-euler-left_leg_tlem.txt";
+    SepSign = ",";
+    SepSpaceAutoOnOff = Off;
+    Header.TitleSectionOnOff = Off;
+    Header.ConstSectionOnOff = Off;
+    Header.ConstSectionSaveOptionsOnOff = Off;
+    Header.VarSectionOnOff = Off;
+
+    
+    AnyVector HipFlexion = ..BodyModel.Interface.Left.HipFlexion.Pos;
+    AnyVector HipAbduction = ..BodyModel.Interface.Left.HipAbduction.Pos;
+    AnyVector HipExternalRotation = ..BodyModel.Interface.Left.HipExternalRotation.Pos;
+    AnyVector KneeFlexion = ..BodyModel.Interface.Left.KneeFlexion.Pos;
+    AnyVector AnklePlantarFlexion = ..BodyModel.Interface.Left.AnklePlantarFlexion.Pos;
+    AnyVector SubTalarEversion = ..BodyModel.Interface.Left.SubTalarEversion.Pos;
+  };
+#endif
+  
+  
+  
+#if BM_LEG_RIGHT & BM_LEG_MODEL_IS_TLEM
+  AnyOutputFile OutputFile_RightLeg = {
+    FileName = TEMP_PATH+"/"+ MOCAP_TEST_FILENAME_PREFIX + MOCAP_OUTPUT_FILENAME_PREFIX + Main.ModelSetup.TrialSpecificData.TrialFileName + "-euler-right_leg_tlem.txt";
+    SepSign = ",";
+    SepSpaceAutoOnOff = Off;
+    Header.TitleSectionOnOff = Off;
+    Header.ConstSectionOnOff = Off;
+    Header.ConstSectionSaveOptionsOnOff = Off;
+    Header.VarSectionOnOff = Off;
+    
+    AnyVector HipFlexion = ..BodyModel.Interface.Right.HipFlexion.Pos;
+    AnyVector HipAbduction = ..BodyModel.Interface.Right.HipAbduction.Pos;
+    AnyVector HipExternalRotation = ..BodyModel.Interface.Right.HipExternalRotation.Pos;
+    AnyVector KneeFlexion = ..BodyModel.Interface.Right.KneeFlexion.Pos;
+    AnyVector AnklePlantarFlexion = ..BodyModel.Interface.Right.AnklePlantarFlexion.Pos;
+    AnyVector SubTalarEversion = ..BodyModel.Interface.Right.SubTalarEversion.Pos;
+  };
+#endif
+  
+  
+  
+  
+  
+#if BM_LEG_LEFT & (BM_LEG_MODEL == _LEG_MODEL_LEG_)
+  AnyOutputFile OutputFile_LeftLeg = {
+    FileName = TEMP_PATH+"/"+ MOCAP_TEST_FILENAME_PREFIX + MOCAP_OUTPUT_FILENAME_PREFIX + Main.ModelSetup.TrialSpecificData.TrialFileName + "-euler-left_leg.txt";
+    SepSign = ",";
+    SepSpaceAutoOnOff = Off;
+    Header.TitleSectionOnOff = Off;
+    Header.ConstSectionOnOff = Off;
+    Header.ConstSectionSaveOptionsOnOff = Off;
+    Header.VarSectionOnOff = Off;
+    
+    AnyVector HipFlexion = ..BodyModel.Interface.Left.HipFlexion.Pos;
+    AnyVector HipAbduction = ..BodyModel.Interface.Left.HipAbduction.Pos;
+    AnyVector HipExternalRotation = ..BodyModel.Interface.Left.HipExternalRotation.Pos;
+    AnyVector KneeFlexion = ..BodyModel.Interface.Left.KneeFlexion.Pos;
+    AnyVector AnklePlantarFlexion = ..BodyModel.Interface.Left.AnklePlantarFlexion.Pos;
+    AnyVector AnkleEversion = ..BodyModel.Interface.Left.AnkleEversion.Pos;
+  };
+#endif
+  
+  
+  
+#if BM_LEG_RIGHT & (BM_LEG_MODEL == _LEG_MODEL_LEG_)
+  AnyOutputFile OutputFile_RightLeg = {
+    FileName = TEMP_PATH+"/"+ MOCAP_TEST_FILENAME_PREFIX + MOCAP_OUTPUT_FILENAME_PREFIX + Main.ModelSetup.TrialSpecificData.TrialFileName + "-euler-right_leg.txt";
+    SepSign = ",";
+    SepSpaceAutoOnOff = Off;
+    Header.TitleSectionOnOff = Off;
+    Header.ConstSectionOnOff = Off;
+    Header.ConstSectionSaveOptionsOnOff = Off;
+    Header.VarSectionOnOff = Off;
+    
+    AnyVector HipFlexion = ..BodyModel.Interface.Right.HipFlexion.Pos;
+    AnyVector HipAbduction = ..BodyModel.Interface.Right.HipAbduction.Pos;
+    AnyVector HipExternalRotation = ..BodyModel.Interface.Right.HipExternalRotation.Pos;
+    AnyVector KneeFlexion = ..BodyModel.Interface.Right.KneeFlexion.Pos;
+    AnyVector AnklePlantarFlexion = ..BodyModel.Interface.Right.AnklePlantarFlexion.Pos;
+    AnyVector AnkleEversion = ..BodyModel.Interface.Right.AnkleEversion.Pos;
+  };
+#endif
+  
+  
+  
+  
+#if BM_ARM_LEFT == ON
+  
+
+  AnyOutputFile OutputFile_LeftArm = {
+    FileName = TEMP_PATH+"/"+ MOCAP_TEST_FILENAME_PREFIX +MOCAP_OUTPUT_FILENAME_PREFIX + Main.ModelSetup.TrialSpecificData.TrialFileName + "-rotvec-left_arm_shoulder.txt";
+    SepSign = ",";
+    SepSpaceAutoOnOff = Off;
+    Header.TitleSectionOnOff = Off;
+    Header.ConstSectionOnOff = Off;
+    Header.ConstSectionSaveOptionsOnOff = Off;
+    Header.VarSectionOnOff = Off;
+
+    AnyVector ThoraxClavicula =..BodyModel.Interface.Left.RotVectorMeasures.ThoraxClavicula.Pos;
+    AnyVector ClaviculaScapula =..BodyModel.Interface.Left.RotVectorMeasures.ClaviculaScapula.Pos;
+    AnyVector ScapulaHumerus =..BodyModel.Interface.Left.RotVectorMeasures.ScapulaHumerus.Pos;
+    AnyVector HumerusUlna =..BodyModel.Interface.Left.ElbowFlexion.Pos;
+    AnyVector UlnaRadius =..BodyModel.Interface.Left.ElbowPronation.Pos;
+    AnyVector RadiusWrist =..BodyModel.Interface.Left.WristFlexion.Pos;
+    AnyVector WristHand =..BodyModel.Interface.Left.WristAbduction.Pos;
+  };
+  
+  
+  #if BM_ARM_DETAILED_HAND
+  AnyOutputFile OutputFile_LeftDetailedHand = {
+    FileName = TEMP_PATH+"/"+ MOCAP_TEST_FILENAME_PREFIX + MOCAP_OUTPUT_FILENAME_PREFIX + Main.ModelSetup.TrialSpecificData.TrialFileName + "-euler-left_detailed_hand.txt";
+    SepSign = ",";
+    SepSpaceAutoOnOff = Off;
+    Header.TitleSectionOnOff = Off;
+    Header.ConstSectionOnOff = Off;
+    Header.ConstSectionSaveOptionsOnOff = Off;
+    Header.VarSectionOnOff = Off;
+    
+    AnyVector CMC1Flexion = ..BodyModel.Interface.Left.CMCFlexion.Pos;
+    AnyVector CMC1Abduction = ..BodyModel.Interface.Left.CMCAbduction.Pos;
+    AnyVector MCP1Flexion = ..BodyModel.Interface.Left.MCPFlexion.Pos;
+    AnyVector MCP1Abduction = ..BodyModel.Interface.Left.MCPAbduction.Pos;
+    AnyVector DIP1 = ..BodyModel.Interface.Left.DIP.Pos;
+    AnyVector MCP2 = ..BodyModel.Left.ShoulderArm.Seg.Hand.Finger2.Jnt.MCP.Pos;
+    AnyVector PIP2 = ..BodyModel.Left.ShoulderArm.Seg.Hand.Finger2.Jnt.PIP.Pos;
+    AnyVector DIP2 = ..BodyModel.Left.ShoulderArm.Seg.Hand.Finger2.Jnt.DIP.Pos;
+    AnyVector MCP3 = ..BodyModel.Left.ShoulderArm.Seg.Hand.Finger3.Jnt.MCP.Pos;
+    AnyVector PIP3 = ..BodyModel.Left.ShoulderArm.Seg.Hand.Finger3.Jnt.PIP.Pos;
+    AnyVector DIP3 = ..BodyModel.Left.ShoulderArm.Seg.Hand.Finger3.Jnt.DIP.Pos;
+    AnyVector MCP4 = ..BodyModel.Left.ShoulderArm.Seg.Hand.Finger4.Jnt.MCP.Pos;
+    AnyVector PIP4 = ..BodyModel.Left.ShoulderArm.Seg.Hand.Finger4.Jnt.PIP.Pos;
+    AnyVector DIP4 = ..BodyModel.Left.ShoulderArm.Seg.Hand.Finger4.Jnt.DIP.Pos;
+    AnyVector MCP5 = ..BodyModel.Left.ShoulderArm.Seg.Hand.Finger5.Jnt.MCP.Pos;
+    AnyVector PIP5 = ..BodyModel.Left.ShoulderArm.Seg.Hand.Finger5.Jnt.PIP.Pos;
+    AnyVector DIP5 = ..BodyModel.Left.ShoulderArm.Seg.Hand.Finger5.Jnt.DIP.Pos;    
+  };
+  #endif  
+  
+#endif
+
+    
+#if BM_ARM_RIGHT == ON
+  
+  AnyOutputFile OutputFile_RightArm = {
+    FileName = TEMP_PATH+"/"+ MOCAP_TEST_FILENAME_PREFIX + MOCAP_OUTPUT_FILENAME_PREFIX + Main.ModelSetup.TrialSpecificData.TrialFileName + "-rotvec-right_arm_shoulder.txt";
+    SepSign = ",";
+    SepSpaceAutoOnOff = Off;
+    Header.TitleSectionOnOff = Off;
+    Header.ConstSectionOnOff = Off;
+    Header.ConstSectionSaveOptionsOnOff = Off;
+    Header.VarSectionOnOff = Off;
+    
+    AnyVector ThoraxClavicula =..BodyModel.Interface.Right.RotVectorMeasures.ThoraxClavicula.Pos;
+    AnyVector ClaviculaScapula =..BodyModel.Interface.Right.RotVectorMeasures.ClaviculaScapula.Pos;
+    AnyVector ScapulaHumerus =..BodyModel.Interface.Right.RotVectorMeasures.ScapulaHumerus.Pos;
+    AnyVector HumerusUlna =..BodyModel.Interface.Right.ElbowFlexion.Pos;
+    AnyVector UlnaRadius =..BodyModel.Interface.Right.ElbowPronation.Pos;
+    AnyVector RadiusWrist =..BodyModel.Interface.Right.WristFlexion.Pos;
+    AnyVector WristHand =..BodyModel.Interface.Right.WristAbduction.Pos;
+  };
+  
+  
+  #if BM_ARM_DETAILED_HAND
+  AnyOutputFile OutputFile_RightDetailedHand = {
+    FileName = TEMP_PATH+"/"+ MOCAP_TEST_FILENAME_PREFIX + MOCAP_OUTPUT_FILENAME_PREFIX + Main.ModelSetup.TrialSpecificData.TrialFileName + "-euler-right_detailed_hand.txt";
+    SepSign = ",";
+    SepSpaceAutoOnOff = Off;
+    Header.TitleSectionOnOff = Off;
+    Header.ConstSectionOnOff = Off;
+    Header.ConstSectionSaveOptionsOnOff = Off;
+    Header.VarSectionOnOff = Off;
+    
+    AnyVector CMC1Flexion = ..BodyModel.Interface.Right.CMCFlexion.Pos;
+    AnyVector CMC1Abduction = ..BodyModel.Interface.Right.CMCAbduction.Pos;
+    AnyVector MCP1Flexion = ..BodyModel.Interface.Right.MCPFlexion.Pos;
+    AnyVector MCP1Abduction = ..BodyModel.Interface.Right.MCPAbduction.Pos;
+    AnyVector DIP1 = ..BodyModel.Interface.Right.DIP.Pos;
+    AnyVector MCP2 = ..BodyModel.Right.ShoulderArm.Seg.Hand.Finger2.Jnt.MCP.Pos;
+    AnyVector PIP2 = ..BodyModel.Right.ShoulderArm.Seg.Hand.Finger2.Jnt.PIP.Pos;
+    AnyVector DIP2 = ..BodyModel.Right.ShoulderArm.Seg.Hand.Finger2.Jnt.DIP.Pos;
+    AnyVector MCP3 = ..BodyModel.Right.ShoulderArm.Seg.Hand.Finger3.Jnt.MCP.Pos;
+    AnyVector PIP3 = ..BodyModel.Right.ShoulderArm.Seg.Hand.Finger3.Jnt.PIP.Pos;
+    AnyVector DIP3 = ..BodyModel.Right.ShoulderArm.Seg.Hand.Finger3.Jnt.DIP.Pos;
+    AnyVector MCP4 = ..BodyModel.Right.ShoulderArm.Seg.Hand.Finger4.Jnt.MCP.Pos;
+    AnyVector PIP4 = ..BodyModel.Right.ShoulderArm.Seg.Hand.Finger4.Jnt.PIP.Pos;
+    AnyVector DIP4 = ..BodyModel.Right.ShoulderArm.Seg.Hand.Finger4.Jnt.DIP.Pos;
+    AnyVector MCP5 = ..BodyModel.Right.ShoulderArm.Seg.Hand.Finger5.Jnt.MCP.Pos;
+    AnyVector PIP5 = ..BodyModel.Right.ShoulderArm.Seg.Hand.Finger5.Jnt.PIP.Pos;
+    AnyVector DIP5 = ..BodyModel.Right.ShoulderArm.Seg.Hand.Finger5.Jnt.DIP.Pos;    
+  };
+  #endif
+  
+#endif
+  
+  
+}; //JointAngleOutputs
+
+
+

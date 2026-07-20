@@ -1,0 +1,29 @@
+
+AnyFolder Muscle_list = {
+  
+AnyFolder &Trunk_muscles = Main.HumanModel.BodyModel.Trunk.Muscles;
+
+
+AnySearchFun CervicalMuscleList = {
+  Search = ".Trunk_muscles.MusclesCervical*.*.Activity";
+};
+
+AnyFloat cervical_mscl_list = CervicalMuscleList();
+
+
+
+AnySearchFun RibCageMuscleList = {
+  Search = ".Trunk_muscles.MusclesRibCage*.*.*.Activity";
+};
+
+AnyFloat ribcage_mscl_list = RibCageMuscleList();
+
+
+
+AnySearchFun SpineMuscleList = {
+  Search = ".Trunk_muscles.MusclesS*.*.*.Activity";
+};
+
+AnyFloat spinal_mscl_list = SpineMuscleList();
+
+};

@@ -1,0 +1,71 @@
+#ifdef LumbarLigaments 
+// (defined in BodyPartsSetup.any)
+
+// Definition of the mechanical and geometric properties of the lumbar spine ligaments 
+AnyFolder LumbarSpineLigaments = {
+   AnyFloat strainratio = 0.75;
+   AnyFloat mm2m = 1000;
+   AnyFloat al_slack_length = 1.2;
+   AnyFloat pl_slack_length = 1.2;
+   AnyFloat is_slack_length = 1.2;   
+   AnyFloat ss_slack_length = 1.2;   
+   AnyFloat lf_slack_length = 1.2;
+   
+   // mean stiffness values from Pintar et al. 1992, J Biomech
+   // stiffness vectorT12L1 L1L2, L2L3, L3L4, L4L5, L5Sacrum given in N/mm^-1
+//   AnyVector  kALL = {32.9, 32.4, 20.8, 39.5, 40.5, 13.2}*mm2m;     // conversion to N/m   
+//   AnyVector  kPLL = {10.0, 17.1, 36.6, 10.6, 25.8, 21.8}*mm2m;     // conversion to N/m
+//   AnyVector  kISL = {12.1, 10.0, 9.6,  18.1, 8.7, 16.3}*mm2m;       // conversion to N/m   
+//   AnyVector  kSSL = {15.1, 23.0, 24.8, 34.8, 18.0, 17.8}*mm2m;     // conversion to N/m
+//   AnyVector  kLF  = {24.2, 23.0, 25.1, 34.5, 27.2, 20.2}*mm2m/2.0; // conversion to N/m + splitting (2 lig parts)
+   //Try to define a new stiffness which is the same as sadegh's(The above is the default value)
+//   AnyVector  kALL = {347, 347, 347, 347, 347, 347}*mm2m;     // conversion to N/m   
+//   AnyVector  kPLL = {29.5, 17.1, 29.5, 29.5, 29.5, 29.5}*mm2m;     // conversion to N/m
+//   AnyVector  kISL = {1.4, 1.4, 1.4,  1.4, 1.4, 1.4}*mm2m;       // conversion to N/m   
+//   AnyVector  kSSL = {2.5, 2.5, 2.5, 2.5, 2.5, 2.5}*mm2m;     // conversion to N/m
+//   AnyVector  kLF  = {7.7, 7.7, 7.7, 7.7, 7.7, 7.7}*mm2m/2.0; // conversion to N/m + splitting (2 lig parts)
+  //if sacale fails, the above code is recommanded.
+   
+   //The following code is trying to scale the siffness of ligament at each level
+   AnyVector  kALL = {347*0.812, 347*0.8, 347*0.514, 347*0.98, 347, 347*0.326}*mm2m;     // conversion to N/m   
+   AnyVector  kPLL = {29.5*0.27, 29.5*0.475, 29.5, 29.5*0.29, 29.5*0.7, 29.5*0.6}*mm2m;     // conversion to N/m
+   AnyVector  kISL = {1.4*0.668, 1.4*0.55, 1.4*0.53,  1.4, 1.4*0.48, 1.4*0.9}*mm2m;       // conversion to N/m   
+   AnyVector  kSSL = {2.5*0.434, 2.5*0.66, 2.5*0.713, 2.5, 2.5*0.517, 2.5*0.51}*mm2m;     // conversion to N/m
+   AnyVector  kLF  = {7.7*0.7, 7.7*0.67, 7.7*0.728, 7.7, 7.7*0.788, 7.7*0.59}*mm2m/2.0; // conversion to N/m + splitting (2 lig parts)
+   //AnyVector  kCLL = {36.0*0.12, 36.0*0.13, 36.0*0.7, 36.0*0.8, 36.0*0.7, 36.0*0.6}*mm2m;     
+   AnyVector  kCLL = {36.0*0.12, 36.0*0.2, 36.0*0.3, 36.0*0.4, 36.0*0.4, 36.0*0.23}*mm2m;     
+
+    //NB!! assumption: 75% failure strain corresponds to nominal strain(removed in the revised version)
+   AnyVector  epsALL = {0.319, 0.44, 0.49, 0.328, 0.447, 0.281}*strainratio ;    
+   AnyVector  epsPLL = {0.162, 0.157, 0.113, 0.158, 0.127, 0.15}*strainratio ;   
+   AnyVector  epsISL = {0.594, 0.897, 0.415, 0.865, 0.774, 0.529}*strainratio ;
+   AnyVector  epsSSL = {0.75,  0.834, 0.606, 0.994, 0.863, 1.151}*strainratio ;
+   AnyVector  epsLF  = {0.615, 0.786, 0.288, 0.706, 0.820, 0.831}*strainratio ; 
+//   AnyVector  epsALL = {0.203, 0.203, 0.203, 0.203, 0.203, 0.203} ;    
+//   AnyVector  epsPLL = {0.23, 0.23, 0.23, 0.23, 0.23, 0.23};   
+//   AnyVector  epsISL = {0.2, 0.2, 0.2, 0.2, 0.2, 0.2} ;
+//   AnyVector  epsSSL = {0.25,  0.25, 0.25, 0.25, 0.25, 0.25} ;
+//   AnyVector  epsLF  = {0.49, 0.49, 0.49, 0.49, 0.49, 0.49} ;
+
+   // values from Chazal et al. 1985 (not available in Pintar et al.)
+   AnyVector  kIT  = 0.5*{42, 42, 42, 42, 42, 42}*mm2m; // conversion to N/m  (This initial stiffness will influence the inital compressive force)) 
+   AnyVector  epsIT  = {0.3,  0.3,  0.3,  0.3,  0.3,  0.3};//*strainratio; 
+   
+   //Capsular ligament defination
+   //Remember the strainration is removed for capsular ligaments
+   //AnyVector  kCLL = {36.0, 36.0, 36.0, 36.0, 36.0, 36.0}*mm2m;     // Capsular Ligament conversion to N/m (Not available in default script))(1-sup 2-inf 3-poster 4-ant)
+   AnyVector  epsCR1 = {0.3, 0.3,  0.3,  0.5, 0.7, 0.6};//Parameter eps of Capsular Ligament(Not available in default script)
+   AnyVector  epsCR2 = {0.3, 0.3,  0.4,  1.1, 1.3, 0.6};//Parameter eps of Capsular Ligament(Not available in default script)
+   AnyVector  epsCR3 = {0.3, 0.3,  0.4,  0.7, 0.85, 0.6};//Parameter eps of Capsular Ligament(Not available in default script)
+   AnyVector  epsCR4 = {0.3, 0.3,  0.3,  0.6, 0.7, 0.6};//Parameter eps of Capsular Ligament(Not available in default script)
+   
+   //Ligament definition is finished
+   
+   AnyFolder T12L1Lig = {#include "T12L1Ligaments.any"};
+   AnyFolder L1L2Lig = {#include "L1L2Ligaments.any"};
+   AnyFolder L2L3Lig = {#include "L2L3Ligaments.any"};
+   AnyFolder L3L4Lig = {#include "L3L4Ligaments.any"};
+   AnyFolder L4L5Lig = {#include "L4L5Ligaments.any"};
+   AnyFolder L5SacrumLig = {#include "L5SacrumLigaments.any"};    
+ }; 
+#endif

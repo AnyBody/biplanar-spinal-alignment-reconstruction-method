@@ -1,0 +1,554 @@
+
+
+#class_template SplineMuscle_CreateElement (__CLASS__=AnyMuscleViaPoint, NAME1,NAME2){
+      AnyRefNode &Org = .OriginSegment.NAME1##_Org.NAME2;
+      AnyRefNode &Ins = .InsertionSegment.NAME1##_Ins.NAME2;
+      AnyMuscleModel MusMdl = {F0=..MuscleModel.F0/..NumberOfElements;Lf0=..MuscleModel.F0; Vol0=..MuscleModel.Vol0/..NumberOfElements;};
+      viewForce.Visible=Off; 
+      viewMuscle = {#include "../../DrawSettings/MusDrawSettings.any"};
+  //    AnyDrawPLine drwLine ={AnyFloat RGB_Red = {1,0,0};AnyFloat RGB_Green = {0,1,0};RGB=iffun(gtfun(.LmtDot,0),RGB_Red,RGB_Green);Thickness=0.005;};  
+};
+
+
+
+// Class template for creating multiple muscles distributed along a spline function
+
+//#class_template SubjectMuscleParameter_template(NAME) {
+//  /// Descriptive name for the muscle, e.g. for plotting
+//  #var AnyString Ligament = NAME.Ligament; 
+//  
+//  /// Number of elements in the ligament
+//  #var AnyIntVar LigamentElemAmount = NAME.LigamentElemAmount;
+//
+//  /// L0 Slacklength of the ligament
+//  #var AnyFloat L0 = NAME.L0; 
+//  
+//  /// Nominal strain of the ligament
+//  #var AnyFloat eps1 = NAME.eps1; 
+//  
+//  /// Factor for determining shortening speed at optimum length
+//  #var AnyFloat F1 = NAME.F1; 
+//
+//  /// Factor for determining shortening speed at optimum length
+//  #var AnyFloat a0 = NAME.a0; 
+//  
+//  /// Factor for determining shortening speed at optimum length
+//  #var AnyFloat a1 = NAME.a1;
+//
+//  /// Stiffness coefficient for the ligament
+//  #var AnyFloat k = NAME.k; 
+//};
+
+// Class template Ligament_template
+
+//Class to construct a series of ligaments using interpolation functions between points
+
+
+
+
+#class_template SplineMuscle_CreateMuscle(
+  CREATE_ELEMENTS,
+  AnyFolder &OriginSegment,
+  ORIGIN_POINTS,
+  AnyFolder &InsertionSegment,
+  INSERTION_POINTS,
+  MUSCLE_MODEL_PARAMETERS 
+){
+  AnyVec3 MuscleRGB = {0.85, 0.85, 0.85}; //< Default ligament color
+  
+ #var AnyIntVar NumberOfElements = CREATE_ELEMENTS;
+ AnyFolder& MuscleModel = MUSCLE_MODEL_PARAMETERS;
+
+ AnyFunInterpol OriginFun = { 
+   AnyInt Size = SizesOf(.ORIGIN_POINTS)[0];
+   T= linspace(0,1,Size);
+   Type=Bspline;  
+   Data = .InsertionSegment.Scale(.ORIGIN_POINTS)';
+};  
+
+ AnyFunInterpol InsertionFun = { 
+   AnyInt Size = SizesOf(.INSERTION_POINTS)[0];
+   T= linspace(0,1,Size);
+   Type=Bspline;  
+   Data = .InsertionSegment.Scale(.INSERTION_POINTS)';
+};  
+
+
+  AnyVector a = linspace(0,1,CREATE_ELEMENTS);
+ 
+
+  // Create function nodes on segments
+  OriginSegment = {
+    AnyRefNodeGroup __NAME__##_Org = {
+      NodeAmount =CREATE_ELEMENTS;
+      NodeName = "Node";
+      Node_sRels = ..OriginFun(..a);
+      CreateMotionOutput = {r=On;rDot=Off;rDDot=Off;Axes=Off;EulerPar=Off;omega=Off;omegaDot=Off;};
+      NodeDefaults.CreateMotionOutput = {r=On;rDot=Off;rDDot=Off;Axes=Off;EulerPar=Off;omega=Off;omegaDot=Off;};
+//      AnyDrawPLine intercostalis_line = {RGB = {0, 0.5, 0.5};};
+    };
+  };
+
+  InsertionSegment = {
+    AnyRefNodeGroup __NAME__##_Ins = {
+      NodeAmount = CREATE_ELEMENTS;
+      NodeName = "Node";
+      Node_sRels = ..InsertionFun(..a);
+      CreateMotionOutput = {r=On;rDot=Off;rDDot=Off;Axes=Off;EulerPar=Off;omega=Off;omegaDot=Off;};
+      NodeDefaults.CreateMotionOutput = {r=On;rDot=Off;rDDot=Off;Axes=Off;EulerPar=Off;omega=Off;omegaDot=Off;};
+//      AnyDrawPLine intercostalis_line = {RGB = {0.5, 0, 0.5};};
+    };
+  };
+  
+  #if CREATE_ELEMENTS >= 1 
+    SplineMuscle_CreateElement elem1 (NAME1=__NAME__,NAME2=Node0)= {};
+  #endif
+  #if CREATE_ELEMENTS >= 2
+    SplineMuscle_CreateElement elem2 (NAME1=__NAME__,NAME2=Node1)= {};
+  #endif
+  #if CREATE_ELEMENTS >= 3
+    SplineMuscle_CreateElement elem3 (NAME1=__NAME__,NAME2=Node2)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 4 
+    SplineMuscle_CreateElement elem4 (NAME1=__NAME__,NAME2=Node3)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 5
+    SplineMuscle_CreateElement elem5 (NAME1=__NAME__,NAME2=Node4)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 6
+    SplineMuscle_CreateElement elem6 (NAME1=__NAME__,NAME2=Node5)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 7
+    SplineMuscle_CreateElement elem7 (NAME1=__NAME__,NAME2=Node6)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 8 
+    SplineMuscle_CreateElement elem8 (NAME1=__NAME__,NAME2=Node7)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 9 
+    SplineMuscle_CreateElement elem9 (NAME1=__NAME__,NAME2=Node8)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 10
+     SplineMuscle_CreateElement elem10 (NAME1=__NAME__,NAME2=Node9)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 11 
+     SplineMuscle_CreateElement elem11 (NAME1=__NAME__,NAME2=Node10)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 12 
+     SplineMuscle_CreateElement elem12 (NAME1=__NAME__,NAME2=Node11)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 13
+     SplineMuscle_CreateElement elem13 (NAME1=__NAME__,NAME2=Node12)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 14 
+     SplineMuscle_CreateElement elem14 (NAME1=__NAME__,NAME2=Node13)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 15 
+     SplineMuscle_CreateElement elem15 (NAME1=__NAME__,NAME2=Node14)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 16 
+     SplineMuscle_CreateElement elem16 (NAME1=__NAME__,NAME2=Node15)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 17
+     SplineMuscle_CreateElement elem17 (NAME1=__NAME__,NAME2=Node16)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 18 
+     SplineMuscle_CreateElement elem18 (NAME1=__NAME__,NAME2=Node17)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 19
+     SplineMuscle_CreateElement elem19 (NAME1=__NAME__,NAME2=Node18)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 20
+     SplineMuscle_CreateElement elem20 (NAME1=__NAME__,NAME2=Node19)= {};
+  #endif
+   #if CREATE_ELEMENTS  >= 21
+     SplineMuscle_CreateElement elem21 (NAME1=__NAME__,NAME2=Node20)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 22
+     SplineMuscle_CreateElement elem22 (NAME1=__NAME__,NAME2=Node21)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 23
+     SplineMuscle_CreateElement elem23 (NAME1=__NAME__,NAME2=Node22)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 24
+     SplineMuscle_CreateElement elem24 (NAME1=__NAME__,NAME2=Node23)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 25
+     SplineMuscle_CreateElement elem25 (NAME1=__NAME__,NAME2=Node24)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 26
+     SplineMuscle_CreateElement elem26 (NAME1=__NAME__,NAME2=Node25)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 27
+     SplineMuscle_CreateElement elem27 (NAME1=__NAME__,NAME2=Node26)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 28
+     SplineMuscle_CreateElement elem28 (NAME1=__NAME__,NAME2=Node27)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 29
+     SplineMuscle_CreateElement elem29 (NAME1=__NAME__,NAME2=Node28)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 30
+     SplineMuscle_CreateElement elem30 (NAME1=__NAME__,NAME2=Node29)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 31
+     SplineMuscle_CreateElement elem31 (NAME1=__NAME__,NAME2=Node30)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 32
+     SplineMuscle_CreateElement elem32 (NAME1=__NAME__,NAME2=Node31)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 33
+     SplineMuscle_CreateElement elem33 (NAME1=__NAME__,NAME2=Node32)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 34
+     SplineMuscle_CreateElement elem34 (NAME1=__NAME__,NAME2=Node33)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 35
+     SplineMuscle_CreateElement elem35 (NAME1=__NAME__,NAME2=Node34)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 36
+     SplineMuscle_CreateElement elem36 (NAME1=__NAME__,NAME2=Node35)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 37
+     SplineMuscle_CreateElement elem37 (NAME1=__NAME__,NAME2=Node36)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 38
+     SplineMuscle_CreateElement elem38 (NAME1=__NAME__,NAME2=Node37)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 39
+     SplineMuscle_CreateElement elem39 (NAME1=__NAME__,NAME2=Node38)= {};
+  #endif
+  
+
+};
+
+
+
+//This function can be used to set the angles of the lines acting between two spline fuctions e.g. intercostal muscles
+//the line will have a specified angle wrt to the origin function 
+//to do this we make a correct to the parameter values on the insertation function
+//it is using a triangle calculation based on three points  A, B, C. A and B are points on the origin spline
+//C is a point on the insertion spline.
+//the input to the calculation is a  desired angle, a set of parameters values and two spline functions
+//the spline functions 
+#define SPLINE_MUSLE_OFFSET(DesiredAngle, par,InsertionFun,OriginFun) \
+  AnyFolder Offsets = { \
+  //small pertubation
+  AnyVar Pert = 0.001;\
+  //point on origin spline 
+  AnyFloat C = .OriginFun(par); \
+  //pertubed point on origin spline
+  AnyFloat B = .OriginFun((par+Pert)); \
+  //point on insertaion spline
+  AnyFloat A = .InsertionFun(par); \
+  //length BC
+  AnyFloat a = vnorm(B-C);\
+  //length AC
+  AnyFloat b = vnorm(A-C);\
+   //length AB
+  AnyFloat c = vnorm(A-B);\
+  //angle C  using c^2=a^2+b^2-2*a*b*cos(C_angle)
+  AnyFloat Angles_temp  = (180/pi)*acos((c^2-a^2-b^2)/(-2*mult(a,b))); \
+  //needed angle correction to obtain 90 deg wrt to origin fun
+  AnyFloat Correction_Angle  = Angles_temp-90;  \
+ //needed offset on insertaion parameters to obtain 90 deg called ISO
+  AnyFloat Offset_ISO = mult(sin(Correction_Angle*pi/180),b);\
+  //calculate new correct parameters using Offset_ISO
+  AnyFloat par_corrected= par+Offset_ISO/.InsertionFun.L;\
+  //new caluclated points on INF after correction to iso
+  AnyFloat A_corrected = .InsertionFun(par_corrected);\
+  //calculation of b after point A is moved
+  AnyFloat b_corrected = vnorm(C-A_corrected);\
+  // using the desired angle calculate corrections needed
+  // tan(Desired_Ext_angle)=offset/b_corrected
+  // offset= b_corrected* tan(Desired_Ext_angle)
+  AnyFloat Offset = tan(DesiredAngle*pi/180)*b_corrected+Offset_ISO ;\
+}; \
+
+
+
+
+
+
+ #define DRAWLINE AnyDrawPLine drwLine ={AnyFloat RGB_Red = {1,0,0};AnyFloat RGB_Green = {0,1,0};RGB=iffun(gtfun(.LmtDot,0),RGB_Red,RGB_Green);Thickness=0.005; }; 
+
+
+
+#class_template SplineMuscle_CreateMuscleMultiOffset(
+  CREATE_ELEMENTS,
+  AnyFolder &OriginSegment,
+  ORIGIN_POINTS,
+  AnyFolder &InsertionSegment,
+  INSERTION_POINTS,
+  MUSCLE_MODEL_PARAMETERS, 
+  DISPLAY=1
+){
+  AnyVec3 MuscleRGB = {0.85, 0.85, 0.85}; //< Default ligament color
+  
+ #var AnyIntVar NumberOfElements = CREATE_ELEMENTS;
+ #var AnyFloat  DesiredAngle=0;
+ AnyFolder& MuscleModel = MUSCLE_MODEL_PARAMETERS;
+
+ AnyFloat Data_Origin=ORIGIN_POINTS';
+ AnyFloat Data_Insertion=INSERTION_POINTS';
+  
+ AnyFunInterpol OriginFun = { 
+   AnyInt Size = SizesOf(.ORIGIN_POINTS)[0];
+   T= linspace(0,1.0,Size);
+   //Type=Bspline; 
+   Type=PiecewiseLinear;
+   Data = .ORIGIN_POINTS';
+ };  
+
+ AnyFunInterpol InsertionFun = { 
+   AnyInt Size = SizesOf(.INSERTION_POINTS)[0];
+   T= linspace(0,1.0,Size);
+   //Type=Bspline;  
+   Type=PiecewiseLinear;
+   Data = .INSERTION_POINTS';
+};  
+
+
+
+
+
+
+AnyInt   Origin_Size = SizesOf(ORIGIN_POINTS)[0];
+AnyInt   Insertion_Size = SizesOf(INSERTION_POINTS)[0];
+AnyFloat Origin_Accum_L = arrcat(0.0,vnorm((DIFFMAT(Origin_Size))*ORIGIN_POINTS)*(TRI(Origin_Size-1)'));
+AnyFloat Insertion_Accum_L = arrcat(0.0,vnorm((DIFFMAT(Insertion_Size))*INSERTION_POINTS)*(TRI(Insertion_Size-1)'));
+AnyFloat Origin_L = TOTAL_POLYLINE_LENGTH(ORIGIN_POINTS);
+AnyFloat Insertion_L = TOTAL_POLYLINE_LENGTH(INSERTION_POINTS);
+AnyFloat Origin_REL_L =  Origin_Accum_L/Origin_L;
+AnyFloat Insertion_REL_L = Insertion_Accum_L/Insertion_L;
+
+
+//T as length
+AnyFunInterpol Fun_Origin = { 
+ T= .Origin_Accum_L;
+ AnyInt Size =.Origin_Size; 
+ Type=Bspline; 
+ Data = .ORIGIN_POINTS';
+};  
+
+//T as length
+AnyFunInterpol Fun_Insertion = { 
+ T= .Insertion_Accum_L;
+ AnyInt Size =.Insertion_Size; 
+ Type= Bspline;
+ Data = .INSERTION_POINTS';
+}; 
+
+//T as relative extended
+AnyFunInterpol Fun_Origin_Extend = { 
+  AnyVar extension_factor =0.75; 
+  Type=Bspline;  
+  AnyFloat L=.Origin_L;
+  //Add extra points to allow extrapolations
+  AnyFloat p0    = .Fun_Origin(0.0);
+  AnyFloat p1    = .Fun_Origin(extension_factor*L);
+  AnyFloat p_pre =  p0 + (p0-p1);
+  
+  AnyFloat p100= .Fun_Origin(L);
+  AnyFloat p99 = .Fun_Origin(L-extension_factor*L);
+  AnyFloat p_post= p100+(p100-p99);
+  
+  T= arrcat(-extension_factor+0,.Origin_REL_L,1+extension_factor);
+  Data = arrcat({p_pre},.Fun_Origin(.Origin_Accum_L),{p_post})';
+};  
+
+//T as relative extended
+AnyFunInterpol Fun_Insertion_Extend = { 
+  AnyVar extension_factor =0.75; 
+  Type=  Bspline;  
+  AnyFloat L=.Insertion_L;
+  //Add extra points to allow extrapolations
+  AnyFloat p0    = .Fun_Insertion(0.0);
+  AnyFloat p1    = .Fun_Insertion(extension_factor*L);
+  AnyFloat p_pre =  p0 + (p0-p1);
+  
+  AnyFloat p100= .Fun_Insertion(L);
+  AnyFloat p99 = .Fun_Insertion(L-extension_factor*L);
+  AnyFloat p_post= p100+(p100-p99);
+  
+  T= arrcat(-extension_factor+0,.Insertion_REL_L,1+extension_factor);
+  Data = arrcat({p_pre},.Fun_Insertion(.Insertion_Accum_L),{p_post})';
+};  
+
+//calculate offsets 
+SPLINE_MUSLE_OFFSET(.DesiredAngle,.Origin_REL_L,Fun_Insertion_Extend,Fun_Origin_Extend)
+
+//Make interpolated offset function
+AnyFunInterpol InsertionFun_Offset = { 
+   T= linspace(0,1.0,.Insertion_Size);
+   Type=Bspline;  
+   Data={ linspace(0,1,.Insertion_Size)+.Offsets.Offset/.Insertion_L};
+};  
+  
+////take max of offset... we want to check if we go beyond end of function
+AnyFloat  max_=InsertionFun_Offset(1.0)-1;
+//take min of offset... we want to check if we go beyond start of function
+AnyFloat  min_=InsertionFun_Offset(0.0);
+
+//space out evenly points..
+//subtract lengths if we are going beyond the ends... and add a small safety of 1% 
+AnyVector a_org = linspace(iffun(ltfun(min_,0),-min_+0.01,0.0),iffun(gtfun(max_,0),1.0-max_-0.01,1.0),CREATE_ELEMENTS);
+
+
+
+
+//AnyFloat test =InsertionFun_Offset(a_org)';
+  
+  // Create function nodes on segments
+  OriginSegment = {
+    AnyRefNodeGroup __NAME__##_Org = {
+      NodeAmount =CREATE_ELEMENTS;
+      NodeName = "Node";
+      Node_sRels = ..OriginFun(..a_org);
+      CreateMotionOutput = {r=On;rDot=Off;rDDot=Off;Axes=Off;EulerPar=Off;omega=Off;omegaDot=Off;};
+      NodeDefaults.CreateMotionOutput = {r=On;rDot=Off;rDDot=Off;Axes=Off;EulerPar=Off;omega=Off;omegaDot=Off;};
+    //  AnyDrawPLine intercostalis_line = {RGB = {1, 0, 0};};
+    };
+  };
+
+  InsertionSegment = {
+    AnyRefNodeGroup __NAME__##_Ins = {
+      NodeAmount = CREATE_ELEMENTS;
+      NodeName = "Node";
+      Node_sRels = ..InsertionFun(..InsertionFun_Offset(..a_org)');
+      CreateMotionOutput = {r=On;rDot=Off;rDDot=Off;Axes=Off;EulerPar=Off;omega=Off;omegaDot=Off;};
+      NodeDefaults.CreateMotionOutput = {r=On;rDot=Off;rDDot=Off;Axes=Off;EulerPar=Off;omega=Off;omegaDot=Off;};
+     // AnyDrawPLine intercostalis_line = {RGB = {0.5, 0, 0.5};};
+    };
+  };
+  
+  
+   #if CREATE_ELEMENTS >= 1 
+    SplineMuscle_CreateElement elem1 (NAME1=__NAME__,NAME2=Node0)= {};
+  #endif
+  #if CREATE_ELEMENTS >= 2
+    SplineMuscle_CreateElement elem2 (NAME1=__NAME__,NAME2=Node1)= {};
+  #endif
+  #if CREATE_ELEMENTS >= 3
+    SplineMuscle_CreateElement elem3 (NAME1=__NAME__,NAME2=Node2)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 4 
+    SplineMuscle_CreateElement elem4 (NAME1=__NAME__,NAME2=Node3)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 5
+    SplineMuscle_CreateElement elem5 (NAME1=__NAME__,NAME2=Node4)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 6
+    SplineMuscle_CreateElement elem6 (NAME1=__NAME__,NAME2=Node5)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 7
+    SplineMuscle_CreateElement elem7 (NAME1=__NAME__,NAME2=Node6)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 8 
+    SplineMuscle_CreateElement elem8 (NAME1=__NAME__,NAME2=Node7)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 9 
+    SplineMuscle_CreateElement elem9 (NAME1=__NAME__,NAME2=Node8)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 10
+     SplineMuscle_CreateElement elem10 (NAME1=__NAME__,NAME2=Node9)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 11 
+     SplineMuscle_CreateElement elem11 (NAME1=__NAME__,NAME2=Node10)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 12 
+     SplineMuscle_CreateElement elem12 (NAME1=__NAME__,NAME2=Node11)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 13
+     SplineMuscle_CreateElement elem13 (NAME1=__NAME__,NAME2=Node12)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 14 
+     SplineMuscle_CreateElement elem14 (NAME1=__NAME__,NAME2=Node13)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 15 
+     SplineMuscle_CreateElement elem15 (NAME1=__NAME__,NAME2=Node14)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 16 
+     SplineMuscle_CreateElement elem16 (NAME1=__NAME__,NAME2=Node15)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 17
+     SplineMuscle_CreateElement elem17 (NAME1=__NAME__,NAME2=Node16)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 18 
+     SplineMuscle_CreateElement elem18 (NAME1=__NAME__,NAME2=Node17)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 19
+     SplineMuscle_CreateElement elem19 (NAME1=__NAME__,NAME2=Node18)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 20
+     SplineMuscle_CreateElement elem20 (NAME1=__NAME__,NAME2=Node19)= {};
+  #endif
+   #if CREATE_ELEMENTS  >= 21
+     SplineMuscle_CreateElement elem21 (NAME1=__NAME__,NAME2=Node20)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 22
+     SplineMuscle_CreateElement elem22 (NAME1=__NAME__,NAME2=Node21)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 23
+     SplineMuscle_CreateElement elem23 (NAME1=__NAME__,NAME2=Node22)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 24
+     SplineMuscle_CreateElement elem24 (NAME1=__NAME__,NAME2=Node23)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 25
+     SplineMuscle_CreateElement elem25 (NAME1=__NAME__,NAME2=Node24)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 26
+     SplineMuscle_CreateElement elem26 (NAME1=__NAME__,NAME2=Node25)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 27
+     SplineMuscle_CreateElement elem27 (NAME1=__NAME__,NAME2=Node26)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 28
+     SplineMuscle_CreateElement elem28 (NAME1=__NAME__,NAME2=Node27)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 29
+     SplineMuscle_CreateElement elem29 (NAME1=__NAME__,NAME2=Node28)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 30
+     SplineMuscle_CreateElement elem30 (NAME1=__NAME__,NAME2=Node29)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 31
+     SplineMuscle_CreateElement elem31 (NAME1=__NAME__,NAME2=Node30)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 32
+     SplineMuscle_CreateElement elem32 (NAME1=__NAME__,NAME2=Node31)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 33
+     SplineMuscle_CreateElement elem33 (NAME1=__NAME__,NAME2=Node32)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 34
+     SplineMuscle_CreateElement elem34 (NAME1=__NAME__,NAME2=Node33)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 35
+     SplineMuscle_CreateElement elem35 (NAME1=__NAME__,NAME2=Node34)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 36
+     SplineMuscle_CreateElement elem36 (NAME1=__NAME__,NAME2=Node35)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 37
+     SplineMuscle_CreateElement elem37 (NAME1=__NAME__,NAME2=Node36)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 38
+     SplineMuscle_CreateElement elem38 (NAME1=__NAME__,NAME2=Node37)= {};
+  #endif
+  #if CREATE_ELEMENTS  >= 39
+     SplineMuscle_CreateElement elem39 (NAME1=__NAME__,NAME2=Node38)= {};
+  #endif
+  
+   
+  
+};
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,22 @@
+// *** Define inferior endplate frames ***
+
+#if IncludeNeckCalibration == 0
+  AnyRefNode &PostSup = PLLNodeSuperior;
+  AnyRefNode &AntSup = ALLNodeSuperior;
+  AnyRefNode &PostInf = PLLNodeInferior;
+  AnyRefNode &AntInf = ALLNodeInferior;
+
+#endif
+
+  // Inferior endplate
+  AnyRefNode Inf_EP_orient = {
+    sRel = (.PostInf.sRel + .AntInf.sRel)/2;
+    ARel = RotMat(sRel, .AntInf.sRel, sRel +{0.0,0.1,0.0});
+    
+//    AnyDrawRefFrame drw = {
+//      ScaleXYZ = 0.07*{1,0,1};
+//      RGB = {0.1,0.3,0.3};
+//    };
+
+  };
+  

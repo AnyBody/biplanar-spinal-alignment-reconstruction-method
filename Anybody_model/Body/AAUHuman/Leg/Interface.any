@@ -1,0 +1,161 @@
+//This file contains the interface to the leg it consist of joints and
+//nodes which can be used for defining contact with the sorroundings
+
+
+
+
+#if BM_FOOT_MODEL == _FOOT_MODEL_DEFAULT_
+
+AnyKinMeasureLinComb AnklePlantarFlexion =
+{
+
+  AnyFolder &Shank = ..Seg.Shank.AnkleJoint;
+  Shank =
+  {
+    AnyRefNode RotNode={ARel={{0,....Sign*-1,0},{....Sign*1,0,0},{0,0,1}};};
+  };
+
+  AnyFolder &Foot = ..Seg.Foot.AnkleJoint;
+  Foot =
+  {
+    AnyRefNode RotNode = {ARel={{....Sign*1,0,0},{0,....Sign*1,0},{0,0,1}};};
+  };
+
+  AnyKinRotational Ankle =
+  {
+    Type=RotAxesAngles;
+    AnyRefNode &ShankNode = ...Seg.Shank.AnkleJoint.RotNode;
+    AnyRefNode &FootNode  = ...Seg.Foot.AnkleJoint.RotNode;
+  }; // End of Ankle
+  Coef = {{-1,0,0}};
+  OutDim = 1;
+};
+
+AnyKinMeasureOrg AnkleEversion=
+{
+  AnyKinRotational &Ankle = .AnklePlantarFlexion.Ankle;
+  MeasureOrganizer={1};
+};
+
+
+AnyKinMeasureLinComb AnklePlantarFlexionJntMus=
+{
+  AnyKinRotational RotMeasure =
+  {
+    Type=RotAxesAngles;
+    AngVelOnOff = On;
+    AnyRefNode &ShankNode = ...Seg.Shank.AnkleJoint.RotNode;
+    AnyRefNode &FootNode  = ...Seg.Foot.AnkleJoint.RotNode;
+  };
+  Coef = {{0,0,-1}};
+  OutDim = 1;
+};
+
+
+AnyKinMeasureOrg AnkleEversionJntMus=
+{
+  AnyKinRotational &Ankle = .AnklePlantarFlexionJntMus.RotMeasure;
+  MeasureOrganizer={1};
+};
+#endif
+
+AnyKinMeasureOrg KneeFlexion =
+{
+  AnyFolder &Thigh = ..Seg.Thigh.KneeJoint;
+  Thigh =
+  {
+    AnyRefNode RotNode={
+      ARel={{....Sign*1,0,0},{0,....Sign*1,0},{0,0,1}};
+    };
+  };
+  AnyFolder &Shank = ..Seg.Shank.KneeJoint;
+  Shank =
+  {
+    AnyRefNode RotNode=
+    {
+      ARel={{....Sign*1,0,0},{0,....Sign*1,0},{0,0,1}};
+    };
+  };
+  AnyKinRotational KneeRot=
+  {
+    AnyRefNode &ShankNode = ...Seg.Shank.KneeJoint.RotNode;
+    AnyRefNode &ThighNode = ...Seg.Thigh.KneeJoint.RotNode;
+    Type=RotAxesAngles;
+  };
+  MeasureOrganizer={0};
+};
+
+
+
+AnyKinMeasureOrg HipFlexion =
+{
+  //create new rotated node
+  AnyFolder &HipNodeRef=..HipNodeRef;
+  HipNodeRef=
+  {
+    AnyRefNode RotNode=
+    {
+      ARel={{....Sign*-1,0,0},{0,....Sign*-1,0},{0,0,1}};
+    };
+  };
+  
+  AnyFolder &ThighNodeRef = ..Seg.Thigh.HipJoint;
+  ThighNodeRef =
+  {
+    AnyRefNode RotNode=
+    {
+      ARel={{....Sign*-1,0,0},{0,....Sign*-1,0},{0,0,1}};
+    };
+  };
+  
+  AnyKinRotational HipMeasure =
+  {
+    AnyRefNode &PelvisNode = ...HipNodeRef.RotNode;
+    AnyRefNode &ThighNode = ...Seg.Thigh.HipJoint.RotNode;
+    Axis1 = z; Axis2 = x;  Axis3 = y;
+    Type=RotAxesAngles;
+  };    
+  MeasureOrganizer={0};
+};
+
+
+AnyKinMeasureOrg HipAbduction =
+{
+  AnyKinRotational &HipJoint =.HipFlexion.HipMeasure;
+  MeasureOrganizer={1};
+};
+
+AnyKinMeasureOrg HipExternalRotation =
+{
+  AnyKinRotational &HipJoint =.HipFlexion.HipMeasure;
+  MeasureOrganizer={2};
+};
+
+
+AnyKinMeasureOrg HipFlexionJntMus =
+{
+  AnyKinRotational HipMeasure =
+  {
+    AnyRefNode &PelvisNode = ...HipNodeRef.RotNode;
+    AnyRefNode &ThighNode = ...Seg.Thigh.HipJoint.RotNode;
+    Type=RotAxesAngles;
+    AngVelOnOff = On;
+  };
+  MeasureOrganizer={2}; // AngVelOnOff = On use the normal xyz sequence
+};
+
+AnyKinMeasureOrg HipAbductionJntMus =
+{
+  AnyKinRotational &HipJoint =.HipFlexionJntMus.HipMeasure;
+  MeasureOrganizer={0};
+};
+
+AnyKinMeasureOrg HipExternalRotationJntMus =
+{
+  AnyKinRotational &HipJoint =.HipFlexionJntMus.HipMeasure;
+  MeasureOrganizer={1};
+};
+
+
+
+

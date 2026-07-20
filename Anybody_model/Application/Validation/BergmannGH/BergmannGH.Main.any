@@ -1,0 +1,56 @@
+#include "../libdef.any"
+
+// Find a detailed description of the model here
+#include "Model/Description.any"
+
+Main = {
+  
+  #include "<ANYBODY_PATH_MODELUTILS>\Operations\RunAppSequence.any"
+
+
+  #include "Model/BMSettings.any"
+  
+  #include "<ANYBODY_PATH_BODY>/HumanModel.any"  
+  
+  HumanModel = {
+    
+    // Create a node for Bergmann's force reference
+    BodyModel.Right.ShoulderArm.Seg.Humerus.gh = {
+      AnyRefNode Bergmann = {
+        ARel = RotMat(90*pi/180,y);
+        AnyDrawRefFrame drwref = {
+          RGB = {1,0,0};
+          ScaleXYZ = {1,1,1}/5;
+        };
+      };
+    };
+  };
+    
+  AnyFolder Model = {
+    
+    AnyFolder &BodyModel=.HumanModel.BodyModel;
+    
+    // Definition of the model environment
+    #include "Model/Environment.any"
+    
+    AnyFolder ModelEnvironmentConnection = {
+      #include "Model/JointsAndDrivers.any"
+    };
+  };
+  
+  AnyBodyStudy Study = {
+    AnyFolder &Model = .Model;
+    
+    // Output variables collecting the GH forces in the pertinent coordinate frame
+    AnyVec3 GHReactionInHumerus = -(Model.BodyModel.Right.ShoulderArm.Seg.Humerus.gh.Bergmann.Axes'
+       *Model.BodyModel.Right.ShoulderArm.Jnt.GHReactions.ResultantForce.FTotalGlobal')';
+      InverseDynamics.Criterion.Type=MR_Quadratic;
+
+   
+    tEnd = 8.0; // 5;
+    Gravity = {0.01, -9.81, 0.01};
+    nStep = 30; //19;
+//    MuscleEliminationTol = 1e-6;
+  }; // End of study
+  
+}; //Main

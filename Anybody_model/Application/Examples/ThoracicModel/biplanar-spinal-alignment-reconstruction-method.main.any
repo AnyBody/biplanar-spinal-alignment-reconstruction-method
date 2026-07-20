@@ -1,0 +1,146 @@
+#include "../libdef.any"
+#include "<ANYBODY_PATH_MODELUTILS>/Drivers/Fourier.any"
+
+
+Main = {
+ 
+  
+  // New flexible thorax is enabled with:
+  #define BM_TRUNK_THORACIC_MODEL _THORACIC_MODEL_FLEXIBLE_
+  
+  #define BM_LEG_MODEL OFF
+  #define BM_ARM_LEFT OFF
+  #define BM_ARM_RIGHT OFF
+  
+  // Note: Model doesn't yet work without muscles
+  #define BM_TRUNK_MUSCLES ON
+  
+  // The new thoracic model comes with a full set of
+  // ligaments all along the spine. They can be enabled
+  // with the following switch.
+  #define BM_TRUNK_LIGAMENTS OFF 
+  
+
+  // This example comes with custom fourier drivers for the
+  // spine motion. So here we disable the default drivers 
+  #define BM_MANNEQUIN_DRIVER_PELVIS_THORAX_EXTENSION OFF
+  #define BM_MANNEQUIN_DRIVER_PELVIS_THORAX_ROTATION OFF
+  #define BM_MANNEQUIN_DRIVER_PELVIS_THORAX_LATERAL_BENDING OFF
+  
+  // Disable neck drivers and link the degrees of freedom to the 
+  // rest of the spine. 
+  #define BM_MANNEQUIN_DRIVER_SKULL_THORAX_FLEXION OFF
+  #define BM_MANNEQUIN_DRIVER_SKULL_THORAX_LATERALBENDING OFF
+  #define BM_MANNEQUIN_DRIVER_SKULL_THORAX_ROTATION OFF
+  #define BM_TRUNK_CERVICAL_THORACIC_LINK OFF 
+  #define BM_TRUNK_CERVICAL_RHYTHM OFF
+  #define BM_TRUNK_LUMBAR_THORACIC_LINK OFF 
+  
+  ////////////////////////////////////////// 
+  
+  // Switch on/off alignment modeling, define patient ID, etc.
+  #include "Setup/Model/UserDefinitions.any"
+  
+  // Read in and organize data from input files
+  #include "Setup/Model/SubjectData.any"
+  
+  // Posture modeling files
+  #include "Setup/ModelingAlignment/EndplatesAndIntervertebralAngles.any"
+  #include "Setup/ModelingAlignment/PosturalMeasures.any"
+
+  // Include environment model (global reference)
+  #include "Setup/Model/Environment.any"
+  
+  // Alignment calibration
+  #if AlignmentModeling == 1 
+  #include "Setup/ModelingAlignment/PostureCalibration.any"
+  #endif
+
+   //////////////////////////////////////////
+   
+   // Include the human model
+#include "<ANYBODY_PATH_BODY>/HumanModel.any"
+
+AnyFolder Model = {
+
+  AnyFolder &BodyModel = Main.HumanModel.BodyModel;
+  AnyFolder &DefaultDrivers = Main.HumanModel.DefaultMannequinDrivers;
+
+  AnyReacForce PelvisGroundReactions = {
+    AnyKinMeasure &lin = .BodyModel.Interface.Trunk.PelvisPosX.lin;
+    AnyKinMeasure &rot = .BodyModel.Interface.Trunk.PelvisRotX.rot;
+  };
+
+};
+
+AnyBodyStudy Study = {
+
+  AnyFolder &Model = Main.Model;
+
+  tStart = 0;
+  tEnd = 1;
+  Gravity = {0, -9.81, 0.0};
+  nStep = 3;
+
+  AnyVar PelvisThoraxFlexionDeg = Main.HumanModel.BodyModel.Interface.Trunk.PelvisThoraxExtension.Pos[0] * 180 / pi;
+
+  AnyFolder &BodyModel = Main.HumanModel.BodyModel;
+
+  #include "Setup/Model/PosturalDrivers.any"
+  
+  
+
+  // Include functions to generate a video:
+  // -> Run `Study.VideoTool.Preview` to preview the camera view.
+  // -> Run `Study.VideoTool.Create_Video` to generate video from the analysis.
+  #include "CreateVideo.any"
+
+  #if SaveSelectedOutput == 1
+
+    AnyStringVar fileID = Main.FileNameConstruction.fileID;
+
+    AnyOutputFile SaveOutputAll = {
+
+      FileName = "Setup\\OutputData\\" + .fileID + "_complete_new.csv";
+
+      SepSign = " ;";
+      Header.TitleSectionOnOff = Off;
+      Header.ConstSectionOnOff = Off;
+      Header.ColumnNamesOnOff = On;
+      Header.VarSectionOnOff = Off;
+
+      Search = {
+        "Main.HumanModel.BodyModel.SelectedOutput.Trunk.JointReactionForce.*CompressionForce",
+        "Main.HumanModel.BodyModel.SelectedOutput.Trunk.JointReactionForce.*AnteroPosteriorShearForce",
+        "Main.HumanModel.BodyModel.SelectedOutput.Trunk.JointReactionForce.*MedioLateralShearForce",
+        "Main.HumanModel.BodyModel.SelectedOutput.Trunk.Muscles.AllMusclesMaxAct",
+        "Main.HumanModel.BodyModel.SelectedOutput.Trunk.Muscles.AllMusclesTotalForce",
+        "Main.HumanModel.BodyModel.SelectedOutput.Trunk.Muscles.Activities.*",
+        "Main.HumanModel.BodyModel.SelectedOutput.Trunk.Muscles.Forces.*",
+        "Main.HumanModel.BodyModel.SelectedOutput.Trunk.SegmentalRotationFlexion.*",
+        "Main.HumanModel.BodyModel.SelectedOutput.Trunk.SegmentalRotationLateralBending.*",
+        "Main.HumanModel.BodyModel.SelectedOutput.Trunk.SegmentalRotationAxialRotation.*",
+        "Main.HumanModel.BodyModel.SelectedOutput.Trunk.PosturalMeasures.*",
+        "Main.HumanModel.BodyModel.SelectedOutput.Trunk.CoM.*",
+        "Main.HumanModel.BodyModel.SelectedOutput.Trunk.Cobb.*",
+
+//        "Main.CheckPostureReconstruction.*_error_pos",
+//        "Main.CheckPostureReconstruction.*_error_rotZ",
+//        "Main.CheckPostureReconstruction.*_error_rotX",
+//        "Main.CheckPostureReconstruction.*_error_rotY",
+      };
+    };
+
+  #endif
+
+};
+
+AnyOperationSequence RunApplication = {
+
+  #if AlignmentModeling == 1 
+  AnyOperation &CalibrateAlignment = Main.Calibrate_VertebralCentroids;
+  #endif
+
+  AnyOperation &ref = Main.Study.InverseDynamics;
+};
+};

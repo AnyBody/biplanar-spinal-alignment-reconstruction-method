@@ -1,0 +1,262 @@
+AnyFolder coronal_input = {
+#if ModelCoronalAlignment == 1
+
+AnyVar CorAngle_L5 = Main.SubjectData.Alignment.CorAngle_L5;
+AnyVar CorAngle_L4 = Main.SubjectData.Alignment.CorAngle_L4;
+AnyVar CorAngle_L3 = Main.SubjectData.Alignment.CorAngle_L3;
+AnyVar CorAngle_L2 = Main.SubjectData.Alignment.CorAngle_L2;
+AnyVar CorAngle_L1 = Main.SubjectData.Alignment.CorAngle_L1;
+
+AnyVar CorAngle_T12= Main.SubjectData.Alignment.CorAngle_T12;
+AnyVar CorAngle_T11= Main.SubjectData.Alignment.CorAngle_T11;
+AnyVar CorAngle_T10= Main.SubjectData.Alignment.CorAngle_T10;
+AnyVar CorAngle_T9= Main.SubjectData.Alignment.CorAngle_T9;
+AnyVar CorAngle_T8= Main.SubjectData.Alignment.CorAngle_T8;
+AnyVar CorAngle_T7= Main.SubjectData.Alignment.CorAngle_T7;
+AnyVar CorAngle_T6= Main.SubjectData.Alignment.CorAngle_T6;
+AnyVar CorAngle_T5= Main.SubjectData.Alignment.CorAngle_T5;
+AnyVar CorAngle_T4= Main.SubjectData.Alignment.CorAngle_T4;
+AnyVar CorAngle_T3= Main.SubjectData.Alignment.CorAngle_T3;
+AnyVar CorAngle_T2= Main.SubjectData.Alignment.CorAngle_T2;
+AnyVar CorAngle_T1= Main.SubjectData.Alignment.CorAngle_T1;
+
+AnyVar T1_z = Main.SubjectData.Alignment.T1_z;
+//AnyVar T1_y = Main.SubjectData.CoronalAlignment.T1_y;
+AnyVar T2_z = Main.SubjectData.Alignment.T2_z;
+//AnyVar T2_y = Main.SubjectData.CoronalAlignment.T2_y;
+AnyVar T3_z = Main.SubjectData.Alignment.T3_z;
+//AnyVar T3_y = Main.SubjectData.CoronalAlignment.T3_y;
+AnyVar T4_z = Main.SubjectData.Alignment.T4_z;
+//AnyVar T4_y = Main.SubjectData.CoronalAlignment.T4_y;
+AnyVar T5_z = Main.SubjectData.Alignment.T5_z;
+//AnyVar T5_y = Main.SubjectData.CoronalAlignment.T5_y;
+AnyVar T6_z = Main.SubjectData.Alignment.T6_z;
+//AnyVar T6_y = Main.SubjectData.CoronalAlignment.T6_y;
+AnyVar T7_z = Main.SubjectData.Alignment.T7_z;
+//AnyVar T7_y = Main.SubjectData.CoronalAlignment.T7_y;
+AnyVar T8_z = Main.SubjectData.Alignment.T8_z;
+//AnyVar T8_y = Main.SubjectData.CoronalAlignment.T8_y;
+AnyVar T9_z = Main.SubjectData.Alignment.T9_z;
+//AnyVar T9_y = Main.SubjectData.CoronalAlignment.T9_y;
+AnyVar T10_z = Main.SubjectData.Alignment.T10_z;
+//AnyVar T10_y = Main.SubjectData.CoronalAlignment.T10_y;
+AnyVar T11_z = Main.SubjectData.Alignment.T11_z;
+//AnyVar T11_y = Main.SubjectData.CoronalAlignment.T11_y;
+AnyVar T12_z = Main.SubjectData.Alignment.T12_z;
+//AnyVar T12_y = Main.SubjectData.CoronalAlignment.T12_y;
+
+AnyVar L1_z = Main.SubjectData.Alignment.L1_z;
+//AnyVar L1_y = Main.SubjectData.CoronalAlignment.L1_y;
+AnyVar L2_z = Main.SubjectData.Alignment.L2_z;
+//AnyVar L2_y = Main.SubjectData.CoronalAlignment.L2_y;
+AnyVar L3_z = Main.SubjectData.Alignment.L3_z;
+//AnyVar L3_y = Main.SubjectData.CoronalAlignment.L3_y;
+AnyVar L4_z = Main.SubjectData.Alignment.L4_z;
+//AnyVar L4_y = Main.SubjectData.CoronalAlignment.L4_y;
+AnyVar L5_z = Main.SubjectData.Alignment.L5_z;
+//AnyVar L5_y = Main.SubjectData.CoronalAlignment.L5_y;
+
+
+AnyVar SacrObl = Main.SubjectData.Alignment.SacrObl;
+AnyVar PelvicObl = Main.SubjectData.Alignment.PelvicObl;
+
+// Sarah end
+
+AnyVar T1_x = 0;
+AnyVar T2_x = 0;
+AnyVar T3_x = 0;
+AnyVar T4_x = 0;
+AnyVar T5_x = 0;
+AnyVar T6_x = 0;
+AnyVar T7_x = 0;
+AnyVar T8_x = 0;
+AnyVar T9_x = 0;
+AnyVar T10_x = 0;
+AnyVar T11_x = 0;
+AnyVar T12_x = 0;
+
+AnyVar L1_x = 0;
+AnyVar L2_x = 0;
+AnyVar L3_x = 0;
+AnyVar L4_x = 0;
+AnyVar L5_x = 0;
+
+
+#if IncludeNeckCalibration == 1 
+// this may need to be updated for coronal alignment; use carefully! - SS
+
+ AnyVar CorAngle_C7= Main.SubjectData.Alignment.CorAngle_C7;
+ AnyVar CorAngle_C6= Main.SubjectData.Alignment.CorAngle_C6;
+ AnyVar CorAngle_C5= Main.SubjectData.Alignment.CorAngle_C5;
+ AnyVar CorAngle_C4= Main.SubjectData.Alignment.CorAngle_C4;
+ AnyVar CorAngle_C3= Main.SubjectData.Alignment.CorAngle_C3;
+ AnyVar CorAngle_C2= Main.SubjectData.Alignment.CorAngle_C2;
+ 
+ AnyVar C7_z = Main.SubjectData.Alignment.C7_z;
+ AnyVar C6_z = Main.SubjectData.Alignment.C6_z;
+ AnyVar C5_z = Main.SubjectData.Alignment.C5_z;
+ AnyVar C4_z = Main.SubjectData.Alignment.C4_z;
+ AnyVar C3_z = Main.SubjectData.Alignment.C3_z;
+ AnyVar C2_z = Main.SubjectData.Alignment.C2_z;
+
+#endif
+
+#else // Note: this section called for now for ease of implementation (coronal alignment switched off)
+// choose between implementing patient 23 or 24
+
+// angles patient 23
+//AnyVar CorAngle_L5 = 9.9012011173;
+//AnyVar CorAngle_L4 = 14.5657394664;
+//AnyVar CorAngle_L3 = 12.5029378082;
+//AnyVar CorAngle_L2 = 2.2677934506;
+//AnyVar CorAngle_L1 = -8.7159966247;
+//
+//AnyVar CorAngle_T12= -10.6664431377;
+//AnyVar CorAngle_T11= -13.5536389901;
+//AnyVar CorAngle_T10= -11.9229652693;
+//AnyVar CorAngle_T9= -9.4722953334;
+//AnyVar CorAngle_T8= -6.9355686035;
+//AnyVar CorAngle_T7= -4.3575873569;
+//AnyVar CorAngle_T6= -3.8542793887;
+//AnyVar CorAngle_T5= -2.1715245568;
+//AnyVar CorAngle_T4= -1.3649048707;
+//AnyVar CorAngle_T3= 1.4953923683;
+//AnyVar CorAngle_T2= 2.8221534845;
+//AnyVar CorAngle_T1= 3.1180319172;
+
+// patient 24
+//AnyVar CorAngle_L5 = -2.5918502837;
+//AnyVar CorAngle_L4 = -9.0999386507;
+//AnyVar CorAngle_L3 = -15.1952362265;
+//AnyVar CorAngle_L2 = -4.5860923011;
+//AnyVar CorAngle_L1 = 7.6440507491;
+//
+//AnyVar CorAngle_T12= 15.2812293287;
+//AnyVar CorAngle_T11= 19.5055193994;
+//AnyVar CorAngle_T10= 13.7475715084;
+//AnyVar CorAngle_T9= 10.3395192828;
+//AnyVar CorAngle_T8= 1.9333177584;
+//AnyVar CorAngle_T7= -9.0945726110;
+//AnyVar CorAngle_T6= -11.5353859673;
+//AnyVar CorAngle_T5= -9.5029405561;
+//AnyVar CorAngle_T4= -3.6353375111;
+//AnyVar CorAngle_T3= -4.8623128651;
+//AnyVar CorAngle_T2= -1.2679221442;
+//AnyVar CorAngle_T1= -3.0802478332;
+
+AnyVar CorAngle_L5 = 0;
+AnyVar CorAngle_L4 = 0;
+AnyVar CorAngle_L3 = 0;
+AnyVar CorAngle_L2 = 0;
+AnyVar CorAngle_L1 = 0;
+
+AnyVar CorAngle_T12= 0;
+AnyVar CorAngle_T11= 0;
+AnyVar CorAngle_T10= 0;
+AnyVar CorAngle_T9= 0;
+AnyVar CorAngle_T8= 0;
+AnyVar CorAngle_T7= 0;
+AnyVar CorAngle_T6= 0;
+AnyVar CorAngle_T5= 0;
+AnyVar CorAngle_T4= 0;
+AnyVar CorAngle_T3= 0;
+AnyVar CorAngle_T2= 0;
+AnyVar CorAngle_T1= 0;
+
+
+
+// Sarah start
+// centroids - still needs to include sacrum, FH, Y-coord?
+// patient 23
+//AnyVar T1_z = 0.0101793638;
+//AnyVar T2_z = 0.0125470854;
+//AnyVar T3_z = 0.0143396564;
+//AnyVar T4_z = 0.0150685683;
+//AnyVar T5_z = 0.0150413388;
+//AnyVar T6_z = 0.0148596463;
+//AnyVar T7_z = 0.0139062358;
+//AnyVar T8_z = 0.0123347729;
+//AnyVar T9_z = 0.0095571369;
+//AnyVar T10_z = 0.0053744864;
+//AnyVar T11_z = -0.0017893718;
+//AnyVar T12_z = -0.0103123576;
+//
+//AnyVar L1_z = -0.0167727699;
+//AnyVar L2_z = -0.0184823809;
+//AnyVar L3_z = -0.0131960178;
+//AnyVar L4_z = -0.0043835699;
+//AnyVar L5_z = 0.0015217207;
+
+// patient 24
+//AnyVar T1_z = -0.0057011293;
+//AnyVar T2_z = -0.0049918893;
+//AnyVar T3_z = -0.0047790372;
+//AnyVar T4_z = -0.0065320220;
+//AnyVar T5_z = -0.0113640763;
+//AnyVar T6_z = -0.0165647624;
+//AnyVar T7_z = -0.0205473425;
+//AnyVar T8_z = -0.0225521069;
+//AnyVar T9_z = -0.0206565414;
+//AnyVar T10_z = -0.0145439742;
+//AnyVar T11_z = -0.0037951274;
+//AnyVar T12_z = 0.0080747265;
+//
+//AnyVar L1_z = 0.0161097802;
+//AnyVar L2_z = 0.0181025312;
+//AnyVar L3_z = 0.0098469584;
+//AnyVar L4_z = -0.0025019462;
+//AnyVar L5_z = -0.0059355821;
+
+
+AnyVar T1_z = 0;
+AnyVar T2_z = 0;
+AnyVar T3_z = 0;
+AnyVar T4_z = 0;
+AnyVar T5_z = 0;
+AnyVar T6_z = 0;
+AnyVar T7_z = 0;
+AnyVar T8_z = 0;
+AnyVar T9_z = 0;
+AnyVar T10_z = 0;
+AnyVar T11_z = 0;
+AnyVar T12_z = 0;
+
+AnyVar L1_z = 0;
+AnyVar L2_z = 0;
+AnyVar L3_z = 0;
+AnyVar L4_z = 0;
+AnyVar L5_z = 0;
+
+// no obliquity
+AnyVar SacrObl = 0;
+AnyVar PelvicObl = 0;
+
+// patient 23
+//AnyVar SacrObl = 5.79;
+//AnyVar PelvicObl = 5.79;
+
+// patient 24
+//AnyVar SacrObl = 0.72;
+//AnyVar PelvicObl = 1.53;
+
+#if IncludeNeckCalibration == 1
+
+ AnyVar CorAngle_C7= 0;
+ AnyVar CorAngle_C6= 0;
+ AnyVar CorAngle_C5= 0;
+ AnyVar CorAngle_C4= 0;
+ AnyVar CorAngle_C3= 0;
+ AnyVar CorAngle_C2= 0;
+ 
+  AnyVar C7_z = 0;
+ AnyVar C6_z = 0;
+ AnyVar C5_z = 0;
+ AnyVar C4_z = 0;
+ AnyVar C3_z = 0;
+ AnyVar C2_z = 0;
+
+#endif
+
+#endif
+
+};

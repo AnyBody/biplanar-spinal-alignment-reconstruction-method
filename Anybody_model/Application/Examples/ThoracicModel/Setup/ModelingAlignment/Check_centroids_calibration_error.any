@@ -1,0 +1,275 @@
+// check the error for the respective vertebral coordinates and the input values wrt 
+// to the calibration reference frame
+
+AnyFolder Centroids_error = {
+  
+  AnyFolder &Input_points = Main.HumanModel.BodyModel.Trunk.Segments;
+  AnyFolder &segs = Main.HumanModel.BodyModel.Trunk.Segments;
+  
+  AnyRefFrame &Centroids_Check_Ref = Main.HumanModel.BodyModel.Trunk.Segments.SacrumSeg.CS4Node_MidLR;
+  
+  Main.HumanModel.BodyModel.Trunk.Segments.SacrumSeg.CS4Node_MidLR = {
+    AnyDrawNode CSRNodeMid = { ScaleXYZ={1,1,1}*0.006; Visible = On; RGB = {0.9,0.5,0};};
+  };
+  
+
+  //  // ------------------------------------------------------------
+  //  // ------ measure distance between calibration reference ------
+  //  // --------------- system and vertebral centroid --------------
+  //  // ------------------------------------------------------------
+  
+  // AnyKinLinear by default finds distance between two nodes/frames, expressed in global coordinates system
+  
+  //bifemoral-head axis
+  AnyKinLinear FHPos = {
+    AnyRefFrame &Error_check_Ref = .Centroids_Check_Ref;
+    AnyRefFrame &L5_centroid = .segs.PelvisSeg.HipJointsCenter;
+  };
+  
+  //lumbar vertebra
+  AnyKinLinear L5Pos = {
+    AnyRefFrame &Error_check_Ref = .Centroids_Check_Ref;
+    AnyRefFrame &L5_centroid = .segs.L5Seg.Vertebral_orient;
+  };
+  
+  AnyKinLinear L4Pos = {
+    AnyRefFrame &Error_check_Ref = .Centroids_Check_Ref;
+    AnyRefFrame &L4_centroid = .segs.L4Seg.Vertebral_orient;
+  };
+  
+  AnyKinLinear L3Pos = {
+    AnyRefFrame &Error_check_Ref = .Centroids_Check_Ref;
+    AnyRefFrame &L3_centroid = .segs.L3Seg.Vertebral_orient;
+  };
+  
+  AnyKinLinear L2Pos = {
+    AnyRefFrame &Error_check_Ref = .Centroids_Check_Ref;
+    AnyRefFrame &L2_centroid = .segs.L2Seg.Vertebral_orient;
+  };
+  
+  AnyKinLinear L1Pos = {
+    AnyRefFrame &Error_check_Ref = .Centroids_Check_Ref;
+    AnyRefFrame &L1_centroid = .segs.L1Seg.Vertebral_orient;
+  };
+  
+  //thoracic vertebra
+  AnyKinLinear T12Pos = {
+    AnyRefFrame &Error_check_Ref = .Centroids_Check_Ref;
+    AnyRefFrame &T12_centroid = .segs.T12Seg.Vertebral_orient;
+  };
+  
+  AnyKinLinear T11Pos = {
+    AnyRefFrame &Error_check_Ref = .Centroids_Check_Ref;
+    AnyRefFrame &T11_centroid = .segs.T11Seg.Vertebral_orient;
+  };
+  
+  AnyKinLinear T10Pos = {
+    AnyRefFrame &Error_check_Ref = .Centroids_Check_Ref;
+    AnyRefFrame &T10_centroid = .segs.T10Seg.Vertebral_orient;
+  };
+  
+  AnyKinLinear T9Pos = {
+    AnyRefFrame &Error_check_Ref = .Centroids_Check_Ref;
+    AnyRefFrame &T9_centroid = .segs.T9Seg.Vertebral_orient;
+  };
+  
+  AnyKinLinear T8Pos = {
+    AnyRefFrame &Error_check_Ref = .Centroids_Check_Ref;
+    AnyRefFrame &T8_centroid = .segs.T8Seg.Vertebral_orient;
+  };
+  
+  AnyKinLinear T7Pos = {
+    AnyRefFrame &Error_check_Ref = .Centroids_Check_Ref;
+    AnyRefFrame &T7_centroid = .segs.T7Seg.Vertebral_orient;
+  };
+  
+  AnyKinLinear T6Pos = {
+    AnyRefFrame &Error_check_Ref = .Centroids_Check_Ref;
+    AnyRefFrame &T6_centroid = .segs.T6Seg.Vertebral_orient;
+  };
+  
+  AnyKinLinear T5Pos = {
+    AnyRefFrame &Error_check_Ref = .Centroids_Check_Ref;
+    AnyRefFrame &T5_centroid = .segs.T5Seg.Vertebral_orient;
+  };
+  
+  AnyKinLinear T4Pos = {
+    AnyRefFrame &Error_check_Ref = .Centroids_Check_Ref;
+    AnyRefFrame &T4_centroid = .segs.T4Seg.Vertebral_orient;
+  };
+  
+  AnyKinLinear T3Pos = {
+    AnyRefFrame &Error_check_Ref = .Centroids_Check_Ref;
+    AnyRefFrame &T3_centroid = .segs.T3Seg.Vertebral_orient;
+  };
+  
+  AnyKinLinear T2Pos = {
+    AnyRefFrame &Error_check_Ref = .Centroids_Check_Ref;
+    AnyRefFrame &T2_centroid = .segs.T2Seg.Vertebral_orient;
+  };
+  
+  AnyKinLinear T1Pos = {
+    AnyRefFrame &Error_check_Ref = .Centroids_Check_Ref;
+    AnyRefFrame &T1_centroid = .segs.T1Seg.Vertebral_orient;
+  };
+  
+  #if IncludeNeckCalibration == 1
+  
+  //cervical vertebra
+  AnyKinLinear C7Pos = {
+    AnyRefFrame &Error_check_Ref = .Centroids_Check_Ref;
+    AnyRefFrame &C7_centroid = .segs.C7Seg.Vertebral_orient;
+  };
+  
+  AnyKinLinear C6Pos = {
+    AnyRefFrame &Error_check_Ref = .Centroids_Check_Ref;
+    AnyRefFrame &C6_centroid = .segs.C6Seg.Vertebral_orient;
+  };
+  
+  AnyKinLinear C5Pos = {
+    AnyRefFrame &Error_check_Ref = .Centroids_Check_Ref;
+    AnyRefFrame &C5_centroid = .segs.C5Seg.Vertebral_orient;
+  };
+  
+  AnyKinLinear C4Pos = {
+    AnyRefFrame &Error_check_Ref = .Centroids_Check_Ref;
+    AnyRefFrame &C4_centroid = .segs.C4Seg.Vertebral_orient;
+  };
+  
+  AnyKinLinear C3Pos = {
+    AnyRefFrame &Error_check_Ref = .Centroids_Check_Ref;
+    AnyRefFrame &C3_centroid = .segs.C3Seg.Vertebral_orient;
+  };
+  
+  AnyKinLinear C2Pos = {
+    AnyRefFrame &Error_check_Ref = .Centroids_Check_Ref;
+    AnyRefFrame &C2_centroid = .segs.C2Seg.Inf_EP_orient;
+  };
+  
+  #endif
+}; // End of Cenroids_error folder
+
+
+// calculate error between actual centroids coordinates and input
+
+AnyFolder &ce = Centroids_error;
+
+// for MoCap model - Pos[0] -> Pos[1], Pos[1] -> Pos[2]
+
+#if IncludeNeckCalibration == 1
+AnyVec3 C2_error_pos = {ce.C2Pos.Pos[0] - Main.SubjectData.Alignment.C2_x, ce.C2Pos.Pos[1] - Main.SubjectData.Alignment.C2_y, 0};
+AnyVec3 C3_error_pos = {ce.C3Pos.Pos[0] - Main.SubjectData.Alignment.C3_x, ce.C3Pos.Pos[1] - Main.SubjectData.Alignment.C3_y, 0};
+AnyVec3 C4_error_pos = {ce.C4Pos.Pos[0] - Main.SubjectData.Alignment.C4_x, ce.C4Pos.Pos[1] - Main.SubjectData.Alignment.C4_y, 0};
+AnyVec3 C5_error_pos = {ce.C5Pos.Pos[0] - Main.SubjectData.Alignment.C5_x, ce.C5Pos.Pos[1] - Main.SubjectData.Alignment.C5_y, 0};
+AnyVec3 C6_error_pos = {ce.C6Pos.Pos[0] - Main.SubjectData.Alignment.C6_x, ce.C6Pos.Pos[1] - Main.SubjectData.Alignment.C6_y, 0};
+AnyVec3 C7_error_pos = {ce.C7Pos.Pos[0] - Main.SubjectData.Alignment.C7_x, ce.C7Pos.Pos[1] - Main.SubjectData.Alignment.C7_y, 0};
+#endif
+
+AnyVec3 T1_error_pos = {ce.T1Pos.Pos[0] - Main.SubjectData.Alignment.T1_x, ce.T1Pos.Pos[1] - Main.SubjectData.Alignment.T1_y, ce.T1Pos.Pos[2] - Main.SubjectData.Alignment.T1_z};
+AnyVec3 T2_error_pos = {ce.T2Pos.Pos[0] - Main.SubjectData.Alignment.T2_x, ce.T2Pos.Pos[1] - Main.SubjectData.Alignment.T2_y, ce.T2Pos.Pos[2] - Main.SubjectData.Alignment.T2_z};
+AnyVec3 T3_error_pos = {ce.T3Pos.Pos[0] - Main.SubjectData.Alignment.T3_x, ce.T3Pos.Pos[1] - Main.SubjectData.Alignment.T3_y, ce.T3Pos.Pos[2] - Main.SubjectData.Alignment.T3_z};
+AnyVec3 T4_error_pos = {ce.T4Pos.Pos[0] - Main.SubjectData.Alignment.T4_x, ce.T4Pos.Pos[1] - Main.SubjectData.Alignment.T4_y, ce.T4Pos.Pos[2] - Main.SubjectData.Alignment.T4_z};
+AnyVec3 T5_error_pos = {ce.T5Pos.Pos[0] - Main.SubjectData.Alignment.T5_x, ce.T5Pos.Pos[1] - Main.SubjectData.Alignment.T5_y, ce.T5Pos.Pos[2] - Main.SubjectData.Alignment.T5_z};
+AnyVec3 T6_error_pos = {ce.T6Pos.Pos[0] - Main.SubjectData.Alignment.T6_x, ce.T6Pos.Pos[1] - Main.SubjectData.Alignment.T6_y, ce.T6Pos.Pos[2] - Main.SubjectData.Alignment.T6_z};
+AnyVec3 T7_error_pos = {ce.T7Pos.Pos[0] - Main.SubjectData.Alignment.T7_x, ce.T7Pos.Pos[1] - Main.SubjectData.Alignment.T7_y, ce.T7Pos.Pos[2] - Main.SubjectData.Alignment.T7_z};
+AnyVec3 T8_error_pos = {ce.T8Pos.Pos[0] - Main.SubjectData.Alignment.T8_x, ce.T8Pos.Pos[1] - Main.SubjectData.Alignment.T8_y, ce.T8Pos.Pos[2] - Main.SubjectData.Alignment.T8_z};
+AnyVec3 T9_error_pos = {ce.T9Pos.Pos[0] - Main.SubjectData.Alignment.T9_x, ce.T9Pos.Pos[1] - Main.SubjectData.Alignment.T9_y, ce.T9Pos.Pos[2] - Main.SubjectData.Alignment.T9_z};
+AnyVec3 T10_error_pos = {ce.T10Pos.Pos[0] - Main.SubjectData.Alignment.T10_x, ce.T10Pos.Pos[1] - Main.SubjectData.Alignment.T10_y, ce.T10Pos.Pos[2] - Main.SubjectData.Alignment.T10_z};
+AnyVec3 T11_error_pos = {ce.T11Pos.Pos[0] - Main.SubjectData.Alignment.T11_x, ce.T11Pos.Pos[1] - Main.SubjectData.Alignment.T11_y, ce.T11Pos.Pos[2] - Main.SubjectData.Alignment.T11_z};
+AnyVec3 T12_error_pos = {ce.T12Pos.Pos[0] - Main.SubjectData.Alignment.T12_x, ce.T12Pos.Pos[1] - Main.SubjectData.Alignment.T12_y, ce.T12Pos.Pos[2] - Main.SubjectData.Alignment.T12_z};
+
+AnyVec3 L1_error_pos = {ce.L1Pos.Pos[0] - Main.SubjectData.Alignment.L1_x, ce.L1Pos.Pos[1] - Main.SubjectData.Alignment.L1_y, ce.L1Pos.Pos[2] - Main.SubjectData.Alignment.L1_z};
+AnyVec3 L2_error_pos = {ce.L2Pos.Pos[0] - Main.SubjectData.Alignment.L2_x, ce.L2Pos.Pos[1] - Main.SubjectData.Alignment.L2_y, ce.L2Pos.Pos[2] - Main.SubjectData.Alignment.L2_z};
+AnyVec3 L3_error_pos = {ce.L3Pos.Pos[0] - Main.SubjectData.Alignment.L3_x, ce.L3Pos.Pos[1] - Main.SubjectData.Alignment.L3_y, ce.L3Pos.Pos[2] - Main.SubjectData.Alignment.L3_z};
+AnyVec3 L4_error_pos = {ce.L4Pos.Pos[0] - Main.SubjectData.Alignment.L4_x, ce.L4Pos.Pos[1] - Main.SubjectData.Alignment.L4_y, ce.L4Pos.Pos[2] - Main.SubjectData.Alignment.L4_z};
+AnyVec3 L5_error_pos = {ce.L5Pos.Pos[0] - Main.SubjectData.Alignment.L5_x, ce.L5Pos.Pos[1] - Main.SubjectData.Alignment.L5_y, ce.L5Pos.Pos[2] - Main.SubjectData.Alignment.L5_z};
+
+
+// calculate error between actual vertebral orientations and input
+
+AnyFolder &modelmeasures = Main.PostureCalibration.CalStudy_centroids.Drivers.measures;
+
+#if IncludeNeckCalibration == 1
+AnyVar C2_error_rot = modelmeasures.C2InferiorRot.Pos[2]*180/pi - Main.SubjectData.Alignment.Angle_C2;
+AnyVar C3_error_rot = modelmeasures.C3GlobalRot.Pos[2]*180/pi - Main.SubjectData.Alignment.Angle_C3;
+AnyVar C4_error_rot = modelmeasures.C4GlobalRot.Pos[2]*180/pi - Main.SubjectData.Alignment.Angle_C4;
+AnyVar C5_error_rot = modelmeasures.C5GlobalRot.Pos[2]*180/pi - Main.SubjectData.Alignment.Angle_C5;
+AnyVar C6_error_rot = modelmeasures.C6GlobalRot.Pos[2]*180/pi - Main.SubjectData.Alignment.Angle_C6;
+AnyVar C7_error_rot = modelmeasures.C7GlobalRot.Pos[2]*180/pi - Main.SubjectData.Alignment.Angle_C7;
+#endif
+
+AnyVar L1S1_error_rotZ = modelmeasures.LL_L1S1 - Main.SubjectData.Alignment.LL;
+AnyVar L4S1_error_rotZ = modelmeasures.LL_L4S1 - Main.SubjectData.Alignment.L4S1L;
+AnyVar C7VT_error_rotZ = modelmeasures.C7_MovingFrame.SacrC7OrientationMeasure.Pos[0] - (90 - Main.SubjectData.Alignment.T1GT + Main.SubjectData.Alignment.PT);
+AnyVar T5T12_error_rotZ = modelmeasures.TK_T5T12 - Main.SubjectData.Alignment.T5_T12_Kifoz;
+AnyVar T2T5_error_rotZ = modelmeasures.TK_T2T5 - Main.SubjectData.Alignment.T2_T5_Kifoz;
+AnyVar T10L2_error_rotZ = modelmeasures.TK_T10L2 - Main.SubjectData.Alignment.T10_L2_Kifoz;
+
+AnyVar T1_error_rotZ = modelmeasures.T1GlobalRot_AngleZ - Main.SubjectData.Alignment.Angle_T1;
+AnyVar T2_error_rotZ = modelmeasures.T2GlobalRot_AngleZ - Main.SubjectData.Alignment.Angle_T2;
+AnyVar T3_error_rotZ = modelmeasures.T3GlobalRot_AngleZ - Main.SubjectData.Alignment.Angle_T3;
+AnyVar T4_error_rotZ = modelmeasures.T4GlobalRot_AngleZ - Main.SubjectData.Alignment.Angle_T4;
+AnyVar T5_error_rotZ = modelmeasures.T5GlobalRot_AngleZ - Main.SubjectData.Alignment.Angle_T5;
+AnyVar T6_error_rotZ = modelmeasures.T6GlobalRot_AngleZ - Main.SubjectData.Alignment.Angle_T6;
+AnyVar T7_error_rotZ = modelmeasures.T7GlobalRot_AngleZ - Main.SubjectData.Alignment.Angle_T7;
+AnyVar T8_error_rotZ = modelmeasures.T8GlobalRot_AngleZ - Main.SubjectData.Alignment.Angle_T8;
+AnyVar T9_error_rotZ = modelmeasures.T9GlobalRot_AngleZ - Main.SubjectData.Alignment.Angle_T9;
+AnyVar T10_error_rotZ = modelmeasures.T10GlobalRot_AngleZ - Main.SubjectData.Alignment.Angle_T10;
+AnyVar T11_error_rotZ = modelmeasures.T11GlobalRot_AngleZ - Main.SubjectData.Alignment.Angle_T11;
+AnyVar T12_error_rotZ = modelmeasures.T12GlobalRot_AngleZ - Main.SubjectData.Alignment.Angle_T12;
+AnyVar L1_error_rotZ = modelmeasures.L1GlobalRot_AngleZ - Main.SubjectData.Alignment.Angle_L1;
+AnyVar L2_error_rotZ = modelmeasures.L2GlobalRot_AngleZ - Main.SubjectData.Alignment.Angle_L2;
+AnyVar L3_error_rotZ = modelmeasures.L3GlobalRot_AngleZ - Main.SubjectData.Alignment.Angle_L3;
+AnyVar L4_error_rotZ = modelmeasures.L4GlobalRot_AngleZ - Main.SubjectData.Alignment.Angle_L4;
+AnyVar L5_error_rotZ = modelmeasures.L5GlobalRot_AngleZ - Main.SubjectData.Alignment.Angle_L5;
+
+AnyVar T1_error_rotX = modelmeasures.T1GlobalRot_AngleX - Main.SubjectData.Alignment.CorAngle_T1;
+AnyVar T2_error_rotX = modelmeasures.T2GlobalRot_AngleX - Main.SubjectData.Alignment.CorAngle_T2;
+AnyVar T3_error_rotX = modelmeasures.T3GlobalRot_AngleX - Main.SubjectData.Alignment.CorAngle_T3;
+AnyVar T4_error_rotX = modelmeasures.T4GlobalRot_AngleX - Main.SubjectData.Alignment.CorAngle_T4;
+AnyVar T5_error_rotX = modelmeasures.T5GlobalRot_AngleX - Main.SubjectData.Alignment.CorAngle_T5;
+AnyVar T6_error_rotX = modelmeasures.T6GlobalRot_AngleX - Main.SubjectData.Alignment.CorAngle_T6;
+AnyVar T7_error_rotX = modelmeasures.T7GlobalRot_AngleX - Main.SubjectData.Alignment.CorAngle_T7;
+AnyVar T8_error_rotX = modelmeasures.T8GlobalRot_AngleX - Main.SubjectData.Alignment.CorAngle_T8;
+AnyVar T9_error_rotX = modelmeasures.T9GlobalRot_AngleX - Main.SubjectData.Alignment.CorAngle_T9;
+AnyVar T10_error_rotX = modelmeasures.T10GlobalRot_AngleX - Main.SubjectData.Alignment.CorAngle_T10;
+AnyVar T11_error_rotX = modelmeasures.T11GlobalRot_AngleX - Main.SubjectData.Alignment.CorAngle_T11;
+AnyVar T12_error_rotX = modelmeasures.T12GlobalRot_AngleX - Main.SubjectData.Alignment.CorAngle_T12;
+AnyVar L1_error_rotX = modelmeasures.L1GlobalRot_AngleX - Main.SubjectData.Alignment.CorAngle_L1;
+AnyVar L2_error_rotX = modelmeasures.L2GlobalRot_AngleX - Main.SubjectData.Alignment.CorAngle_L2;
+AnyVar L3_error_rotX = modelmeasures.L3GlobalRot_AngleX - Main.SubjectData.Alignment.CorAngle_L3;
+AnyVar L4_error_rotX = modelmeasures.L4GlobalRot_AngleX - Main.SubjectData.Alignment.CorAngle_L4;
+AnyVar L5_error_rotX = modelmeasures.L5GlobalRot_AngleX - Main.SubjectData.Alignment.CorAngle_L5;
+
+AnyVar T1_error_rotY = modelmeasures.T1GlobalRot_AngleY - 0;
+AnyVar T2_error_rotY = modelmeasures.T2GlobalRot_AngleY - 0;
+AnyVar T3_error_rotY = modelmeasures.T3GlobalRot_AngleY - 0;
+AnyVar T4_error_rotY = modelmeasures.T4GlobalRot_AngleY - 0;
+AnyVar T5_error_rotY = modelmeasures.T5GlobalRot_AngleY - 0;
+AnyVar T6_error_rotY = modelmeasures.T6GlobalRot_AngleY - 0;
+AnyVar T7_error_rotY = modelmeasures.T7GlobalRot_AngleY - 0;
+AnyVar T8_error_rotY = modelmeasures.T8GlobalRot_AngleY - 0;
+AnyVar T9_error_rotY = modelmeasures.T9GlobalRot_AngleY - 0;
+AnyVar T10_error_rotY = modelmeasures.T10GlobalRot_AngleY - 0;
+AnyVar T11_error_rotY = modelmeasures.T11GlobalRot_AngleY - 0;
+AnyVar T12_error_rotY = modelmeasures.T12GlobalRot_AngleY - 0;
+AnyVar L1_error_rotY = modelmeasures.L1GlobalRot_AngleY - 0;
+AnyVar L2_error_rotY = modelmeasures.L2GlobalRot_AngleY - 0;
+AnyVar L3_error_rotY = modelmeasures.L3GlobalRot_AngleY - 0;
+AnyVar L4_error_rotY = modelmeasures.L4GlobalRot_AngleY - 0;
+AnyVar L5_error_rotY = modelmeasures.L5GlobalRot_AngleY - 0;
+
+
+#if AlignmentModeling == 0
+AnyVar Sacr_ground_rot = Main.PostureCalibration.CalStudy_centroids.Drivers.Sacr_Ground_NoRot.Pos[1] - 0;
+#endif
+
+#if AlignmentModeling == 1
+AnyVar Sacr_ground_rot = Main.PostureCalibration.CalStudy_centroids.Drivers.Sacr_Ground_NoRot.Pos[0] - 0;
+#endif
+
+
+
+
+
+

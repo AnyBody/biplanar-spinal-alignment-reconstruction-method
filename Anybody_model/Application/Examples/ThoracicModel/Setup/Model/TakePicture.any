@@ -1,0 +1,119 @@
+AnyFolder CameraDefs = {
+  
+  AnyStringVar ImagePath = "..\OutputImages/"; // Name of the folder where are stored the images (remenber you have to crate the folder before doing the record).
+  AnyStringVar ImageExt = "png";  // output format for the name of the output files
+  AnyIntVar pxWidth = 600;  //size of the output
+  AnyIntVar pxHeight = 800;
+  AnyScene scene = {
+    BackgroundColor = {1,1,1};
+  };
+  
+  // define a fixed camera
+  AnyCameraLookAt Cam1 = {
+    
+    Perspective = Off;
+    EyePoint = {0,1.3,2};    // location of the camera  
+    LookAtPoint = {0, 1.3, 0};  // point where the camera is looking at 
+    UpPoint = {0,2,0};      // define where is up
+    FocalDist = 2.1;    // the focal lenght of the camera
+    FocalHeight = 1.1; 
+    Near = 2;
+    
+//    EyePoint = {0.1,1.35,2.3};    // location of the camera
+//    LookAtPoint = {0.1,1.35,0};  // point where the camera is looking at
+//    UpPoint = {0,2,0};      // define where is up
+
+    AnyScene &scene = .scene;
+    
+    // recorder for this camera to output pictures
+    AnyCamRecorder rec1 = {
+
+      FileName = ..ImagePath + ...fileID + "_0UprLat." + ..ImageExt; 
+
+      pxWidth = ..pxWidth ;
+      pxHeight = ..pxHeight;
+
+      Trig = eqfun(Main.Study.iStep,0);
+
+      ResetTrig = On;
+      AntiAlias = 8;
+      
+    };
+    
+    AnyCamRecorder rec2 = {
+      
+      FileName = ..ImagePath + ...fileID + "_1Flex." + ..ImageExt; 
+
+      pxWidth = ..pxWidth ;
+      pxHeight = ..pxHeight;
+     
+      Trig = eqfun(Main.Study.t,300);
+//      ResetTrig = On;
+
+      AntiAlias = 8;
+    };
+
+    
+  };
+};
+
+AnyFolder CameraDefs2 = {
+  
+  AnyStringVar ImagePath2 = "..\OutputImages/"; // Name of the folder where are stored the images (remenber you have to crate the folder before doing the record).
+  AnyStringVar ImageExt2 = "png";  // output format for the name of the output files
+  AnyIntVar pxWidth2 = 600;  //size of the output
+  AnyIntVar pxHeight2 = 800;
+  
+  AnyScene scene2 = {
+    BackgroundColor = {1,1,1};
+  };
+  
+  // define a fixed camera
+  AnyCameraLookAt Cam2 = {
+    
+    Perspective = Off;
+    EyePoint = {1,1.3,0};    // location of the camera  
+    LookAtPoint = {0, 1.3, 0};  // point where the camera is looking at 
+    UpPoint = {0,2,0};      // define where is up
+    FocalDist = 2.1;    // the focal lenght of the camera
+    FocalHeight = 1.1; 
+    Near = 2;
+    
+//    EyePoint = {0.1,1.35,2.3};    // location of the camera
+//    LookAtPoint = {0.1,1.35,0};  // point where the camera is looking at
+//    UpPoint = {0,2,0};      // define where is up
+
+    AnyScene &scene2 = .scene2;
+    
+    
+    // recorder for this camera to output pictures
+    AnyCamRecorder rec2 = {
+
+      FileName = ..ImagePath2 + ...fileID + "_0UprFront." + ..ImageExt2; 
+
+      pxWidth = ..pxWidth2 ;
+      pxHeight = ..pxHeight2;
+
+      Trig = eqfun(Main.Study.iStep,0);
+
+      ResetTrig = On;
+      AntiAlias = 8;
+      
+    };
+    
+    AnyCamRecorder rec3 = {
+      
+      FileName = ..ImagePath2 + ...fileID + "_1Flex." + ..ImageExt2; 
+
+      pxWidth = ..pxWidth2 ;
+      pxHeight = ..pxHeight2;
+     
+      Trig = eqfun(Main.Study.t,300);
+//      ResetTrig = On;
+      AntiAlias = 8;
+    };
+
+    
+  };
+};
+

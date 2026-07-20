@@ -1,0 +1,11 @@
+
+AnyFolder EnvironmentModel = {
+    
+  AnyFixedRefFrame GlobalRef = {
+    Origin ={0,0,0};     
+    
+    AnyDrawRefFrame drw={ScaleXYZ=0.4*{1,1,1};};
+    
+  };//GlobalRef
+  
+};

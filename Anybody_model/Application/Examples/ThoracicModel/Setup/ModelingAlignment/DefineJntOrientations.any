@@ -1,0 +1,352 @@
+AnyFolder DefineJointOrientations = {
+    
+  // Sacrum Pelvis joint 
+  AnyOperationSetValue SetJntAxes_SacrPelv = {
+    
+    AnyFolder &infseg = Main.HumanModel.BodyModel.Trunk.Segments.PelvisSeg;
+    AnyFolder &supseg = Main.HumanModel.BodyModel.Trunk.Segments.SacrumSeg;
+        
+    AnyMat33 rotPelvis = infseg.PelvisSacrumJntNode.Axes';
+    AnyMat33 rotSacrum = supseg.SacrumPelvisJntNode.Axes';
+
+    Source = {&rotPelvis, &rotSacrum}; 
+    Target = {&infseg.PelvisSacrumJntNode.ARel, &supseg.SacrumPelvisJntNode.ARel };
+  };
+  
+
+  // Lumbar joints
+  AnyOperationSetValue SetJntAxes_L5S1 = {
+    
+    AnyFolder &seg_inf = Main.HumanModel.BodyModel.Trunk.Segments.SacrumSeg;
+    AnyFolder &seg_sup = Main.HumanModel.BodyModel.Trunk.Segments.L5Seg;
+    
+    #include "JntAxesRotDefinition.any"
+    Target = {&seg_inf.SacrumL5JntNode.ARel, &seg_sup.L5SacrumJntNode.ARel};
+    
+  };
+  
+  AnyOperationSetValue SetJntAxes_L4L5 = {
+    
+    AnyFolder &seg_inf = Main.HumanModel.BodyModel.Trunk.Segments.L5Seg;
+    AnyFolder &seg_sup = Main.HumanModel.BodyModel.Trunk.Segments.L4Seg;
+    
+    #include "JntAxesRotDefinition.any"
+    Target = {&seg_inf.L4L5JntNode.ARel, &seg_sup.L4L5JntNode.ARel};
+    
+  };
+  
+  AnyOperationSetValue SetJntAxes_L3L4 = {
+    
+    AnyFolder &seg_inf = Main.HumanModel.BodyModel.Trunk.Segments.L4Seg;
+    AnyFolder &seg_sup = Main.HumanModel.BodyModel.Trunk.Segments.L3Seg;
+    
+    #include "JntAxesRotDefinition.any"
+    Target = {&seg_inf.L3L4JntNode.ARel, &seg_sup.L3L4JntNode.ARel};
+    
+  };
+  
+  AnyOperationSetValue SetJntAxes_L2L3 = {
+    
+    AnyFolder &seg_inf = Main.HumanModel.BodyModel.Trunk.Segments.L3Seg;
+    AnyFolder &seg_sup = Main.HumanModel.BodyModel.Trunk.Segments.L2Seg;
+    
+    #include "JntAxesRotDefinition.any"
+    Target = {&seg_inf.L2L3JntNode.ARel, &seg_sup.L2L3JntNode.ARel};
+    
+  };
+  
+  AnyOperationSetValue SetJntAxes_L1L2 = {
+    
+    AnyFolder &seg_inf = Main.HumanModel.BodyModel.Trunk.Segments.L2Seg;
+    AnyFolder &seg_sup = Main.HumanModel.BodyModel.Trunk.Segments.L1Seg;
+    
+    #include "JntAxesRotDefinition.any"
+    Target = {&seg_inf.L1L2JntNode.ARel, &seg_sup.L1L2JntNode.ARel};
+    
+  };
+  
+  AnyOperationSetValue SetJntAxes_T12L1 = {
+    
+    AnyFolder &seg_inf = Main.HumanModel.BodyModel.Trunk.Segments.L1Seg;
+    AnyFolder &seg_sup = Main.HumanModel.BodyModel.Trunk.Segments.T12Seg;
+    
+    #include "JntAxesRotDefinition.any"
+    Target = {&seg_inf.T12L1JntNode.ARel, &seg_sup.T12L1JntNode.ARel};
+    
+  };
+  
+  
+  
+  // Thoracic joints
+  
+  AnyOperationSetValue SetJntAxes_T11T12 = {
+    
+    AnyFolder &seg_inf = Main.HumanModel.BodyModel.Trunk.Segments.T12Seg;
+    AnyFolder &seg_sup = Main.HumanModel.BodyModel.Trunk.Segments.T11Seg;
+    
+    #include "JntAxesRotDefinition.any"
+    Target = {&seg_inf.T11T12JntNode.ARel, &seg_sup.T11T12JntNode.ARel};
+    
+  };
+  
+  AnyOperationSetValue SetJntAxes_T10T11 = {
+    
+    AnyFolder &seg_inf = Main.HumanModel.BodyModel.Trunk.Segments.T11Seg;
+    AnyFolder &seg_sup = Main.HumanModel.BodyModel.Trunk.Segments.T10Seg;
+    
+    #include "JntAxesRotDefinition.any"
+    Target = {&seg_inf.T10T11JntNode.ARel, &seg_sup.T10T11JntNode.ARel};
+    
+  };
+  
+  AnyOperationSetValue SetJntAxes_T9T10 = {
+    
+    AnyFolder &seg_inf = Main.HumanModel.BodyModel.Trunk.Segments.T10Seg;
+    AnyFolder &seg_sup = Main.HumanModel.BodyModel.Trunk.Segments.T9Seg;
+    
+    #include "JntAxesRotDefinition.any"
+    Target = {&seg_inf.T9T10JntNode.ARel, &seg_sup.T9T10JntNode.ARel};
+    
+  };
+  
+  AnyOperationSetValue SetJntAxes_T8T9 = {
+    
+    AnyFolder &seg_inf = Main.HumanModel.BodyModel.Trunk.Segments.T9Seg;
+    AnyFolder &seg_sup = Main.HumanModel.BodyModel.Trunk.Segments.T8Seg;
+    
+    #include "JntAxesRotDefinition.any"
+    Target = {&seg_inf.T8T9JntNode.ARel, &seg_sup.T8T9JntNode.ARel};
+    
+  };
+  
+  AnyOperationSetValue SetJntAxes_T7T8 = {
+    
+    AnyFolder &seg_inf = Main.HumanModel.BodyModel.Trunk.Segments.T8Seg;
+    AnyFolder &seg_sup = Main.HumanModel.BodyModel.Trunk.Segments.T7Seg;
+    
+    #include "JntAxesRotDefinition.any"
+    Target = {&seg_inf.T7T8JntNode.ARel, &seg_sup.T7T8JntNode.ARel};
+    
+  };
+  
+  AnyOperationSetValue SetJntAxes_T6T7 = {
+    
+    AnyFolder &seg_inf = Main.HumanModel.BodyModel.Trunk.Segments.T7Seg;
+    AnyFolder &seg_sup = Main.HumanModel.BodyModel.Trunk.Segments.T6Seg;
+    
+    #include "JntAxesRotDefinition.any"
+    Target = {&seg_inf.T6T7JntNode.ARel, &seg_sup.T6T7JntNode.ARel};
+    
+  };
+  
+  AnyOperationSetValue SetJntAxes_T5T6 = {
+    
+    AnyFolder &seg_inf = Main.HumanModel.BodyModel.Trunk.Segments.T6Seg;
+    AnyFolder &seg_sup = Main.HumanModel.BodyModel.Trunk.Segments.T5Seg;
+    
+    #include "JntAxesRotDefinition.any"
+    Target = {&seg_inf.T5T6JntNode.ARel, &seg_sup.T5T6JntNode.ARel};
+    
+  };
+  
+  AnyOperationSetValue SetJntAxes_T4T5 = {
+    
+    AnyFolder &seg_inf = Main.HumanModel.BodyModel.Trunk.Segments.T5Seg;
+    AnyFolder &seg_sup = Main.HumanModel.BodyModel.Trunk.Segments.T4Seg;
+    
+    #include "JntAxesRotDefinition.any"
+    Target = {&seg_inf.T4T5JntNode.ARel, &seg_sup.T4T5JntNode.ARel};
+    
+  };
+  
+  AnyOperationSetValue SetJntAxes_T3T4 = {
+    
+    AnyFolder &seg_inf = Main.HumanModel.BodyModel.Trunk.Segments.T4Seg;
+    AnyFolder &seg_sup = Main.HumanModel.BodyModel.Trunk.Segments.T3Seg;
+    
+    #include "JntAxesRotDefinition.any"
+    Target = {&seg_inf.T3T4JntNode.ARel, &seg_sup.T3T4JntNode.ARel};
+    
+  };
+  
+  AnyOperationSetValue SetJntAxes_T2T3 = {
+    
+    AnyFolder &seg_inf = Main.HumanModel.BodyModel.Trunk.Segments.T3Seg;
+    AnyFolder &seg_sup = Main.HumanModel.BodyModel.Trunk.Segments.T2Seg;
+    
+    #include "JntAxesRotDefinition.any"
+    Target = {&seg_inf.T2T3JntNode.ARel, &seg_sup.T2T3JntNode.ARel};
+    
+  };
+  
+  AnyOperationSetValue SetJntAxes_T1T2 = {
+    
+    AnyFolder &seg_inf = Main.HumanModel.BodyModel.Trunk.Segments.T2Seg;
+    AnyFolder &seg_sup = Main.HumanModel.BodyModel.Trunk.Segments.T1Seg;
+    
+    #include "JntAxesRotDefinition.any"
+    Target = {&seg_inf.T1T2JntNode.ARel, &seg_sup.T1T2JntNode.ARel};
+    
+  };
+  
+  AnyOperationSetValue SetJntAxes_C7T1 = {
+    
+    AnyFolder &seg_inf = Main.HumanModel.BodyModel.Trunk.Segments.T1Seg;
+    AnyFolder &seg_sup = Main.HumanModel.BodyModel.Trunk.Segments.C7Seg;
+    
+    #include "JntAxesRotDefinition.any"
+    Target = {&seg_inf.T1C7JntNode.ARel, &seg_sup.T1C7JntNode.ARel};
+    
+  };
+  
+  
+  // Cervical spine
+  
+  #if IncludeNeckCalibration
+  
+  AnyOperationSetValue SetJntAxes_C6C7 = {
+    
+    AnyFolder &seg_inf = Main.HumanModel.BodyModel.Trunk.Segments.C7Seg;
+    AnyFolder &seg_sup = Main.HumanModel.BodyModel.Trunk.Segments.C6Seg;
+    
+    #include "JntAxesRotDefinition.any"
+    Target = {&seg_inf.C7C6JntNode.ARel, &seg_sup.C7C6JntNode.ARel};
+    
+  };
+  
+  AnyOperationSetValue SetJntAxes_C5C6 = {
+    
+    AnyFolder &seg_inf = Main.HumanModel.BodyModel.Trunk.Segments.C6Seg;
+    AnyFolder &seg_sup = Main.HumanModel.BodyModel.Trunk.Segments.C5Seg;
+    
+    #include "JntAxesRotDefinition.any"
+    Target = {&seg_inf.C6C5JntNode.ARel, &seg_sup.C6C5JntNode.ARel};
+    
+  };
+  
+  AnyOperationSetValue SetJntAxes_C4C5 = {
+    
+    AnyFolder &seg_inf = Main.HumanModel.BodyModel.Trunk.Segments.C5Seg;
+    AnyFolder &seg_sup = Main.HumanModel.BodyModel.Trunk.Segments.C4Seg;
+    
+    #include "JntAxesRotDefinition.any"
+    Target = {&seg_inf.C5C4JntNode.ARel, &seg_sup.C5C4JntNode.ARel};
+    
+  };
+  
+  AnyOperationSetValue SetJntAxes_C4C3 = {
+    
+    AnyFolder &seg_inf = Main.HumanModel.BodyModel.Trunk.Segments.C4Seg;
+    AnyFolder &seg_sup = Main.HumanModel.BodyModel.Trunk.Segments.C3Seg;
+    
+    #include "JntAxesRotDefinition.any"
+    Target = {&seg_inf.C4C3JntNode.ARel, &seg_sup.C4C3JntNode.ARel};
+    
+  };
+  
+  AnyOperationSetValue SetJntAxes_C3C2 = {
+    
+    AnyFolder &seg_inf = Main.HumanModel.BodyModel.Trunk.Segments.C3Seg;
+    AnyFolder &seg_sup = Main.HumanModel.BodyModel.Trunk.Segments.C2Seg;
+    
+    #include "JntAxesRotDefinition.any"
+    Target = {&seg_inf.C3C2JntNode.ARel, &seg_sup.C3C2JntNode.ARel};
+    
+  };
+  
+  AnyOperationSetValue SetJntAxes_SkullC1 = {
+    
+    AnyFolder &seg_inf = Main.HumanModel.BodyModel.Trunk.Segments.C1Seg;
+    AnyFolder &seg_sup = Main.HumanModel.BodyModel.Trunk.Segments.SkullSeg;
+    
+    AnyVar Angle = -(Main.SubjectData.Alignment.Angle_C2 - Main.HumanModel.BodyModel.Trunk.PosturalMeasures.C1C2JntC2InfRot.AngleDeg)*pi/180;
+    
+    AnyMat33 rot_Skull = {{cos(Angle), sin(Angle), 0}, {-sin(Angle), cos(Angle), 0}, {0, 0, 1}};
+    
+    Source = {&rot_Skull};
+    Target = {&seg_inf.C1C0JntNode.ARel};
+    
+  };
+  
+  #else
+  
+  // set horizontal gaze of the skull
+  AnyOperationSetValue SetJntAxes_SkullC1 = {
+    
+    AnyFolder &seg_inf = Main.HumanModel.BodyModel.Trunk.Segments.C1Seg;
+    AnyFolder &seg_sup = Main.HumanModel.BodyModel.Trunk.Segments.SkullSeg;
+    
+    AnyVar Angle = 0;
+    
+    AnyMat33 rot_Skull = {{cos(Angle), sin(Angle), 0}, {-sin(Angle), cos(Angle), 0}, {0, 0, 1}};
+    
+    Source = {&rot_Skull};
+    Target = {&seg_inf.C1C0JntNode.ARel};
+    
+  };
+  
+  
+  #endif
+  
+  
+// Define orientations of segments for use in drivers
+AnyOperationSetValue SetSegAxes = {
+   
+  AnyMat33 rot = {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};  
+  
+  AnyMat33 rot_T1 = Main.HumanModel.BodyModel.Trunk.Segments.T1Seg.Axes'; 
+  AnyMat33 rot_T2 = Main.HumanModel.BodyModel.Trunk.Segments.T2Seg.Axes'; 
+  AnyMat33 rot_T3 = Main.HumanModel.BodyModel.Trunk.Segments.T3Seg.Axes'; 
+  AnyMat33 rot_T4 = Main.HumanModel.BodyModel.Trunk.Segments.T4Seg.Axes'; 
+  AnyMat33 rot_T5 = Main.HumanModel.BodyModel.Trunk.Segments.T5Seg.Axes'; 
+  AnyMat33 rot_T6 = Main.HumanModel.BodyModel.Trunk.Segments.T6Seg.Axes'; 
+  AnyMat33 rot_T7 = Main.HumanModel.BodyModel.Trunk.Segments.T7Seg.Axes'; 
+  AnyMat33 rot_T8 = Main.HumanModel.BodyModel.Trunk.Segments.T8Seg.Axes'; 
+  AnyMat33 rot_T9 = Main.HumanModel.BodyModel.Trunk.Segments.T9Seg.Axes'; 
+  AnyMat33 rot_T10 = Main.HumanModel.BodyModel.Trunk.Segments.T10Seg.Axes'; 
+  AnyMat33 rot_T11 = Main.HumanModel.BodyModel.Trunk.Segments.T11Seg.Axes'; 
+  AnyMat33 rot_T12 = Main.HumanModel.BodyModel.Trunk.Segments.T12Seg.Axes'; 
+  AnyMat33 rot_L1 = Main.HumanModel.BodyModel.Trunk.Segments.L1Seg.Axes'; 
+  AnyMat33 rot_L2 = Main.HumanModel.BodyModel.Trunk.Segments.L2Seg.Axes'; 
+  AnyMat33 rot_L3 = Main.HumanModel.BodyModel.Trunk.Segments.L3Seg.Axes'; 
+  AnyMat33 rot_L4 = Main.HumanModel.BodyModel.Trunk.Segments.L4Seg.Axes'; 
+  AnyMat33 rot_L5 = Main.HumanModel.BodyModel.Trunk.Segments.L5Seg.Axes'; 
+  AnyMat33 rot_Sacrum = Main.HumanModel.BodyModel.Trunk.Segments.SacrumSeg.Axes';
+  AnyMat33 rot_Pelvis = Main.HumanModel.BodyModel.Trunk.Segments.PelvisSeg.Axes';
+
+  Source = {&rot_T1, &rot_T2, &rot_T3, &rot_T4, &rot_T5, &rot_T6, &rot_T7, &rot_T8, &rot_T9, &rot_T10, &rot_T11, &rot_T12,
+            &rot_L1, &rot_L2, &rot_L3, &rot_L4, &rot_L5, &rot_Sacrum, &rot_Pelvis};     
+  
+  Target = {
+    &Main.HumanModel.BodyModel.Trunk.Segments.T1Seg.T1GlobalOrient.ARel,
+    &Main.HumanModel.BodyModel.Trunk.Segments.T2Seg.T2GlobalOrient.ARel,
+    &Main.HumanModel.BodyModel.Trunk.Segments.T3Seg.T3GlobalOrient.ARel,
+    &Main.HumanModel.BodyModel.Trunk.Segments.T4Seg.T4GlobalOrient.ARel,
+    &Main.HumanModel.BodyModel.Trunk.Segments.T5Seg.T5GlobalOrient.ARel,
+    &Main.HumanModel.BodyModel.Trunk.Segments.T6Seg.T6GlobalOrient.ARel,
+    &Main.HumanModel.BodyModel.Trunk.Segments.T7Seg.T7GlobalOrient.ARel,
+    &Main.HumanModel.BodyModel.Trunk.Segments.T8Seg.T8GlobalOrient.ARel,
+    &Main.HumanModel.BodyModel.Trunk.Segments.T9Seg.T9GlobalOrient.ARel,
+    &Main.HumanModel.BodyModel.Trunk.Segments.T10Seg.T10GlobalOrient.ARel,
+    &Main.HumanModel.BodyModel.Trunk.Segments.T11Seg.T11GlobalOrient.ARel,
+    &Main.HumanModel.BodyModel.Trunk.Segments.T12Seg.T12GlobalOrient.ARel,
+    &Main.HumanModel.BodyModel.Trunk.Segments.L1Seg.L1GlobalOrient.ARel,
+    &Main.HumanModel.BodyModel.Trunk.Segments.L2Seg.L2GlobalOrient.ARel,
+    &Main.HumanModel.BodyModel.Trunk.Segments.L3Seg.L3GlobalOrient.ARel,
+    &Main.HumanModel.BodyModel.Trunk.Segments.L4Seg.L4GlobalOrient.ARel,
+    &Main.HumanModel.BodyModel.Trunk.Segments.L5Seg.L5GlobalOrient.ARel,
+    &Main.HumanModel.BodyModel.Trunk.Segments.SacrumSeg.SacrumGlobalOrient.ARel,
+    &Main.HumanModel.BodyModel.Trunk.Segments.PelvisSeg.PelvisGlobalOrient.ARel,
+  };
+  
+};
+
+
+};
+
+
+
+
+
+
+

@@ -1,0 +1,151 @@
+AnyBodyCalibrationStudy JointCalStudy_check = {
+    
+  tEnd = 1.0;
+  nStep = 1;
+  Kinematics.SolverType = KinSolOverDeterminate;
+  InitialConditions.SolverType = KinSolOverDeterminate;
+  
+  AnyFolder &segs = Main.HumanModel.BodyModel.Trunk.Segments;
+  
+  MechObjectExclude = {
+    &segs.Right.R1Seg,
+    &segs.Right.R2Seg,
+    &segs.Right.R3Seg,
+    &segs.Right.R4Seg,
+    &segs.Right.R5Seg,
+    &segs.Right.R6Seg,
+    &segs.Right.R7Seg,
+    &segs.Right.R8Seg,
+    &segs.Right.R9Seg,
+    &segs.Right.R10Seg,
+    &segs.Left.R1Seg,
+    &segs.Left.R2Seg,
+    &segs.Left.R3Seg,
+    &segs.Left.R4Seg,
+    &segs.Left.R5Seg,
+    &segs.Left.R6Seg,
+    &segs.Left.R7Seg,
+    &segs.Left.R8Seg,
+    &segs.Left.R9Seg,
+    &segs.Left.R10Seg,
+    &segs.SternumSeg,
+    &segs.SkullSeg,
+    &segs.C1Seg,
+    &segs.C2Seg,
+    &segs.C3Seg,
+    &segs.C4Seg,
+    &segs.C5Seg,
+    &segs.C6Seg,
+    &Main.HumanModel.BodyModel.Trunk.PosturalMeasures.C7_MovingFrame.SacrC7MovingFrame,
+    &Main.HumanModel.BodyModel.Trunk.PosturalMeasures.C7_MovingFrame.MovingFrameHingeJoint,
+    &Main.HumanModel.BodyModel.Trunk.PosturalMeasures.C7_MovingFrame.MovingFrameHingeJoint.Constraints,
+    &Main.HumanModel.BodyModel.Trunk.PosturalMeasures.C7_MovingFrame.MovingFrameHingeJoint.Constraints.Reaction,
+    &Main.HumanModel.BodyModel.Trunk.PosturalMeasures.C7_MovingFrame.SacrC7DirectionDriver,
+    &Main.HumanModel.BodyModel.Trunk.PosturalMeasures.C7_MovingFrame.SacrC7DirectionDriver.Reaction,
+    &segs.Right.R11Seg,
+    &segs.Left.R11Seg,
+    &segs.Right.R12Seg,
+    &segs.Left.R12Seg,
+    &segs.SternalBodySeg,
+    &segs.C7Seg
+
+  };
+  
+  
+  AnyFolder Model = {
+    
+    AnySeg &C7 = .segs.C7Seg;
+    AnySeg &T1 = .segs.T1Seg;
+    AnySeg &T2 = .segs.T2Seg;
+    AnySeg &T3 = .segs.T3Seg;
+    AnySeg &T4 = .segs.T4Seg;    
+    AnySeg &T5 = .segs.T5Seg;
+    AnySeg &T6 = .segs.T6Seg;
+    AnySeg &T7 = .segs.T7Seg;
+    AnySeg &T8 = .segs.T8Seg;
+    AnySeg &T9 = .segs.T9Seg;
+    AnySeg &T10 = .segs.T10Seg;
+    AnySeg &T11 = .segs.T11Seg;
+    AnySeg &T12 = .segs.T12Seg;    
+    AnySeg &L1 = .segs.L1Seg;
+    AnySeg &L2 = .segs.L2Seg;
+    AnySeg &L3 = .segs.L3Seg;
+    AnySeg &L4 = .segs.L4Seg;
+    AnySeg &L5 = .segs.L5Seg;
+    AnySeg &Sacrum = .segs.SacrumSeg;
+    AnySeg &Pelvis = .segs.PelvisSeg;
+    
+    AnyFolder &measures = Main.HumanModel.BodyModel.Trunk.PosturalMeasures;
+    AnyFolder &input = Main.SubjectData.Alignment;
+    
+    
+    AnyKinEqSimpleDriver Sacr_Ground_NoTransl = {
+      AnyKinLinear SacrGround = {
+        AnySeg &u1 = ...segs.SacrumSeg;
+        AnyRefFrame &ground = Main.EnvironmentModel.GlobalRef;
+      };
+      DriverPos = {0,1,0};
+      DriverVel = {0,0,0};
+      Reaction.Type = {On,On,On};
+      CType = {Soft, Soft, Soft};
+    };
+    
+    AnyKinEqSimpleDriver DriverSS = {
+      AnyKinMeasureOrg &SS_ref = .measures.SacralSlope;
+      DriverPos = {.input.SS}*pi/180;
+      DriverVel = {0};
+      Reaction.Type = {On}; 
+      CType = {Hard};
+    };
+    
+    AnyKinEqSimpleDriver Sacr_Ground_NoRot = {
+      AnyKinMeasureOrg SacrGroundXY = {
+        AnyKinRotational SacrGround = {
+          AnySeg &u1 = ....segs.SacrumSeg;
+          AnyRefFrame &ground = Main.EnvironmentModel.GlobalRef;
+          Type = RotVector;
+        };
+        MeasureOrganizer = {0,1};
+      };
+      DriverPos = {0,0}*pi/180;
+      DriverVel = {0,0};
+      Reaction.Type = {On,On};
+      CType = {Soft, Soft};
+    };
+    
+    
+    
+    AnyKinEqSimpleDriver AllRelevantJoints = {
+      AnySphericalJoint &u2 = Main.HumanModel.BodyModel.Trunk.Joints.Lumbar.L5Sacrum;
+      AnySphericalJoint &u3 = Main.HumanModel.BodyModel.Trunk.Joints.Lumbar.L4L5;
+      AnySphericalJoint &u4 = Main.HumanModel.BodyModel.Trunk.Joints.Lumbar.L3L4;
+      AnySphericalJoint &u5 = Main.HumanModel.BodyModel.Trunk.Joints.Lumbar.L2L3;
+      AnySphericalJoint &u6 = Main.HumanModel.BodyModel.Trunk.Joints.Lumbar.L1L2;
+      AnySphericalJoint &u7 = Main.HumanModel.BodyModel.Trunk.Joints.Lumbar.T12L1;  
+      AnySphericalJoint &u8 = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T11T12;
+      AnySphericalJoint &u9 = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T10T11;
+      AnySphericalJoint &u10 = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T9T10;
+      AnySphericalJoint &u11 = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T8T9;
+      AnySphericalJoint &u12 = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T7T8;
+      AnySphericalJoint &u13 = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T6T7;
+      AnySphericalJoint &u14 = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T5T6;
+      AnySphericalJoint &u15 = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T4T5;
+      AnySphericalJoint &u16 = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T3T4;
+      AnySphericalJoint &u17 = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T2T3;
+      AnySphericalJoint &u18 = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T1T2;
+      AnySphericalJoint &u19 = Main.HumanModel.BodyModel.Trunk.Joints.Cervical.T1C7;
+      
+      DriverPos = {0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0};
+      DriverVel = {0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0};
+      Reaction.Type = {On,On,On, On,On,On, On,On,On, On,On,On, On,On,On, On,On,On, On,On,On, On,On,On, On,On,On, On,On,On, On,On,On, On,On,On, On,On,On, On,On,On, On,On,On, On,On,On, On,On,On, On,On,On};      
+    };
+    
+  };
+};
+
+
+
+
+
+
+

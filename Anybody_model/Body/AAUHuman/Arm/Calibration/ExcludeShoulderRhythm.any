@@ -1,0 +1,12 @@
+  // Exclude the shoulder rythm, since the drivers handles all DOFs.
+  
+  AnyMechObjectExcluder ExcludeShoulderRhythm = 
+  {
+     Objects = arrcat(
+        &.JointsSideCal.ClaviculaProtractionDriver,
+        &.JointsSideCal.ClaviculaElevationDriver,
+        ObjSearch(".JointsSideCal.ClaviculaAxialRotationDriver")
+     );
+  };
+  
+  

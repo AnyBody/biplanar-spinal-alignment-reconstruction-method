@@ -1,0 +1,46 @@
+#ifndef EXCLUDE_MUSCLE_METABOLISM
+#define EXCLUDE_MUSCLE_METABOLISM AnyMetabModelSimple ZeroMetabolicMdl = {EtaCon = 2e22; EtaEcc = 2e22;}; MetabModel = &ZeroMetabolicMdl;
+#endif
+
+#ifndef SET_DEFAULT_ACTUATOR_VOLUME
+#define SET_DEFAULT_ACTUATOR_VOLUME Volume = 1e-6
+#endif
+
+AnyKinLinear Lin={
+  AnyRefFrame &ref1=..StartNode;
+  AnyRefFrame &ref2=..EndNode;
+  //AnyDrawPLine drw={ Thickness=.005; RGB={0,0,1};};
+  Ref=0;
+};
+
+AnyKinMeasureOrg LinMeasureOrg={
+  AnyKinLinear &ref=.Lin;
+  MeasureOrganizer=.Axis;
+};
+
+AnyMuscleModel MuscleModel={
+  F0=.Strength;
+};
+
+AnyRecruitedActuator ArtificialSupportMuscle={
+  Strength = .Strength;
+  AnyKinMeasure& ref2=.LinMeasureOrg;
+  Type = iffun(eqfun(.DirectionOfForce,1), NonNegative, NonPositive);
+  SET_DEFAULT_ACTUATOR_VOLUME;
+};
+
+AnyDrawVector DrawSupport = {
+  AnyRefFrame &ref = .Lin.ref2;
+  Vec = ..ScaleFactor*..DrawRef.Support.Lin.ScaleFactor*.Direction*.ArtificialSupportMuscle.Fout[0]*.Lin.ref1.Axes';
+
+  //Use this line to plot support muscles strength
+  //Vec = 0.1*..ScaleFactor*..DrawRef.Support.Lin.ScaleFactor*.Direction*.ArtificialSupportMuscle.Strength*.Lin.ref1.Axes'; 
+  PointAway = Off;
+  DrawCoord = Off;
+  
+  Line.RGB = ..DrawRef.Support.Lin.RGB;
+  Line.Thickness = ..DrawRef.Support.Lin.Thickness;
+  Line.End.Thickness = 2*..DrawRef.Support.Lin.Thickness;  
+  Line.End.Length = 4*..DrawRef.Support.Lin.Thickness;
+  
+};

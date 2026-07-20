@@ -1,0 +1,141 @@
+
+
+SelectedOutput.Trunk = {
+  
+  
+  JointReactionForce = {
+    
+    /// Lateral positive
+    AnyVar SacrumPelvisMedioLateralForce = ...Trunk.Joints.Lumbar.SacrumPelvis.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar SacrumPelvisProximoDistalForce = ...Trunk.Joints.Lumbar.SacrumPelvis.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar SacrumPelvisAnteroPosteriorForce = ...Trunk.Joints.Lumbar.SacrumPelvis.Constraints.Reaction.Fout[0];
+    //Pelvis ref
+    
+    /// Lateral positive
+    AnyVar L5SacrumMedioLateralForce = ...Trunk.Joints.Lumbar.L5Sacrum.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar L5SacrumProximoDistalForce = ...Trunk.Joints.Lumbar.L5Sacrum.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar L5SacrumAnteroPosteriorForce = ...Trunk.Joints.Lumbar.L5Sacrum.Constraints.Reaction.Fout[0];
+    //Sacrum ref
+    
+    /// Lateral positive
+    AnyVar L4L5MedioLateralForce = ...Trunk.Joints.Lumbar.L4L5.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar L4L5ProximoDistalForce = ...Trunk.Joints.Lumbar.L4L5.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar L4L5AnteroPosteriorForce = ...Trunk.Joints.Lumbar.L4L5.Constraints.Reaction.Fout[0];
+    //L5 ref
+
+    /// Lateral positive
+    AnyVar L3L4MedioLateralForce = ...Trunk.Joints.Lumbar.L3L4.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar L3L4ProximoDistalForce = ...Trunk.Joints.Lumbar.L3L4.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar L3L4AnteroPosteriorForce = ...Trunk.Joints.Lumbar.L3L4.Constraints.Reaction.Fout[0];
+    //L4 ref
+    
+    
+    /// Lateral positive
+    AnyVar L2L3MedioLateralForce = ...Trunk.Joints.Lumbar.L2L3.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar L2L3ProximoDistalForce = ...Trunk.Joints.Lumbar.L2L3.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar L2L3AnteroPosteriorForce = ...Trunk.Joints.Lumbar.L2L3.Constraints.Reaction.Fout[0];
+    //L3 ref
+    
+    /// Lateral positive
+    AnyVar L1L2MedioLateralForce = ...Trunk.Joints.Lumbar.L1L2.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar L1L2ProximoDistalForce = ...Trunk.Joints.Lumbar.L1L2.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar L1L2AnteroPosteriorForce = ...Trunk.Joints.Lumbar.L1L2.Constraints.Reaction.Fout[0];
+    //L2 ref
+    
+    /// Lateral positive
+    AnyVar T12L1MedioLateralForce = ...Trunk.Joints.Lumbar.T12L1.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar T12L1ProximoDistalForce = ...Trunk.Joints.Lumbar.T12L1.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar T12L1AnteroPosteriorForce = ...Trunk.Joints.Lumbar.T12L1.Constraints.Reaction.Fout[0];
+    //L1 ref
+    
+    /// Lateral positive
+    AnyVar T1C7MedioLateralForce = ...Trunk.Joints.Cervical.T1C7.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar T1C7ProximoDistalForce = ...Trunk.Joints.Cervical.T1C7.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar T1C7AnteroPosteriorForce = ...Trunk.Joints.Cervical.T1C7.Constraints.Reaction.Fout[0];
+    //Thorax ref
+    
+    /// Lateral positive
+    AnyVar C7C6MedioLateralForce = ...Trunk.Joints.Cervical.C7C6.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar C7C6ProximoDistalForce = ...Trunk.Joints.Cervical.C7C6.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar C7C6AnteroPosteriorForce = ...Trunk.Joints.Cervical.C7C6.Constraints.Reaction.Fout[0];
+    //C7 ref
+    
+    /// Lateral positive
+    AnyVar C6C5MedioLateralForce = ...Trunk.Joints.Cervical.C6C5.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar C6C5ProximoDistalForce = ...Trunk.Joints.Cervical.C6C5.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar C6C5AnteroPosteriorForce = ...Trunk.Joints.Cervical.C6C5.Constraints.Reaction.Fout[0];
+    //C6 ref
+    
+    /// Lateral positive
+    AnyVar C5C4MedioLateralForce = ...Trunk.Joints.Cervical.C5C4.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar C5C4ProximoDistalForce = ...Trunk.Joints.Cervical.C5C4.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar C5C4AnteroPosteriorForce = ...Trunk.Joints.Cervical.C5C4.Constraints.Reaction.Fout[0];
+    //C5 ref
+    
+    /// Lateral positive
+    AnyVar C4C3MedioLateralForce = ...Trunk.Joints.Cervical.C4C3.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar C4C3ProximoDistalForce = ...Trunk.Joints.Cervical.C4C3.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar C4C3AnteroPosteriorForce = ...Trunk.Joints.Cervical.C4C3.Constraints.Reaction.Fout[0];
+    //C4 ref
+    
+    /// Lateral positive
+    AnyVar C3C2MedioLateralForce = ...Trunk.Joints.Cervical.C3C2.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar C3C2ProximoDistalForce = ...Trunk.Joints.Cervical.C3C2.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar C3C2AnteroPosteriorForce = ...Trunk.Joints.Cervical.C3C2.Constraints.Reaction.Fout[0];
+    //C3 ref
+    
+    /// Lateral positive
+    AnyVar C2C1MedioLateralForce = ...Trunk.Joints.Cervical.C2C1.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar C2C1ProximoDistalForce = ...Trunk.Joints.Cervical.C2C1.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar C2C1AnteroPosteriorForce = ...Trunk.Joints.Cervical.C2C1.Constraints.Reaction.Fout[0];
+    /// Extension positive
+    AnyVar C2C1FlexionExtensionMoment = -1*(...Trunk.Joints.Cervical.C2C1.Constraints.Reaction.RefFrameOutput.M[0]*...Trunk.Joints.Cervical.C2C1.C2Node.Axes)[2];
+    /// Right positive
+    AnyVar C2C1LateralMoment = -1*(...Trunk.Joints.Cervical.C2C1.Constraints.Reaction.RefFrameOutput.M[0]*...Trunk.Joints.Cervical.C2C1.C2Node.Axes)[0];
+    //C2 ref
+    
+    /// Lateral positive
+    AnyVar C1C0MedioLateralForce = ...Trunk.Joints.Cervical.C1C0.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar C1C0ProximoDistalForce = ...Trunk.Joints.Cervical.C1C0.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar C1C0AnteroPosteriorForce = ...Trunk.Joints.Cervical.C1C0.Constraints.Reaction.Fout[0];
+    /// Left positive
+    AnyVar C1C0AxialMoment = -1*(...Trunk.Joints.Cervical.C1C0.Constraints.Reaction.RefFrameOutput.M[0]*...Trunk.Joints.Cervical.C1C0.C1Node.Axes)[1];
+    /// Right positive
+    AnyVar C1C0LateralMoment = -1*(...Trunk.Joints.Cervical.C1C0.Constraints.Reaction.RefFrameOutput.M[0]*...Trunk.Joints.Cervical.C1C0.C1Node.Axes)[0];
+    //C1 ref
+    
+    
+  }; //End JointReactionForce
+  
+  
+}; //End Trunk

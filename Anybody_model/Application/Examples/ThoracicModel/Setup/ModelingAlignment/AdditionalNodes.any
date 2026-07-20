@@ -1,0 +1,184 @@
+// Define points to allow postural measurements
+Main.HumanModel.BodyModel.Trunk.Segments.T1Seg = {
+  AnyRefNode C7CentreNode = {  
+    sRel = .Scale({0.017, 0.471, 0});
+    AnyDrawNode C7Centre = {
+      ScaleXYZ = 0.002*{1,1,1};
+      RGB={0.5,0,0.5};
+    };
+  }; 
+  
+  AnyRefNode T1_node = {  
+    sRel=.Scale({0.012,0.452,0});
+  };   
+};
+
+Main.HumanModel.BodyModel.Trunk.Segments.T1Seg = {
+ AnyRefNode T1GlobalOrient = {
+     sRel = .T1_node.sRel;
+   }; 
+};
+
+
+Main.HumanModel.BodyModel.Trunk.Segments.T2Seg = {
+  AnyRefNode T2GlobalOrient = {
+    sRel  = (.PostSup.sRel + .AntSup.sRel + .PostInf.sRel + .AntInf.sRel) * 0.25;
+  };
+};
+
+
+Main.HumanModel.BodyModel.Trunk.Segments.T3Seg = {
+  AnyRefNode T3GlobalOrient = {
+    sRel  = (.PostSup.sRel + .AntSup.sRel + .PostInf.sRel + .AntInf.sRel) * 0.25;
+  };
+};
+
+
+Main.HumanModel.BodyModel.Trunk.Segments.T4Seg = {
+  AnyRefNode T4GlobalOrient = {
+    sRel  = (.PostSup.sRel + .AntSup.sRel + .PostInf.sRel + .AntInf.sRel) * 0.25;
+  };
+};
+
+Main.HumanModel.BodyModel.Trunk.Segments.T5Seg = {
+  AnyRefNode T5GlobalOrient = {
+    sRel  = (.PostSup.sRel + .AntSup.sRel + .PostInf.sRel + .AntInf.sRel) * 0.25;
+  };
+};
+
+Main.HumanModel.BodyModel.Trunk.Segments.T6Seg = {
+  AnyRefNode T6GlobalOrient = {
+    sRel  = (.PostSup.sRel + .AntSup.sRel + .PostInf.sRel + .AntInf.sRel) * 0.25;
+  };
+};
+
+Main.HumanModel.BodyModel.Trunk.Segments.T7Seg = {
+  AnyRefNode T7GlobalOrient = {
+    sRel  = (.PostSup.sRel + .AntSup.sRel + .PostInf.sRel + .AntInf.sRel) * 0.25;
+  };
+};
+
+Main.HumanModel.BodyModel.Trunk.Segments.T8Seg = {
+  AnyRefNode T8GlobalOrient = {
+    sRel  = (.PostSup.sRel + .AntSup.sRel + .PostInf.sRel + .AntInf.sRel) * 0.25;
+  };
+};
+
+Main.HumanModel.BodyModel.Trunk.Segments.T9Seg = {
+  AnyRefNode T9GlobalOrient = {
+    sRel  = (.PostSup.sRel + .AntSup.sRel + .PostInf.sRel + .AntInf.sRel) * 0.25;
+  };
+};
+
+Main.HumanModel.BodyModel.Trunk.Segments.T10Seg = {
+  AnyRefNode T10GlobalOrient = {
+    sRel  = (.PostSup.sRel + .AntSup.sRel + .PostInf.sRel + .AntInf.sRel) * 0.25;
+  };
+};
+
+Main.HumanModel.BodyModel.Trunk.Segments.T11Seg = {
+  AnyRefNode T11GlobalOrient = {
+    sRel  = (.PostSup.sRel + .AntSup.sRel + .PostInf.sRel + .AntInf.sRel) * 0.25;
+  };
+};
+
+Main.HumanModel.BodyModel.Trunk.Segments.T12Seg = {
+  AnyRefNode T12GlobalOrient = {
+    sRel = (.PostSup.sRel + .AntSup.sRel + .PostInf.sRel + .AntInf.sRel) * 0.25;
+  };
+};
+
+Main.HumanModel.BodyModel.Trunk.Segments.L1Seg = {
+  AnyRefNode L1GlobalOrient = {
+    sRel = {0, 0, 0};
+  };
+};
+
+Main.HumanModel.BodyModel.Trunk.Segments.L2Seg = {
+  AnyRefNode L2GlobalOrient = {
+    sRel = {0, 0, 0};
+  };
+};
+
+Main.HumanModel.BodyModel.Trunk.Segments.L3Seg = {
+  AnyRefNode L3GlobalOrient = {
+    sRel = {0, 0, 0};
+  };
+};
+
+Main.HumanModel.BodyModel.Trunk.Segments.L4Seg = {
+  AnyRefNode L4GlobalOrient = {
+    sRel = {0, 0, 0};
+  };
+};
+
+Main.HumanModel.BodyModel.Trunk.Segments.L5Seg = {
+  AnyRefNode L5GlobalOrient = {
+    sRel = {0, 0, 0};
+  };
+};
+
+Main.HumanModel.BodyModel.Trunk.Segments.SacrumSeg = {
+  AnyRefNode SacrumGlobalOrient = {
+    sRel = {0, 0, 0};
+  };
+};
+
+Main.HumanModel.BodyModel.Trunk.Segments.PelvisSeg = {
+  AnyRefNode PelvisGlobalOrient = {
+    sRel = {0,0,0};
+  };
+};
+
+Main.HumanModel.BodyModel.Trunk.Segments.C7Seg = {
+  AnyRefNode C7CentreNode = {  
+    sRel = .Scale({0.017, 0.471, 0});
+  };  
+};
+
+
+Main.HumanModel.BodyModel.Trunk.Segments.SacrumSeg = {
+
+  AnyRefNode SacralMidPointNode = {
+    sRel = (.ALLNodeSuperior.sRel + .PLLNodeSuperior.sRel) / 2;
+
+    AnyDrawNode DrwNode = {
+      ScaleXYZ = ..Scale({0.004, 0.004, 0.004});
+      RGB = {0, 1, 0};
+    };
+
+    AnyDrawRefFrame SacralEndplateNodeDrw = {
+      ScaleXYZ = ..Scale({0.001, 0.001, 0.001});
+      RGB = {0, 1, 0};
+    };
+  };
+
+  AnyRefNode &Endplate_Frame = Endplate_sup;
+
+};
+
+Main.HumanModel.BodyModel.Trunk.Segments.PelvisSeg = {
+
+  AnyKinPLine HipCenterToS1Mid = {
+    AnyRefNode &ref1 = .HipJointsCenter;
+    AnyRefNode &ref2 = ..SacrumSeg.SacralMidPointNode;
+    AnyDrawPLine drw = {Thickness = 0.002; RGB = {0, 0, 0};};
+  };
+
+  AnyRefNode HipCenter_S1Mid_Frame = {
+    sRel = .HipJointsCenter.sRel;
+    AnyVector SacrumPoint =.PelvisSacrumJntNode.sRel - ..SacrumSeg.SacrumPelvisJntNode.sRel + ..SacrumSeg.SacralMidPointNode.sRel;
+    ARel = RotMat(sRel, SacrumPoint, -{0.1, 0.0, 0.0}) * RotMat(-pi / 2, z);
+  };
+
+  AnyRefNode HipJointsCenter = {
+    sRel = .Scale({0.03, -0.10, 0});
+    AnyDrawNode DrwNode = {
+      ScaleXYZ = {0.005, 0.005, 0.005};
+      RGB = {0.8, 0, 0.2};
+    };
+  };
+  
+}; 
+
+

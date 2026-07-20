@@ -1,0 +1,69 @@
+
+Left = {
+  
+  AnyFolder Leg = {  
+    AnyVar Sign = -1;
+
+    #ifdef SignRef
+      #undef SignRef
+    #endif
+    #define SignRef 0
+    
+    #include "<BM_LEG_DATASET_PATH>\ModelParameters.any"
+    
+    #define _LEFT_RIGHT_ "Left"
+    
+    #include "<BM_LEG_TLEM_PATH>\Leg.root.any"
+    
+    #undef _LEFT_RIGHT_    
+     
+    AnyFolder &InterfaceFolder = ..Interface.Left;
+    
+    AnyFolder &MannequinValuesFolder = ..MannequinValuesFromModel.AnyFolder_Posture.AnyFolder_Left;
+    
+    #include "../Include/SettingsLeg.any"
+    
+    AnyFolder &Scaling = ...Scaling;
+    AnyFolder &StandardParameters = ...Scaling.StandardParameters.Left;
+    AnyFolder &GeoScaling = ...Scaling.GeometricalScaling.Left;
+    AnyFolder &MassScaling = ...Scaling.MassScaling.Left;
+    AnyFolder &FiberLengthScaling = ...Scaling.FiberLengthScaling.Left;
+    AnyFolder &StrengthScaling = ...Scaling.StrengthScaling.Left;
+    
+    
+    AnyFolder BonesOpacity = {
+      AnyVar Foot = Main.DrawSettings.BonesOpacity.LeftFoot;
+      AnyVar Shank = Main.DrawSettings.BonesOpacity.LeftShank;
+      AnyVar Thigh = Main.DrawSettings.BonesOpacity.LeftThigh;
+      AnyVar Talus = Main.DrawSettings.BonesOpacity.LeftTalus;
+      AnyVar Patella = Main.DrawSettings.BonesOpacity.LeftPatella;
+    };
+
+    #if (BM_LEG_MUSCLES_LEFT != OFF) | (BM_TRUNK_MUSCLES != OFF) 
+      AnyFolder &TrunkMuscles = ..Trunk.Muscles.Left;
+    #endif
+    
+    #if (BM_LEG_MUSCLES_LEFT == OFF)
+      AnyFolder MomentMeasure = {
+        #if BM_TRUNK_MUSCLES == _MUSCLES_SIMPLE_
+          #define LEG_WITH_PSOAS_MUSCLES 
+        #endif
+       
+        #define LEG_WITH_JOINT_MUSCLES
+        #include "<BM_LEG_TLEM_PATH>\LegMoments.any"
+        #undef LEG_WITH_JOINT_MUSCLES
+       
+        #ifdef LEG_WITH_PSOAS_MUSCLES 
+          #undef LEG_WITH_PSOAS_MUSCLES 
+        #endif
+      };
+    #else
+      AnyFolder MomentMeasure = {
+        #include "<BM_LEG_TLEM_PATH>\LegMoments.any"
+      };            
+    #endif
+    
+  }; //End Leg
+};
+
+#include "<BM_LEG_TLEM_PATH>/LeftLegSelectedOutput.any"

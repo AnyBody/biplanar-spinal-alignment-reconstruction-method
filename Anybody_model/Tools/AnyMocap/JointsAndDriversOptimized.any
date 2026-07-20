@@ -1,0 +1,245 @@
+AnyFolder JointsAndDrivers = {
+    AnyComponentDefinition obj = {
+      NameCast = "OptimizedJointDrivers";
+    };  
+
+ #ifdef MOCAP_OUTPUT_FILENAME_PREFIX 
+    AnyStringVar BaseFileName ??=   TEMP_PATH + "/" + MOCAP_TEST_FILENAME_PREFIX + MOCAP_OUTPUT_FILENAME_PREFIX + Main.ModelSetup.TrialSpecificData.TrialFileName ;
+ #else
+    AnyStringVar BaseFileName ??=  "test";
+ #endif    
+  
+AnyKinDriver JntDriverTrunkFull = {
+  
+  #include "InterpolateJointAngleData.any"
+  FileReader.FileName ??= .BaseFileName + "-rotvec-trunk-full.txt";
+  
+  /// The default data if no joint angles files have been generated.
+  FileReader.Data0 = repmat(
+    1, FileReader.Length0, 
+    arrcat({Main.HumanModel.Mannequin.Posture.PelvisPosX,
+            Main.HumanModel.Mannequin.Posture.PelvisPosY,
+            Main.HumanModel.Mannequin.Posture.PelvisPosZ,
+            Main.HumanModel.Mannequin.Posture.PelvisRotX*pi/180,
+            Main.HumanModel.Mannequin.Posture.PelvisRotY*pi/180,
+            Main.HumanModel.Mannequin.Posture.PelvisRotZ*pi/180
+           },repmat(nDim-6,0.0)
+    )
+  );
+  AnyVector PelvisPosOffset ??= {0,0,0};
+  AnyKinMeasureLinComb Measure = {
+    AnyKinMeasureOrg Input = {
+      AnyKinMeasure& PelvisPosX = .....BodyModel.Interface.Trunk.PelvisPosX;
+      AnyKinMeasure& PelvisPosY = .....BodyModel.Interface.Trunk.PelvisPosY;
+      AnyKinMeasure& PelvisPosZ = .....BodyModel.Interface.Trunk.PelvisPosZ;
+      
+      AnyKinMeasure& PelvisRotVec = .....BodyModel.Interface.Trunk.PelvisRotVec;
+      
+      AnyKinMeasureOrg& SacrumPelvis = .....BodyModel.Interface.Trunk.IntervertebralAngles.SacrumPelvis.Jnt;
+      AnyKinMeasureOrg& L5Sacrum =.....BodyModel.Interface.Trunk.IntervertebralAngles.L5Sacrum.Jnt;
+      AnyKinMeasureOrg& L4L5 =.....BodyModel.Interface.Trunk.IntervertebralAngles.L4L5.Jnt;
+      AnyKinMeasureOrg& L3L4 =.....BodyModel.Interface.Trunk.IntervertebralAngles.L3L4.Jnt;
+      AnyKinMeasureOrg& L2L3 =.....BodyModel.Interface.Trunk.IntervertebralAngles.L2L3.Jnt;
+      AnyKinMeasureOrg& L1L2 =.....BodyModel.Interface.Trunk.IntervertebralAngles.L1L2.Jnt;
+      AnyKinMeasureOrg& T12L1 =.....BodyModel.Interface.Trunk.IntervertebralAngles.T12L1.Jnt;
+#if BM_TRUNK_THORACIC_MODEL != _THORACIC_MODEL_RIGID_
+      AnyKinMeasureOrg& T11T12 =.....BodyModel.Interface.Trunk.IntervertebralAngles.T11T12.Jnt;
+      AnyKinMeasureOrg& T10T11 =.....BodyModel.Interface.Trunk.IntervertebralAngles.T10T11.Jnt;
+      AnyKinMeasureOrg& T9T10 =.....BodyModel.Interface.Trunk.IntervertebralAngles.T9T10.Jnt;
+      AnyKinMeasureOrg& T8T9 =.....BodyModel.Interface.Trunk.IntervertebralAngles.T8T9.Jnt;
+      AnyKinMeasureOrg& T7T8 =.....BodyModel.Interface.Trunk.IntervertebralAngles.T7T8.Jnt;
+      AnyKinMeasureOrg& T6T7 =.....BodyModel.Interface.Trunk.IntervertebralAngles.T6T7.Jnt;
+      AnyKinMeasureOrg& T5T6 =.....BodyModel.Interface.Trunk.IntervertebralAngles.T5T6.Jnt;
+      AnyKinMeasureOrg& T4T5 =.....BodyModel.Interface.Trunk.IntervertebralAngles.T4T5.Jnt;
+      AnyKinMeasureOrg& T3T4 =.....BodyModel.Interface.Trunk.IntervertebralAngles.T3T4.Jnt;
+      AnyKinMeasureOrg& T2T3 =.....BodyModel.Interface.Trunk.IntervertebralAngles.T2T3.Jnt;
+      AnyKinMeasureOrg& T1T2 =.....BodyModel.Interface.Trunk.IntervertebralAngles.T1T2.Jnt;
+#endif
+      AnyKinMeasureOrg& T1C7 =.....BodyModel.Interface.Trunk.IntervertebralAngles.T1C7.Jnt;
+      AnyKinMeasureOrg& C7C6 =.....BodyModel.Interface.Trunk.IntervertebralAngles.C7C6.Jnt;
+      AnyKinMeasureOrg& C6C5 =.....BodyModel.Interface.Trunk.IntervertebralAngles.C6C5.Jnt;
+      AnyKinMeasureOrg& C5C4 =.....BodyModel.Interface.Trunk.IntervertebralAngles.C5C4.Jnt;
+      AnyKinMeasureOrg& C4C3 =.....BodyModel.Interface.Trunk.IntervertebralAngles.C4C3.Jnt;
+      AnyKinMeasureOrg& C3C2 =.....BodyModel.Interface.Trunk.IntervertebralAngles.C3C2.Jnt;
+      AnyKinMeasureOrg& C2C1 =.....BodyModel.Interface.Trunk.IntervertebralAngles.C2C1.Jnt;
+      AnyKinMeasureOrg& C1C0 =.....BodyModel.Interface.Trunk.IntervertebralAngles.C1C0.Jnt;
+    };
+     OutDim=Input.nDim;
+     Coef = eye(OutDim);
+     Const ??= arrcat(.PelvisPosOffset, zeros(1,OutDim-3)[0]);
+  };
+  Reaction.Type = repmat(nDim, Off);
+};
+
+  
+  
+  #if BM_LEG_LEFT & BM_LEG_MODEL_IS_TLEM
+  AnyKinDriver JntDriverLeftLegTD = {
+    
+    #include "InterpolateJointAngleData.any"
+    FileReader.FileName = TEMP_PATH + "/" + MOCAP_TEST_FILENAME_PREFIX +MOCAP_OUTPUT_FILENAME_PREFIX + Main.ModelSetup.TrialSpecificData.TrialFileName + "-euler-left_leg_tlem.txt";
+    FileReader.Data0 = zeros(nDim, FileReader.Length0 );
+    
+    AnyKinMeasure& HipFlexion = ...BodyModel.Interface.Left.HipFlexion;
+    AnyKinMeasure& HipAbduction = ...BodyModel.Interface.Left.HipAbduction;
+    AnyKinMeasure& HipExternalRotation = ...BodyModel.Interface.Left.HipExternalRotation;
+    AnyKinMeasure& KneeFlexion = ...BodyModel.Interface.Left.KneeFlexion;
+    AnyKinMeasure& AnklePlantarFlexion = ...BodyModel.Interface.Left.AnklePlantarFlexion;
+    AnyKinMeasure& SubTalarEversion = ...BodyModel.Interface.Left.SubTalarEversion;
+    Reaction.Type = repmat(nDim, Off);
+  };
+  #endif
+  
+  
+  #if BM_LEG_RIGHT & BM_LEG_MODEL_IS_TLEM
+  AnyKinDriver JntDriverRightLegTD = {
+    #include "InterpolateJointAngleData.any"
+    FileReader.FileName = TEMP_PATH + "/" + MOCAP_TEST_FILENAME_PREFIX +  MOCAP_OUTPUT_FILENAME_PREFIX + Main.ModelSetup.TrialSpecificData.TrialFileName + "-euler-right_leg_tlem.txt";
+    FileReader.Data0 = zeros(nDim, FileReader.Length0 );
+
+    AnyKinMeasure& HipFlexion = ...BodyModel.Interface.Right.HipFlexion;
+    AnyKinMeasure& HipAbduction = ...BodyModel.Interface.Right.HipAbduction;
+    AnyKinMeasure& HipExternalRotation = ...BodyModel.Interface.Right.HipExternalRotation;
+    AnyKinMeasure& KneeFlexion = ...BodyModel.Interface.Right.KneeFlexion;
+    AnyKinMeasure& AnklePlantarFlexion = ...BodyModel.Interface.Right.AnklePlantarFlexion;
+    AnyKinMeasure& SubTalarEversion = ...BodyModel.Interface.Right.SubTalarEversion;
+    Reaction.Type = repmat(nDim, Off);
+  };
+  #endif
+
+  
+  
+  #if BM_LEG_LEFT & BM_LEG_MODEL == _LEG_MODEL_LEG_
+  AnyKinDriver JntDriverLeftLeg = {
+    #include "InterpolateJointAngleData.any"
+    FileReader.FileName ??= .BaseFileName + "-euler-left_leg.txt";
+    FileReader.Data0 = zeros(nDim, FileReader.Length0 );
+
+    AnyKinMeasure& HipFlexion = ...BodyModel.Interface.Left.HipFlexion;
+    AnyKinMeasure& HipAbduction = ...BodyModel.Interface.Left.HipAbduction;
+    AnyKinMeasure& HipExternalRotation = ...BodyModel.Interface.Left.HipExternalRotation;
+    AnyKinMeasure& KneeFlexion = ...BodyModel.Interface.Left.KneeFlexion;
+    AnyKinMeasure& AnklePlantarFlexion = ...BodyModel.Interface.Left.AnklePlantarFlexion;
+    AnyKinMeasure& AnkleEversion = ...BodyModel.Interface.Left.AnkleEversion;
+    Reaction.Type = repmat(nDim, Off);
+  };
+  #endif
+  
+  
+  #if BM_LEG_RIGHT & BM_LEG_MODEL == _LEG_MODEL_LEG_
+  AnyKinDriver JntDriverRightLeg = {
+    #include "InterpolateJointAngleData.any"
+    FileReader.FileName ??= .BaseFileName + "-euler-right_leg.txt";
+    FileReader.Data0 = zeros(nDim, FileReader.Length0 );
+
+    AnyKinMeasure& HipFlexion = ...BodyModel.Interface.Right.HipFlexion;
+    AnyKinMeasure& HipAbduction = ...BodyModel.Interface.Right.HipAbduction;
+    AnyKinMeasure& HipExternalRotation = ...BodyModel.Interface.Right.HipExternalRotation;
+    AnyKinMeasure& KneeFlexion = ...BodyModel.Interface.Right.KneeFlexion;
+    AnyKinMeasure& AnklePlantarFlexion = ...BodyModel.Interface.Right.AnklePlantarFlexion;
+    AnyKinMeasure& AnkleEversion = ...BodyModel.Interface.Right.AnkleEversion;
+    Reaction.Type = repmat(nDim, Off);
+  };
+  #endif
+    
+  #if BM_ARM_LEFT == ON 
+  AnyKinDriver JntDriverLeftArm = {
+    #include "InterpolateJointAngleData.any"
+    FileReader.FileName ??= .BaseFileName + "-rotvec-left_arm_shoulder.txt";
+    FileReader.Data0 = zeros(nDim, FileReader.Length0 );
+       
+    AnyKinMeasure& ThoraxClavicula=...BodyModel.Interface.Left.RotVectorMeasures.ThoraxClavicula;
+    AnyKinMeasure& ClaviculaScapula=...BodyModel.Interface.Left.RotVectorMeasures.ClaviculaScapula;
+    AnyKinMeasure& ScapulaHumerus=...BodyModel.Interface.Left.RotVectorMeasures.ScapulaHumerus;
+    AnyKinMeasure& HumerusUlna=...BodyModel.Interface.Left.ElbowFlexion;
+    AnyKinMeasure& UlnaRadius=...BodyModel.Interface.Left.ElbowPronation;
+    AnyKinMeasure& RadiusWrist=...BodyModel.Interface.Left.WristFlexion;
+    AnyKinMeasure& WristHand=...BodyModel.Interface.Left.WristAbduction;
+    
+    Reaction.Type = repmat(nDim, Off);
+  };
+  
+  #if BM_ARM_DETAILED_HAND
+  AnyKinDriver JntDriverLeftDetailedHand = {
+    #include "InterpolateJointAngleData.any"
+    FileReader.FileName ??= .BaseFileName + "-euler-left_detailed_hand.txt";
+    FileReader.Data0 = zeros(nDim, FileReader.Length0 );
+
+    AnyKinMeasure& CMC1Flexion = ...BodyModel.Interface.Left.CMCFlexion;
+    AnyKinMeasure& CMC1Abduction = ...BodyModel.Interface.Left.CMCAbduction;
+    AnyKinMeasure& MCP1Flexion = ...BodyModel.Interface.Left.MCPFlexion;
+    AnyKinMeasure& MCP1Abduction = ...BodyModel.Interface.Left.MCPAbduction;
+    AnyKinMeasure& DIP1 = ...BodyModel.Interface.Left.DIP;
+    AnyKinMeasure& MCP2 = ...BodyModel.Left.ShoulderArm.Seg.Hand.Finger2.Jnt.MCP;
+    AnyKinMeasure& PIP2 = ...BodyModel.Left.ShoulderArm.Seg.Hand.Finger2.Jnt.PIP;
+    AnyKinMeasure& DIP2 = ...BodyModel.Left.ShoulderArm.Seg.Hand.Finger2.Jnt.DIP;
+    AnyKinMeasure& MCP3 = ...BodyModel.Left.ShoulderArm.Seg.Hand.Finger3.Jnt.MCP;
+    AnyKinMeasure& PIP3 = ...BodyModel.Left.ShoulderArm.Seg.Hand.Finger3.Jnt.PIP;
+    AnyKinMeasure& DIP3 = ...BodyModel.Left.ShoulderArm.Seg.Hand.Finger3.Jnt.DIP;
+    AnyKinMeasure& MCP4 = ...BodyModel.Left.ShoulderArm.Seg.Hand.Finger4.Jnt.MCP;
+    AnyKinMeasure& PIP4 = ...BodyModel.Left.ShoulderArm.Seg.Hand.Finger4.Jnt.PIP;
+    AnyKinMeasure& DIP4 = ...BodyModel.Left.ShoulderArm.Seg.Hand.Finger4.Jnt.DIP;
+    AnyKinMeasure& MCP5 = ...BodyModel.Left.ShoulderArm.Seg.Hand.Finger5.Jnt.MCP;
+    AnyKinMeasure& PIP5 = ...BodyModel.Left.ShoulderArm.Seg.Hand.Finger5.Jnt.PIP;
+    AnyKinMeasure& DIP5 = ...BodyModel.Left.ShoulderArm.Seg.Hand.Finger5.Jnt.DIP;    
+    Reaction.Type = repmat(nDim, Off);
+  };
+  #endif  
+  
+  
+  #endif
+    
+  #if BM_ARM_RIGHT == ON
+  AnyKinDriver JntDriverRightArm = {
+    #include "InterpolateJointAngleData.any"
+    FileReader.FileName ??= .BaseFileName + "-rotvec-right_arm_shoulder.txt";
+    FileReader.Data0 = zeros(nDim, FileReader.Length0 );
+    
+    AnyKinMeasure& ThoraxClavicula=...BodyModel.Interface.Right.RotVectorMeasures.ThoraxClavicula;
+    AnyKinMeasure& ClaviculaScapula=...BodyModel.Interface.Right.RotVectorMeasures.ClaviculaScapula;
+    AnyKinMeasure& ScapulaHumerus=...BodyModel.Interface.Right.RotVectorMeasures.ScapulaHumerus;
+    AnyKinMeasure& HumerusUlna=...BodyModel.Interface.Right.ElbowFlexion;
+    AnyKinMeasure& UlnaRadius=...BodyModel.Interface.Right.ElbowPronation;
+    AnyKinMeasure& RadiusWrist=...BodyModel.Interface.Right.WristFlexion;
+    AnyKinMeasure& WristHand=...BodyModel.Interface.Right.WristAbduction;
+
+    Reaction.Type = repmat(nDim, Off);
+  };
+  
+  #if BM_ARM_DETAILED_HAND
+  AnyKinDriver JntDriverRightDetailedHand = {
+    #include "InterpolateJointAngleData.any"
+    FileReader.FileName ??= .BaseFileName + "-euler-right_detailed_hand.txt";
+    FileReader.Data0 = zeros(nDim, FileReader.Length0 );
+
+    AnyKinMeasure& CMC1Flexion = ...BodyModel.Interface.Right.CMCFlexion;
+    AnyKinMeasure& CMC1Abduction = ...BodyModel.Interface.Right.CMCAbduction;
+    AnyKinMeasure& MCP1Flexion = ...BodyModel.Interface.Right.MCPFlexion;
+    AnyKinMeasure& MCP1Abduction = ...BodyModel.Interface.Right.MCPAbduction;
+    AnyKinMeasure& DIP1 = ...BodyModel.Interface.Right.DIP;
+    AnyKinMeasure& MCP2 = ...BodyModel.Right.ShoulderArm.Seg.Hand.Finger2.Jnt.MCP;
+    AnyKinMeasure& PIP2 = ...BodyModel.Right.ShoulderArm.Seg.Hand.Finger2.Jnt.PIP;
+    AnyKinMeasure& DIP2 = ...BodyModel.Right.ShoulderArm.Seg.Hand.Finger2.Jnt.DIP;
+    AnyKinMeasure& MCP3 = ...BodyModel.Right.ShoulderArm.Seg.Hand.Finger3.Jnt.MCP;
+    AnyKinMeasure& PIP3 = ...BodyModel.Right.ShoulderArm.Seg.Hand.Finger3.Jnt.PIP;
+    AnyKinMeasure& DIP3 = ...BodyModel.Right.ShoulderArm.Seg.Hand.Finger3.Jnt.DIP;
+    AnyKinMeasure& MCP4 = ...BodyModel.Right.ShoulderArm.Seg.Hand.Finger4.Jnt.MCP;
+    AnyKinMeasure& PIP4 = ...BodyModel.Right.ShoulderArm.Seg.Hand.Finger4.Jnt.PIP;
+    AnyKinMeasure& DIP4 = ...BodyModel.Right.ShoulderArm.Seg.Hand.Finger4.Jnt.DIP;
+    AnyKinMeasure& MCP5 = ...BodyModel.Right.ShoulderArm.Seg.Hand.Finger5.Jnt.MCP;
+    AnyKinMeasure& PIP5 = ...BodyModel.Right.ShoulderArm.Seg.Hand.Finger5.Jnt.PIP;
+    AnyKinMeasure& DIP5 = ...BodyModel.Right.ShoulderArm.Seg.Hand.Finger5.Jnt.DIP;    
+    Reaction.Type = repmat(nDim, Off);
+  };
+  #endif
+  
+  
+  #endif
+  
+
+  
+};
+
+
+
+

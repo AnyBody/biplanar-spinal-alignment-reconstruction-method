@@ -1,0 +1,48 @@
+
+AnyFolder Pull ={
+/*  AnyKinMeasureOrg Dist={
+    AnyKinLinear  Lin={
+      AnyRefNode &Box =...BaseObject;
+      AnyRefFrame &Hand = ...TargetObject;
+    };
+    MeasureOrganizer ={..AxisNormalToSurfaceOfBaseObject};
+    
+  };*/
+  
+       
+
+ 
+  AnyKinLinear Lin={
+    AnyRefNode &Box =..BaseObject;
+    AnyRefFrame &Hand = ..TargetObject;
+    Ref=0;
+    //AnyDrawPLine drw={Thickness=.005; RGB={0,0,1};};
+  };
+  
+  AnyRecruitedActuator ContactMuscle={
+    AnyKinMeasureOrg LinX={
+      AnyKinLinear &ref=..Lin;
+      MeasureOrganizer={...Direction};
+    };
+    Strength = ..UserDefinedStrengthFunction;
+    Type = NonPositive;
+    SET_DEFAULT_ACTUATOR_VOLUME;
+  };
+  
+  AnyDrawVector DrawContact =     {
+    AnyRefFrame &ref=..TargetObject;
+
+    AnyVar Strength=   iffunc(.ContactMuscle.Strength,.ContactMuscle.Strength,0.00001);
+    Vec =0.005*..DirectionVector*.ContactMuscle.Fout[0]*..BaseObject.Axes';
+    AnyVar lenght=Strength*(2-(1-Strength/sqrt(Strength^2)));
+    //Vec =3*0.000005*..DirectionVector*lenght*..BaseObject.Axes';
+
+    PointAway = Off;
+    DrawCoord = Off;
+    Line.RGB = {0,0,1};
+    Line.Thickness = 0.015;
+    Line.End.Thickness = 2*0.015; 
+    Line.End.Length = 4*0.015;
+  };
+  
+};

@@ -1,0 +1,41 @@
+
+  #if MOCAP_HUMAN_GROUND_RESIDUALS == "PelvisWeak" 
+    #include "<ANYBODY_PATH_AMMR>/Tools/GRFPrediction/WeakResiduals.any"     
+  #endif
+    
+  #if MOCAP_HUMAN_GROUND_RESIDUALS == "Pelvis"
+  /// Dynamic balance residuals between the human and ground segments. 
+  /// This is also sometimes refered to as the 'Hand of God' in some biomechanical 
+  /// text books. This residual force is added to the Pelvis segment
+  AnyReacForce HumanGroundResiduals = 
+  {
+    AnyKinLinear Lin = { 
+      Ref = 0; 
+      AnyRefFrame& ref0 = ...BodyModel.Trunk.Segments.PelvisSeg;
+    };
+    AnyKinRotational Rot = {
+      Type = RotVector;
+               AngVelOnOff = On;
+      AnyRefFrame& ref0 = ...BodyModel.Trunk.Segments.PelvisSeg;
+    };
+  };
+  #endif
+  
+  #if MOCAP_HUMAN_GROUND_RESIDUALS == "Trunk"
+  /// Dynamic balance residuals between the human and ground segments. 
+  /// This is also sometimes refered to as the 'Hand of God' in some biomechanical 
+  /// text books. This residual force is added to the Trunk segment
+  AnyReacForce HumanGroundResiduals = 
+  {
+    AnyKinLinear Lin = { 
+      Ref = 0; 
+      AnyRefFrame& ref0 = ...BodyModel.Trunk.Segments.ThoraxSeg;
+    };
+    AnyKinRotational Rot = {
+      Type = RotVector;
+      AngVelOnOff = On;
+      AnyRefFrame& ref0 = ...BodyModel.Trunk.Segments.ThoraxSeg;
+    };
+  };
+  #endif
+  

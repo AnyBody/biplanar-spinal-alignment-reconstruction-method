@@ -1,0 +1,146 @@
+#include "../libdef.any"
+/** ----------------------------------------------------------------------------------
+This mandible model is based on a CT scan from a 30 year old male.
+
+You can read more about this model and its validation in the following article:
+de Zee, M., M. Dalstra, P.M. Cattaneo, J. Rasmussen, P. Svensson, and B. Melsen. Validation of a
+musculo-skeletal model of the mandible and its application to mandibular distraction osteogenesis.
+J.Biomech. 40: 1192-1201, 2007.
+
+Be aware that the model is work in progress:
+- The mandibular fossa is modelled as a planar constraint without curvature.
+
+The kinematic data for the chewing case is based on measurements. However, the chewing force
+is simulated and might differ a lot from reality. It is only meant as a demonstration.
+
+The work is supported by the Villum Kann Rasmussen Foundation. And I would like to acknowledge my co-workers:
+Paolo M. Catteneo, Michel Dalstra, John Rasmussen, Birte Melsen, Peter Svensson
+
+The work was performed at the Department of Orthodontics, School of Dentistry,Faculty of Health Sciences,
+University of Aarhus
+
+Do not hesitate to contact me for questions and/or suggestions.
+
+Regards,
+Mark de Zee, Ph.D., Post Doc.
+E-mail: mdz@hst.aau.dk 
+
+---------------------------------------------------------------------------------- */
+Main = {
+  #include "Model/RunApplication.any"
+
+  /// These are the attachment positions of the skull to the global reference frame
+  AnyFixedRefFrame GlobalRef = {
+    AnyRefNode GroundNode = {
+      sRel = {0.0,0.0,0.0};
+    };
+    AnyDrawRefFrame DrwGlobalRef = {
+      ScaleXYZ = {0.1,0.1,0.1};
+      RGB = {0,0,1};
+      Opacity = 0.0;
+    };
+  };  // Global reference frame  
+  
+  #include "Model/DrawSettings.any"
+  
+  
+  AnyFolder Model = {
+    
+    AnyFolder HumanModel={
+      
+      #include  "<ANYBODY_PATH_MANDIBLE>\SymmetricMandible_AU\SymmetricMandibleHill.root.any" //Model with 3 element Hill muscles
+      //#include  "<ANYBODY_PATH_MANDIBLE>\SymmetricMandible_AU\SymmetricMandible.root.any" //Model with simple muscle model without force-length-velocity relationship
+      
+      /// The orientation of the constraining plane in the TMJ
+      AnyFolder AngleConstrainingPlane = {
+        AnyVar AngleYaxis = -30*pi/180; // From Langenbach and Hannam, Archives of Oral Biology 44 (1999) 557-573
+        AnyVar AngleXaxis = -5*pi/180; // From Langenbach and Hannam, Archives of Oral Biology 44 (1999) 557-573
+      };
+      
+      /*
+      Choice of Scaling
+      */
+      #include "<ANYBODY_PATH_MANDIBLE>\Scaling\ScalingStandard.any"
+      
+      
+    };
+    
+    /**
+    Two cases are present here 1: chewing and 2: clenching.
+    You can change between the cases by commenting out one case and put in the other case.
+    Case 1: Chewing with input based on measured coordinates, but with a simulated chewing force
+    Case 2: Clenching on a force transducer on the first premolar on the left side. Both the input kinematics
+    and clenching force are based on real measurements
+    */    
+    AnyFolder MotionDriversAndExternalForces = {
+      //Two cases are present here 1: chewing and 2: clenching.
+      //You can change between the cases by commenting out one case and put in the other case.
+      
+      
+      //Case 1: Chewing with input based on measured coordinates, but with a simulated chewing force
+      #include "Model/JointsAndDriversChewing.any" //Driving point on incisors of the mandible, chewing movement right with measured coordinates
+      #include "Model/SimulatedChewingForce.any" //Simulated chewing force. Probably not totally realistic!!
+      
+      /*
+      //Case 2: Clenching on a force transducer on the first premolar on the left side. Both the input kinematics and clenching force are based
+      // on real measurements
+      #include "Model/JointsAndDriversClenchingFirstPreMolarLeftSubMax5.any" //Measured movement during clenching on first premolar on the left side
+      */
+    };
+    
+  };
+  
+  
+  /// The study: Operations to be performed on the model
+  AnyBodyStudy Study = {
+    AnyFolder &Model = .Model;      
+     Gravity = {0.0, 0.0, -9.81};
+    tStart = 0;
+    tEnd = 9.99;
+    nStep = 600;
+    
+    AnyOutputFile TMJ_Forces = {
+      FileName = ANYBODY_PATH_OUTPUT+"/TMJ_Forces.csv";
+      AnyVar TMJ_ForceR = Main.Model.HumanModel.Jnt.ReactionForceTMJ_R.Fout[0];
+      AnyVar TMJ_ForceL = Main.Model.HumanModel.Jnt.ReactionForceTMJ_L.Fout[0];
+    };
+    
+    #include "Model/AnyChart.any"
+    #include "Model/AnyChart2.any"
+    
+  };
+  
+  /*
+  Calibration models and studies
+  
+  Together with the geometry of the model, model calibration is one
+  of the most critical parts within our models. In theory it is not necessary
+  to calibrate the model provided that your muscle data and geometry are exactly correct,
+  which is rarely the case.
+  With model calibration we mean fine-tuning of the muscle properties in such
+  a way that each individual muscle works in the right part of their force-length
+  relationship complying as much as possible with existing literature. From the literature
+  information is gathered about joint positions where muscle fibres of individual
+  muscles have their optimal length (Note that those joint position are not
+  necessarily the position where the muscle creates the largest moment). When
+  these joint positions are known the tendon length in the model is modified
+  keeping the rest of the muscle properties constant (maximum muscle force, muscle
+  fibre length) in such a way that the fibres work at their optimal length in
+  that position.
+  */ 
+  #include "<ANYBODY_PATH_MANDIBLE>\SymmetricMandible_AU\CalibrationMandible.any"  
+  
+ 
+  
+}; // Main
+
+
+
+
+
+
+
+
+
+
+

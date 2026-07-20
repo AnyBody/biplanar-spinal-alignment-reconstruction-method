@@ -1,0 +1,1171 @@
+
+
+SelectedOutput.Trunk = {
+  
+  /// The joint reaction force is expressed in the local reference frame on the proximal segment in the joint.
+  /// This reference frame (RotNode) is located inside the joint node on the proximal segment and aligned with
+  /// the vertebral body of the vertebra to compute the compression and shear force on the vertebra.
+  /// The force is acting on the distal segment due to the proximal segment.
+  AnyFolder JointReactionForce = {
+    
+    /// Lateral (right) positive
+    AnyVar SacrumPelvisMedioLateralShearForce = ...Trunk.Joints.Lumbar.SacrumPelvis.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar SacrumPelvisCompressionForce = ...Trunk.Joints.Lumbar.SacrumPelvis.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar SacrumPelvisAnteroPosteriorShearForce = ...Trunk.Joints.Lumbar.SacrumPelvis.Constraints.Reaction.Fout[0];
+    //Pelvis ref
+    
+    
+        /// Lateral (right) positive
+    AnyVar L5SacrumMedioLateralShearForce = ...Trunk.Joints.Lumbar.L5Sacrum.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar L5SacrumCompressionForce = ...Trunk.Joints.Lumbar.L5Sacrum.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar L5SacrumAnteroPosteriorShearForce = ...Trunk.Joints.Lumbar.L5Sacrum.Constraints.Reaction.Fout[0];
+    //Sacrum ref
+    
+    /// Lateral (right) positive
+    AnyVar L4L5MedioLateralShearForce = ...Trunk.Joints.Lumbar.L4L5.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar L4L5CompressionForce = ...Trunk.Joints.Lumbar.L4L5.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar L4L5AnteroPosteriorShearForce = ...Trunk.Joints.Lumbar.L4L5.Constraints.Reaction.Fout[0];
+    //L5 ref
+
+    /// Lateral (right) positive
+    AnyVar L3L4MedioLateralShearForce = ...Trunk.Joints.Lumbar.L3L4.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar L3L4CompressionForce = ...Trunk.Joints.Lumbar.L3L4.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar L3L4AnteroPosteriorShearForce = ...Trunk.Joints.Lumbar.L3L4.Constraints.Reaction.Fout[0];
+    //L4 ref
+    
+    
+    /// Lateral (right) positive
+    AnyVar L2L3MedioLateralShearForce = ...Trunk.Joints.Lumbar.L2L3.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar L2L3CompressionForce = ...Trunk.Joints.Lumbar.L2L3.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar L2L3AnteroPosteriorShearForce = ...Trunk.Joints.Lumbar.L2L3.Constraints.Reaction.Fout[0];
+    //L3 ref
+    
+    /// Lateral (right) positive
+    AnyVar L1L2MedioLateralShearForce = ...Trunk.Joints.Lumbar.L1L2.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar L1L2CompressionForce = ...Trunk.Joints.Lumbar.L1L2.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar L1L2AnteroPosteriorShearForce = ...Trunk.Joints.Lumbar.L1L2.Constraints.Reaction.Fout[0];
+    //L2 ref
+    
+    /// Lateral (right) positive
+    AnyVar T12L1MedioLateralShearForce = ...Trunk.Joints.Lumbar.T12L1.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar T12L1CompressionForce = ...Trunk.Joints.Lumbar.T12L1.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar T12L1AnteroPosteriorShearForce = ...Trunk.Joints.Lumbar.T12L1.Constraints.Reaction.Fout[0];
+    //L1 ref
+    
+  
+//    /// Lateral (right) positive
+//    AnyVar L5SacrumMedioLateralShearForce = ...Trunk.Joints.Lumbar.L5Sacrum.ReactionForceRotated.Flocal[2];
+//    /// Distal (superior) positive
+//    AnyVar L5SacrumCompressionForce = ...Trunk.Joints.Lumbar.L5Sacrum.ReactionForceRotated.Flocal[1];
+//    /// Anterior positive
+//    AnyVar L5SacrumAnteroPosteriorShearForce = ...Trunk.Joints.Lumbar.L5Sacrum.ReactionForceRotated.Flocal[0];
+//    //Sacrum ref
+//    
+//    /// Lateral (right) positive
+//    AnyVar L4L5MedioLateralShearForce = ...Trunk.Joints.Lumbar.L4L5.ReactionForceRotated.Flocal[2];
+//    /// Distal (superior) positive
+//    AnyVar L4L5CompressionForce = ...Trunk.Joints.Lumbar.L4L5.ReactionForceRotated.Flocal[1];
+//    /// Anterior positive
+//    AnyVar L4L5AnteroPosteriorShearForce = ...Trunk.Joints.Lumbar.L4L5.ReactionForceRotated.Flocal[0];
+//    //L5 ref
+//
+//    /// Lateral (right) positive
+//    AnyVar L3L4MedioLateralShearForce = ...Trunk.Joints.Lumbar.L3L4.ReactionForceRotated.Flocal[2];
+//    /// Distal (superior) positive
+//    AnyVar L3L4CompressionForce = ...Trunk.Joints.Lumbar.L3L4.ReactionForceRotated.Flocal[1];
+//    /// Anterior positive
+//    AnyVar L3L4AnteroPosteriorShearForce = ...Trunk.Joints.Lumbar.L3L4.ReactionForceRotated.Flocal[0];
+//    //L4 ref
+//    
+//    
+//    /// Lateral (right) positive
+//    AnyVar L2L3MedioLateralShearForce = ...Trunk.Joints.Lumbar.L2L3.ReactionForceRotated.Flocal[2];
+//    /// Distal (superior) positive
+//    AnyVar L2L3CompressionForce = ...Trunk.Joints.Lumbar.L2L3.ReactionForceRotated.Flocal[1];
+//    /// Anterior positive
+//    AnyVar L2L3AnteroPosteriorShearForce = ...Trunk.Joints.Lumbar.L2L3.ReactionForceRotated.Flocal[0];
+//    //L3 ref
+//    
+//    /// Lateral (right) positive
+//    AnyVar L1L2MedioLateralShearForce = ...Trunk.Joints.Lumbar.L1L2.ReactionForceRotated.Flocal[2];
+//    /// Distal (superior) positive
+//    AnyVar L1L2CompressionForce = ...Trunk.Joints.Lumbar.L1L2.ReactionForceRotated.Flocal[1];
+//    /// Anterior positive
+//    AnyVar L1L2AnteroPosteriorShearForce = ...Trunk.Joints.Lumbar.L1L2.ReactionForceRotated.Flocal[0];
+//    //L2 ref
+//    
+//    /// Lateral (right) positive
+//    AnyVar T12L1MedioLateralShearForce = ...Trunk.Joints.Lumbar.T12L1.ReactionForceRotated.Flocal[2];
+//    /// Distal (superior) positive
+//    AnyVar T12L1CompressionForce = ...Trunk.Joints.Lumbar.T12L1.ReactionForceRotated.Flocal[1];
+//    /// Anterior positive
+//    AnyVar T12L1AnteroPosteriorShearForce = ...Trunk.Joints.Lumbar.T12L1.ReactionForceRotated.Flocal[0];
+//    //L1 ref
+    
+    /// Lateral (right) positive
+    AnyVar T11T12MedioLateralShearForce = ...Trunk.Joints.Thorax.T11T12.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar T11T12CompressionForce = ...Trunk.Joints.Thorax.T11T12.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar T11T12AnteroPosteriorShearForce = ...Trunk.Joints.Thorax.T11T12.Constraints.Reaction.Fout[0];
+    //T12 ref
+
+    /// Lateral (right) positive
+    AnyVar T10T11MedioLateralShearForce = ...Trunk.Joints.Thorax.T10T11.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar T10T11CompressionForce = ...Trunk.Joints.Thorax.T10T11.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar T10T11AnteroPosteriorShearForce = ...Trunk.Joints.Thorax.T10T11.Constraints.Reaction.Fout[0];
+    //T11 ref
+
+    /// Lateral (right) positive
+    AnyVar T9T10MedioLateralShearForce = ...Trunk.Joints.Thorax.T9T10.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar T9T10CompressionForce = ...Trunk.Joints.Thorax.T9T10.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar T9T10AnteroPosteriorShearForce = ...Trunk.Joints.Thorax.T9T10.Constraints.Reaction.Fout[0];
+    //T10 ref
+
+    /// Lateral (right) positive
+    AnyVar T8T9MedioLateralShearForce = ...Trunk.Joints.Thorax.T8T9.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar T8T9CompressionForce = ...Trunk.Joints.Thorax.T8T9.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar T8T9AnteroPosteriorShearForce = ...Trunk.Joints.Thorax.T8T9.Constraints.Reaction.Fout[0];
+    //T9 ref
+
+    /// Lateral (right) positive
+    AnyVar T7T8MedioLateralShearForce = ...Trunk.Joints.Thorax.T7T8.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar T7T8CompressionForce = ...Trunk.Joints.Thorax.T7T8.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar T7T8AnteroPosteriorShearForce = ...Trunk.Joints.Thorax.T7T8.Constraints.Reaction.Fout[0];
+    //T8 ref
+
+    /// Lateral (right) positive
+    AnyVar T6T7MedioLateralShearForce = ...Trunk.Joints.Thorax.T6T7.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar T6T7CompressionForce = ...Trunk.Joints.Thorax.T6T7.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar T6T7AnteroPosteriorShearForce = ...Trunk.Joints.Thorax.T6T7.Constraints.Reaction.Fout[0];
+    //T7 ref
+    
+    /// Lateral (right) positive
+    AnyVar T5T6MedioLateralShearForce = ...Trunk.Joints.Thorax.T5T6.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar T5T6CompressionForce = ...Trunk.Joints.Thorax.T5T6.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar T5T6AnteroPosteriorShearForce = ...Trunk.Joints.Thorax.T5T6.Constraints.Reaction.Fout[0];
+    //T6 ref
+
+    /// Lateral (right) positive
+    AnyVar T4T5MedioLateralShearForce = ...Trunk.Joints.Thorax.T4T5.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar T4T5CompressionForce = ...Trunk.Joints.Thorax.T4T5.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar T4T5AnteroPosteriorShearForce = ...Trunk.Joints.Thorax.T4T5.Constraints.Reaction.Fout[0];
+    //T5 ref
+    
+    /// Lateral (right) positive
+    AnyVar T3T4MedioLateralShearForce = ...Trunk.Joints.Thorax.T3T4.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar T3T4CompressionForce = ...Trunk.Joints.Thorax.T3T4.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar T3T4AnteroPosteriorShearForce = ...Trunk.Joints.Thorax.T3T4.Constraints.Reaction.Fout[0];
+    //T4 ref
+    
+    /// Lateral (right) positive
+    AnyVar T2T3MedioLateralShearForce = ...Trunk.Joints.Thorax.T2T3.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar T2T3CompressionForce = ...Trunk.Joints.Thorax.T2T3.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar T2T3AnteroPosteriorShearForce = ...Trunk.Joints.Thorax.T2T3.Constraints.Reaction.Fout[0];
+    //T3 ref
+    
+    /// Lateral (right) positive
+    AnyVar T1T2MedioLateralShearForce = ...Trunk.Joints.Thorax.T1T2.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar T1T2CompressionForce = ...Trunk.Joints.Thorax.T1T2.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar T1T2AnteroPosteriorShearForce = ...Trunk.Joints.Thorax.T1T2.Constraints.Reaction.Fout[0];
+    //T2 ref
+
+    /// Lateral (right) positive
+    AnyVar T1C7MedioLateralShearForce = ...Trunk.Joints.Cervical.T1C7.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar T1C7CompressionForce = ...Trunk.Joints.Cervical.T1C7.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar T1C7AnteroPosteriorShearForce = ...Trunk.Joints.Cervical.T1C7.Constraints.Reaction.Fout[0];
+    //T1 ref
+      
+    /// Lateral (right) positive
+    AnyVar C6C7MedioLateralShearForce = ...Trunk.Joints.Cervical.C7C6.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar C6C7CompressionForce = ...Trunk.Joints.Cervical.C7C6.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar C6C7AnteroPosteriorShearForce = ...Trunk.Joints.Cervical.C7C6.Constraints.Reaction.Fout[0];
+    //C7 ref
+    
+    /// Lateral (right) positive
+    AnyVar C5C6MedioLateralShearForce = ...Trunk.Joints.Cervical.C6C5.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar C5C6CompressionForce = ...Trunk.Joints.Cervical.C6C5.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar C5C6AnteroPosteriorShearForce = ...Trunk.Joints.Cervical.C6C5.Constraints.Reaction.Fout[0];
+    //C6 ref
+    
+    /// Lateral (right) positive
+    AnyVar C4C5MedioLateralShearForce = ...Trunk.Joints.Cervical.C5C4.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar C4C5CompressionForce = ...Trunk.Joints.Cervical.C5C4.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar C4C5AnteroPosteriorShearForce = ...Trunk.Joints.Cervical.C5C4.Constraints.Reaction.Fout[0];
+    //C5 ref
+    
+    /// Lateral (right) positive
+    AnyVar C3C4MedioLateralShearForce = ...Trunk.Joints.Cervical.C4C3.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar C3C4CompressionForce = ...Trunk.Joints.Cervical.C4C3.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar C3C4AnteroPosteriorShearForce = ...Trunk.Joints.Cervical.C4C3.Constraints.Reaction.Fout[0];
+    //C4 ref
+    
+    /// Lateral (right) positive
+    AnyVar C2C3MedioLateralShearForce = ...Trunk.Joints.Cervical.C3C2.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar C2C3CompressionForce = ...Trunk.Joints.Cervical.C3C2.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar C2C3AnteroPosteriorShearForce = ...Trunk.Joints.Cervical.C3C2.Constraints.Reaction.Fout[0];
+    //C3 ref
+    
+    /// Lateral (right) positive
+    AnyVar C1C2MedioLateralShearForce = ...Trunk.Joints.Cervical.C2C1.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar C1C2CompressionForce = ...Trunk.Joints.Cervical.C2C1.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar C1C2AnteroPosteriorShearForce = ...Trunk.Joints.Cervical.C2C1.Constraints.Reaction.Fout[0];
+    /// Extension positive
+    AnyVar C1C2FlexionExtensionMoment = -1*(...Trunk.Joints.Cervical.C2C1.Constraints.Reaction.RefFrameOutput.M[0]*...Trunk.Joints.Cervical.C2C1.C2Node.RotNode.Axes)[2];
+    /// Right positive
+    AnyVar C1C2LateralMoment = -1*(...Trunk.Joints.Cervical.C2C1.Constraints.Reaction.RefFrameOutput.M[0]*...Trunk.Joints.Cervical.C2C1.C2Node.RotNode.Axes)[0];
+    //C2 ref
+    
+    /// Lateral (right) positive
+    AnyVar C0C1MedioLateralShearForce = ...Trunk.Joints.Cervical.C1C0.Constraints.Reaction.Fout[2];
+    /// Distal (superior) positive
+    AnyVar C0C1CompressionForce = ...Trunk.Joints.Cervical.C1C0.Constraints.Reaction.Fout[1];
+    /// Anterior positive
+    AnyVar C0C1AnteroPosteriorShearForce = ...Trunk.Joints.Cervical.C1C0.Constraints.Reaction.Fout[0];
+    /// Left positive
+    AnyVar C0C1AxialMoment = -1*(...Trunk.Joints.Cervical.C1C0.Constraints.Reaction.RefFrameOutput.M[0]*...Trunk.Joints.Cervical.C1C0.C1Node.RotNode.Axes)[1];
+    /// Right positive
+    AnyVar C0C1LateralMoment = -1*(...Trunk.Joints.Cervical.C1C0.Constraints.Reaction.RefFrameOutput.M[0]*...Trunk.Joints.Cervical.C1C0.C1Node.RotNode.Axes)[0];
+    //C1 ref
+    
+    
+  }; //End JointReactionForce
+  
+
+  AnyFolder JointMomentMeasure = {
+  
+    AnyVar SacrumPelvisFlexionExtensionMoment = ...Trunk.Joints.Lumbar.SacrumPelvisReaction.Fout[2];
+    AnyVar SacrumPelvisAxialMoment = ...Trunk.Joints.Lumbar.SacrumPelvisReaction.Fout[1];
+    AnyVar SacrumPelvisLateralMoment = ...Trunk.Joints.Lumbar.SacrumPelvisReaction.Fout[0];
+  
+  }; //End JointMomentMeasure
+  
+  
+  AnyFolder Muscles = {
+  AnyFolder DataLink = {
+      
+      AnyFolder Activity = {
+        
+        AnySearchFun All = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.*.*.*.Activity";
+        };
+        
+
+         AnySearchFun Diaphragm_R= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.Diaphragm.*.Activity";
+        };
+
+         AnySearchFun Hyoid_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.Hyoid.*.Activity";
+        };
+
+        
+         AnySearchFun SemispinalisThoracis_R= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.SemispinalisThoracis.*.Activity";
+        };
+     
+        
+          AnySearchFun SerratusPosteriorSuperior_R= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.SerratusPosteriorSuperior.*.Activity";
+        };
+     
+           AnySearchFun SerratusPosteriorInferior_R= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.SerratusPosteriorInferior.*.Activity";
+        };
+
+        
+          AnySearchFun SpleniusCervicis_R= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.SpleniusCervicis.*.Activity";
+        };
+
+          AnySearchFun RotatoresBrevis_R= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.RotatoresBrevis.*.Activity";
+        };
+
+           AnySearchFun RotatoresLongus_R= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.RotatoresLongus.*.Activity";
+        };
+
+        
+           AnySearchFun PelvicFloor_R= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.PelvicFloor.*.Activity";
+        };
+
+        
+        AnySearchFun MFd_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.Multifidi.*.Activity";
+        };
+        
+        AnySearchFun ES_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.ErectorSpinae.*.Activity";
+        };
+        
+        AnySearchFun PM_R= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.PsoasMajor.*.Activity";
+        };
+        
+        AnySearchFun QL_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.QuadratusLumborum.*.Activity";
+        };
+        
+        AnySearchFun OE_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.ObliquusExternus.*.Activity";
+        };
+        
+        AnySearchFun OI_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.ObliquusInternus.*.Activity";
+        };
+        
+        AnySearchFun Se_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.SemispinalisCapitis.*.Activity";
+        };
+        
+        AnySearchFun ThMFd_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.ThoracicMultifidi.*.Activity";
+        };
+        
+        AnySearchFun RA_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.RectusAbdominis.*.Activity";
+        };
+        
+        AnySearchFun Sp_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Spinalis.*.Activity";
+        };
+        
+        AnySearchFun Tr_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.Transversus.*.Activity";
+        };
+        
+        AnySearchFun ScHy_R = {
+           Search ="Main.HumanModel.BodyModel.Trunk.Muscles.Right.Scalenus.*.Activity";
+        };
+        
+        AnySearchFun TrTh_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.TransversusThoracis.*.Activity";
+        };
+        
+        AnySearchFun LC_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.LevatorCostarum.*.Activity";
+        };
+        
+        AnySearchFun SC_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.Subcostalis.*.Activity";
+        };
+        
+        AnySearchFun LngCl_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.LongusColli.*.Activity";
+        };
+        
+        AnySearchFun LngCp_R= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.LongusCapitis.*.Activity";
+        };
+        
+        AnySearchFun Spl_R= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.SpleniusCapitis.*.Activity";
+        };
+        
+        AnySearchFun SSpC_R= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.SemispinalisCervicis.*.Activity";
+        };
+        
+        AnySearchFun ESC_R= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.LongissimusCapitis.*.Activity";
+        };
+        
+        AnySearchFun MFdC_R= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.MultifidusCervicis.*.Activity";
+        };
+  
+//        AnySearchFun CervicalMuscles = {
+//          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.MusclesCervicalSpineRight.*.Activity";
+//        };
+//        
+
+//        AnySearchFun Ic_R= {
+//          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.InterCostalis.IC*.elem*.Activity";
+//        };
+
+       
+        
+     
+        
+        
+                 AnySearchFun Diaphragm_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.Diaphragm.*.Activity";
+        };
+
+         AnySearchFun Hyoid_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.Hyoid.*.Activity";
+        };
+
+        
+         AnySearchFun SemispinalisThoracis_L= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.SemispinalisThoracis.*.Activity";
+        };
+     
+        
+          AnySearchFun SerratusPosteriorSuperior_L= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.SerratusPosteriorSuperior.*.Activity";
+        };
+     
+           AnySearchFun SerratusPosteriorInferior_L= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.SerratusPosteriorInferior.*.Activity";
+        };
+
+        
+          AnySearchFun SpleniusCervicis_L= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.SpleniusCervicis.*.Activity";
+        };
+
+          AnySearchFun RotatoresBrevis_L= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.RotatoresBrevis.*.Activity";
+        };
+
+           AnySearchFun RotatoresLongus_L= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.RotatoresLongus.*.Activity";
+        };
+
+        
+           AnySearchFun PelvicFloor_L= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.PelvicFloor.*.Activity";
+        };
+
+        
+        AnySearchFun MFd_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.Multifidi.*.Activity";
+        };
+        
+        AnySearchFun ES_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.ErectorSpinae.*.Activity";
+        };
+        
+        AnySearchFun PM_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.PsoasMajor.*.Activity";
+        };
+        
+        AnySearchFun QL_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.QuadratusLumborum.*.Activity";
+        };
+        
+        AnySearchFun OE_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.ObliquusExternus.*.Activity";
+        };
+        
+        AnySearchFun OI_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.ObliquusInternus.*.Activity";
+        };
+        
+        AnySearchFun Se_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.SemispinalisCapitis.*.Activity";
+        };
+        
+        AnySearchFun ThMFd_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.ThoracicMultifidi.*.Activity";
+        };
+        
+        AnySearchFun RA_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.RectusAbdominis.*.Activity";
+        };
+        
+        AnySearchFun Tr_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.Transversus.*.Activity";
+        };
+
+        AnySearchFun ScHy_L = {
+           Search ="Main.HumanModel.BodyModel.Trunk.Muscles.Left.Scalenus.*.Activity";
+        };
+        
+        AnySearchFun TrTh_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.TransversusThoracis.*.Activity";
+        };
+        
+        AnySearchFun LC_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.LevatorCostarum.*.Activity";
+        };
+        
+        AnySearchFun SC_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.Subcostalis.*.Activity";
+        };
+        
+        AnySearchFun LngCl_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.LongusColli.*.Activity";
+        };
+        
+        AnySearchFun LngCp_L= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.LongusCapitis.*.Activity";
+        };
+        
+        AnySearchFun Spl_L= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.SpleniusCapitis.*.Activity";
+        };
+        
+        AnySearchFun SSpC_L= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.SemispinalisCervicis.*.Activity";
+        };
+        
+        AnySearchFun ESC_L= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.LongissimusCapitis.*.Activity";
+        };
+        
+        AnySearchFun MFdC_L= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.MultifidusCervicis.*.Activity";
+        };
+  
+//        AnySearchFun CervicalMuscles = {
+//          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.MusclesCervicalSpineRight.*.Activity";
+//        };
+//        
+
+//        AnySearchFun Ic_L= {
+//          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.InterCostalis.IC*.elem*.Activity";
+//        };
+        
+          
+      };
+      
+      
+      
+      
+      AnyFolder Force = {
+        
+               AnySearchFun All = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.*.*.*.Fm";
+        };
+        
+
+         AnySearchFun Diaphragm_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.Diaphragm.*.Fm";
+        };
+
+         AnySearchFun Hyoid_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.Hyoid.*.Fm";
+        };
+
+        
+         AnySearchFun SemispinalisThoracis_R= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.SemispinalisThoracis.*.Fm";
+        };
+     
+        
+          AnySearchFun SerratusPosteriorSuperior_R= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.SerratusPosteriorSuperior.*.Fm";
+        };
+     
+           AnySearchFun SerratusPosteriorInferior_R= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.SerratusPosteriorInferior.*.Fm";
+        };
+
+        
+          AnySearchFun SpleniusCervicis_R= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.SpleniusCervicis.*.Fm";
+        };
+
+          AnySearchFun RotatoresBrevis_R= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.RotatoresBrevis.*.Fm";
+        };
+
+           AnySearchFun RotatoresLongus_R= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.RotatoresLongus.*.Fm";
+        };
+
+        
+           AnySearchFun PelvicFloor_R= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.PelvicFloor.*.Fm";
+        };
+
+        
+        AnySearchFun MFd_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.Multifidi.*.Fm";
+        };
+        
+        AnySearchFun ES_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.ErectorSpinae.*.Fm";
+        };
+        
+        AnySearchFun PM_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.PsoasMajor.*.Fm";
+        };
+        
+        AnySearchFun QL_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.QuadratusLumborum.*.Fm";
+        };
+        
+        AnySearchFun OE_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.ObliquusExternus.*.Fm";
+        };
+        
+        AnySearchFun OI_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.ObliquusInternus.*.Fm";
+        };
+        
+        AnySearchFun Se_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.SemispinalisCapitis.*.Fm";
+        };
+        
+        AnySearchFun ThMFd_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.ThoracicMultifidi.*.Fm";
+        };
+        
+        AnySearchFun RA_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.RectusAbdominis.*.Fm";
+        };
+        
+        AnySearchFun Sp_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Spinalis.*.Fm";
+        };
+        
+        AnySearchFun Tr_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.Transversus.*.Fm";
+        };
+        
+        AnySearchFun ScHy_R = {
+           Search ="Main.HumanModel.BodyModel.Trunk.Muscles.Right.Scalenus.*.Fm";
+        };
+        
+        AnySearchFun TrTh_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.TransversusThoracis.*.Fm";
+        };
+        
+        AnySearchFun LC_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.LevatorCostarum.*.Fm";
+        };
+        
+        AnySearchFun SC_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.Subcostalis.*.Fm";
+        };
+        
+        AnySearchFun LngCl_R = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.LongusColli.*.Fm";
+        };
+        
+        AnySearchFun LngCp_R= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.LongusCapitis.*.Fm";
+        };
+        
+        AnySearchFun Spl_R= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.SpleniusCapitis.*.Fm";
+        };
+        
+        AnySearchFun SSpC_R= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.SemispinalisCervicis.*.Fm";
+        };
+        
+        AnySearchFun ESC_R= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.LongissimusCapitis.*.Fm";
+        };
+        
+        AnySearchFun MFdC_R= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.MultifidusCervicis.*.Fm";
+        };
+  
+//        AnySearchFun CervicalMuscles = {
+//          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.MusclesCervicalSpineRight.*.Activity";
+//        };
+//        
+
+//        AnySearchFun Ic_R= {
+//          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Right.InterCostalis.IC*.elem*.Fm";
+//        };
+
+       
+        
+     
+        
+        
+                 AnySearchFun Diaphragm_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.Diaphragm.*.Fm";
+        };
+
+         AnySearchFun Hyoid_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.Hyoid.*.Fm";
+        };
+
+        
+         AnySearchFun SemispinalisThoracis_L= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.SemispinalisThoracis.*.Fm";
+        };
+     
+        
+          AnySearchFun SerratusPosteriorSuperior_L= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.SerratusPosteriorSuperior.*.Fm";
+        };
+     
+           AnySearchFun SerratusPosteriorInferior_L= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.SerratusPosteriorInferior.*.Fm";
+        };
+
+        
+          AnySearchFun SpleniusCervicis_L= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.SpleniusCervicis.*.Fm";
+        };
+
+          AnySearchFun RotatoresBrevis_L= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.RotatoresBrevis.*.Fm";
+        };
+
+           AnySearchFun RotatoresLongus_L= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.RotatoresLongus.*.Fm";
+        };
+
+        
+           AnySearchFun PelvicFloor_L= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.PelvicFloor.*.Fm";
+        };
+
+        
+        AnySearchFun MFd_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.Multifidi.*.Fm";
+        };
+        
+        AnySearchFun ES_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.ErectorSpinae.*.Fm";
+        };
+        
+        AnySearchFun PM_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.PsoasMajor.*.Fm";
+        };
+        
+        AnySearchFun QL_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.QuadratusLumborum.*.Fm";
+        };
+        
+        AnySearchFun OE_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.ObliquusExternus.*.Fm";
+        };
+        
+        AnySearchFun OI_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.ObliquusInternus.*.Fm";
+        };
+        
+        AnySearchFun Se_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.SemispinalisCapitis.*.Fm";
+        };
+        
+        AnySearchFun ThMFd_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.ThoracicMultifidi.*.Fm";
+        };
+        
+        AnySearchFun RA_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.RectusAbdominis.*.Fm";
+        };
+        
+        AnySearchFun Tr_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.Transversus.*.Fm";
+        };
+          
+        AnySearchFun ScHy_L = {
+           Search ="Main.HumanModel.BodyModel.Trunk.Muscles.Left.Scalenus.*.Fm";
+        };
+        
+        AnySearchFun TrTh_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.TransversusThoracis.*.Fm";
+        };
+        
+        AnySearchFun LC_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.LevatorCostarum.*.Fm";
+        };
+        
+        AnySearchFun SC_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.Subcostalis.*.Fm";
+        };
+        
+        AnySearchFun LngCl_L = {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.LongusColli.*.Fm";
+        };
+        
+        AnySearchFun LngCp_L= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.LongusCapitis.*.Fm";
+        };
+        
+        AnySearchFun Spl_L= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.SpleniusCapitis.*.Fm";
+        };
+        
+        AnySearchFun SSpC_L= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.SemispinalisCervicis.*.Fm";
+        };
+        
+        AnySearchFun ESC_L= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.LongissimusCapitis.*.Fm";
+        };
+        
+        AnySearchFun MFdC_L= {
+          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.MultifidusCervicis.*.Fm";
+        };
+  
+//        AnySearchFun CervicalMuscles = {
+//          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.MusclesCervicalSpineRight.*.Activity";
+//        };
+//        
+
+//        AnySearchFun Ic_L= {
+//          Search = "Main.HumanModel.BodyModel.Trunk.Muscles.Left.InterCostalis.IC*.elem*.Fm";
+//        };
+       
+      };
+      
+    };
+    
+    AnyVar AllMusclesMaxAct = max(DataLink.Activity.All());
+    AnyVar AllMusclesTotalForce = sum(DataLink.Force.All());
+    
+    
+    AnyFolder Activities = {
+      
+      AnyVar MultifidusMaxAct_R = max(.DataLink.Activity.MFd_R());
+      AnyVar ErectorSpinaeMaxAct_R = max(.DataLink.Activity.ES_R());
+      AnyVar PsoasMajorMaxAct_R = max(.DataLink.Activity.PM_R());
+      AnyVar QuadratusLumborumMaxAct_R = max(.DataLink.Activity.QL_R());
+      AnyVar ObliquuesExternusMaxAct_R = max(.DataLink.Activity.OE_R());
+      AnyVar ObliquusInternusMaxAct_R = max(.DataLink.Activity.OI_R());
+      AnyVar SemispinalisCapitisMaxAct_R = max(.DataLink.Activity.Se_R());
+      AnyVar ThoracicMultifidusMaxAct_R = max(.DataLink.Activity.ThMFd_R());
+      AnyVar RectorAbdominisMaxAct_R = max(.DataLink.Activity.RA_R());
+      AnyVar SpinalisMaxAct_R = max(.DataLink.Activity.Sp_R());
+      AnyVar TransversusMaxAct_R = max(.DataLink.Activity.Tr_R());
+      AnyVar ScalenusMaxAct_R = max(.DataLink.Activity.ScHy_R());
+      AnyVar TransversusThoracisMaxAct_R = max(.DataLink.Activity.TrTh_R());
+      AnyVar LevatorCostarumMaxAct_R = max(.DataLink.Activity.LC_R());
+      AnyVar SubcostalisMaxAct_R = max(.DataLink.Activity.SC_R());
+//      AnyVar IntercostalesMaxAct_R = max(.DataLink.Activity.Ic_R());
+//      AnyVar SerratusPosteriorInferiorMaxAct = max(.DataLink.Activity.SePoIn());
+      
+      AnyVar LongusColliMaxAct_R = max(.DataLink.Activity.LngCl_R());
+      AnyVar LongusCapitisMaxAct_R = max(.DataLink.Activity.LngCp_R());
+      AnyVar SpleniusMaxAct_R = max(.DataLink.Activity.Spl_R());
+      AnyVar SemispinialiCMaxAct_R = max(.DataLink.Activity.SSpC_R());
+      AnyVar LongissimusCMaxAct_R = max(.DataLink.Activity.ESC_R());
+      AnyVar MultifidusCMaxAct_R = max(.DataLink.Activity.MFdC_R());
+      
+      
+      
+      
+      AnyVar MultifidusMaxAct_L = max(.DataLink.Activity.MFd_L());
+      AnyVar ErectorSpinaeMaxAct_L = max(.DataLink.Activity.ES_L());
+      AnyVar PsoasMajorMaxAct_L = max(.DataLink.Activity.PM_L());
+      AnyVar QuadratusLumborumMaxAct_L = max(.DataLink.Activity.QL_L());
+      AnyVar ObliquuesExternusMaxAct_L = max(.DataLink.Activity.OE_L());
+      AnyVar ObliquusInternusMaxAct_L = max(.DataLink.Activity.OI_L());
+      AnyVar SemispinalisCapitisMaxAct_L = max(.DataLink.Activity.Se_L());
+      AnyVar ThoracicMultifidusMaxAct_L = max(.DataLink.Activity.ThMFd_L());
+      AnyVar RectorAbdominisMaxAct_L = max(.DataLink.Activity.RA_L());
+      AnyVar TransversusMaxAct_L = max(.DataLink.Activity.Tr_L());
+      AnyVar ScalenusMaxAct_L = max(.DataLink.Activity.ScHy_L());
+      AnyVar TransversusThoracisMaxAct_L = max(.DataLink.Activity.TrTh_L());
+      AnyVar LevatorCostarumMaxAct_L = max(.DataLink.Activity.LC_L());
+      AnyVar SubcostalisMaxAct_L = max(.DataLink.Activity.SC_L());
+//      AnyVar IntercostalesMaxAct_L = max(.DataLink.Activity.Ic_L());
+//      AnyVar SerratusPosteriorInferiorMaxAct = max(.DataLink.Activity.SePoIn());
+      
+      AnyVar LongusColliMaxAct_L = max(.DataLink.Activity.LngCl_L());
+      AnyVar LongusCapitisMaxAct_L = max(.DataLink.Activity.LngCp_L());
+      AnyVar SpleniusMaxAct_L = max(.DataLink.Activity.Spl_L());
+      AnyVar SemispinialiCMaxAct_L = max(.DataLink.Activity.SSpC_L());
+      AnyVar LongissimusCMaxAct_L = max(.DataLink.Activity.ESC_L());
+      AnyVar MultifidusCMaxAct_L = max(.DataLink.Activity.MFdC_L());
+
+      
+      AnyVar DiaphragmMaxAct_R = max(.DataLink.Activity.Diaphragm_R());
+      AnyVar DiaphragmMaxAct_L = max(.DataLink.Activity.Diaphragm_L());
+      
+      
+      AnyVar HyoidMaxAct_R = max(.DataLink.Activity.Hyoid_R());
+      AnyVar HyoidMaxAct_L = max(.DataLink.Activity.Hyoid_L());
+      
+      AnyVar SemispinalisThoracisMaxAct_R = max(.DataLink.Activity.SemispinalisThoracis_R());
+      AnyVar SemispinalisThoracisMaxAct_L = max(.DataLink.Activity.SemispinalisThoracis_L());
+      
+      
+      AnyVar SerratusPosteriorSuperiorMaxAct_R = max(.DataLink.Activity.SerratusPosteriorSuperior_R());
+      AnyVar SerratusPosteriorSuperiorMaxAct_L = max(.DataLink.Activity.SerratusPosteriorSuperior_L());
+      
+      
+      AnyVar SerratusPosteriorInferiorMaxAct_R = max(.DataLink.Activity.SerratusPosteriorInferior_R());
+      AnyVar SerratusPosteriorInferiorMaxAct_L = max(.DataLink.Activity.SerratusPosteriorInferior_L());
+
+      
+      AnyVar SpleniusCervicisMaxAct_R = max(.DataLink.Activity.SpleniusCervicis_R());
+      AnyVar SpleniusCervicisMaxAct_L = max(.DataLink.Activity.SpleniusCervicis_L());
+      
+      
+      AnyVar RotatoresBrevisMaxAct_R = max(.DataLink.Activity.RotatoresBrevis_R());
+      AnyVar RotatoresBrevisMaxAct_L = max(.DataLink.Activity.RotatoresBrevis_L());
+      
+      
+      AnyVar RotatoresLongusMaxAct_R = max(.DataLink.Activity.RotatoresLongus_R());
+      AnyVar RotatoresLongusMaxAct_L = max(.DataLink.Activity.RotatoresLongus_L());
+      
+      
+      AnyVar PelvicFloorMaxAct_R = max(.DataLink.Activity.PelvicFloor_R());
+      AnyVar PelvicFloorMaxAct_L = max(.DataLink.Activity.PelvicFloor_L());
+      
+    };
+    
+    AnyFolder Forces = {
+      
+      AnyVar MultifidusTotalForce_R = sum(.DataLink.Force.MFd_R());
+      AnyVar ErectorSpinaeTotalForce_R = sum(.DataLink.Force.ES_R());
+      AnyVar PsoasMajorTotalForce_R = max(.DataLink.Force.PM_R());
+      AnyVar QuadratusLumborumTotalForce_R = sum(.DataLink.Force.QL_R());
+      AnyVar ObliquuesExternusTotalForce_R = sum(.DataLink.Force.OE_R());
+      AnyVar ObliquusInternusTotalForce_R = sum(.DataLink.Force.OI_R());
+      AnyVar SemispinalisCapitisTotalForce_R = sum(.DataLink.Force.Se_R());
+      AnyVar ThoracicMultifidusTotalForce_R = sum(.DataLink.Force.ThMFd_R());
+      AnyVar RectorAbdominisTotalForce_R = sum(.DataLink.Force.RA_R());
+      AnyVar SpinalisTotalForce_R = sum(.DataLink.Force.Sp_R());
+      AnyVar TransversusTotalForce_R = sum(.DataLink.Force.Tr_R());
+      AnyVar ScalenusTotalForce_R = sum(.DataLink.Force.ScHy_R());
+      AnyVar TransversusThoracisTotalForce_R = sum(.DataLink.Force.TrTh_R());
+      AnyVar LevatorCostarumTotalForce_R = sum(.DataLink.Force.LC_R());
+      AnyVar SubcostalisTotalForce_R = sum(.DataLink.Force.SC_R());
+//      AnyVar IntercostalesTotalForce_R = sum(.DataLink.Force.Ic_R());
+//      AnyVar SerratusPosteriorInferiorMaxAct = max(.DataLink.Activity.SePoIn());
+      
+      AnyVar LongusColliTotalForce_R = sum(.DataLink.Force.LngCl_R());
+      AnyVar LongusCapitisTotalForcet_R = sum(.DataLink.Force.LngCp_R());
+      AnyVar SpleniusTotalForce_R = sum(.DataLink.Force.Spl_R());
+      AnyVar SemispinialiCTotalForce_R = sum(.DataLink.Force.SSpC_R());
+      AnyVar LongissimusCTotalForce_R = sum(.DataLink.Force.ESC_R());
+      AnyVar MultifidusCTotalForce_R = sum(.DataLink.Force.MFdC_R());
+      
+      
+      
+      
+      AnyVar MultifidusTotalForce_L = sum(.DataLink.Force.MFd_L());
+      AnyVar ErectorSpinaeTotalForce_L = sum(.DataLink.Force.ES_L());
+      AnyVar PsoasMajorTotalForce_L = sum(.DataLink.Force.PM_L());
+      AnyVar QuadratusLumborumTotalForce_L = sum(.DataLink.Force.QL_L());
+      AnyVar ObliquuesExternusTotalForce_L = sum(.DataLink.Force.OE_L());
+      AnyVar ObliquusInternusTotalForce_L = sum(.DataLink.Force.OI_L());
+      AnyVar SemispinalisCapitisTotalForce_L = sum(.DataLink.Force.Se_L());
+      AnyVar ThoracicMultifidusTotalForce_L = sum(.DataLink.Force.ThMFd_L());
+      AnyVar RectorAbdominisTotalForce_L = sum(.DataLink.Force.RA_L());
+      AnyVar TransversusTotalForce_L = sum(.DataLink.Force.Tr_L());
+      AnyVar ScalenusTotalForce_L = sum(.DataLink.Force.ScHy_L());
+      AnyVar TransversusThoracisTotalForce_L = sum(.DataLink.Force.TrTh_L());
+      AnyVar LevatorCostarumTotalForce_L = sum(.DataLink.Force.LC_L());
+      AnyVar SubcostalisTotalForce_L = sum(.DataLink.Force.SC_L());
+//      AnyVar IntercostalesTotalForce_L = sum(.DataLink.Force.Ic_L());
+//      AnyVar SerratusPosteriorInferiorMaxAct = max(.DataLink.Activity.SePoIn());
+      
+      AnyVar LongusColliTotalForce_L = sum(.DataLink.Force.LngCl_L());
+      AnyVar LongusCapitisv_L = sum(.DataLink.Force.LngCp_L());
+      AnyVar SpleniusMaxAct_L = sum(.DataLink.Force.Spl_L());
+      AnyVar SemispinialiCTotalForce_L = sum(.DataLink.Force.SSpC_L());
+      AnyVar LongissimusCTotalForce_L = sum(.DataLink.Force.ESC_L());
+      AnyVar MultifidusCTotalForce_L = sum(.DataLink.Force.MFdC_L());
+
+      
+      AnyVar DiaphragmTotalForce_R = sum(.DataLink.Force.Diaphragm_R());
+      AnyVar DiaphragmTotalForce_L = sum(.DataLink.Force.Diaphragm_L());
+      
+      
+      AnyVar HyoidTotalForce_R = sum(.DataLink.Force.Hyoid_R());
+      AnyVar HyoidTotalForce_L = sum(.DataLink.Force.Hyoid_L());
+      
+      AnyVar SemispinalisThoracisTotalForce_R = sum(.DataLink.Force.SemispinalisThoracis_R());
+      AnyVar SemispinalisThoracisTotalForce_L = sum(.DataLink.Force.SemispinalisThoracis_L());
+      
+      
+      AnyVar SerratusPosteriorSuperiorTotalForce_R = sum(.DataLink.Force.SerratusPosteriorSuperior_R());
+      AnyVar SerratusPosteriorSuperiorTotalForce_L = sum(.DataLink.Force.SerratusPosteriorSuperior_L());
+      
+      
+      AnyVar SerratusPosteriorInferiorTotalForce_R = sum(.DataLink.Force.SerratusPosteriorInferior_R());
+      AnyVar SerratusPosteriorInferiorTotalForce_L = sum(.DataLink.Force.SerratusPosteriorInferior_L());
+
+      
+      AnyVar SpleniusCervicisTotalForce_R = sum(.DataLink.Activity.SpleniusCervicis_R());
+      AnyVar SpleniusCervicisTotalForce_L = sum(.DataLink.Force.SpleniusCervicis_L());
+      
+      
+      AnyVar RotatoresBrevisTotalForce_R = sum(.DataLink.Force.RotatoresBrevis_R());
+      AnyVar RotatoresBrevisTotalForce_L = sum(.DataLink.Force.RotatoresBrevis_L());
+      
+      
+      AnyVar RotatoresLongusTotalForce_R = sum(.DataLink.Force.RotatoresLongus_R());
+      AnyVar RotatoresLongusTotalForce_L = sum(.DataLink.Force.RotatoresLongus_L());
+      
+      
+      AnyVar PelvicFloorTotalForce_R = sum(.DataLink.Force.PelvicFloor_R());
+      AnyVar PelvicFloorTotalForce_L = sum(.DataLink.Force.PelvicFloor_L());
+      
+
+      
+    };
+ 
+  
+  }; //End Muscles
+  
+    AnyFolder SegmentalRotationFlexion = {
+    AnyVar C1C0Flexion = Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C1C0.Pos[0]*180/pi;
+    AnyVar C2C1Flexion = Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C2C1.Pos[0]*180/pi;
+    AnyVar C3C2Flexion = Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C3C2.Pos[2]*180/pi;
+    AnyVar C4C3Flexion = Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C4C3.Pos[2]*180/pi;
+    AnyVar C5C4Flexion = Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C5C4.Pos[2]*180/pi;
+    AnyVar C6C5Flexion = Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C6C5.Pos[2]*180/pi;
+    AnyVar C7C6Flexion = Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C7C6.Pos[2]*180/pi;   
+    AnyVar T1C7Flexion = Main.HumanModel.BodyModel.Trunk.Joints.Cervical.T1C7.Pos[2]*180/pi;
+    AnyVar T1T2Flexion = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T1T2.Pos[2]*180/pi;
+    AnyVar T2T3Flexion = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T2T3.Pos[2]*180/pi;
+    AnyVar T3T4Flexion = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T3T4.Pos[2]*180/pi;
+    AnyVar T4T5Flexion = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T4T5.Pos[2]*180/pi;
+    AnyVar T5T6Flexion = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T5T6.Pos[2]*180/pi;
+    AnyVar T6T7Flexion = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T6T7.Pos[2]*180/pi;
+    AnyVar T7T8Flexion = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T7T8.Pos[2]*180/pi;
+    AnyVar T8T9Flexion = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T8T9.Pos[2]*180/pi;
+    AnyVar T9T10Flexion = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T9T10.Pos[2]*180/pi;
+    AnyVar T10T11Flexion = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T10T11.Pos[2]*180/pi;
+    AnyVar T11T12Flexion = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T11T12.Pos[2]*180/pi;
+    AnyVar T12L1Flexion = Main.HumanModel.BodyModel.Trunk.Joints.Lumbar.T12L1.Pos[2]*180/pi;
+    AnyVar L1L2Flexion = Main.HumanModel.BodyModel.Trunk.Joints.Lumbar.L1L2.Pos[2]*180/pi;
+    AnyVar L2L3Flexion = Main.HumanModel.BodyModel.Trunk.Joints.Lumbar.L2L3.Pos[2]*180/pi;
+    AnyVar L3L4Flexion = Main.HumanModel.BodyModel.Trunk.Joints.Lumbar.L3L4.Pos[2]*180/pi;
+    AnyVar L4L5Flexion = Main.HumanModel.BodyModel.Trunk.Joints.Lumbar.L4L5.Pos[2]*180/pi;
+    AnyVar L5SacrumFlexion = Main.HumanModel.BodyModel.Trunk.Joints.Lumbar.L5Sacrum.Pos[2]*180/pi;  
+    AnyVar PelvisThoraxFlexion = Main.HumanModel.BodyModel.Interface.Trunk.PelvisThoraxExtension.Pos[0]*180/pi;  
+    AnyVar T12T1Flexion = Main.HumanModel.BodyModel.Interface.Trunk.T12T1Extension.Pos[0]*180/pi;
+    AnyVar PelvisT12Flexion = Main.HumanModel.BodyModel.Interface.Trunk.PelvisT12Extension.Pos[0]*180/pi;  
+  };
+
+    AnyFolder  SegmentalRotationLateralBending= {
+//    AnyVar C1C0LatBend = Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C1C0.Pos[0]*180/pi;
+//    AnyVar C2C1LatBend= Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C2C1.Pos[0]*180/pi;
+    AnyVar C3C2LatBend = Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C3C2.Pos[0]*180/pi;
+    AnyVar C4C3LatBend = Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C4C3.Pos[0]*180/pi;
+    AnyVar C5C4LatBend = Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C5C4.Pos[0]*180/pi;
+    AnyVar C6C5LatBend = Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C6C5.Pos[0]*180/pi;
+    AnyVar C7C6LatBend = Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C7C6.Pos[0]*180/pi;   
+    AnyVar T1C7LatBend = Main.HumanModel.BodyModel.Trunk.Joints.Cervical.T1C7.Pos[0]*180/pi;
+    AnyVar T1T2LatBend = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T1T2.Pos[0]*180/pi;
+    AnyVar T2T3LatBend = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T2T3.Pos[0]*180/pi;
+    AnyVar T3T4LatBend = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T3T4.Pos[0]*180/pi;
+    AnyVar T4T5LatBend = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T4T5.Pos[0]*180/pi;
+    AnyVar T5T6LatBend = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T5T6.Pos[0]*180/pi;
+    AnyVar T6T7LatBend = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T6T7.Pos[0]*180/pi;
+    AnyVar T7T8LatBend = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T7T8.Pos[0]*180/pi;
+    AnyVar T8T9LatBend = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T8T9.Pos[0]*180/pi;
+    AnyVar T9T10LatBend = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T9T10.Pos[0]*180/pi;
+    AnyVar T10T11LatBend = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T10T11.Pos[0]*180/pi;
+    AnyVar T11T12LatBend = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T11T12.Pos[0]*180/pi;
+    AnyVar T12L1LatBend = Main.HumanModel.BodyModel.Trunk.Joints.Lumbar.T12L1.Pos[0]*180/pi;
+    AnyVar L1L2LatBend = Main.HumanModel.BodyModel.Trunk.Joints.Lumbar.L1L2.Pos[0]*180/pi;
+    AnyVar L2L3LatBend = Main.HumanModel.BodyModel.Trunk.Joints.Lumbar.L2L3.Pos[0]*180/pi;
+    AnyVar L3L4LatBend = Main.HumanModel.BodyModel.Trunk.Joints.Lumbar.L3L4.Pos[0]*180/pi;
+    AnyVar L4L5LatBend = Main.HumanModel.BodyModel.Trunk.Joints.Lumbar.L4L5.Pos[0]*180/pi;
+    AnyVar L5SacrumLatBend = Main.HumanModel.BodyModel.Trunk.Joints.Lumbar.L5Sacrum.Pos[0]*180/pi;    
+    AnyVar PelvisThoraxLatBend = Main.HumanModel.BodyModel.Interface.Trunk.PelvisThoraxLateralBending.Pos[0]*180/pi;   
+    AnyVar T12T1LatBend = Main.HumanModel.BodyModel.Interface.Trunk.T12T1LateralBending.Pos[0]*180/pi;
+    AnyVar PelvisT12LatBend = Main.HumanModel.BodyModel.Interface.Trunk.PelvisT12LateralBending.Pos[0]*180/pi;
+  };
+   
+      AnyFolder SegmentalRotationAxialRotation = {
+//    AnyVar C1C0AxialRot = Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C1C0.Pos[1]*180/pi;
+//    AnyVar C2C1AxialRot = Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C2C1.Pos[1]*180/pi;
+    AnyVar C3C2AxialRot = Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C3C2.Pos[1]*180/pi;
+    AnyVar C4C3AxialRot = Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C4C3.Pos[1]*180/pi;
+    AnyVar C5C4AxialRot = Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C5C4.Pos[1]*180/pi;
+    AnyVar C6C5AxialRot = Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C6C5.Pos[1]*180/pi;
+    AnyVar C7C6AxialRot = Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C7C6.Pos[1]*180/pi;   
+    AnyVar T1C7AxialRot = Main.HumanModel.BodyModel.Trunk.Joints.Cervical.T1C7.Pos[1]*180/pi;
+    AnyVar T1T2AxialRot = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T1T2.Pos[1]*180/pi;
+    AnyVar T2T3AxialRot = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T2T3.Pos[1]*180/pi;
+    AnyVar T3T4AxialRot = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T3T4.Pos[1]*180/pi;
+    AnyVar T4T5AxialRot = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T4T5.Pos[1]*180/pi;
+    AnyVar T5T6AxialRot = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T5T6.Pos[1]*180/pi;
+    AnyVar T6T7AxialRot = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T6T7.Pos[1]*180/pi;
+    AnyVar T7T8AxialRot = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T7T8.Pos[1]*180/pi;
+    AnyVar T8T9AxialRot = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T8T9.Pos[1]*180/pi;
+    AnyVar T9T10AxialRot = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T9T10.Pos[1]*180/pi;
+    AnyVar T10T11AxialRot = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T10T11.Pos[1]*180/pi;
+    AnyVar T11T12AxialRot = Main.HumanModel.BodyModel.Trunk.Joints.Thorax.T11T12.Pos[1]*180/pi;
+    AnyVar T12L1AxialRot = Main.HumanModel.BodyModel.Trunk.Joints.Lumbar.T12L1.Pos[1]*180/pi;
+    AnyVar L1L2AxialRot = Main.HumanModel.BodyModel.Trunk.Joints.Lumbar.L1L2.Pos[1]*180/pi;
+    AnyVar L2L3AxialRot= Main.HumanModel.BodyModel.Trunk.Joints.Lumbar.L2L3.Pos[1]*180/pi;
+    AnyVar L3L4AxialRot = Main.HumanModel.BodyModel.Trunk.Joints.Lumbar.L3L4.Pos[1]*180/pi;
+    AnyVar L4L5AxialRot= Main.HumanModel.BodyModel.Trunk.Joints.Lumbar.L4L5.Pos[1]*180/pi;
+    AnyVar L5SacrumAxialRot = Main.HumanModel.BodyModel.Trunk.Joints.Lumbar.L5Sacrum.Pos[1]*180/pi;  
+    AnyVar PelvisThoraxAxialRot = Main.HumanModel.BodyModel.Interface.Trunk.PelvisThoraxRotation.Pos[0]*180/pi;  
+    AnyVar T12T1AxialRot = Main.HumanModel.BodyModel.Interface.Trunk.T12T1Rotation.Pos[0]*180/pi;
+    AnyVar PelvisT12AxialRot = Main.HumanModel.BodyModel.Interface.Trunk.PelvisT12Rotation.Pos[0]*180/pi;
+  };
+  
+AnyFolder PosturalMeasures = {
+  AnyVar PelvicTilt = Main.HumanModel.BodyModel.Trunk.PosturalMeasures.PelvicTilt.Pos[0]*180/pi;
+  AnyVar SacralSlope = Main.HumanModel.BodyModel.Trunk.PosturalMeasures.SacralSlope.Pos[0]*180/pi;
+  AnyVar GlobalTilt = Main.HumanModel.BodyModel.Trunk.PosturalMeasures.GlobalTiltMeasure.Pos[0]*180/pi;
+  AnyVar LumbarLordosisL1S1 = Main.HumanModel.BodyModel.Trunk.PosturalMeasures.LumbarLordosisL1S1.Pos[0]*180/pi;
+  AnyVar LumbarLordosisL4S1 = Main.HumanModel.BodyModel.Trunk.PosturalMeasures.LumbarLordosisL4S1.Pos[0]*180/pi;
+  AnyVar KyphosisT2T12 = Main.HumanModel.BodyModel.Trunk.PosturalMeasures.KyphosisT2T12.Pos[0]*180/pi;
+  AnyVar KyphosisT5T12 = Main.HumanModel.BodyModel.Trunk.PosturalMeasures.KyphosisT5T12.Pos[0]*180/pi;
+  AnyVar KyphosisT2T5 = Main.HumanModel.BodyModel.Trunk.PosturalMeasures.KyphosisT2T5.Pos[0]*180/pi;
+  AnyVar KyphosisT10L2 = Main.HumanModel.BodyModel.Trunk.PosturalMeasures.KyphosisT10L2.Pos[0]*180/pi;
+  AnyVar C7_SVA = Main.HumanModel.BodyModel.Trunk.PosturalMeasures.C7_SVA.Pos[0]*180/pi;
+  AnyVar SVA= Main.HumanModel.BodyModel.Trunk.PosturalMeasures.SVA;  
+};
+
+AnyFolder CoM = {
+  AnyVar CoM_x = Main.HumanModel.BodyModel.Interface.CenterOfMass.Pos[0];
+  AnyVar CoM_y = Main.HumanModel.BodyModel.Interface.CenterOfMass.Pos[1];
+  AnyVar CoM_z = Main.HumanModel.BodyModel.Interface.CenterOfMass.Pos[2];
+};
+
+//AnyFolder CoMTrunk = {
+//  AnyVar CoM_x = Main.HumanModel.BodyModel.Interface.CenterOfMassTrunk.Pos[0];
+//  AnyVar CoM_y = Main.HumanModel.BodyModel.Interface.CenterOfMassTrunk.Pos[1];
+//  AnyVar CoM_z = Main.HumanModel.BodyModel.Interface.CenterOfMassTrunk.Pos[2];
+//};
+
+}; //End Trunk
+
+#if BM_COMPATIBILITY_24_TRUNK_SELECTED_OUTPUTS_JRF == ON
+#include "TrunkSelectedOutput_Compatibility24.any"
+#endif

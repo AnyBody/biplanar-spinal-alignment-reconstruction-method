@@ -1,0 +1,790 @@
+// -------------------------------------------------------------------
+// Calibration of alignment with respect to segment centroids
+// -------------------------------------------------------------------
+  
+AnyBodyCalibrationStudy CalStudy_centroids = {
+  
+  tEnd = 1.0;
+  nStep = 1;
+  
+  Kinematics.SolverType = KinSolOverDeterminate;
+  InitialConditions.SolverType = KinSolOverDeterminate; 
+    
+  AnyFolder &segs = Main.HumanModel.BodyModel.Trunk.Segments;
+   
+  #if IncludeNeckCalibration == 1
+  
+  MechObjectExclude = {
+    &segs.Right.R1Seg,
+    &segs.Right.R2Seg,
+    &segs.Right.R3Seg,
+    &segs.Right.R4Seg,
+    &segs.Right.R5Seg,
+    &segs.Right.R6Seg,
+    &segs.Right.R7Seg,
+    &segs.Right.R8Seg,
+    &segs.Right.R9Seg,
+    &segs.Right.R10Seg,
+    &segs.Left.R1Seg,
+    &segs.Left.R2Seg,
+    &segs.Left.R3Seg,
+    &segs.Left.R4Seg,
+    &segs.Left.R5Seg,
+    &segs.Left.R6Seg,
+    &segs.Left.R7Seg,
+    &segs.Left.R8Seg,
+    &segs.Left.R9Seg,
+    &segs.Left.R10Seg,
+    &segs.SternumSeg,
+    &segs.SkullSeg,
+    &segs.C1Seg,
+    &Main.HumanModel.BodyModel.Trunk.Joints.Cervical.T1C7,
+    &Main.HumanModel.BodyModel.Trunk.Joints.Cervical.T1C7.Constraints,
+    &Main.HumanModel.BodyModel.Trunk.Joints.Cervical.T1C7.Constraints.Reaction,
+    &Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C7C6,
+    &Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C7C6.Constraints,
+    &Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C7C6.Constraints.Reaction,
+    &Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C6C5,
+    &Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C6C5.Constraints,
+    &Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C6C5.Constraints.Reaction,
+    &Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C5C4,
+    &Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C5C4.Constraints,
+    &Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C5C4.Constraints.Reaction,
+    &Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C4C3,
+    &Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C4C3.Constraints,
+    &Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C4C3.Constraints.Reaction,
+    &Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C3C2,
+    &Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C3C2.Constraints,
+    &Main.HumanModel.BodyModel.Trunk.Joints.Cervical.C3C2.Constraints.Reaction,
+    &Main.HumanModel.BodyModel.Trunk.PosturalMeasures.C7_MovingFrame.SacrC7MovingFrame,
+    &Main.HumanModel.BodyModel.Trunk.PosturalMeasures.C7_MovingFrame.MovingFrameHingeJoint,
+    &Main.HumanModel.BodyModel.Trunk.PosturalMeasures.C7_MovingFrame.MovingFrameHingeJoint.Constraints,
+    &Main.HumanModel.BodyModel.Trunk.PosturalMeasures.C7_MovingFrame.MovingFrameHingeJoint.Constraints.Reaction,
+    &Main.HumanModel.BodyModel.Trunk.PosturalMeasures.C7_MovingFrame.SacrC7DirectionDriver,
+    &Main.HumanModel.BodyModel.Trunk.PosturalMeasures.C7_MovingFrame.SacrC7DirectionDriver.Reaction,    
+    &segs.Right.R11Seg,
+    &segs.Left.R11Seg,
+    &segs.Right.R12Seg,
+    &segs.Left.R12Seg,
+    &segs.SternalBodySeg
+  };
+  
+  
+  AnyFolder Model = {
+    
+    AnySeg &C2 = .segs.C2Seg;
+    AnySeg &C3 = .segs.C3Seg;
+    AnySeg &C4 = .segs.C4Seg;
+    AnySeg &C5 = .segs.C5Seg;
+    AnySeg &C6 = .segs.C6Seg;
+    AnySeg &C7 = .segs.C7Seg;
+    AnySeg &T1 = .segs.T1Seg;
+    AnySeg &T2 = .segs.T2Seg;
+    AnySeg &T3 = .segs.T3Seg;
+    AnySeg &T4 = .segs.T4Seg;    
+    AnySeg &T5 = .segs.T5Seg;
+    AnySeg &T6 = .segs.T6Seg;
+    AnySeg &T7 = .segs.T7Seg;
+    AnySeg &T8 = .segs.T8Seg;
+    AnySeg &T9 = .segs.T9Seg;
+    AnySeg &T10 = .segs.T10Seg;
+    AnySeg &T11 = .segs.T11Seg;
+    AnySeg &T12 = .segs.T12Seg;    
+    AnySeg &L1 = .segs.L1Seg;
+    AnySeg &L2 = .segs.L2Seg;
+    AnySeg &L3 = .segs.L3Seg;
+    AnySeg &L4 = .segs.L4Seg;
+    AnySeg &L5 = .segs.L5Seg;
+    AnySeg &Sacrum = .segs.SacrumSeg;
+    AnySeg &Pelvis = .segs.PelvisSeg;
+        
+  };
+  
+  #else
+  
+  MechObjectExclude = {
+    &segs.Right.R1Seg,
+    &segs.Right.R2Seg,
+    &segs.Right.R3Seg,
+    &segs.Right.R4Seg,
+    &segs.Right.R5Seg,
+    &segs.Right.R6Seg,
+    &segs.Right.R7Seg,
+    &segs.Right.R8Seg,
+    &segs.Right.R9Seg,
+    &segs.Right.R10Seg,
+    &segs.Left.R1Seg,
+    &segs.Left.R2Seg,
+    &segs.Left.R3Seg,
+    &segs.Left.R4Seg,
+    &segs.Left.R5Seg,
+    &segs.Left.R6Seg,
+    &segs.Left.R7Seg,
+    &segs.Left.R8Seg,
+    &segs.Left.R9Seg,
+    &segs.Left.R10Seg,
+    &segs.SternumSeg,
+    &segs.SkullSeg,
+    &segs.C1Seg,
+    &segs.C2Seg,
+    &segs.C3Seg,
+    &segs.C4Seg,
+    &segs.C5Seg,
+    &segs.C6Seg,
+    &segs.C7Seg,
+    &Main.HumanModel.BodyModel.Trunk.PosturalMeasures.C7_MovingFrame.SacrC7MovingFrame,
+    &Main.HumanModel.BodyModel.Trunk.PosturalMeasures.C7_MovingFrame.MovingFrameHingeJoint,
+    &Main.HumanModel.BodyModel.Trunk.PosturalMeasures.C7_MovingFrame.MovingFrameHingeJoint.Constraints,
+    &Main.HumanModel.BodyModel.Trunk.PosturalMeasures.C7_MovingFrame.MovingFrameHingeJoint.Constraints.Reaction,
+    &Main.HumanModel.BodyModel.Trunk.PosturalMeasures.C7_MovingFrame.SacrC7DirectionDriver,
+    &Main.HumanModel.BodyModel.Trunk.PosturalMeasures.C7_MovingFrame.SacrC7DirectionDriver.Reaction,  
+    &segs.Right.R11Seg,
+    &segs.Left.R11Seg,
+    &segs.Right.R12Seg,
+    &segs.Left.R12Seg,
+    &segs.SternalBodySeg
+    
+  };
+  
+  
+  AnyFolder Model = {
+    
+    AnySeg &T1 = .segs.T1Seg;
+    AnySeg &T2 = .segs.T2Seg;
+    AnySeg &T3 = .segs.T3Seg;
+    AnySeg &T4 = .segs.T4Seg;    
+    AnySeg &T5 = .segs.T5Seg;
+    AnySeg &T6 = .segs.T6Seg;
+    AnySeg &T7 = .segs.T7Seg;
+    AnySeg &T8 = .segs.T8Seg;
+    AnySeg &T9 = .segs.T9Seg;
+    AnySeg &T10 = .segs.T10Seg;
+    AnySeg &T11 = .segs.T11Seg;
+    AnySeg &T12 = .segs.T12Seg;    
+    AnySeg &L1 = .segs.L1Seg;
+    AnySeg &L2 = .segs.L2Seg;
+    AnySeg &L3 = .segs.L3Seg;
+    AnySeg &L4 = .segs.L4Seg;
+    AnySeg &L5 = .segs.L5Seg;
+    AnySeg &Sacrum = .segs.SacrumSeg;
+    AnySeg &Pelvis = .segs.PelvisSeg;
+    
+      };
+  
+  #endif
+  
+  //Reference Frame to calibrate centroids of alignment measurements
+  AnyFixedRefFrame Centroids_Calib_Ref = {
+    Origin = {-0.5, 1, 0}; // that is: Main.SubjectData.ShowInputPoints.Origin
+    Axes = 
+    {{1.0, 0.0, 0.0},
+      {0.0, 1.0, 0.0},
+      {0.0, 0.0, 1.0}};    
+    viewRefFrame.Visible = Off;
+    viewRefFrame.ScaleXYZ = {0.075, 0.075, 0.075};
+    viewRefFrame.RGB = {1,0.55,0}; 
+  };  
+  
+  // get coordinates from input file
+  AnyFolder &input = Main.SubjectData.Alignment;
+  
+   #if AlignmentModeling == 1
+  AnyFolder &coronalinput = Main.SubjectData.Alignment;
+  #endif
+  
+  //load BH from input file
+  AnyVar Body_height = Main.SubjectData.Alignment.BH;
+  
+  //Segments lumbar
+  AnyFolder &Segs_lumbar = Main.HumanModel.BodyModel.Trunk.Segments;
+  //Segments thoracic
+  AnyFolder &Segs_thorax = Main.HumanModel.BodyModel.Trunk.Segments;
+  //Segments cervical
+  AnyFolder &Segs_cervical = Main.HumanModel.BodyModel.Trunk.Segments;  
+  
+
+  AnyFolder Drivers = {
+    
+    #if AlignmentModeling == 1
+      
+    // Position of Sacrum wrt Ground
+    AnyKinEqSimpleDriver Sacr_Ground_Transl = {
+      AnyKinLinear SacrGroundTransl = {        
+        AnyRefFrame &ground = Main.EnvironmentModel.GlobalRef;
+        AnyRefFrame &sacrum = ...segs.SacrumSeg.CS4Node_MidLR; 
+      };
+      DriverPos = {-0.5, 1, 0}; 
+      DriverVel = {0,0,0};
+      Reaction.Type = {On,On,On};
+    }; 
+        
+    // Pelvic Tilt
+    AnyKinEqSimpleDriver DriverPT = {
+      AnyKinMeasureOrg &PT_ref = .measures.PelvicTilt;
+      DriverPos = {.input.PT}*(-1)*pi/180;
+      DriverVel = {0};
+      Reaction.Type = {On};
+    };
+     
+    // Sacral Slope
+    AnyKinEqSimpleDriver DriverSS = {
+      AnyKinMeasureOrg &SS_ref = Main.HumanModel.BodyModel.Trunk.PosturalMeasures.SacralSlope;
+      DriverPos = {Main.SubjectData.Alignment.SS}*pi/180;
+      DriverVel = {0};
+      Reaction.Type = {On}; 
+    };
+    
+    // No Sacrum rotation wrt ground Y
+    AnyKinEqSimpleDriver Sacr_Ground_NoRot = {
+      AnyKinMeasureOrg SacrGroundY = {
+        AnyKinRotational SacrGround = {
+          AnySeg &u1 = ....segs.SacrumSeg;   
+          AnyRefFrame &ground = Main.EnvironmentModel.GlobalRef;
+          Type = RotVector;
+        };
+        MeasureOrganizer = {1};
+      }; 
+      DriverPos = {0}*pi/180;
+      DriverVel = {0};
+      Reaction.Type = {On};
+    };
+    
+   // No Pelvis rotation wrt ground Y
+    AnyKinEqSimpleDriver Pelvis_Ground_NoRot = {
+      AnyKinMeasureOrg PelvisGroundY = {
+        AnyKinRotational PelvisGround = {
+          AnySeg &u1 = ....segs.PelvisSeg;   
+          AnyRefFrame &ground = Main.EnvironmentModel.GlobalRef;
+          Type = RotVector;
+        };
+        MeasureOrganizer = {1};
+      };    
+      DriverPos = {0}*pi/180;
+      DriverVel = {0};
+      Reaction.Type = {On};
+    };
+    
+  
+    
+    // Assign sacral obliquity angle (SS in input file) to the sacrum to represent left to right tilt of the pelvis  
+    AnyKinEqSimpleDriver DriverSacralObliq = {
+      AnyKinMeasureOrg SacrGroundX = {
+        AnyKinRotational SacrGround = {
+          AnySeg &u1 = ....segs.SacrumSeg;   
+          AnyRefFrame &ground = Main.EnvironmentModel.GlobalRef;
+          Type = RotAxesAngles;
+          Axis1 = x;
+          Axis2 = y;
+          Axis3 = z;
+        };
+        MeasureOrganizer = {0};
+      };
+             
+     DriverPos = {.input.SacrObl}*pi/180;
+      DriverVel = {0};
+      Reaction.Type = {On};
+    };
+    
+    
+    // Assign pelvic obliquity 
+      AnyKinEqSimpleDriver DriverPelvicObliq = {
+      AnyKinMeasureOrg PelvisGroundX = {
+        AnyKinRotational PelvisGround = {
+          AnySeg &u1 = ....segs.PelvisSeg;   
+          AnyRefFrame &ground = Main.EnvironmentModel.GlobalRef;
+          Type = RotAxesAngles;
+          Axis1 = x;
+          Axis2 = y;
+          Axis3 = z;
+        };
+        MeasureOrganizer = {0};
+      };
+             
+      DriverPos = {.input.PelvicObl}*pi/180;
+      DriverVel = {0};
+      Reaction.Type = {On};
+    };
+    
+    // Pelvis position according to SacrPelvis jnt
+    AnyKinEqSimpleDriver Pelvis_Sacr_Jnt = {
+       AnyKinLinear PelvisSacrJnt = {
+         AnyRefFrame &pelvis = ...segs.PelvisSeg.PelvisSacrumJntNode;   
+         AnyRefFrame &sacr = ...segs.SacrumSeg.SacrumPelvisJntNode;
+       };
+      DriverPos = {0,0,0}*pi/180;
+      DriverVel = {0,0,0};
+      Reaction.Type = {On,On, On};
+    };
+
+
+    // ------------------------------------------------------------------------------------------------
+    // ------ Vertebral centroids drivers -------------------------------------------------------------
+    // ------------------------------------------------------------------------------------------------
+
+    AnyKinEqSimpleDriver L5_centroid = {
+      AnyKinLinear centroid_pos = {
+        AnyRefFrame &ground = ...Centroids_Calib_Ref;
+        AnyRefFrame &u1 = ...Segs_lumbar.L5Seg.Vertebral_orient;    
+        Ref=0;
+      };
+      DriverPos = {..input.L5_x, ..input.L5_y, ..input.L5_z};
+      DriverVel = {0,0,0};
+      Reaction.Type = {On,On,On};
+      CType = {Hard, Hard, Hard};
+    };
+    
+    AnyKinEqSimpleDriver L4_centroid = {
+      AnyKinLinear centroid_pos = {
+        AnyRefFrame &ground = ...Centroids_Calib_Ref;
+        AnyRefFrame &u1 = ...Segs_lumbar.L4Seg.Vertebral_orient;
+        Ref=0;
+      };
+      DriverPos = {..input.L4_x, ..input.L4_y, ..input.L4_z};
+      DriverVel = {0,0,0};
+      Reaction.Type = {On,On,On};
+      CType = {Hard, Hard, Hard};
+    };
+    
+    AnyKinEqSimpleDriver L3_centroid = {
+      AnyKinLinear centroid_pos = {
+        AnyRefFrame &ground = ...Centroids_Calib_Ref;
+        AnyRefFrame &u1 = ...Segs_lumbar.L3Seg.Vertebral_orient;    
+        Ref=0;
+      };
+      DriverPos = {..input.L3_x, ..input.L3_y, ..input.L3_z};
+      DriverVel = {0,0,0};
+      Reaction.Type = {On,On,On};
+      CType = {Hard, Hard, Hard};
+    };
+    
+    AnyKinEqSimpleDriver L2_centroid = {
+      AnyKinLinear centroid_pos = {
+        AnyRefFrame &ground = ...Centroids_Calib_Ref;
+        AnyRefFrame &u1 = ...Segs_lumbar.L2Seg.Vertebral_orient;    
+        Ref=0;
+      };
+      DriverPos = {..input.L2_x, ..input.L2_y, ..input.L2_z};
+      DriverVel = {0,0,0};
+      Reaction.Type = {On,On,On};
+      CType = {Hard, Hard, Hard};
+    };
+    
+    AnyKinEqSimpleDriver L1_centroid = {
+      AnyKinLinear centroid_pos = {
+        AnyRefFrame &ground = ...Centroids_Calib_Ref;
+        AnyRefFrame &u1 = ...Segs_lumbar.L1Seg.Vertebral_orient;   
+        Ref=0;
+      };
+      DriverPos = {..input.L1_x, ..input.L1_y, ..input.L1_z};
+      DriverVel = {0,0,0};
+      Reaction.Type = {On,On,On};
+      CType = {Hard, Hard, Hard};
+    };
+    
+    AnyKinEqSimpleDriver T12_centroid = {
+      AnyKinLinear centroid_pos = {
+        AnyRefFrame &ground = ...Centroids_Calib_Ref;
+        AnyRefFrame &u1 = ...Segs_thorax.T12Seg.Vertebral_orient;  
+        Ref=0;
+      };
+      DriverPos = {..input.T12_x, ..input.T12_y, ..input.T12_z};
+      DriverVel = {0,0,0};
+      Reaction.Type = {On,On,On};
+      CType = {Hard, Hard, Hard};
+    };
+    
+    AnyKinEqSimpleDriver T11_centroid = {
+      AnyKinLinear centroid_pos = {
+        AnyRefFrame &ground = ...Centroids_Calib_Ref;
+        AnyRefFrame &u1 = ...Segs_thorax.T11Seg.Vertebral_orient; 
+        Ref=0;
+      };
+      DriverPos = {..input.T11_x, ..input.T11_y, ..input.T11_z};
+      DriverVel = {0,0,0};
+      Reaction.Type = {On,On,On};
+      CType = {Hard, Hard, Hard};
+    };
+    
+    AnyKinEqSimpleDriver T10_centroid = {
+      AnyKinLinear centroid_pos = {
+        AnyRefFrame &ground = ...Centroids_Calib_Ref;
+        AnyRefFrame &u1 = ...Segs_thorax.T10Seg.Vertebral_orient; 
+        Ref=0;
+      };
+      DriverPos = {..input.T10_x, ..input.T10_y, ..input.T10_z};
+      DriverVel = {0,0,0};
+      Reaction.Type = {On,On,On};
+      CType = {Hard, Hard, Hard};
+    };
+    
+    AnyKinEqSimpleDriver T9_centroid = {
+      AnyKinLinear centroid_pos = {
+        AnyRefFrame &ground = ...Centroids_Calib_Ref;
+        AnyRefFrame &u1 = ...Segs_thorax.T9Seg.Vertebral_orient;    
+        Ref=0;
+      };
+      DriverPos = {..input.T9_x, ..input.T9_y, ..input.T9_z};
+      DriverVel = {0,0,0};
+      Reaction.Type = {On,On,On};
+      CType = {Hard, Hard, Hard};
+    };
+    
+    AnyKinEqSimpleDriver T8_centroid = {
+      AnyKinLinear centroid_pos = {
+        AnyRefFrame &ground = ...Centroids_Calib_Ref;
+        AnyRefFrame &u1 = ...Segs_thorax.T8Seg.Vertebral_orient; 
+        Ref=0;
+      };
+      DriverPos = {..input.T8_x, ..input.T8_y, ..input.T8_z};
+      DriverVel = {0,0,0};
+      Reaction.Type = {On,On,On};
+      CType = {Hard, Hard, Hard};
+    };
+    
+    AnyKinEqSimpleDriver T7_centroid = {
+      AnyKinLinear centroid_pos = {
+        AnyRefFrame &ground = ...Centroids_Calib_Ref;
+        AnyRefFrame &u1 = ...Segs_thorax.T7Seg.Vertebral_orient; 
+        Ref=0;
+      };
+      DriverPos = {..input.T7_x, ..input.T7_y, ..input.T7_z};
+      DriverVel = {0,0,0};
+      Reaction.Type = {On,On,On};
+      CType = {Hard, Hard, Hard};
+    };
+    
+    AnyKinEqSimpleDriver T6_centroid = {
+      AnyKinLinear centroid_pos = {
+        AnyRefFrame &ground = ...Centroids_Calib_Ref;
+        AnyRefFrame &u1 = ...Segs_thorax.T6Seg.Vertebral_orient;  
+        Ref=0;
+      };
+      DriverPos = {..input.T6_x, ..input.T6_y, ..input.T6_z};
+      DriverVel = {0,0,0};
+      Reaction.Type = {On,On,On};
+      CType = {Hard, Hard, Hard};
+    };
+    
+    AnyKinEqSimpleDriver T5_centroid = {
+      AnyKinLinear centroid_pos = {
+        AnyRefFrame &ground = ...Centroids_Calib_Ref;
+        AnyRefFrame &u1 = ...Segs_thorax.T5Seg.Vertebral_orient; 
+        Ref=0;
+      };
+      DriverPos = {..input.T5_x, ..input.T5_y, ..input.T5_z};
+      DriverVel = {0,0,0};
+      Reaction.Type = {On,On,On};
+      CType = {Hard, Hard, Hard};
+    };
+    
+    AnyKinEqSimpleDriver T4_centroid = {
+      AnyKinLinear centroid_pos = {
+        AnyRefFrame &ground = ...Centroids_Calib_Ref;
+        AnyRefFrame &u1 = ...Segs_thorax.T4Seg.Vertebral_orient;     
+      Ref=0;
+      };
+      DriverPos = {..input.T4_x, ..input.T4_y, ..input.T4_z};
+      DriverVel = {0,0,0};
+      Reaction.Type = {On,On,On};
+      CType = {Hard, Hard, Hard};
+    };
+    
+    AnyKinEqSimpleDriver T3_centroid = {
+      AnyKinLinear centroid_pos = {
+        AnyRefFrame &ground = ...Centroids_Calib_Ref;
+        AnyRefFrame &u1 = ...Segs_thorax.T3Seg.Vertebral_orient; 
+        Ref=0;
+      };
+      
+      DriverPos = {..input.T3_x, ..input.T3_y, ..input.T3_z};
+      DriverVel = {0,0,0};
+      Reaction.Type = {On,On,On};
+      CType = {Hard, Hard, Hard};
+    };
+    
+    AnyKinEqSimpleDriver T2_centroid = {
+      AnyKinLinear centroid_pos = {
+        AnyRefFrame &ground = ...Centroids_Calib_Ref;
+        AnyRefFrame &u1 = ...Segs_thorax.T2Seg.Vertebral_orient;     
+        Ref=0;
+      };
+      DriverPos = {..input.T2_x, ..input.T2_y, ..input.T2_z};
+      DriverVel = {0,0,0};
+      Reaction.Type = {On,On,On};
+      CType = {Hard, Hard, Hard};
+    };
+    
+    AnyKinEqSimpleDriver T1_centroid = {
+      AnyKinLinear centroid_pos = {
+        AnyRefFrame &ground = ...Centroids_Calib_Ref;
+        AnyRefFrame &u1 = ...Segs_thorax.T1Seg.Vertebral_orient;     
+        Ref=0;
+      };
+      DriverPos = {..input.T1_x, ..input.T1_y, ..input.T1_z};
+      DriverVel = {0,0,0};
+      Reaction.Type = {On,On,On};
+      CType = {Hard, Hard, Hard};
+    };
+    
+    
+    #if IncludeNeckCalibration == 1
+    
+    AnyKinEqSimpleDriver C7_centroid = {
+      AnyKinLinear centroid_pos = {
+        AnyRefFrame &ground = ...Centroids_Calib_Ref;
+        AnyRefFrame &u1 = ...Segs_cervical.C7Seg.Vertebral_orient;     
+        Ref=0;
+      };
+      DriverPos = {..input.C7_x, ..input.C7_y, ..input.C7_z};
+      DriverVel = {0,0,0};
+      Reaction.Type = {On,On,On};
+      CType = {Hard, Hard, Hard};
+    };
+    
+    AnyKinEqSimpleDriver C6_centroid = {
+      AnyKinLinear centroid_pos = {
+        AnyRefFrame &ground = ...Centroids_Calib_Ref;
+        AnyRefFrame &u1 = ...Segs_cervical.C6Seg.Vertebral_orient;   
+        Ref=0;
+      };
+      DriverPos = {..input.C6_x, ..input.C6_y, ..input.C6_z};
+      DriverVel = {0,0,0};
+      Reaction.Type = {On,On,On};
+      CType = {Hard, Hard, Hard};
+     };
+    
+    AnyKinEqSimpleDriver C5_centroid = {
+      AnyKinLinear centroid_pos = {
+        AnyRefFrame &ground = ...Centroids_Calib_Ref;
+        AnyRefFrame &u1 = ...Segs_cervical.C5Seg.Vertebral_orient;    
+        Ref=0;
+      };
+      DriverPos = {..input.C5_x, ..input.C5_y, ..input.C5_z};
+      DriverVel = {0,0,0};
+      Reaction.Type = {On,On,On};
+      CType = {Hard, Hard, Hard};
+    };
+    
+    AnyKinEqSimpleDriver C4_centroid = {
+      AnyKinLinear centroid_pos = {
+        AnyRefFrame &ground = ...Centroids_Calib_Ref;
+        AnyRefFrame &u1 = ...Segs_cervical.C4Seg.Vertebral_orient;     
+        Ref=0;
+      };
+      DriverPos = {..input.C4_x, ..input.C4_y, ..input.C4_z};
+      DriverVel = {0,0,0};
+      Reaction.Type = {On,On,On};
+      CType = {Hard, Hard, Hard};
+    };
+    
+    AnyKinEqSimpleDriver C3_centroid = {
+      AnyKinLinear centroid_pos = {
+        AnyRefFrame &ground = ...Centroids_Calib_Ref;
+        AnyRefFrame &u1 = ...Segs_cervical.C3Seg.Vertebral_orient;     
+        Ref=0;
+      };
+      DriverPos = {..input.C3_x, ..input.C3_y, ..input.C3_z};
+      DriverVel = {0,0,0};
+      Reaction.Type = {On,On,On};
+      CType = {Hard, Hard, Hard};
+    };
+    
+    AnyKinEqSimpleDriver C2_Inf_centroid = {
+      AnyKinLinear centroid_pos = {
+        AnyRefFrame &ground = ...Centroids_Calib_Ref;
+        AnyRefFrame &u1 = ...Segs_cervical.C2Seg.Inf_EP_orient;    
+        Ref=0;
+      };
+      DriverPos = {..input.C2_x, ..input.C2_y, ..input.C2_z};
+      DriverVel = {0,0,0};
+      Reaction.Type = {On,On,On};
+      CType = {Hard, Hard, Hard};
+    };
+    };
+    
+    #endif
+    
+    // ------------------------------------------------
+    // ------------- Rotation drivers -----------------
+    // ------------------------------------------------
+    // --------- set segments orientations ------------
+    // ------------------------------------------------
+    
+    AnyFolder &measures = Main.HumanModel.BodyModel.Trunk.PosturalMeasures;
+    AnyFolder &input = Main.SubjectData.Alignment;
+    
+    
+    AnyKinEqSimpleDriver DriverL5 = {
+      AnyKinMeasure &L5_ref = .measures.L5GlobalRot;
+      DriverPos = {.input.CorAngle_L5, 0, .input.Angle_L5}*pi/180;
+      DriverVel = {0, 0, 0};
+      Reaction.Type = {On, On, On}; 
+    };
+    
+    AnyKinEqSimpleDriver DriverL4 = {
+      AnyKinMeasure &L4_ref = .measures.L4GlobalRot;
+      DriverPos = {.input.CorAngle_L4, 0, .input.Angle_L4}*pi/180;
+      DriverVel = {0, 0, 0};
+      Reaction.Type = {On, On, On}; 
+    };
+    
+    AnyKinEqSimpleDriver DriverL3 = {
+      AnyKinMeasure &L3_ref = .measures.L3GlobalRot;
+      DriverPos = {.input.CorAngle_L3, 0, .input.Angle_L3}*pi/180;
+      DriverVel = {0, 0, 0};
+      Reaction.Type = {On, On, On}; 
+    };
+    
+    AnyKinEqSimpleDriver DriverL2 = {
+      AnyKinMeasure &L2_ref = .measures.L2GlobalRot;
+      DriverPos = {.input.CorAngle_L2, 0, .input.Angle_L2}*pi/180;
+      DriverVel = {0, 0, 0};
+      Reaction.Type = {On, On, On}; 
+    };
+    
+    AnyKinEqSimpleDriver DriverL1 = {
+      AnyKinMeasure &L1_ref = .measures.L1GlobalRot;
+      DriverPos = {.input.CorAngle_L1, 0, .input.Angle_L1}*pi/180;
+      DriverVel = {0, 0, 0};
+      Reaction.Type = {On, On, On}; 
+    };
+    
+    AnyKinEqSimpleDriver DriverT12 = {
+      AnyKinMeasure &T12_ref = .measures.T12GlobalRot;
+      DriverPos = {.input.CorAngle_T12, 0, .input.Angle_T12}*pi/180;
+      DriverVel = {0, 0, 0};
+      Reaction.Type = {On, On, On}; 
+    };
+    
+    AnyKinEqSimpleDriver DriverT11 = {
+      AnyKinMeasure &T11_ref = .measures.T11GlobalRot;
+      DriverPos = {.input.CorAngle_T11, 0, .input.Angle_T11}*pi/180;
+      DriverVel = {0, 0, 0};
+      Reaction.Type = {On, On, On}; 
+    };
+    
+    AnyKinEqSimpleDriver DriverT10 = {
+      AnyKinMeasure &T10_ref = .measures.T10GlobalRot;
+      DriverPos = {.input.CorAngle_T10, 0, .input.Angle_T10}*pi/180;
+      DriverVel = {0, 0, 0};
+      Reaction.Type = {On, On, On}; 
+    };
+    
+    AnyKinEqSimpleDriver DriverT9 = {
+      AnyKinMeasure &T9_ref = .measures.T9GlobalRot;
+      DriverPos = {.input.CorAngle_T9, 0, .input.Angle_T9}*pi/180;
+      DriverVel = {0, 0, 0};
+      Reaction.Type = {On, On, On}; 
+    };
+    
+    AnyKinEqSimpleDriver DriverT8 = {
+      AnyKinMeasure &T8_ref = .measures.T8GlobalRot;
+      DriverPos = {.input.CorAngle_T8, 0, .input.Angle_T8}*pi/180;
+      DriverVel = {0, 0, 0};
+      Reaction.Type = {On, On, On}; 
+    };
+    
+    AnyKinEqSimpleDriver DriverT7 = {
+      AnyKinMeasure &T7_ref = .measures.T7GlobalRot;
+      DriverPos = {.input.CorAngle_T7, 0, .input.Angle_T7}*pi/180;
+      DriverVel = {0, 0, 0};
+      Reaction.Type = {On, On, On}; 
+    };
+    
+    AnyKinEqSimpleDriver DriverT6 = {
+      AnyKinMeasure &T6_ref = .measures.T6GlobalRot;
+      DriverPos = {.input.CorAngle_T6, 0, .input.Angle_T6}*pi/180;
+      DriverVel = {0, 0, 0};
+      Reaction.Type = {On, On, On}; 
+    };
+    
+    AnyKinEqSimpleDriver DriverT5 = {
+      AnyKinMeasure &T5_ref = .measures.T5GlobalRot;
+      DriverPos = {.input.CorAngle_T5, 0, .input.Angle_T5}*pi/180;
+      DriverVel = {0, 0, 0};
+      Reaction.Type = {On, On, On}; 
+    };
+    
+    AnyKinEqSimpleDriver DriverT4 = {
+      AnyKinMeasure &T4_ref = .measures.T4GlobalRot;
+      DriverPos = {.input.CorAngle_T4, 0, .input.Angle_T4}*pi/180;
+      DriverVel = {0, 0, 0};
+      Reaction.Type = {On, On, On}; 
+    };
+    
+    AnyKinEqSimpleDriver DriverT3 = {
+      AnyKinMeasure &T3_ref = .measures.T3GlobalRot;
+      DriverPos = {.input.CorAngle_T3, 0, .input.Angle_T3}*pi/180;
+      DriverVel = {0, 0, 0};
+      Reaction.Type = {On, On, On}; 
+    };
+    
+    AnyKinEqSimpleDriver DriverT2 = {
+      AnyKinMeasure &T2_ref = .measures.T2GlobalRot;
+      DriverPos = {.input.CorAngle_T2, 0, .input.Angle_T2}*pi/180;
+      DriverVel = {0, 0, 0};
+      Reaction.Type = {On, On, On}; 
+    };
+    
+    AnyKinEqSimpleDriver DriverT1 = {
+      AnyKinMeasure &T1_ref = .measures.T1GlobalRot;
+      DriverPos = {.input.CorAngle_T1, 0, .input.Angle_T1}*pi/180;
+      DriverVel = {0, 0, 0};
+      Reaction.Type = {On, On, On}; 
+    };
+    
+   
+    #if IncludeNeckCalibration == 1
+    
+    AnyKinEqSimpleDriver DriverC7 = {
+      AnyKinMeasure &C7_ref = .measures.C7GlobalRot;
+      DriverPos = {.input.CorAngle_C7, 0, .input.Angle_C7}*pi/180;
+      DriverVel = {0, 0, 0};
+      Reaction.Type = {On, On, On}; 
+    };
+    
+    AnyKinEqSimpleDriver DriverC6 = {
+      AnyKinMeasure &C6_ref = .measures.C6GlobalRot;
+      DriverPos = {.input.CorAngle_C6, 0, .input.Angle_C6}*pi/180;
+      DriverVel = {0, 0, 0};
+      Reaction.Type = {On, On, On}; 
+    };
+    
+    AnyKinEqSimpleDriver DriverC5 = {
+      AnyKinMeasure &C5_ref = .measures.C5GlobalRot;
+      DriverPos = {.input.CorAngle_C5, 0, .input.Angle_C5}*pi/180;
+      DriverVel = {0, 0, 0};
+      Reaction.Type = {On, On, On}; 
+    };
+    
+    AnyKinEqSimpleDriver DriverC4 = {
+      AnyKinMeasure &C4_ref = .measures.C4GlobalRot;
+      DriverPos = {.input.CorAngle_C4, 0, .input.Angle_C4}*pi/180;
+      DriverVel = {0, 0, 0};
+      Reaction.Type = {On, On, On}; 
+    };
+    
+    AnyKinEqSimpleDriver DriverC3 = {
+      AnyKinMeasure &C3_ref = .measures.C3GlobalRot;
+      DriverPos = {.input.CorAngle_C3, 0, .input.Angle_C3}*pi/180;
+      DriverVel = {0, 0, 0};
+      Reaction.Type = {On, On, On}; 
+    };
+    
+    AnyKinEqSimpleDriver DriverC2 = {
+      AnyKinMeasure &C2_ref =.measures.C2InferiorRot;
+      DriverPos = {.input.CorAngle_C2, 0, .input.Angle_C2}*pi/180;
+      DriverVel = {0, 0, 0};
+      Reaction.Type = {On, On, On}; 
+    };
+    
+    #endif
+
+    #endif
+    
+
+  };
+};
+
+
+

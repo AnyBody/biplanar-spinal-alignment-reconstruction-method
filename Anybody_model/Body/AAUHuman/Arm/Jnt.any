@@ -1,0 +1,350 @@
+//This is the definition of the joints in the arm
+
+/// Definition of SternoClavicular (SC) joint
+AnySphericalJoint SternoClavicularJoint = {
+  AnyRefNode &thorax_sc = ....Trunk.Segments.SternumSeg._SIDE_.scj;
+  AnyRefNode &clavicula_sc = ..Seg.Clavicula.scj;
+  Orientation = {
+    // These settings are kept to mimic the  
+    // previous implementation.
+    Type = RotAxesAngles;
+    Axis1 = y;
+    Axis2 = z;
+    Axis3 = x;
+  };
+};
+
+
+/// Defintion of Acromial-Clavicular (AC) joint
+AnySphericalJoint AcromioClavicularJoint = {
+  AnyRefNode &clavicula_ac = ..Seg.Clavicula.acj;
+  AnyRefNode &scapula_ac = ..Seg.Scapula.acj;
+  Orientation = {
+    // These settings are kept to mimic the  
+    // previous implementation.
+    Type = RotAxesAngles;
+    Axis1 = y;
+    Axis2 = z;
+    Axis3 = x;
+  };
+
+};
+
+
+/// Definition of GH joint
+AnySphericalJoint GlenoHumeralJoint = {
+  AnyRefNode &scapula_gh = ..Seg.Scapula.gh;
+  AnyRefNode &humerus_gh = ..Seg.Humerus.gh; 
+  //These are the reactions of the GH joint they are normally set to "Off Off Off" if the file 
+  // GHReactions.any is being used, if this is not the case the reactions should be set to "On On On"
+  Constraints.Reaction.Type={Off,Off,Off};
+  Orientation = {
+    // These settings are kept to mimic the  
+    // previous implementation.
+    Type = RotAxesAngles;
+    Axis1 = y;
+    Axis2 = z;
+    Axis3 = y;
+  };
+
+};
+
+//This file includes the glenohumeral reactions created by a number of pushing muscles
+//if this file is not include the normal reactions of the GH joint should be set to "On On On"6
+#include "GHReactions.any"
+
+
+
+
+///Definition of the HumeroUlnarJoint (elbow flexion extension).
+AnyRevoluteJoint HumeroUlnarJoint = {
+  Axis = x;
+  AnyRefNode &HumerusFE = ..Seg.Humerus.fe;
+  AnyRefNode &UlnaFE = ..Seg.Ulna.fe;
+};
+
+
+/// This binds one DOF between humerus and Radius. Since AnyBody
+/// does not have a 5 DOF joint type we implement in manually here.
+AnyFolder HumeroRadialJoint = {
+   AnyKinLinear Linear = {
+     AnyRefNode &RadiusPs = ...Seg.Radius.PointHumeralRadialJoint;
+     AnyRefNode &UlnaPs = ...Seg.Humerus.fe; 
+     Ref = 0;
+   };
+   AnyKinEq Constraints = {
+     AnyKinMeasure& Linear  = .Linear;
+     MeasureOrganizer = {0};
+     // Reactions are implemented explicitly below
+     Reaction.Type = {Off};
+   };
+
+  // Since the previous implementation implemented reaction forces   
+  // between some explicit points 'ps2Reac' we do the same here. 
+   AnyReacForce ReacForce = 
+   {
+     AnyKinMeasureOrg RadiusHumerus = {
+       MeasureOrganizer = {0};
+       AnyKinLinear Lin = 
+       {
+         Ref = 0;
+         AnyRefFrame &Radius = .....Seg.Radius.PS2Reac;
+         AnyRefFrame &Humerus = .....Seg.Humerus.fe;
+       };
+     };
+   };
+
+};
+
+
+AnyTransSphericalJoint ProximalRadioUlnarJoint = { 
+  AnyRefNode &RadiusPs = ..Seg.Radius.PointPS2;
+  AnyRefNode &UlnaPs = ..Seg.Ulna.ps2; 
+  // Reactions are disabled, because the are implemented explicitly below. 
+  Constraints.Reaction.Type={Off,Off};
+  Axis = x;
+  Orientation = {
+    // These settings are kept to mimic the previous  
+    // implementation from the PSRotProximal measure.
+    Axis1 = x;
+    Axis2 = y;
+    Axis3 = z;
+    Type = RotAxesAngles;
+  };
+  
+  // Since the previous implementation implemented reaction forces   
+  // between some explicit points 'ps2Reac' we do the same here. 
+  AnyReacForce ReacForce = 
+  {
+    AnyKinMeasureOrg RadiusUlna = {
+      MeasureOrganizer = {0,2};
+      AnyKinLinear Lin = 
+      {
+        Ref = 0;
+        AnyRefFrame &Ulna = .....Seg.Ulna.ps2Reac;
+        AnyRefFrame &Radius = .....Seg.Radius.PS2Reac;
+      };
+    };
+  };
+
+};
+
+
+
+
+
+
+
+AnyTransSphericalJoint DistalRadioUlnarJoint = {
+    AnyRefNode &UlnaPs = ..Seg.Ulna.ps2_usRot;
+    AnyRefNode &RadiusPs = ..Seg.Radius.PS;
+    Axis = y;
+}; 
+
+
+
+
+
+
+////Definition of wrist joint
+AnyRevoluteJoint WristJointFlexion = {
+  Axis = y; //flexion extension
+  AnyRefNode &radius_wj = ..Seg.Radius.wj;
+  AnyRefNode &hand_wj =..Seg.WristJointSeg.FlexionExtensionAxis;
+};//End WristJoint
+
+AnyRevoluteJoint WristJointDeviation = {
+  Axis = z; //radial ulnar deviation
+  AnyRefNode &radius_wj = ..Seg.WristJointSeg.RadialUlnarDeviation;
+  AnyRefNode &hand_wj =..Seg.Hand.HandRef.wj;
+};//End WristJoint
+
+
+
+//Scapula thorax gliding plane
+
+#if BM_ARM_THORAX_SCAPULA_CONTACT == _MULTIPLE_POINT_CONTACT_
+
+#include "EllipsoidsForMultiPointScapulaContact.any"
+ 
+AnyKinMeasureExpComb ScapulaAIThoraxMeasure = 
+{
+  // A large negative number for the exponential combination measures causes
+  // the measure to put emphasis on the "penetration" of the points,
+  // while "ignoring" points far from the surface.
+  a ??= -400;
+  AnyKinPointSurface m1 = {
+    #include "ThoraxScapulaContactPoints.any"
+    AnyFolder &surf3 = ...Seg.Scapula.Ellipsoid_0.ellipsoid;
+  };
+  AnyKinPointSurface m2 = {
+    #include "ThoraxScapulaContactPoints.any"
+    AnyFolder &surf3 = ...Seg.Scapula.Ellipsoid_2.ellipsoid;
+  };
+  AnyKinPointSurface m3 = {
+    #include "ThoraxScapulaContactPoints.any"
+    AnyFolder &surf3 = ...Seg.Scapula.Ellipsoid_3.ellipsoid;
+  };
+  AnyKinPointSurface m4 = {
+    #include "ThoraxScapulaContactPoints.any"
+    AnyFolder &surf3 = ...Seg.Scapula.Ellipsoid_4.ellipsoid;
+  };
+  AnyKinPointSurface m5 = {
+    #include "ThoraxScapulaContactPoints.any"
+    AnyFolder &surf3 = ...Seg.Scapula.Ellipsoid_5.ellipsoid;
+  };
+  AnyKinPointSurface m6 = {
+    #include "ThoraxScapulaContactPoints.any"
+    AnyFolder &surf3 = ...Seg.Scapula.Ellipsoid_6.ellipsoid;
+  };
+};
+
+AnyKinEqSimpleDriver ScapulaAIThoraxNodeDriver = 
+{  
+  AnyKinMeasure &Measure1 = .ScapulaAIThoraxMeasure;
+  DriverPos = {0};
+  DriverVel = {0};
+  Reaction.Type = {Off};
+};
+
+
+// Driver on this measures is in the "ScapulaConoideumDriver.any" include
+// It is only applied when the shoulder rhythm is disabled.
+AnyKinMeasureExpComb ScapulaTSThoraxMeasure =
+{
+  a ??= .ScapulaAIThoraxMeasure.a;
+  AnyKinPointSurface m1 = {
+    #include "ThoraxScapulaContactPoints.any"
+    AnyFolder &surf3 = ...Seg.Scapula.Ellipsoid_1.ellipsoid;
+  };
+ };
+ 
+#endif
+
+
+
+
+#if BM_ARM_THORAX_SCAPULA_CONTACT == _ELLIPSOID_CONTACT_
+
+AnyKinEqSimpleDriver ScapulaAIThoraxNodeDriver = {
+  
+  AnyKinPointSurface Measure1 = {
+    AnyRefFrame &r1 = ...Seg.Scapula.ScapulaSlidingAI;
+    AnySurface &s1 = ...ThoraxSegRef.ScapulaContactSurface.ScapulaEllipsoidOrigin.Elipse;
+  };
+  
+  DriverPos = {0};
+  DriverVel = {0};
+  Reaction.Type = {Off};
+};
+
+#endif
+
+
+
+  AnyReacForce ScapulaAIThorax_ContactReaction = {
+    Type = NonNegative;
+    AnyKinMeasure &ref=.ScapulaAIThoraxNodeDriver.Measure1 ;
+  };
+
+
+
+//Simple muscle model 
+AnyMuscleModel ReactionMuscle = {
+  F0 = 5000;
+  /// This must have a value to work with volume weighted recruitment
+  Vol0=1e-6; 
+};
+
+
+
+//Definitions of ligaments
+AnyKinPLine ConoideumLigament = {
+  AnyRefNode &scapula = ..Seg.Scapula.conoid;
+  AnyRefNode &clavicle = ..Seg.Clavicula.conoid;   
+  AnyDrawPLine drwline= {Thickness=0.005;RGB={1,0,0};};
+};
+
+//Artificial muscle will produce reaction in the ligament
+AnyMuscleViaPoint ConoidLigamentReaction = {
+  AnyRefNode &scapula = ..Seg.Scapula.conoid;
+  AnyRefNode &clavicle = ..Seg.Clavicula.conoid; 
+  AnyMuscleModel &ref = .ReactionMuscle; 
+  viewMuscle = {RGB={0,0,1};MaxStress = 75000000.000000;};
+  EXCLUDE_MUSCLE_METABOLISM
+   
+};
+//Artificial muscle will produce reaction in the ligament
+AnyMuscleViaPoint TrapezoidLigamentReaction = {
+  AnyRefNode &scapula = ..Seg.Scapula.trapezoid;
+  AnyRefNode &clavicle = ..Seg.Clavicula.trapezoid;   
+  AnyMuscleModel &ref = .ReactionMuscle; 
+  viewMuscle = {RGB={0,0,1};MaxStress = 75000000.000000;};
+  EXCLUDE_MUSCLE_METABOLISM
+   
+};
+
+
+
+
+#if BM_ARM_THORAX_SCAPULA_CONTACT == _ELLIPSOID_CONTACT_
+
+//measure needs to always exist 
+AnyKinPointSurface  ScapulaTSThoraxMeasure = {
+    AnyRefFrame &r1 = ..Seg.Scapula.ScapulaSlidingTS;
+    AnySurface &s1 = ..ThoraxSegRef.ScapulaContactSurface.ScapulaEllipsoidOrigin.Elipse;
+  };
+
+#endif
+
+AnyReacForce ScapulaTSThorax_ContactReaction = {
+  Type = NonNegative;
+  AnyKinMeasure &ref=.ScapulaTSThoraxMeasure ;
+};  
+
+#if BM_ARM_CLAVICULA_ROTATION_RHYTHM
+/// Rhythm to distribute axial rotation of the clavicula 
+/// equally between sterno-clavicula  and acromio-clavicual joint
+AnyKinEq SternoClavicularRotationRhythm  = 
+{
+  AnyKinMeasureLinComb CombinedMeasure = 
+  {
+    AnyKinMeasure& SC = ...InterfaceFolder.SternoClavicular.BackwardAxialRotation;
+    AnyKinMeasure& AC = ...InterfaceFolder.AcromioClavicular.PosteriorTilt;
+    Coef = {{1,-1}};
+    OutDim = 1;
+  };
+
+  // Use a template to create the weight function, so
+  // the weight values can be overridden by the user. 
+  Template_AnyFunConst Weights (NUMBER_OF_ELEMENTS=..nDim) = {};
+  WeightFun ={&Weights.Fun};
+  #if (BM_ARM_SHOULDER_RHYTHM == _RHYTHM_SOFT_) | (BM_ARM_CLAVICULA_ROTATION_RHYTHM == _RHYTHM_SOFT_)
+  CType= repmat(nDim,Soft);
+  #endif
+
+};
+#endif
+
+
+
+ #include "ScapulaConoideumDriver.any"
+  
+
+#if BM_ARM_SHOULDER_RHYTHM
+
+  #include "ShoulderRhythm.any"
+
+#endif
+
+
+// Deprecated, Use the name HumeroUlnarJoint instead. Left here for backwards Compatibility.
+AnyFolder &FE = HumeroUlnarJoint;
+
+
+/// Deprecated. Please use the forearm rotation measure
+/// in the interface folder. Left here for backwards compatibility. 
+AnyKinMeasureOrg PS = {
+  AnyKinRotational &Jnt = .ProximalRadioUlnarJoint.Orientation;
+  MeasureOrganizer = {0};
+};

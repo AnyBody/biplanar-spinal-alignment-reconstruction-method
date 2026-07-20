@@ -1,0 +1,531 @@
+AnyFolder DefineJointPositions = {
+  
+  //SacrumPelvis joint node
+  AnyOperationSetValue SetJntPos_SacrumPelvis = {
+    
+    AnyFolder &SegSup = Main.HumanModel.BodyModel.Trunk.Segments.SacrumSeg;
+    AnyFolder &SegInf = Main.HumanModel.BodyModel.Trunk.Segments.PelvisSeg;
+    
+    AnyFolder &SegSupJnt = SegSup.SacrumPelvisJntNode;
+    AnyFolder &SegInfJnt = SegInf.PelvisSacrumJntNode;
+    
+    AnyVec3 HalfDistance = (SegSupJnt.r - SegInfJnt.r)*0.5; 
+       
+    AnyVec3 sup_jnt_node_pos = SegSupJnt.sRel - HalfDistance * SegSup.Axes;
+    AnyVec3 inf_jnt_node_pos = SegInfJnt.sRel +  HalfDistance * SegInf.Axes;
+    
+    Source = {&sup_jnt_node_pos, &inf_jnt_node_pos};
+    
+    Target = {&SegSupJnt.sRel, &SegInfJnt.sRel};
+    
+  }; //SetJntPos_SacrumPelvis
+
+  
+  
+  //L5Sacrum joint node
+  AnyOperationSetValue SetJntPos_L5Sacrum = {
+    
+    AnyFolder &SegSup = Main.HumanModel.BodyModel.Trunk.Segments.L5Seg;
+    AnyFolder &SegInf = Main.HumanModel.BodyModel.Trunk.Segments.SacrumSeg;
+    
+    AnyFolder &SegSupJnt = SegSup.L5SacrumJntNode;
+    AnyFolder &SegInfJnt = SegInf.SacrumL5JntNode;
+    
+    AnyVec3 HalfDistance = (SegSupJnt.r - SegInfJnt.r)*0.5; 
+       
+    AnyVec3 sup_jnt_node_pos = SegSupJnt.sRel - HalfDistance * SegSup.Axes;
+    AnyVec3 inf_jnt_node_pos = SegInfJnt.sRel +  HalfDistance * SegInf.Axes;
+    
+    Source = {&sup_jnt_node_pos, &inf_jnt_node_pos};
+    
+    Target = {&SegSupJnt.sRel, &SegInfJnt.sRel};
+    
+  }; //SetJntPos_L5Sacrum
+  
+  
+  
+  //L4L5 joint node
+  AnyOperationSetValue SetJntPos_L4L5 = {
+    
+    AnyFolder &SegSup = Main.HumanModel.BodyModel.Trunk.Segments.L4Seg;
+    AnyFolder &SegInf = Main.HumanModel.BodyModel.Trunk.Segments.L5Seg;
+    
+    AnyFolder &SegSupJnt = SegSup.L4L5JntNode;
+    AnyFolder &SegInfJnt = SegInf.L4L5JntNode;
+    
+    AnyVec3 HalfDistance = (SegSupJnt.r - SegInfJnt.r)*0.5; 
+      
+    AnyVec3 sup_jnt_node_pos = SegSupJnt.sRel - HalfDistance * SegSup.Axes;
+    AnyVec3 inf_jnt_node_pos = SegInfJnt.sRel +  HalfDistance * SegInf.Axes;
+
+    Source = {&sup_jnt_node_pos, &inf_jnt_node_pos};
+    
+    Target = {&SegSupJnt.sRel, &SegInfJnt.sRel};
+    
+  }; //SetJntPos_L4L5
+  
+  
+  
+  //L3L4 joint node
+  AnyOperationSetValue SetJntPos_L3L4 = {
+    
+    AnyFolder &SegSup = Main.HumanModel.BodyModel.Trunk.Segments.L3Seg;
+    AnyFolder &SegInf = Main.HumanModel.BodyModel.Trunk.Segments.L4Seg;
+    
+    AnyFolder &SegSupJnt = SegSup.L3L4JntNode;
+    AnyFolder &SegInfJnt = SegInf.L3L4JntNode;
+    
+    AnyVec3 HalfDistance = (SegSupJnt.r - SegInfJnt.r)*0.5; 
+    
+    AnyVec3 sup_jnt_node_pos = SegSupJnt.sRel - HalfDistance * SegSup.Axes;
+    AnyVec3 inf_jnt_node_pos = SegInfJnt.sRel +  HalfDistance * SegInf.Axes;
+    
+    Source = {&sup_jnt_node_pos, &inf_jnt_node_pos};
+    
+    Target = {&SegSupJnt.sRel, &SegInfJnt.sRel};
+    
+  }; //SetJntPos_L3L4
+  
+  
+  
+  //L2L3 joint node
+  AnyOperationSetValue SetJntPos_L2L3 = {
+    
+    AnyFolder &SegSup = Main.HumanModel.BodyModel.Trunk.Segments.L2Seg;
+    AnyFolder &SegInf = Main.HumanModel.BodyModel.Trunk.Segments.L3Seg;
+    
+    AnyFolder &SegSupJnt = SegSup.L2L3JntNode;
+    AnyFolder &SegInfJnt = SegInf.L2L3JntNode;
+    
+    AnyVec3 HalfDistance = (SegSupJnt.r - SegInfJnt.r)*0.5; 
+    
+    AnyVec3 sup_jnt_node_pos = SegSupJnt.sRel - HalfDistance * SegSup.Axes;
+    AnyVec3 inf_jnt_node_pos = SegInfJnt.sRel +  HalfDistance * SegInf.Axes;
+    
+    Source = {&sup_jnt_node_pos, &inf_jnt_node_pos};
+    
+    Target = {&SegSupJnt.sRel, &SegInfJnt.sRel};
+    
+  }; //SetJntPos_L2L3
+  
+  
+  
+  //L1L2 joint node
+  AnyOperationSetValue SetJntPos_L1L2 = {
+    
+    AnyFolder &SegSup = Main.HumanModel.BodyModel.Trunk.Segments.L1Seg;
+    AnyFolder &SegInf = Main.HumanModel.BodyModel.Trunk.Segments.L2Seg;
+    
+    AnyFolder &SegSupJnt = SegSup.L1L2JntNode;
+    AnyFolder &SegInfJnt = SegInf.L1L2JntNode;
+    
+    AnyVec3 HalfDistance = (SegSupJnt.r - SegInfJnt.r)*0.5; 
+    
+    AnyVec3 sup_jnt_node_pos = SegSupJnt.sRel - HalfDistance * SegSup.Axes;
+    AnyVec3 inf_jnt_node_pos = SegInfJnt.sRel +  HalfDistance * SegInf.Axes;
+    
+    Source = {&sup_jnt_node_pos, &inf_jnt_node_pos};
+    
+    Target = {&SegSupJnt.sRel, &SegInfJnt.sRel};
+    
+  }; //SetJntPos_L1L2
+  
+  
+  
+  //T12L1 joint node
+  AnyOperationSetValue SetJntPos_T12L1 = {
+    
+    AnyFolder &SegSup = Main.HumanModel.BodyModel.Trunk.Segments.T12Seg;
+    AnyFolder &SegInf = Main.HumanModel.BodyModel.Trunk.Segments.L1Seg;
+    
+    AnyFolder &SegSupJnt = SegSup.T12L1JntNode;
+    AnyFolder &SegInfJnt = SegInf.T12L1JntNode;
+    
+    AnyVec3 HalfDistance = (SegSupJnt.r - SegInfJnt.r)*0.5;
+    
+    AnyVec3 sup_jnt_node_pos = SegSupJnt.sRel - HalfDistance * SegSup.Axes;
+    AnyVec3 inf_jnt_node_pos = SegInfJnt.sRel +  HalfDistance * SegInf.Axes;
+    
+    Source = {&sup_jnt_node_pos, &inf_jnt_node_pos};
+    
+    Target = {&SegSupJnt.sRel, &SegInfJnt.sRel};
+    
+  }; //SetJntPos_T12L1
+  
+  
+  
+  //T11T12 joint node
+  AnyOperationSetValue SetJntPos_T11T12 = {
+    
+    AnyFolder &SegSup = Main.HumanModel.BodyModel.Trunk.Segments.T11Seg;
+    AnyFolder &SegInf = Main.HumanModel.BodyModel.Trunk.Segments.T12Seg;
+    
+    AnyFolder &SegSupJnt = SegSup.T11T12JntNode;
+    AnyFolder &SegInfJnt = SegInf.T11T12JntNode;
+    
+    AnyVec3 HalfDistance = (SegSupJnt.r - SegInfJnt.r)*0.5; 
+    
+    AnyVec3 sup_jnt_node_pos = SegSupJnt.sRel - HalfDistance * SegSup.Axes;
+    AnyVec3 inf_jnt_node_pos = SegInfJnt.sRel + HalfDistance * SegInf.Axes;
+    
+    Source = {&sup_jnt_node_pos, &inf_jnt_node_pos};
+    
+    Target = {&SegSupJnt.sRel, &SegInfJnt.sRel};
+    
+  }; //SetJntPos_T11T12
+  
+  
+  
+  //T10T11 joint node
+  AnyOperationSetValue SetJntPos_T10T11 = {
+    
+    AnyFolder &SegSup = Main.HumanModel.BodyModel.Trunk.Segments.T10Seg;
+    AnyFolder &SegInf = Main.HumanModel.BodyModel.Trunk.Segments.T11Seg;
+    
+    AnyFolder &SegSupJnt = SegSup.T10T11JntNode;
+    AnyFolder &SegInfJnt = SegInf.T10T11JntNode;
+    
+    AnyVec3 HalfDistance = (SegSupJnt.r - SegInfJnt.r)*0.5; 
+    
+    AnyVec3 sup_jnt_node_pos = SegSupJnt.sRel - HalfDistance * SegSup.Axes;
+    AnyVec3 inf_jnt_node_pos = SegInfJnt.sRel +  HalfDistance * SegInf.Axes;
+    
+    Source = {&sup_jnt_node_pos, &inf_jnt_node_pos};
+    
+    Target = {&SegSupJnt.sRel, &SegInfJnt.sRel};
+    
+  }; //SetJntPos_T10T11
+  
+  
+  
+  //T9T10 joint node
+  AnyOperationSetValue SetJntPos_T9T10 = {
+    
+    AnyFolder &SegSup = Main.HumanModel.BodyModel.Trunk.Segments.T9Seg;
+    AnyFolder &SegInf = Main.HumanModel.BodyModel.Trunk.Segments.T10Seg;
+    
+    AnyFolder &SegSupJnt = SegSup.T9T10JntNode;
+    AnyFolder &SegInfJnt = SegInf.T9T10JntNode;
+    
+    AnyVec3 HalfDistance = (SegSupJnt.r - SegInfJnt.r)*0.5; 
+    
+    AnyVec3 sup_jnt_node_pos = SegSupJnt.sRel - HalfDistance * SegSup.Axes;
+    AnyVec3 inf_jnt_node_pos = SegInfJnt.sRel +  HalfDistance * SegInf.Axes;
+    
+    Source = {&sup_jnt_node_pos, &inf_jnt_node_pos};
+    
+    Target = {&SegSupJnt.sRel, &SegInfJnt.sRel};
+    
+  }; //SetJntPos_T9T10
+  
+  
+  
+  //T8T9 joint node
+  AnyOperationSetValue SetJntPos_T8T9 = {
+    
+    AnyFolder &SegSup = Main.HumanModel.BodyModel.Trunk.Segments.T8Seg;
+    AnyFolder &SegInf = Main.HumanModel.BodyModel.Trunk.Segments.T9Seg;
+    
+    AnyFolder &SegSupJnt = SegSup.T8T9JntNode;
+    AnyFolder &SegInfJnt = SegInf.T8T9JntNode;
+    
+    AnyVec3 HalfDistance = (SegSupJnt.r - SegInfJnt.r)*0.5; 
+    
+    AnyVec3 sup_jnt_node_pos = SegSupJnt.sRel - HalfDistance * SegSup.Axes;
+    AnyVec3 inf_jnt_node_pos = SegInfJnt.sRel +  HalfDistance * SegInf.Axes;
+    
+    Source = {&sup_jnt_node_pos, &inf_jnt_node_pos};
+    
+    Target = {&SegSupJnt.sRel, &SegInfJnt.sRel};
+    
+  }; //SetJntPos_T8T9
+  
+  
+  
+  //T7T8 joint node
+  AnyOperationSetValue SetJntPos_T7T8 = {
+    
+    AnyFolder &SegSup = Main.HumanModel.BodyModel.Trunk.Segments.T7Seg;
+    AnyFolder &SegInf = Main.HumanModel.BodyModel.Trunk.Segments.T8Seg;
+    
+    AnyFolder &SegSupJnt = SegSup.T7T8JntNode;
+    AnyFolder &SegInfJnt = SegInf.T7T8JntNode;
+    
+    AnyVec3 HalfDistance = (SegSupJnt.r - SegInfJnt.r)*0.5;
+    
+    AnyVec3 sup_jnt_node_pos = SegSupJnt.sRel - HalfDistance * SegSup.Axes;
+    AnyVec3 inf_jnt_node_pos = SegInfJnt.sRel +  HalfDistance * SegInf.Axes;
+    
+    Source = {&sup_jnt_node_pos, &inf_jnt_node_pos};
+    
+    Target = {&SegSupJnt.sRel, &SegInfJnt.sRel};
+    
+  }; //SetJntPos_T7T8
+  
+  
+  
+  //T6T7 joint node
+  AnyOperationSetValue SetJntPos_T6T7 = {
+    
+    AnyFolder &SegSup = Main.HumanModel.BodyModel.Trunk.Segments.T6Seg;
+    AnyFolder &SegInf = Main.HumanModel.BodyModel.Trunk.Segments.T7Seg;
+    
+    AnyFolder &SegSupJnt = SegSup.T6T7JntNode;
+    AnyFolder &SegInfJnt = SegInf.T6T7JntNode;
+    
+    AnyVec3 HalfDistance = (SegSupJnt.r - SegInfJnt.r)*0.5; 
+    
+    AnyVec3 sup_jnt_node_pos = SegSupJnt.sRel - HalfDistance * SegSup.Axes;
+    AnyVec3 inf_jnt_node_pos = SegInfJnt.sRel +  HalfDistance * SegInf.Axes;
+    
+    Source = {&sup_jnt_node_pos, &inf_jnt_node_pos};
+    
+    Target = {&SegSupJnt.sRel, &SegInfJnt.sRel};
+    
+  }; //SetJntPos_T6T7
+  
+  
+  
+  //T5T6 joint node
+  AnyOperationSetValue SetJntPos_T5T6 = {
+    
+    AnyFolder &SegSup = Main.HumanModel.BodyModel.Trunk.Segments.T5Seg;
+    AnyFolder &SegInf = Main.HumanModel.BodyModel.Trunk.Segments.T6Seg;
+    
+    AnyFolder &SegSupJnt = SegSup.T5T6JntNode;
+    AnyFolder &SegInfJnt = SegInf.T5T6JntNode;
+    
+    AnyVec3 HalfDistance = (SegSupJnt.r - SegInfJnt.r)*0.5; 
+    
+    AnyVec3 sup_jnt_node_pos = SegSupJnt.sRel - HalfDistance * SegSup.Axes;
+    AnyVec3 inf_jnt_node_pos = SegInfJnt.sRel +  HalfDistance * SegInf.Axes;
+    
+    Source = {&sup_jnt_node_pos, &inf_jnt_node_pos};
+    
+    Target = {&SegSupJnt.sRel, &SegInfJnt.sRel};
+    
+  }; //SetJntPos_T5T6
+  
+  
+  
+  //T4T5 joint node
+  AnyOperationSetValue SetJntPos_T4T5 = {
+    
+    AnyFolder &SegSup = Main.HumanModel.BodyModel.Trunk.Segments.T4Seg;
+    AnyFolder &SegInf = Main.HumanModel.BodyModel.Trunk.Segments.T5Seg;
+    
+    AnyFolder &SegSupJnt = SegSup.T4T5JntNode;
+    AnyFolder &SegInfJnt = SegInf.T4T5JntNode;
+    
+    AnyVec3 HalfDistance = (SegSupJnt.r - SegInfJnt.r)*0.5; 
+    
+    AnyVec3 sup_jnt_node_pos = SegSupJnt.sRel - HalfDistance * SegSup.Axes;
+    AnyVec3 inf_jnt_node_pos = SegInfJnt.sRel +  HalfDistance * SegInf.Axes;
+    
+    Source = {&sup_jnt_node_pos, &inf_jnt_node_pos};
+    
+    Target = {&SegSupJnt.sRel, &SegInfJnt.sRel};
+    
+  }; //SetJntPos_T4T5
+  
+  
+  
+  //T3T4 joint node
+  AnyOperationSetValue SetJntPos_T3T4 = {
+    
+    AnyFolder &SegSup = Main.HumanModel.BodyModel.Trunk.Segments.T3Seg;
+    AnyFolder &SegInf = Main.HumanModel.BodyModel.Trunk.Segments.T4Seg;
+    
+    AnyFolder &SegSupJnt = SegSup.T3T4JntNode;
+    AnyFolder &SegInfJnt = SegInf.T3T4JntNode;
+    
+    AnyVec3 HalfDistance = (SegSupJnt.r - SegInfJnt.r)*0.5; 
+    
+    AnyVec3 sup_jnt_node_pos = SegSupJnt.sRel - HalfDistance * SegSup.Axes;
+    AnyVec3 inf_jnt_node_pos = SegInfJnt.sRel +  HalfDistance * SegInf.Axes;
+    
+    Source = {&sup_jnt_node_pos, &inf_jnt_node_pos};
+    
+    Target = {&SegSupJnt.sRel, &SegInfJnt.sRel};
+    
+  }; //SetJntPos_T3T4
+  
+  
+  
+  //T2T3 joint node
+  AnyOperationSetValue SetJntPos_T2T3 = {
+    
+    AnyFolder &SegSup = Main.HumanModel.BodyModel.Trunk.Segments.T2Seg;
+    AnyFolder &SegInf = Main.HumanModel.BodyModel.Trunk.Segments.T3Seg;
+    
+    AnyFolder &SegSupJnt = SegSup.T2T3JntNode;
+    AnyFolder &SegInfJnt = SegInf.T2T3JntNode;
+    
+    AnyVec3 HalfDistance = (SegSupJnt.r - SegInfJnt.r)*0.5;
+    
+    AnyVec3 sup_jnt_node_pos = SegSupJnt.sRel - HalfDistance * SegSup.Axes;
+    AnyVec3 inf_jnt_node_pos = SegInfJnt.sRel +  HalfDistance * SegInf.Axes;
+    
+    Source = {&sup_jnt_node_pos, &inf_jnt_node_pos};
+    
+    Target = {&SegSupJnt.sRel, &SegInfJnt.sRel};
+    
+  }; //SetJntPos_T2T3
+  
+  
+  
+  //T1T2 joint node
+  AnyOperationSetValue SetJntPos_T1T2 = {
+    
+    AnyFolder &SegSup = Main.HumanModel.BodyModel.Trunk.Segments.T1Seg;
+    AnyFolder &SegInf = Main.HumanModel.BodyModel.Trunk.Segments.T2Seg;
+    
+    AnyFolder &SegSupJnt = SegSup.T1T2JntNode;
+    AnyFolder &SegInfJnt = SegInf.T1T2JntNode;
+    
+    AnyVec3 HalfDistance = (SegSupJnt.r - SegInfJnt.r)*0.5; 
+
+    AnyVec3 sup_jnt_node_pos = SegSupJnt.sRel - HalfDistance * SegSup.Axes;
+    AnyVec3 inf_jnt_node_pos = SegInfJnt.sRel +  HalfDistance * SegInf.Axes;
+    
+    Source = {&sup_jnt_node_pos, &inf_jnt_node_pos};
+    
+    Target = {&SegSupJnt.sRel, &SegInfJnt.sRel};
+    
+  }; //SetJntPos_T1T2
+  
+  
+    
+  //C7T1 joint node
+  AnyOperationSetValue SetJntPos_C7T1 = {
+    
+    AnyFolder &SegSup = Main.HumanModel.BodyModel.Trunk.Segments.C7Seg;
+    AnyFolder &SegInf = Main.HumanModel.BodyModel.Trunk.Segments.T1Seg;
+    
+    AnyFolder &SegSupJnt = SegSup.T1C7JntNode;
+    AnyFolder &SegInfJnt = SegInf.T1C7JntNode;
+    
+    AnyVec3 HalfDistance = (SegSupJnt.r - SegInfJnt.r)*0.5; 
+    
+    AnyVec3 sup_jnt_node_pos = SegSupJnt.sRel - HalfDistance * SegSup.Axes;
+    AnyVec3 inf_jnt_node_pos = SegInfJnt.sRel +  HalfDistance * SegInf.Axes;
+    
+    Source = {&sup_jnt_node_pos, &inf_jnt_node_pos};
+
+    Target = {&SegSupJnt.sRel, &SegInfJnt.sRel};
+       
+    }; //SetJntPos_C7T1
+    
+    
+  
+  //C6C7 joint node
+  AnyOperationSetValue SetJntPos_C6C7 = {
+    
+    AnyFolder &SegSup = Main.HumanModel.BodyModel.Trunk.Segments.C6Seg;
+    AnyFolder &SegInf = Main.HumanModel.BodyModel.Trunk.Segments.C7Seg;
+    
+    AnyFolder &SegSupJnt = SegSup.C7C6JntNode;
+    AnyFolder &SegInfJnt = SegInf.C7C6JntNode;
+    
+    AnyVec3 HalfDistance = (SegSupJnt.r - SegInfJnt.r)*0.5; 
+    
+    AnyVec3 sup_jnt_node_pos = SegSupJnt.sRel - HalfDistance * SegSup.Axes;
+    AnyVec3 inf_jnt_node_pos = SegInfJnt.sRel +  HalfDistance * SegInf.Axes;
+    
+    Source = {&sup_jnt_node_pos, &inf_jnt_node_pos};
+    
+    Target = {&SegSupJnt.sRel, &SegInfJnt.sRel};
+    
+  }; //SetJntPos_C6C7
+  
+  
+  
+  //C5C6 joint node
+  AnyOperationSetValue SetJntPos_C5C6 = {
+    
+    AnyFolder &SegSup = Main.HumanModel.BodyModel.Trunk.Segments.C5Seg;
+    AnyFolder &SegInf = Main.HumanModel.BodyModel.Trunk.Segments.C6Seg;
+    
+    AnyFolder &SegSupJnt = SegSup.C6C5JntNode;
+    AnyFolder &SegInfJnt = SegInf.C6C5JntNode;
+    
+    AnyVec3 HalfDistance = (SegSupJnt.r - SegInfJnt.r)*0.5; 
+    
+    AnyVec3 sup_jnt_node_pos = SegSupJnt.sRel - HalfDistance * SegSup.Axes;
+    AnyVec3 inf_jnt_node_pos = SegInfJnt.sRel +  HalfDistance * SegInf.Axes;
+    
+    Source = {&sup_jnt_node_pos, &inf_jnt_node_pos};
+    
+    Target = {&SegSupJnt.sRel, &SegInfJnt.sRel};
+    
+  }; //SetJntPos_C5C6
+  
+  
+  
+   //C4C5 joint node
+   AnyOperationSetValue SetJntPos_C4C5 = {
+    
+    AnyFolder &SegSup = Main.HumanModel.BodyModel.Trunk.Segments.C4Seg;
+    AnyFolder &SegInf = Main.HumanModel.BodyModel.Trunk.Segments.C5Seg;
+    
+    AnyFolder &SegSupJnt = SegSup.C5C4JntNode;
+    AnyFolder &SegInfJnt = SegInf.C5C4JntNode;
+    
+    AnyVec3 HalfDistance = (SegSupJnt.r - SegInfJnt.r)*0.5; 
+    
+    AnyVec3 sup_jnt_node_pos = SegSupJnt.sRel - HalfDistance * SegSup.Axes;
+    AnyVec3 inf_jnt_node_pos = SegInfJnt.sRel +  HalfDistance * SegInf.Axes;
+    
+    Source = {&sup_jnt_node_pos, &inf_jnt_node_pos};
+    
+    Target = {&SegSupJnt.sRel, &SegInfJnt.sRel};
+    
+  }; //SetJntPos_C4C5
+  
+  
+  
+  //C3C4 joint node
+   AnyOperationSetValue SetJntPos_C3C4 = {
+    
+    AnyFolder &SegSup = Main.HumanModel.BodyModel.Trunk.Segments.C3Seg;
+    AnyFolder &SegInf = Main.HumanModel.BodyModel.Trunk.Segments.C4Seg;
+    
+    AnyFolder &SegSupJnt = SegSup.C4C3JntNode;
+    AnyFolder &SegInfJnt = SegInf.C4C3JntNode;
+    
+    AnyVec3 HalfDistance = (SegSupJnt.r - SegInfJnt.r)*0.5; 
+    
+    AnyVec3 sup_jnt_node_pos = SegSupJnt.sRel - HalfDistance * SegSup.Axes;
+    AnyVec3 inf_jnt_node_pos = SegInfJnt.sRel +  HalfDistance * SegInf.Axes;
+    
+    Source = {&sup_jnt_node_pos, &inf_jnt_node_pos};
+
+    Target = {&SegSupJnt.sRel, &SegInfJnt.sRel};
+    
+  }; //SetJntPos_C3C4
+  
+  
+  
+  //C3C4 joint node
+   AnyOperationSetValue SetJntPos_C2C3 = {
+    
+    AnyFolder &SegSup = Main.HumanModel.BodyModel.Trunk.Segments.C2Seg;
+    AnyFolder &SegInf = Main.HumanModel.BodyModel.Trunk.Segments.C3Seg;
+    
+    AnyFolder &SegSupJnt = SegSup.C3C2JntNode;
+    AnyFolder &SegInfJnt = SegInf.C3C2JntNode;
+    
+    AnyVec3 HalfDistance = (SegSupJnt.r - SegInfJnt.r)*0.5; 
+    
+    AnyVec3 sup_jnt_node_pos = SegSupJnt.sRel - HalfDistance * SegSup.Axes;
+    AnyVec3 inf_jnt_node_pos = SegInfJnt.sRel +  HalfDistance * SegInf.Axes;
+
+    Source = {&sup_jnt_node_pos, &inf_jnt_node_pos};
+    
+    Target = {&SegSupJnt.sRel, &SegInfJnt.sRel};
+    
+  }; //SetJntPos_C2C3
+
+
+ 
+}; //DefineJointPositions

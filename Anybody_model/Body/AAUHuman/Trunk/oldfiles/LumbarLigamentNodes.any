@@ -1,0 +1,340 @@
+
+// #include "Kyphosis.any"
+
+// Definition of lumbar ligament attachment points
+Main.HumanModel.BodyModel.Trunk.Segments.T12Seg= {
+  
+  AnyRefNode ALLNodeInferior = {sRel = .Scale({0.038,0.166,0});};
+  AnyRefNode ALLNodeSuperior = {sRel = .Scale({0.029,0.188,0});};
+  // posterior longitudinal
+  AnyRefNode PLLNodeInferior = {sRel = .Scale({0.009,0.152,0});}; //on T12
+  //    AnyRefNode PLLViaNode = {sRel = .Scale({0.004,0.164,0});}; //on T12
+  AnyRefNode PLLNodeSuperior = {sRel = .Scale({-0.001,0.177,0});}; //on T11
+  
+  //Capsular Ligament
+  AnyRefNode CR1NodeInferior = {sRel = .Scale({-0.00692,0.145,0.0147});};//on T12
+  AnyRefNode CR2NodeInferior = {sRel = .Scale({-0.00661,0.1329,0.0154});};//on T12      
+  AnyRefNode CR3NodeInferior = {sRel = .Scale({-0.0033146,0.14419781,0.0126026});};//on T12
+  AnyRefNode CR4NodeInferior = {sRel = .Scale({-0.00461,0.13278,0.007866});};//on T12
+  AnyRefNode CL1NodeInferior = {sRel = .Scale({-0.00692,0.145,-0.0147});};//on T12
+  AnyRefNode CL2NodeInferior = {sRel = .Scale({-0.00661,0.1329,-0.0154});};//on T12      
+  AnyRefNode CL3NodeInferior = {sRel = .Scale({-0.0033146,0.14419781,-0.0126026});};//on T12
+  AnyRefNode CL4NodeInferior = {sRel = .Scale({-0.00461,0.13278,-0.007866});};//on T12
+  //End Capsular Ligaments
+  
+  // inter/supraspinous
+  AnyRefNode InterspinousInferior = {sRel = .Scale({-0.016,0.131,0});}; 
+  AnyRefNode InterspinousSuperior = {sRel = .Scale({-0.023,0.146,0});};  
+  AnyRefNode SupraspinousInferior = {sRel = .Scale({-0.028,0.126,0});};
+  AnyRefNode SupraspinousSuperior = {sRel = .Scale({-0.030,0.135,0});};  
+  
+  // ligamenta flavia (right/left)
+  AnyRefNode FlavumInferiorR = {sRel = .Scale({-0.00001198, 0.1404274, 0.00745881});};  
+  AnyRefNode FlavumSuperiorR = {sRel = .Scale({-0.007,0.166,0.005});};
+  AnyRefNode FlavumInferiorL = {sRel = {.FlavumInferiorR.sRel[0], .FlavumInferiorR.sRel[1], .FlavumInferiorR.sRel[2]*-1};};  
+  AnyRefNode FlavumSuperiorL = {sRel = {.FlavumSuperiorR.sRel[0], .FlavumSuperiorR.sRel[1], .FlavumSuperiorR.sRel[2]*-1};}; 
+  
+  AnyRefNode InterTransverseR = {sRel = .Scale({-0.01243741, 0.1655881, 0.02496396});};  
+  AnyRefNode InterTransverseL = {sRel = {.InterTransverseR.sRel[0], .InterTransverseR.sRel[1], .InterTransverseR.sRel[2]*-1};};      
+  
+  AnyRefNode InterTransverseRmid = {sRel = .Scale( {-0.0005667311, 0.1610546, 0.02087555});};  
+  AnyRefNode InterTransverseLmid = {sRel = {.InterTransverseRmid.sRel[0], .InterTransverseRmid.sRel[1], .InterTransverseRmid.sRel[2]*-1};};      
+};
+// Ligament Nodes   
+
+
+Main.HumanModel.BodyModel.Trunk.Segments.L1Seg = {
+  
+  // anterior longitudinal
+  AnyRefNode ALLNodeInferior = {sRel = .Scale({0.051,0.133,0});};
+  AnyRefNode ALLNodeSuperior = {sRel = .Scale({0.042,0.159,0});};
+  
+  //Capsular Ligament on L1 Segment inferior
+  AnyRefNode CR1NodeInferior = {sRel = .Scale({0.005003379,0.123835493,0.015021749});};//on L1 inferior
+  AnyRefNode CR2NodeInferior = {sRel = .Scale({0.007688548,0.109589,0.0106558});};//on L1 inferior      
+  AnyRefNode CR3NodeInferior = {sRel = .Scale({0.001504548,0.116079591,0.01404066});};//on L1 inferior
+  AnyRefNode CR4NodeInferior = {sRel = .Scale({0.01198916,0.1143761,0.009542741});};//on L1 inferior
+  AnyRefNode CL1NodeInferior = {sRel = .Scale({0.005003379,0.123835493,-0.015021749});};//on L1 inferior
+  AnyRefNode CL2NodeInferior = {sRel = .Scale({0.007688548,0.109589,-0.0106558});};//on L1 inferior      
+  AnyRefNode CL3NodeInferior = {sRel = .Scale({0.001504548,0.116079591,-0.01404066});};//on L1 inferior
+  AnyRefNode CL4NodeInferior = {sRel = .Scale({0.01198916,0.1143761,-0.009542741});};//on L1 inferior
+  //End Capsular Ligaments
+  
+  // posterior longitudinal
+  //    AnyRefNode PLLViaNode = {sRel = .Scale({0.037,0.015,0});};
+  AnyRefNode PLLNodeSuperior = {sRel = .Scale( {0.0120, 0.147, 0});};
+  AnyRefNode PLLNodeInferior = {sRel = .Scale({0.021,0.119,0});};
+  
+  // inter/supraspinous
+  AnyRefNode InterspinousInferior = {sRel = .Scale({-0.0005,0.1065,0});};  
+  AnyRefNode InterspinousSuperior = {sRel = .Scale({-0.0075,0.118,0});};  
+  AnyRefNode SupraspinousInferior = {sRel = .Scale({-0.012,0.1,0});};
+  AnyRefNode SupraspinousSuperior = {sRel = .Scale({-0.016,0.115,0});};  
+  
+  // ligamenta flavia (right/left)
+  AnyRefNode FlavumInferiorR = {sRel = .Scale({0.012,0.1175,0.0065});};  
+  AnyRefNode FlavumSuperiorR = {sRel = .Scale({0.005,0.135,0.005});};
+  AnyRefNode FlavumInferiorL = {sRel = {.FlavumInferiorR.sRel[0], .FlavumInferiorR.sRel[1], .FlavumInferiorR.sRel[2]*-1};};  
+  AnyRefNode FlavumSuperiorL = {sRel = {.FlavumSuperiorR.sRel[0], .FlavumSuperiorR.sRel[1], .FlavumSuperiorR.sRel[2]*-1};}; 
+  
+  AnyRefNode InterTransverseR = {sRel = .Scale({0.001681264, 0.1354231, 0.0342857});};  
+  AnyRefNode InterTransverseL = {sRel = {.InterTransverseR.sRel[0], .InterTransverseR.sRel[1], .InterTransverseR.sRel[2]*-1};};
+  
+  AnyRefNode InterTransverseRmid = {sRel = .Scale({0.006658831, 0.1334801, 0.02453004});};  
+  AnyRefNode InterTransverseLmid = {sRel = {.InterTransverseRmid.sRel[0], .InterTransverseRmid.sRel[1], .InterTransverseRmid.sRel[2]*-1};};  
+  
+  
+  // FacetSuperiorR FSR - brought from FacetJointsLumbar - nodes needed for ligaments
+  // 1 - sup, 2 - inf, 3 - post, 4 - ant, 
+  AnyRefNode FSRp1 = {sRel = .Scale({-0.004,0.146,0.0175});};
+  AnyRefNode FSRp2 = {sRel = .Scale({-0.005,0.135,0.0135});};
+  AnyRefNode FSRp3 = {sRel = .Scale({-.011,0.14,0.017});};
+  AnyRefNode FSRp4 = {sRel = .Scale({.002,0.138,0.008});};
+  
+  // FacetSuperiorL FSL
+  AnyRefNode FSLp1 = {sRel = {.FSRp1.sRel[0], .FSRp1.sRel[1], -1*.FSRp1.sRel[2]};};
+  AnyRefNode FSLp2 = {sRel = {.FSRp2.sRel[0], .FSRp2.sRel[1], -1*.FSRp2.sRel[2]};};
+  AnyRefNode FSLp3 = {sRel = {.FSRp3.sRel[0], .FSRp3.sRel[1], -1*.FSRp3.sRel[2]};};
+  AnyRefNode FSLp4 = {sRel = {.FSRp4.sRel[0], .FSRp4.sRel[1], -1*.FSRp4.sRel[2]};};
+ 
+};
+
+Main.HumanModel.BodyModel.Trunk.Segments.L2Seg = {
+  // anterior longitudinal
+  AnyRefNode ALLNodeInferior = {sRel = .Scale({0.062,0.105,0});};
+  AnyRefNode ALLNodeSuperior = {sRel = .Scale({0.053,0.129,0});};
+  
+  //Capsular Ligament on L1 Segment Superior
+  AnyRefNode CSR1NodeSuperior = {sRel = .Scale({0.01178578,0.11582653,0.015345494});};//on L2 sup
+  AnyRefNode CSR2NodeSuperior = {sRel = .Scale({0.011135845,0.106472268,0.012314167});};//on L2 sup  
+  AnyRefNode CSR3NodeSuperior = {sRel = .Scale({0.004397336,0.111401808,0.018488907});};//on L2 sup
+  AnyRefNode CSR4NodeSuperior = {sRel = .Scale({0.014238744,0.114130752,0.010002539});};//on L2 sup
+  AnyRefNode CSL1NodeSuperior = {sRel = .Scale({0.01178578,0.11582653,-0.015345494});};//on L2 sup
+  AnyRefNode CSL2NodeSuperior = {sRel = .Scale({0.011135845,0.106472268,-0.012314167});};//on L2 sup  
+  AnyRefNode CSL3NodeSuperior = {sRel = .Scale({0.004397336,0.111401808,-0.018488907});};//on L2 sup
+  AnyRefNode CSL4NodeSuperior = {sRel = .Scale({0.014238744,0.114130752,-0.010002539});};//on L2 sup
+  
+  //Inferior
+  AnyRefNode CR1NodeInferior = {sRel = .Scale({0.019390107,0.091909867,0.013592688});};//on L2 inf
+  AnyRefNode CR2NodeInferior = {sRel = .Scale({0.016348267,0.079423624,0.01035135});};//on L2 inf
+  AnyRefNode CR3NodeInferior = {sRel = .Scale({0.013429878,0.086844693,0.01463572});};//on L2 inf
+  AnyRefNode CR4NodeInferior = {sRel = .Scale({0.020979878,0.091057105,0.012878811});};//on L2 inf
+  AnyRefNode CL1NodeInferior = {sRel = .Scale({0.019390107,0.091909867,-0.013592688});};//on L2 inf
+  AnyRefNode CL2NodeInferior = {sRel = .Scale({0.016348267,0.079423624,-0.01035135});};//on L2 inf
+  AnyRefNode CL3NodeInferior = {sRel = .Scale({0.013429878,0.086844693,-0.01463572});};//on L2 inf
+  AnyRefNode CL4NodeInferior = {sRel = .Scale({0.020979878,0.091057105,-0.012878811});};//on L2 inf
+  //End Capsular Ligaments
+  
+  // posterior longitudinal
+  AnyRefNode PLLNodeInferior = {sRel = .Scale({0.032,0.092,0});};
+  AnyRefNode PLLViaNode = {sRel = .Scale({0.027,0.104,0});};
+  AnyRefNode PLLNodeSuperior = {sRel = .Scale({0.023,0.117,0});};
+  // inter/supraspinous ligaments
+  AnyRefNode InterspinousInferior = {sRel = .Scale({0.0095,0.0725,0});};  
+  AnyRefNode InterspinousSuperior = {sRel = .Scale({0.003,0.089,0});};  
+  AnyRefNode SupraspinousInferior = {sRel = .Scale({-0.0005,0.0695,0});};
+  AnyRefNode SupraspinousSuperior = {sRel = .Scale({-0.00395,0.0825,0});};  
+  // ligamenta flavia (right/left)
+  AnyRefNode FlavumInferiorR = {sRel = .Scale({0.0225,0.0825,0.007});};  
+  AnyRefNode FlavumSuperiorR = {sRel = .Scale({0.0175,0.105,0.0055});};
+  AnyRefNode FlavumInferiorL = {sRel = {.FlavumInferiorR.sRel[0], .FlavumInferiorR.sRel[1], .FlavumInferiorR.sRel[2]*-1};};  
+  AnyRefNode FlavumSuperiorL = {sRel = {.FlavumSuperiorR.sRel[0], .FlavumSuperiorR.sRel[1], .FlavumSuperiorR.sRel[2]*-1};};
+  
+  AnyRefNode InterTransverseR = {sRel = .Scale({0.01175492, 0.1053886, 0.0342857});};  
+  AnyRefNode InterTransverseL = {sRel = {.InterTransverseR.sRel[0], .InterTransverseR.sRel[1], .InterTransverseR.sRel[2]*-1};};        
+  
+  AnyRefNode InterTransverseRmid = {sRel = .Scale({0.02042832, 0.1038095, 0.02836499});};  
+  AnyRefNode InterTransverseLmid = {sRel = {.InterTransverseRmid.sRel[0], .InterTransverseRmid.sRel[1], .InterTransverseRmid.sRel[2]*-1};};        
+  
+};
+Main.HumanModel.BodyModel.Trunk.Segments.L3Seg = {
+  
+  // anterior longitudional
+  AnyRefNode ALLNodeInferior = {sRel = .Scale({0.069,0.071,0});};
+  AnyRefNode ALLNodeSuperior = {sRel = .Scale({0.064,0.097,0});};
+  
+  //Capsular Ligament on L1 Segment Superior
+  AnyRefNode CSR1NodeSuperior = {sRel = .Scale({0.020315663,0.090719837,0.01671854});};//on L3 sup
+  AnyRefNode CSR2NodeSuperior = {sRel = .Scale({0.017537314,0.076799115,0.011552944});};//on L3 sup  
+  AnyRefNode CSR3NodeSuperior = {sRel = .Scale({0.011999322,0.085345354,0.016243245});};//on L3 sup
+  AnyRefNode CSR4NodeSuperior = {sRel = .Scale({0.022056296,0.090845767,0.014579131});};//on L3 sup
+  AnyRefNode CSL1NodeSuperior = {sRel = .Scale({0.020315663,0.090719837,-0.01671854});};//on L3 sup
+  AnyRefNode CSL2NodeSuperior = {sRel = .Scale({0.017537314,0.076799115,-0.011552944});};//on L3 sup  
+  AnyRefNode CSL3NodeSuperior = {sRel = .Scale({0.011999322,0.085345354,-0.016243245});};//on L3 sup
+  AnyRefNode CSL4NodeSuperior = {sRel = .Scale({0.022056296,0.090845767,-0.014579131});};//on L3 sup
+  
+  //Capsular Ligament on L1 Segment Inferior
+  AnyRefNode CR1NodeInferior = {sRel = .Scale({0.024626202,0.061224868,0.014047312});};//on L3 inf
+  AnyRefNode CR2NodeInferior = {sRel = .Scale({0.022152522,0.051342053,0.0105117});};//on L3 inf
+  AnyRefNode CR3NodeInferior = {sRel = .Scale({0.016707984,0.058778843,0.014389762});};//on L3 inf
+  AnyRefNode CR4NodeInferior = {sRel = .Scale({0.027992188,0.060413498,0.010283561});};//on L3 inf
+  AnyRefNode CL1NodeInferior = {sRel = .Scale({0.024626202,0.061224868,-0.014047312});};//on L3 inf
+  AnyRefNode CL2NodeInferior = {sRel = .Scale({0.022152522,0.051342053,-0.0105117});};//on L3 inf
+  AnyRefNode CL3NodeInferior = {sRel = .Scale({0.016707984,0.058778843,-0.014389762});};//on L3 inf
+  AnyRefNode CL4NodeInferior = {sRel = .Scale({0.027992188,0.060413498,-0.010283561});};//on L3 inf
+  
+  //End Capsular Ligaments
+  
+  // posterior longitudional
+  AnyRefNode PLLNodeInferior = {sRel = .Scale({0.037,0.062,0});};
+  AnyRefNode PLLViaNode = {sRel = .Scale({0.033,0.076,0});};
+  AnyRefNode PLLNodeSuperior = {sRel = .Scale({0.031,0.089,0});};
+  
+  // inter/supraspinous 
+  AnyRefNode InterspinousInferior = {sRel = .Scale({0.0125,0.0475,0});};  
+  AnyRefNode InterspinousSuperior = {sRel = .Scale({0.006,0.064,0});};  
+  AnyRefNode SupraspinousInferior = {sRel = .Scale({0.0005,0.0445,0});};
+  AnyRefNode SupraspinousSuperior = {sRel = .Scale({-0.003,0.0585,0});};  
+  
+  // ligamenta flavia (right/left)
+  AnyRefNode FlavumInferiorR = {sRel = .Scale({0.0275,0.055,0.0095});};  
+  AnyRefNode FlavumSuperiorR = {sRel = .Scale({0.025,0.075,0.006});};
+  AnyRefNode FlavumInferiorL = {sRel = {.FlavumInferiorR.sRel[0], .FlavumInferiorR.sRel[1], .FlavumInferiorR.sRel[2]*-1};};  
+  AnyRefNode FlavumSuperiorL = {sRel = {.FlavumSuperiorR.sRel[0], .FlavumSuperiorR.sRel[1], .FlavumSuperiorR.sRel[2]*-1};};
+  
+  AnyRefNode InterTransverseR = {sRel = .Scale({0.0246511, 0.07434323, 0.03382862});};  
+  AnyRefNode InterTransverseL = {sRel = {.InterTransverseR.sRel[0], .InterTransverseR.sRel[1], .InterTransverseR.sRel[2]*-1};};   
+  
+  
+  AnyRefNode InterTransverseRmid = {sRel = .Scale({0.02859373, 0.07502131, 0.02394057});};  
+  AnyRefNode InterTransverseLmid = {sRel = {.InterTransverseRmid.sRel[0], .InterTransverseRmid.sRel[1], .InterTransverseRmid.sRel[2]*-1};};            
+};
+
+Main.HumanModel.BodyModel.Trunk.Segments.L4Seg = {
+  
+  // anterior longitudinal
+  AnyRefNode ALLNodeInferior = {sRel = .Scale({0.072,0.031,0});};
+  AnyRefNode ALLNodeSuperior = {sRel = .Scale({0.071,0.059,0});};
+  
+  //Capsular Ligament on L1 Segment Superior
+  AnyRefNode CSR1NodeSuperior = {sRel = .Scale({0.027906285,0.062892335,0.017250067});};//on L4 sup
+  AnyRefNode CSR2NodeSuperior = {sRel = .Scale({0.023601528,0.050639667,0.010885435});};//on L4 sup  
+  AnyRefNode CSR3NodeSuperior = {sRel = .Scale({0.015299019,0.058614156,0.01829017});};//on L4 sup
+  AnyRefNode CSR4NodeSuperior = {sRel = .Scale({0.029701061,0.060363279,0.010531443});};//on L4 sup
+  AnyRefNode CSL1NodeSuperior = {sRel = {.CSR1NodeSuperior.sRel[0],.CSR1NodeSuperior.sRel[1],.CSR1NodeSuperior.sRel[2]*-1};};//on L4 sup
+  AnyRefNode CSL2NodeSuperior = {sRel = {.CSR2NodeSuperior.sRel[0],.CSR2NodeSuperior.sRel[1],.CSR2NodeSuperior.sRel[2]*-1};};//on L4 sup
+  AnyRefNode CSL3NodeSuperior = {sRel = {.CSR3NodeSuperior.sRel[0],.CSR3NodeSuperior.sRel[1],.CSR3NodeSuperior.sRel[2]*-1};};//on L4 sup
+  AnyRefNode CSL4NodeSuperior = {sRel = {.CSR4NodeSuperior.sRel[0],.CSR4NodeSuperior.sRel[1],.CSR4NodeSuperior.sRel[2]*-1};};//on L4 sup
+   
+  //Capsular Ligament on L1 Segment Inferior
+  AnyRefNode CR1NodeInferior = {sRel = .Scale({0.027337407,0.0335755,0.01359401});};//on L4 inf
+  AnyRefNode CR2NodeInferior = {sRel = .Scale({0.022602882,0.023411208,0.010855529});};//on L4 inf
+  AnyRefNode CR3NodeInferior = {sRel = .Scale({0.018487899,0.031484637,0.015647021});};//on L4 inf
+  AnyRefNode CR4NodeInferior = {sRel = .Scale({0.029664669,0.031098958,0.011164152});};//on L4 inf
+  AnyRefNode CL1NodeInferior = {sRel = {.CR1NodeInferior.sRel[0],.CR1NodeInferior.sRel[1],.CR1NodeInferior.sRel[2]*-1};};//on L4 sup
+  AnyRefNode CL2NodeInferior = {sRel = {.CR2NodeInferior.sRel[0],.CR2NodeInferior.sRel[1],.CR2NodeInferior.sRel[2]*-1};};//on L4 sup
+  AnyRefNode CL3NodeInferior = {sRel = {.CR3NodeInferior.sRel[0],.CR3NodeInferior.sRel[1],.CR3NodeInferior.sRel[2]*-1};};//on L4 sup
+  AnyRefNode CL4NodeInferior = {sRel = {.CR4NodeInferior.sRel[0],.CR4NodeInferior.sRel[1],.CR4NodeInferior.sRel[2]*-1};};//on L4 sup
+   
+  //End Capsular Ligaments
+  
+  // posterior longitudinal
+  AnyRefNode PLLNodeInferior = {sRel = .Scale({0.039,0.031,0});};
+  AnyRefNode PLLViaNode = {sRel = .Scale({0.038,0.046,0});};
+  AnyRefNode PLLNodeSuperior = {sRel = .Scale({0.037,0.059,0});};
+  
+  // inter/supraspinous 
+  AnyRefNode InterspinousInferior = {sRel = .Scale({0.015,0.0235,0});};  
+  AnyRefNode InterspinousSuperior = {sRel = .Scale({0.0125,0.0425,0});};  
+  AnyRefNode SupraspinousInferior = {sRel = .Scale({0.0015,0.022,0});};
+  AnyRefNode SupraspinousSuperior = {sRel = .Scale({-0.000,0.037,0});};  
+ 
+  // ligamenta flavia (right/left)    
+  AnyRefNode FlavumInferiorR = {sRel = .Scale({0.0275,0.025,0.0115});};  
+  AnyRefNode FlavumSuperiorR = {sRel = .Scale({0.0295,0.05,0.006});};
+  AnyRefNode FlavumInferiorL = {sRel = {.FlavumInferiorR.sRel[0], .FlavumInferiorR.sRel[1], .FlavumInferiorR.sRel[2]*-1};};  
+  AnyRefNode FlavumSuperiorL = {sRel = {.FlavumSuperiorR.sRel[0], .FlavumSuperiorR.sRel[1], .FlavumSuperiorR.sRel[2]*-1};};
+  
+  AnyRefNode InterTransverseR = {sRel = .Scale({0.0275, 0.05000021, 0.03258219});};  
+  AnyRefNode InterTransverseL = {sRel = {.InterTransverseR.sRel[0], .InterTransverseR.sRel[1], .InterTransverseR.sRel[2]*-1};};   
+  
+  AnyRefNode InterTransverseRmid = {sRel = .Scale({0.03295033, 0.04644059, 0.02559336});};  
+  AnyRefNode InterTransverseLmid = {sRel = {.InterTransverseRmid.sRel[0], .InterTransverseRmid.sRel[1], .InterTransverseRmid.sRel[2]*-1};};              
+};
+
+Main.HumanModel.BodyModel.Trunk.Segments.L5Seg = {
+  
+  // anterior longitudinal
+  AnyRefNode ALLNodeInferior = {sRel = .Scale({0.063,-0.007,0});};
+  AnyRefNode ALLNodeSuperior = {sRel = .Scale({0.071,0.020,0});};
+  
+  //Capsular Ligament on L1 Segment Superior
+  AnyRefNode CSR1NodeSuperior = {sRel = .Scale({0.030092184,0.032714483,0.016131327});};//on L5 sup
+  AnyRefNode CSR2NodeSuperior = {sRel = .Scale({0.02203729,0.020814163,0.011119382});};//on L5 sup  
+  AnyRefNode CSR3NodeSuperior = {sRel = .Scale({0.017472396,0.031840622,0.017553914});};//on L5 sup
+  AnyRefNode CSR4NodeSuperior = {sRel = .Scale({0.032032293,0.03042393,0.011098401});};//on L5 sup
+  AnyRefNode CSL1NodeSuperior = {sRel = .Scale({0.030092184,0.032714483,-0.016131327});};//on L5 sup
+  AnyRefNode CSL2NodeSuperior = {sRel = .Scale({0.02203729,0.020814163,-0.011119382});};//on L5 sup  
+  AnyRefNode CSL3NodeSuperior = {sRel = .Scale({0.017472396,0.031840622,-0.017553914});};//on L5 sup
+  AnyRefNode CSL4NodeSuperior = {sRel = .Scale({0.032032293,0.03042393,-0.011098401});};//on L5 sup
+  
+  //Capsular Ligament on L1 Segment Inferior
+  AnyRefNode CR1NodeInferior = {sRel = .Scale({0.023138188,0.005956516,0.013666589});};//on L5 inf
+  AnyRefNode CR2NodeInferior = {sRel = .Scale({0.017758331,0.0044157,0.001096375});};//on L5 inf
+  AnyRefNode CR3NodeInferior = {sRel = .Scale({0.013328379,0.004272116,0.008298322});};//on L5 inf
+  AnyRefNode CR4NodeInferior = {sRel = .Scale({0.024018597,0.006075946,0.006105657});};//on L5 inf
+  AnyRefNode CL1NodeInferior = {sRel = .Scale({0.023138188,0.005956516,-0.013666589});};//on L5 inf
+  AnyRefNode CL2NodeInferior = {sRel = .Scale({0.017758331,0.0044157,-0.001096375});};//on L5 inf
+  AnyRefNode CL3NodeInferior = {sRel = .Scale({0.013328379,0.004272116,-0.008298322});};//on L5 inf
+  AnyRefNode CL4NodeInferior = {sRel = .Scale({0.024018597,0.006075946,-0.006105657});};//on L5 inf
+  
+  //End Capsular Ligaments
+  
+  // posterior longitudinal
+  AnyRefNode PLLViaNode = {sRel = .Scale({0.037,0.015,0});};
+  AnyRefNode PLLNodeSuperior = {sRel = .Scale({0.038,0.027,0});};
+  AnyRefNode PLLNodeInferior = {sRel = .Scale({0.03590498, 0.001, 0.0});};  
+  
+  // ligamenta flavia (right/left)
+  AnyRefNode FlavumInferiorR = {sRel = .Scale({0.02904793, 0.01086995, 0.007435671});};  
+  AnyRefNode FlavumSuperiorR = {sRel = .Scale({0.0295,0.02,0.006});};
+  AnyRefNode FlavumInferiorL = {sRel = {.FlavumInferiorR.sRel[0], .FlavumInferiorR.sRel[1], .FlavumInferiorR.sRel[2]*-1};};  
+  AnyRefNode FlavumSuperiorL = {sRel = {.FlavumSuperiorR.sRel[0], .FlavumSuperiorR.sRel[1], .FlavumSuperiorR.sRel[2]*-1};};
+  
+  // inter/supraspinous
+  AnyRefNode InterspinousInferior = {sRel = .Scale({0.0125,0.005,0});};  
+  AnyRefNode InterspinousSuperior = {sRel = .Scale({0.0125,0.02,0});};  
+  AnyRefNode SupraspinousInferior = {sRel = .Scale({0.0015,0.007,0});};
+  AnyRefNode SupraspinousSuperior = {sRel = .Scale({-0.000,0.016,0});};  
+  
+  AnyRefNode InterTransverseR = {sRel = .Scale({0.02618421, 0.02240737, 0.03258219});};  
+  AnyRefNode InterTransverseL = {sRel = {.InterTransverseR.sRel[0], .InterTransverseR.sRel[1], .InterTransverseR.sRel[2]*-1};};  
+  
+  AnyRefNode InterTransverseRmid = {sRel = .Scale({0.03475866, 0.01717806, 0.02636746});};  
+  AnyRefNode InterTransverseLmid = {sRel = {.InterTransverseRmid.sRel[0], .InterTransverseRmid.sRel[1], .InterTransverseRmid.sRel[2]*-1};};            
+};
+
+Main.HumanModel.BodyModel.Trunk.Segments.SacrumSeg = {  // only superior nodes
+  
+  AnyRefNode ALLNodeSuperior = {sRel = .Scale({0.055,-0.020,0});};   
+  AnyRefNode PLLNodeSuperior = {sRel = .Scale({0.03426434, -0.003116785, 0});};
+  
+  //Capsular Ligament on S1 Segment Superior
+  AnyRefNode CSR1NodeSuperior = {sRel = .Scale({0.024450845,0.0044626,0.016009062});};//on S1 sup
+  AnyRefNode CSR2NodeSuperior = {sRel = .Scale({0.016802204,0.003484814,0.001097942});};//on S1 sup  
+  AnyRefNode CSR3NodeSuperior = {sRel = .Scale({0.010979183,0.002339028,0.00709591});};//on S1 sup
+  AnyRefNode CSR4NodeSuperior = {sRel = .Scale({0.024383043,0.001873483,0.005489895});};//on S1 sup
+  AnyRefNode CSL1NodeSuperior = {sRel = .Scale({0.024450845,0.0044626,-0.016009062});};//on S1 sup
+  AnyRefNode CSL2NodeSuperior = {sRel = .Scale({0.016802204,0.003484814,-0.001097942});};//on S1 sup  
+  AnyRefNode CSL3NodeSuperior = {sRel = .Scale({0.010979183,0.002339028,-0.00709591});};//on S1 sup
+  AnyRefNode CSL4NodeSuperior = {sRel = .Scale({0.024383043,0.001873483,-0.005489895});};//on S1 sup
+  //End Capsular Ligaments
+  
+  // ligamenta flavia (right/left)    
+  AnyRefNode FlavumSuperiorR = {sRel = .Scale({0.02378489, 0.003368557, 0.01158991});};
+  AnyRefNode FlavumSuperiorL = {sRel = {.FlavumSuperiorR.sRel[0], .FlavumSuperiorR.sRel[1], .FlavumSuperiorR.sRel[2]*-1};};
+  
+  // inter/supraspinous
+  AnyRefNode SupraspinousSuperior = {sRel = .Scale({0.001834338, 0.002112139, 0});};  
+  AnyRefNode InterspinousSuperior = {sRel = .Scale({0.011456154, 0.003246047, 0});};      
+  
+  AnyRefNode InterTransverseR = {sRel = .Scale({0.03145664, 0.008208302, 0.0432449});};  
+  AnyRefNode InterTransverseL = {sRel = {.InterTransverseR.sRel[0], .InterTransverseR.sRel[1], .InterTransverseR.sRel[2]*-1};};      
+  
+  AnyRefNode InterTransverseRmid = {sRel = .Scale( {0.02804244, 0.007081035, 0.03249829});};  
+  AnyRefNode InterTransverseLmid = {sRel = {.InterTransverseRmid.sRel[0], .InterTransverseRmid.sRel[1], .InterTransverseRmid.sRel[2]*-1};};        
+};
+
+
+
+

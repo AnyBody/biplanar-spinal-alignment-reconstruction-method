@@ -1,0 +1,48 @@
+#ifdef ThoracicLigaments
+
+AnyFolder ThoracicSpineLigaments ={
+  #include "Kyphosis.any"
+  AnyFloat strainratio = 0.75;
+   AnyFloat mm2m = 1000;
+   AnyFloat al_slack_length = 1.2;
+   AnyFloat pl_slack_length = 1.2;
+   AnyFloat is_slack_length = 1.2;   
+   AnyFloat ss_slack_length = 1.2;
+   AnyFloat lf_slack_length = 1.2;
+   
+   AnyFloat Factor = 1;
+   
+   // mean stiffness values adopted form T12L1!!
+   // stiffness vector T1T2 T2T3 T3T4 T4T5 T5T6 T6T7 T7T8 T8T9 T9T10 T10T11 T11T12 given in N/mm
+   AnyVector  kALL = {32.9,32.9,32.9,32.9,32.9,32.9,32.9,32.9,32.9,32.9,32.9}*mm2m;     // conversion to N/m
+   AnyVector  kPLL = {10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0}*mm2m;     // conversion to N/m
+   AnyVector  kISL = {12.1,12.1,12.1,12.1,12.1,12.1,12.1,12.1,12.1,12.1,12.1}*mm2m;       // conversion to N/m   
+   AnyVector  kSSL = {15.1,15.1,15.1,15.1,15.1,15.1,15.1,15.1,15.1,15.1,15.1}*mm2m;     // conversion to N/m
+   AnyVector  kLF  = {24.2,24.2,24.2,24.2,24.2,24.2,24.2,24.2,24.2,24.2,24.2}*mm2m/2.0; // conversion to N/m + splitting (2 lig parts)
+   // NB!! assumption: 75% failure strain corresponds to nominal strain, adopted from T12L1!!
+   AnyVector  epsALL = {0.319,0.319,0.319,0.319,0.319,0.319,0.319,0.319,0.319,0.319,0.319}*strainratio;        
+   AnyVector  epsPLL = {0.162,0.162,0.162,0.162,0.162,0.162,0.162,0.162,0.162,0.162,0.162}*strainratio;   
+   AnyVector  epsISL = {0.594,0.594,0.594,0.594,0.594,0.594,0.594,0.594,0.594,0.594,0.594}*strainratio;
+   AnyVector  epsSSL = {0.750,0.750,0.750,0.750,0.750,0.750,0.750,0.750,0.750,0.750,0.750}*strainratio;
+   AnyVector  epsLF  = {0.615,0.615,0.615,0.615,0.615,0.615,0.615,0.615,0.615,0.615,0.615}*strainratio; 
+
+   // values from Chazal et al. 1985 (not available in Pintar et al.) adopted from Lumbar spine (the same value for all segments)
+   AnyVector  kIT  = Factor*{50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0}*mm2m; // conversion to N/m   
+   // in kIT above, factor 0.5 was replaced by 0.25 because the inverse dynamics would fail on the 1st step (D.Ignasiak)
+   AnyVector  epsIT  = {0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16}*strainratio;//*strainratio;   
+
+AnyFolder T11T12Lig = {#include "T11T12Ligaments.any"};
+AnyFolder T10T11Lig = {#include "T10T11Ligaments.any"};
+AnyFolder T9T10Lig = {#include "T9T10Ligaments.any"};
+AnyFolder T8T9Lig = {#include "T8T9Ligaments.any"};
+AnyFolder T7T8Lig = {#include "T7T8Ligaments.any"};
+AnyFolder T6T7Lig = {#include "T6T7Ligaments.any"};
+AnyFolder T5T6Lig = {#include "T5T6Ligaments.any"};
+AnyFolder T4T5Lig = {#include "T4T5Ligaments.any"};
+AnyFolder T3T4Lig = {#include "T3T4Ligaments.any"};
+AnyFolder T2T3Lig = {#include "T2T3Ligaments.any"};
+AnyFolder T1T2Lig = {#include "T1T2Ligaments.any"};
+
+};
+
+#endif

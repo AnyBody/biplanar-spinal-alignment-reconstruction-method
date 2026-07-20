@@ -1,0 +1,237 @@
+AnyFixedRefFrame ShowInputPoints = {
+  
+  // Create a reference frame in which nodes corresponding to the input data will be displayed
+
+  // Arbitrary point where to position S1_post point of reference
+  Origin = {-0.5, 1, 0}; 
+  
+  
+  // controls for point display
+  AnyFloat PointSize = 0.005;
+  AnySwitchVar Vis = On;
+  AnySwitchVar FrameVis = On;
+  AnyVec3 LColor = {0.6,0.6,0.9};
+  AnyVec3 TColor = {0.6,0.9,0.6};
+  AnyVec3 CColor = {0.9,0.9,0.6};
+
+  AnyRefNode OriginPoint = { 
+    sRel = {0,0,0};  
+    ARel = RotMat(-..Alignment.SS*pi/180,z);
+    
+    AnyDrawNode origin_drw = { ScaleXYZ={1,1,1}*..PointSize*1.2; Visible = ..Vis; RGB = {1,1,1}*0.35;};
+    
+    AnyDrawRefFrame SacralSlope = {
+    ScaleXYZ = 0.05*{1,0,0};
+    RGB = {1,1,1}*0.35;
+    };
+    
+  };
+  
+  AnyRefNode L5Point = { 
+    sRel = {..Alignment.L5_x, ..Alignment.L5_y, 0};  
+    ARel = RotMat(-..Alignment.Angle_L5*pi/180,z);
+    
+    AnyDrawNode L5_drw = { ScaleXYZ={1,1,1}*..PointSize; Visible = ..Vis; RGB = ..LColor;};
+    AnyDrawRefFrame Angle_L5 = {ScaleXYZ = 0.05*{1,0,0}; Visible = ..FrameVis; RGB = ..LColor;};
+    
+  };
+  
+  AnyRefNode L4Point = { 
+    sRel = {..Alignment.L4_x, ..Alignment.L4_y, 0};  
+    ARel = RotMat(-..Alignment.Angle_L4*pi/180,z);
+
+    AnyDrawNode L4_drw = { ScaleXYZ={1,1,1}*..PointSize; Visible = ..Vis; RGB = ..LColor;};
+    AnyDrawRefFrame Angle_L4 = {ScaleXYZ = 0.05*{1,0,0}; Visible = ..FrameVis; RGB = ..LColor;};
+
+  };
+  
+  AnyRefNode L3Point = { 
+    sRel = {..Alignment.L3_x, ..Alignment.L3_y, 0};  
+    ARel = RotMat(-..Alignment.Angle_L3*pi/180,z);
+
+    AnyDrawNode L3_drw = { ScaleXYZ={1,1,1}*..PointSize; Visible = ..Vis; RGB = ..LColor;};
+    AnyDrawRefFrame Angle_L3 = {ScaleXYZ = 0.05*{1,0,0}; Visible = ..FrameVis; RGB = ..LColor;};
+
+  };
+  
+  AnyRefNode L2Point = { 
+    sRel = {..Alignment.L2_x, ..Alignment.L2_y, 0};  
+    ARel = RotMat(-..Alignment.Angle_L2*pi/180,z);
+
+    AnyDrawNode L2_drw = { ScaleXYZ={1,1,1}*..PointSize; Visible = ..Vis; RGB = ..LColor;};
+    AnyDrawRefFrame Angle_L2 = {ScaleXYZ = 0.05*{1,0,0}; Visible = ..FrameVis; RGB = ..LColor;};
+
+  };
+  
+  AnyRefNode L1Point = { 
+    sRel = {..Alignment.L1_x, ..Alignment.L1_y, 0};  
+    ARel = RotMat(-..Alignment.Angle_L1*pi/180,z);
+
+    AnyDrawNode L1_drw = { ScaleXYZ={1,1,1}*..PointSize; Visible = ..Vis; RGB = ..LColor;};
+    AnyDrawRefFrame Angle_L1 = {ScaleXYZ = 0.05*{1,0,0}; Visible = ..FrameVis; RGB = ..LColor;};
+
+  };
+  
+  AnyRefNode T12Point = { 
+    sRel = {..Alignment.T12_x, ..Alignment.T12_y, 0};  
+    ARel = RotMat(-..Alignment.Angle_T12*pi/180,z);
+
+    AnyDrawNode T12_drw = { ScaleXYZ={1,1,1}*..PointSize; Visible = ..Vis; RGB = ..TColor;};
+    AnyDrawRefFrame Angle_T12 = {ScaleXYZ = 0.05*{1,0,0}; Visible = ..FrameVis; RGB = ..TColor;};
+
+  };
+  
+  AnyRefNode T11Point = { 
+    sRel = {..Alignment.T11_x, ..Alignment.T11_y, 0}; 
+    ARel = RotMat(-..Alignment.Angle_T11*pi/180,z);
+
+    AnyDrawNode T11_drw = { ScaleXYZ={1,1,1}*..PointSize; Visible = ..Vis; RGB = ..TColor;};
+    AnyDrawRefFrame Angle_T11 = {ScaleXYZ = 0.05*{1,0,0}; Visible = ..FrameVis; RGB = ..TColor;};
+
+  };
+  
+  AnyRefNode T10Point = { 
+    sRel = {..Alignment.T10_x, ..Alignment.T10_y, 0};  
+    ARel = RotMat(-..Alignment.Angle_T10*pi/180,z);
+
+    AnyDrawNode T10_drw = { ScaleXYZ={1,1,1}*..PointSize; Visible = ..Vis; RGB = ..TColor;};
+    AnyDrawRefFrame Angle_T10 = {ScaleXYZ = 0.05*{1,0,0}; Visible = ..FrameVis; RGB = ..TColor;};
+
+  };
+
+  AnyRefNode T9Point = { 
+    sRel = {..Alignment.T9_x, ..Alignment.T9_y, 0};  
+    ARel = RotMat(-..Alignment.Angle_T9*pi/180,z);
+
+    AnyDrawNode T9_drw = { ScaleXYZ={1,1,1}*..PointSize; Visible = ..Vis; RGB = ..TColor;};
+    AnyDrawRefFrame Angle_T9 = {ScaleXYZ = 0.05*{1,0,0}; Visible = ..FrameVis; RGB = ..TColor;};
+
+  };
+  
+  AnyRefNode T8Point = { 
+    sRel = {..Alignment.T8_x, ..Alignment.T8_y, 0};  
+    ARel = RotMat(-..Alignment.Angle_T8*pi/180,z);
+
+    AnyDrawNode T8_drw = { ScaleXYZ={1,1,1}*..PointSize; Visible = ..Vis; RGB = ..TColor;};
+    AnyDrawRefFrame Angle_T8 = {ScaleXYZ = 0.05*{1,0,0}; Visible = ..FrameVis; RGB = ..TColor;};
+
+  };
+
+  AnyRefNode T7Point = { 
+    sRel = {..Alignment.T7_x, ..Alignment.T7_y, 0};  
+    ARel = RotMat(-..Alignment.Angle_T7*pi/180,z);
+
+    AnyDrawNode T7_drw = { ScaleXYZ={1,1,1}*..PointSize; Visible = ..Vis; RGB = ..TColor;};
+  AnyDrawRefFrame Angle_T7 = {ScaleXYZ = 0.05*{1,0,0}; Visible = ..FrameVis; RGB = ..TColor;};
+
+  };
+
+  AnyRefNode T6Point = { 
+    sRel = {..Alignment.T6_x, ..Alignment.T6_y, 0};  
+    ARel = RotMat(-..Alignment.Angle_T6*pi/180,z);
+
+    AnyDrawNode T6_drw = { ScaleXYZ={1,1,1}*..PointSize; Visible = ..Vis; RGB = ..TColor;};
+    AnyDrawRefFrame Angle_T6 = {ScaleXYZ = 0.05*{1,0,0}; Visible = ..FrameVis; RGB = ..TColor;};
+
+  };
+
+  AnyRefNode T5Point = { 
+    sRel = {..Alignment.T5_x, ..Alignment.T5_y, 0};  
+    ARel = RotMat(-..Alignment.Angle_T5*pi/180,z);
+
+    AnyDrawNode T5_drw = { ScaleXYZ={1,1,1}*..PointSize; Visible = ..Vis; RGB = ..TColor;};
+    AnyDrawRefFrame Angle_T5 = {ScaleXYZ = 0.05*{1,0,0}; Visible = ..FrameVis; RGB = ..TColor;};
+
+  };
+
+  AnyRefNode T4Point = { 
+    sRel = {..Alignment.T4_x, ..Alignment.T4_y, 0}; 
+    ARel = RotMat(-..Alignment.Angle_T4*pi/180,z);
+
+    AnyDrawNode T4_drw = { ScaleXYZ={1,1,1}*..PointSize; Visible = ..Vis; RGB = ..TColor;};
+    AnyDrawRefFrame Angle_T4 = {ScaleXYZ = 0.05*{1,0,0}; Visible = ..FrameVis; RGB = ..TColor;};
+
+  };
+
+  AnyRefNode T3Point = { 
+    sRel = {..Alignment.T3_x, ..Alignment.T3_y, 0}; 
+    ARel = RotMat(-..Alignment.Angle_T3*pi/180,z);
+
+    AnyDrawNode T3_drw = { ScaleXYZ={1,1,1}*..PointSize; Visible = ..Vis; RGB = ..TColor;};
+    AnyDrawRefFrame Angle_T3 = {ScaleXYZ = 0.05*{1,0,0}; Visible = ..FrameVis; RGB = ..TColor;};
+
+  };
+
+  AnyRefNode T2Point = { 
+    sRel = {..Alignment.T2_x, ..Alignment.T2_y, 0};
+    ARel = RotMat(-..Alignment.Angle_T2*pi/180,z);
+
+    AnyDrawNode T2_drw = { ScaleXYZ={1,1,1}*..PointSize; Visible = ..Vis; RGB = ..TColor;};
+    AnyDrawRefFrame Angle_T2 = {ScaleXYZ = 0.05*{1,0,0}; Visible = ..FrameVis; RGB = ..TColor;};
+
+  };
+
+  AnyRefNode T1Point = { 
+    sRel = {..Alignment.T1_x, ..Alignment.T1_y, 0}; 
+    ARel = RotMat(-..Alignment.Angle_T1*pi/180,z);
+
+    AnyDrawNode T1_drw = { ScaleXYZ={1,1,1}*..PointSize; Visible = ..Vis; RGB = ..TColor;};
+    AnyDrawRefFrame Angle_T1 = {ScaleXYZ = 0.05*{1,0,0}; Visible = ..FrameVis; RGB = ..TColor;};
+
+  };
+  
+  
+  #if IncludeNeckCalibration == 1
+  
+
+  AnyRefNode C7Point = { 
+    sRel = {..Alignment.C7_x, ..Alignment.C7_y, 0};  
+    ARel = RotMat(-..Alignment.Angle_C7*pi/180,z);
+    
+    AnyDrawNode C7_drw = { ScaleXYZ={1,1,1}*..PointSize; Visible = ..Vis; RGB = ..CColor;};
+    AnyDrawRefFrame Angle_C7 = {ScaleXYZ = 0.05*{1,0,0}; Visible = ..FrameVis; RGB = ..CColor;};
+  };
+  
+  AnyRefNode C6Point = { 
+    sRel = {..Alignment.C6_x, ..Alignment.C6_y, 0};  
+    ARel = RotMat(-..Alignment.Angle_C6*pi/180,z);
+
+    AnyDrawNode C6_drw = { ScaleXYZ={1,1,1}*..PointSize; Visible = ..Vis; RGB = ..CColor;};
+    AnyDrawRefFrame Angle_C6 = {ScaleXYZ = 0.05*{1,0,0}; Visible = ..FrameVis; RGB = ..CColor;};
+  };
+
+  AnyRefNode C5Point = { 
+    sRel = {..Alignment.C5_x, ..Alignment.C5_y, 0};  
+    ARel = RotMat(-..Alignment.Angle_C5*pi/180,z);
+
+    AnyDrawNode C5_drw = { ScaleXYZ={1,1,1}*..PointSize; Visible = ..Vis; RGB = ..CColor;};
+    AnyDrawRefFrame Angle_C5 = {ScaleXYZ = 0.05*{1,0,0}; Visible = ..FrameVis; RGB = ..CColor;};
+  };
+
+  AnyRefNode C4Point = { 
+    sRel = {..Alignment.C4_x, ..Alignment.C4_y, 0};  
+    ARel = RotMat(-..Alignment.Angle_C4*pi/180,z);
+
+    AnyDrawNode C4_drw = { ScaleXYZ={1,1,1}*..PointSize; Visible = ..Vis; RGB = ..CColor;};
+    AnyDrawRefFrame Angle_C4 = {ScaleXYZ = 0.05*{1,0,0}; Visible = ..FrameVis; RGB = ..CColor;};
+  };
+
+  AnyRefNode C3Point = { 
+    sRel = {..Alignment.C3_x, ..Alignment.C3_y, 0};  
+    ARel = RotMat(-..Alignment.Angle_C3*pi/180,z);
+
+    AnyDrawNode C3_drw = { ScaleXYZ={1,1,1}*..PointSize; Visible = ..Vis; RGB = ..CColor;};
+    AnyDrawRefFrame Angle_C3 = {ScaleXYZ = 0.05*{1,0,0}; Visible = ..FrameVis; RGB = ..CColor;};
+  };
+
+  AnyRefNode C2Point = { 
+    sRel = {..Alignment.C2_x, ..Alignment.C2_y, 0};  
+    ARel = RotMat(-..Alignment.Angle_C2*pi/180,z);
+
+    AnyDrawNode C2_drw = { ScaleXYZ={1,1,1}*..PointSize; Visible = ..Vis; RGB = ..CColor;};
+    AnyDrawRefFrame Angle_C2 = {ScaleXYZ = 0.05*{1,0,0}; Visible = ..FrameVis; RGB = ..CColor;};
+  };
+
+#endif 
+  
+};

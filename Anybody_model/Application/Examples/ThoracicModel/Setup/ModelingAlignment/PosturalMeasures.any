@@ -1,0 +1,481 @@
+#include "AdditionalNodes.any" // Extra nodes needed for defining postural measures
+
+Main.HumanModel.BodyModel.Trunk = {
+  
+  AnyFolder PosturalMeasures = {
+    AnyKinMeasureOrg PelvicTilt = {
+      AnyKinRotational RotMeasure = {
+        AnyRefFrame &rf0 = ...Segments.PelvisSeg.HipCenter_S1Mid_Frame;
+        AnyRefFrame &rf1 = Main.EnvironmentModel.GlobalRef;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      MeasureOrganizer = {0};
+      AnyFloat AngleDeg= (-1)*Pos[0]/pi*180;   
+    };
+        
+    AnyKinMeasureOrg SacralSlope = {
+      AnyKinRotational RotMeasure = {
+        AnyRefFrame &rf0 = ...Segments.SacrumSeg.Endplate_Frame;
+        AnyRefFrame &rf1 = Main.EnvironmentModel.GlobalRef;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      MeasureOrganizer = {0};
+      AnyFloat AngleDeg=Pos[0]/pi*180;   
+    };
+    
+    AnyKinMeasureOrg SacralObliquity = {
+      AnyKinRotational RotMeasure = {
+        AnyRefFrame &rf0 = ...Segments.SacrumSeg.Endplate_Frame;
+        AnyRefFrame &rf1 = Main.EnvironmentModel.GlobalRef;
+        Type = RotAxesAngles;
+        Axis1 = x;
+      };
+      MeasureOrganizer = {0};
+      AnyFloat AngleDeg=Pos[0]/pi*180;   
+    };
+     
+    
+    // T1 Moving Frame
+    AnyFolder C7_MovingFrame = {  
+      // Artificial segment of a frame pointing from sacrum to C7 center
+      AnySeg SacrC7MovingFrame = {
+        AnyFolder &s = Main.HumanModel.BodyModel.Trunk.Segments;
+        r0 = s.T1Seg.r0 + s.T1Seg.C7CentreNode.sRel*s.T1Seg.Axes0';
+        Axes0 = RotMat(pi/2,z);
+        Mass = 0;
+        Jii  = {0,0,0};
+      };
+      
+      // The frame hinges at the mid-sacral endplate, allowed to rotate in sagittal axis
+      AnyRevoluteJoint MovingFrameHingeJoint = {
+        Axis = z;   
+        AnyRefFrame &C7_Point = Main.HumanModel.BodyModel.Trunk.Segments.C7Seg.C7CentreNode;
+        AnyRefFrame &MovingFrame = .SacrC7MovingFrame ;
+      };
+      
+      // Driver bringing the frame to point to C7 center node (so its y-coordinate in this frame is zero) 
+      AnyKinEq SacrC7DirectionDriver = {
+        AnyKinMeasureOrg liny = {
+          AnyKinLinear lin = {
+            AnyRefFrame &ref0 = ...SacrC7MovingFrame ;
+            AnyRefFrame &ref1 = Main.HumanModel.BodyModel.Trunk.Segments.SacrumSeg.SacralMidPointNode;
+            Ref = 0;
+          };
+          MeasureOrganizer = {1};
+        };
+        CType = {Hard};
+      };  
+      
+      AnyKinMeasureOrg SacrC7OrientationMeasure= {
+        AnyKinRotational Rot = {
+          Type = RotAxesAngles;
+          Axis1 = z; Axis2 = y; Axis3 = x;
+          AnyRefFrame &ref0 = Main.EnvironmentModel.GlobalRef;
+          AnyRefFrame &ref1 = ..SacrC7MovingFrame;
+        };
+        MeasureOrganizer = {0};
+      };
+      AnyFloat AngleDeg = 90-SacrC7OrientationMeasure.Pos[0]/pi*180; 
+    };
+    
+    AnyKinMeasureOrg GlobalTiltMeasure= {
+      AnyKinRotational Rot = {
+        Type = RotAxesAngles;
+        Axis1 = z; Axis2 = y; Axis3 = x;
+        AnyRefFrame &ref0 = ...Segments.PelvisSeg.HipCenter_S1Mid_Frame;
+        AnyRefFrame &ref1 = ..C7_MovingFrame.SacrC7MovingFrame;
+      };
+      MeasureOrganizer = {0};
+    };
+    
+    AnyKinMeasureOrg LumbarLordosisL1S1 = {
+      AnyKinRotational Rot = {
+        Type = RotAxesAngles;
+        Axis1 = z; Axis2 = y; Axis3 = x;
+        AnyRefFrame &ref0 = ...Segments.L1Seg.Endplate_sup;
+        AnyRefFrame &ref1 = ...Segments.SacrumSeg.Endplate_sup;
+      };
+      MeasureOrganizer = {0};
+    };
+    
+    AnyKinMeasureOrg LumbarLordosisL4S1 = {
+      AnyKinRotational Rot = {
+        Type = RotAxesAngles;
+        Axis1 = z; Axis2 = y; Axis3 = x;
+        AnyRefFrame &ref0 = ...Segments.L4Seg.Endplate_sup;
+        AnyRefFrame &ref1 = ...Segments.SacrumSeg.Endplate_sup;
+      };
+      MeasureOrganizer = {0};
+    };
+    
+    AnyKinMeasureOrg KyphosisT2T12 = {
+      AnyKinRotational Rot = {
+        Type = RotAxesAngles;
+        Axis1 = z; Axis2 = y; Axis3 = x;
+        AnyRefFrame &ref0 = ...Segments.T2Seg.Endplate_sup;
+        AnyRefFrame &ref1 = ...Segments.T12Seg.Endplate_inf;
+      };
+      MeasureOrganizer = {0};
+    };
+    
+    AnyKinMeasureOrg KyphosisT5T12 = {
+      AnyKinRotational Rot = {
+        Type = RotAxesAngles;
+        Axis1 = z; Axis2 = y; Axis3 = x;
+        AnyRefFrame &ref0 = ...Segments.T5Seg.Endplate_sup;
+        AnyRefFrame &ref1 = ...Segments.T12Seg.Endplate_inf;
+      };
+      MeasureOrganizer = {0};
+    };
+    
+    AnyKinMeasureOrg KyphosisT2T5 = {
+      AnyKinRotational Rot = {
+        Type = RotAxesAngles;
+        Axis1 = z; Axis2 = y; Axis3 = x;
+        AnyRefFrame &ref0 = ...Segments.T2Seg.Endplate_sup;
+        AnyRefFrame &ref1 = ...Segments.T5Seg.Endplate_inf;
+      };
+      MeasureOrganizer = {0};
+    };
+    
+    AnyKinMeasureOrg KyphosisT10L2 = {
+      AnyKinRotational Rot = {
+        Type = RotAxesAngles;
+        Axis1 = z; Axis2 = y; Axis3 = x;
+        AnyRefFrame &ref0 = ...Segments.T10Seg.Endplate_sup;
+        AnyRefFrame &ref1 = ...Segments.L2Seg.Endplate_inf;
+      };
+      MeasureOrganizer = {0};
+    };
+    
+    AnyKinMeasureOrg C7_SVA = {
+      AnyKinLinear C7SacrPos = {
+        AnyRefFrame &Sacr = ...Segments.SacrumSeg.PLLNodeSuperior;
+        AnyRefNode &C7 = ...Segments.T1Seg.C7CentreNode;      
+      };
+     MeasureOrganizer = {0};
+    };
+    
+
+        
+    AnyFloat PT = PelvicTilt.AngleDeg;
+    AnyFloat SS = SacralSlope.AngleDeg;
+    AnyFloat PI = PT + SS;
+    AnyFloat C7VT = C7_MovingFrame.AngleDeg;
+    AnyFloat GT = 90-GlobalTiltMeasure.Pos[0]/pi*180;
+    AnyFloat LL_L1S1 = LumbarLordosisL1S1.Pos[0]/pi*180;
+    AnyFloat LL_L4S1 = LumbarLordosisL4S1.Pos[0]/pi*180;
+    AnyFloat TK_T2T12 = KyphosisT2T12.Pos[0]/pi*180;
+    AnyFloat TK_T5T12 = KyphosisT5T12.Pos[0]/pi*180; 
+    AnyFloat TK_T2T5 = KyphosisT2T5.Pos[0]/pi*180;
+    AnyFloat TK_T10L2 = KyphosisT10L2.Pos[0]/pi*180;
+    AnyFloat SVA = C7_SVA.Pos[0]*1000; // in mm
+         
+    //added to correct for horizontal gaze 
+    AnyKinMeasureOrg C1C2JntC2InfRot = {
+      AnyKinRotational RotMeasure = {
+        AnyRefFrame &rf0 = ...Segments.C2Seg.C2C1JntNode;
+        AnyRefFrame &rf1 = ...Segments.C2Seg.Inf_EP_orient;
+        Type = RotAxesAngles;
+        Axis1 = z;
+      };
+      MeasureOrganizer = {0};
+      AnyFloat AngleDeg= (-1)*Pos[0]/pi*180;   
+    };
+    
+    
+    #if IncludeNeckCalibration == 1   
+    
+    AnyKinRotational C1GlobalRot = {
+      Type = RotAxesAngles;
+      Axis1 = x;
+      Axis2 = y;
+      Axis3 = z;
+      AnyRefFrame &C1 = ..Segments.C1Seg.COM_visualize;
+      AnyRefFrame &Ground = Main.EnvironmentModel.GlobalRef;
+    };
+    
+    //required for C2 inferior endplate angular calibration
+    AnyKinRotational C2InferiorRot = {
+      Type = RotAxesAngles;
+      Axis1 = x;
+      Axis2 = y;
+      Axis3 = z;
+      AnyRefFrame &C2Inf = ..Segments.C2Seg.Inf_EP_orient;
+      AnyRefFrame &Ground = Main.EnvironmentModel.GlobalRef;
+    };
+    
+    AnyKinRotational C2GlobalRot = {
+      Type = RotAxesAngles;
+      Axis1 = x;
+      Axis2 = y;
+      Axis3 = z;
+      AnyRefFrame &C2 = ..Segments.C2Seg.Vertebral_orient;
+      AnyRefFrame &Ground = Main.EnvironmentModel.GlobalRef;
+    };
+    
+    AnyKinRotational C3GlobalRot = {
+      Type = RotAxesAngles;
+      Axis1 = x;
+      Axis2 = y;
+      Axis3 = z;
+      AnyRefFrame &C3 = ..Segments.C3Seg.Vertebral_orient;
+      AnyRefFrame &Ground = Main.EnvironmentModel.GlobalRef;
+    };
+    
+    AnyKinRotational C4GlobalRot = {
+      Type = RotAxesAngles;
+      Axis1 = x;
+      Axis2 = y;
+      Axis3 = z;
+      AnyRefFrame &C4 = ..Segments.C4Seg.Vertebral_orient;
+      AnyRefFrame &Ground = Main.EnvironmentModel.GlobalRef;
+    };
+    
+    AnyKinRotational C5GlobalRot = {
+      Type = RotAxesAngles;
+      Axis1 = x;
+      Axis2 = y;
+      Axis3 = z;
+      AnyRefFrame &C5 = ..Segments.C5Seg.Vertebral_orient;
+      AnyRefFrame &Ground = Main.EnvironmentModel.GlobalRef;
+    };
+    
+    AnyKinRotational C6GlobalRot = {
+      Type = RotAxesAngles;
+      Axis1 = x;
+      Axis2 = y;
+      Axis3 = z;
+      AnyRefFrame &C6 = ..Segments.C6Seg.Vertebral_orient;
+      AnyRefFrame &Ground = Main.EnvironmentModel.GlobalRef;
+    };
+    
+    AnyKinRotational C7GlobalRot = {
+      Type = RotAxesAngles;
+      Axis1 = x;
+      Axis2 = y;
+      Axis3 = z;
+      AnyRefFrame &C7 = ..Segments.C7Seg.Vertebral_orient;
+      AnyRefFrame &Ground = Main.EnvironmentModel.GlobalRef;
+    };
+    
+    #endif
+    
+
+    
+    //thoracic
+    AnyKinRotational T1GlobalRot = {
+      Type = RotAxesAngles;
+      Axis1 = x;
+      Axis2 = y;
+      Axis3 = z;
+      AnyRefFrame &T1 = ..Segments.T1Seg.Vertebral_orient;
+      AnyRefFrame &Ground = Main.EnvironmentModel.GlobalRef;
+    };
+    
+    AnyKinRotational T2GlobalRot = {
+      Type = RotAxesAngles;
+      Axis1 = x;
+      Axis2 = y;
+      Axis3 = z;
+      AnyRefFrame &T2 = ..Segments.T2Seg.Vertebral_orient;
+      AnyRefFrame &Ground = Main.EnvironmentModel.GlobalRef;
+    };
+     
+    AnyKinRotational T3GlobalRot = {
+      Type = RotAxesAngles;
+      Axis1 = x;
+      Axis2 = y;
+      Axis3 = z;
+      AnyRefFrame &T3 = ..Segments.T3Seg.Vertebral_orient;
+      AnyRefFrame &Ground = Main.EnvironmentModel.GlobalRef;
+    };
+    
+    AnyKinRotational T4GlobalRot = {
+      Type = RotAxesAngles;
+      Axis1 = x;
+      Axis2 = y;
+      Axis3 = z;
+      AnyRefFrame &T4 = ..Segments.T4Seg.Vertebral_orient;
+      AnyRefFrame &Ground = Main.EnvironmentModel.GlobalRef;
+    };
+    
+    AnyKinRotational T5GlobalRot = {
+      Type = RotAxesAngles;
+      Axis1 = x;
+      Axis2 = y;
+      Axis3 = z;
+      AnyRefFrame &T5 = ..Segments.T5Seg.Vertebral_orient;
+      AnyRefFrame &Ground = Main.EnvironmentModel.GlobalRef;
+    };
+    
+    AnyKinRotational T6GlobalRot = {
+      Type = RotAxesAngles;
+      Axis1 = x;
+      Axis2 = y;
+      Axis3 = z;
+      AnyRefFrame &T6 = ..Segments.T6Seg.Vertebral_orient;
+      AnyRefFrame &Ground = Main.EnvironmentModel.GlobalRef;
+    };
+    
+    AnyKinRotational T7GlobalRot = {
+      Type = RotAxesAngles;
+      Axis1 = x;
+      Axis2 = y;
+      Axis3 = z;
+      AnyRefFrame &T7 = ..Segments.T7Seg.Vertebral_orient;
+      AnyRefFrame &Ground = Main.EnvironmentModel.GlobalRef;
+    };
+    
+    AnyKinRotational T8GlobalRot = {
+      Type = RotAxesAngles;
+      Axis1 = x;
+      Axis2 = y;
+      Axis3 = z;
+      AnyRefFrame &T8 = ..Segments.T8Seg.Vertebral_orient;
+      AnyRefFrame &Ground = Main.EnvironmentModel.GlobalRef;
+    };
+    
+    AnyKinRotational T9GlobalRot = {
+      Type = RotAxesAngles;
+      Axis1 = x;
+      Axis2 = y;
+      Axis3 = z;
+      AnyRefFrame &T9 = ..Segments.T9Seg.Vertebral_orient;
+      AnyRefFrame &Ground = Main.EnvironmentModel.GlobalRef;
+    };
+    
+    AnyKinRotational T10GlobalRot = {
+      Type = RotAxesAngles;
+      Axis1 = x;
+      Axis2 = y;
+      Axis3 = z;
+      AnyRefFrame &T10 = ..Segments.T10Seg.Vertebral_orient;
+      AnyRefFrame &Ground = Main.EnvironmentModel.GlobalRef;
+    };
+    
+    AnyKinRotational T11GlobalRot = {
+      Type = RotAxesAngles;
+      Axis1 = x;
+      Axis2 = y;
+      Axis3 = z;
+      AnyRefFrame &T11 = ..Segments.T11Seg.Vertebral_orient;
+      AnyRefFrame &Ground = Main.EnvironmentModel.GlobalRef;
+    };
+    
+    AnyKinRotational T12GlobalRot = {
+      Type = RotAxesAngles;
+      Axis1 = x;
+      Axis2 = y;
+      Axis3 = z;
+      AnyRefFrame &T12 = ..Segments.T12Seg.Vertebral_orient;
+      AnyRefFrame &Ground = Main.EnvironmentModel.GlobalRef;
+    };
+    
+    
+    //lumbar
+    AnyKinRotational L1GlobalRot = {
+      Type = RotAxesAngles;
+      Axis1 = x;
+      Axis2 = y;
+      Axis3 = z;
+      AnyRefFrame &L1 = ..Segments.L1Seg.Vertebral_orient;
+      AnyRefFrame &Ground = Main.EnvironmentModel.GlobalRef;
+    };
+    
+    AnyKinRotational L2GlobalRot = {
+      Type = RotAxesAngles;
+      Axis1 = x;
+      Axis2 = y;
+      Axis3 = z;
+      AnyRefFrame &L2 = ..Segments.L2Seg.Vertebral_orient;
+      AnyRefFrame &Ground = Main.EnvironmentModel.GlobalRef;
+    };
+    
+    AnyKinRotational L3GlobalRot = {
+      Type = RotAxesAngles;
+      Axis1 = x;
+      Axis2 = y;
+      Axis3 = z;
+      AnyRefFrame &L3 = ..Segments.L3Seg.Vertebral_orient;
+      AnyRefFrame &Ground = Main.EnvironmentModel.GlobalRef;
+    };
+    
+    AnyKinRotational L4GlobalRot = {
+      Type = RotAxesAngles;
+      Axis1 = x;
+      Axis2 = y;
+      Axis3 = z;
+      AnyRefFrame &L4 = ..Segments.L4Seg.Vertebral_orient;
+      AnyRefFrame &Ground = Main.EnvironmentModel.GlobalRef;
+    };
+    
+    AnyKinRotational L5GlobalRot = {
+      Type = RotAxesAngles;
+      Axis1 = x;
+      Axis2 = y;
+      Axis3 = z;
+      AnyRefFrame &L5 = ..Segments.L5Seg.Vertebral_orient;
+      AnyRefFrame &Ground = Main.EnvironmentModel.GlobalRef;
+    };
+    
+    AnyFloat T1GlobalRot_AngleZ=T1GlobalRot.Pos[2]/pi*180;
+    AnyFloat T2GlobalRot_AngleZ=T2GlobalRot.Pos[2]/pi*180;
+    AnyFloat T3GlobalRot_AngleZ=T3GlobalRot.Pos[2]/pi*180;
+    AnyFloat T4GlobalRot_AngleZ=T4GlobalRot.Pos[2]/pi*180;
+    AnyFloat T5GlobalRot_AngleZ=T5GlobalRot.Pos[2]/pi*180;
+    AnyFloat T6GlobalRot_AngleZ=T6GlobalRot.Pos[2]/pi*180;
+    AnyFloat T7GlobalRot_AngleZ=T7GlobalRot.Pos[2]/pi*180;
+    AnyFloat T8GlobalRot_AngleZ=T8GlobalRot.Pos[2]/pi*180;
+    AnyFloat T9GlobalRot_AngleZ=T9GlobalRot.Pos[2]/pi*180;
+    AnyFloat T10GlobalRot_AngleZ=T10GlobalRot.Pos[2]/pi*180;
+    AnyFloat T11GlobalRot_AngleZ=T11GlobalRot.Pos[2]/pi*180;
+    AnyFloat T12GlobalRot_AngleZ=T12GlobalRot.Pos[2]/pi*180;
+    AnyFloat L1GlobalRot_AngleZ=L1GlobalRot.Pos[2]/pi*180;    
+    AnyFloat L2GlobalRot_AngleZ=L2GlobalRot.Pos[2]/pi*180;
+    AnyFloat L3GlobalRot_AngleZ=L3GlobalRot.Pos[2]/pi*180;
+    AnyFloat L4GlobalRot_AngleZ=L4GlobalRot.Pos[2]/pi*180;
+    AnyFloat L5GlobalRot_AngleZ=L5GlobalRot.Pos[2]/pi*180;
+    
+    AnyFloat T1GlobalRot_AngleX=T1GlobalRot.Pos[0]/pi*180;
+    AnyFloat T2GlobalRot_AngleX=T2GlobalRot.Pos[0]/pi*180;
+    AnyFloat T3GlobalRot_AngleX=T3GlobalRot.Pos[0]/pi*180;
+    AnyFloat T4GlobalRot_AngleX=T4GlobalRot.Pos[0]/pi*180;
+    AnyFloat T5GlobalRot_AngleX=T5GlobalRot.Pos[0]/pi*180;
+    AnyFloat T6GlobalRot_AngleX=T6GlobalRot.Pos[0]/pi*180;
+    AnyFloat T7GlobalRot_AngleX=T7GlobalRot.Pos[0]/pi*180;
+    AnyFloat T8GlobalRot_AngleX=T8GlobalRot.Pos[0]/pi*180;
+    AnyFloat T9GlobalRot_AngleX=T9GlobalRot.Pos[0]/pi*180;
+    AnyFloat T10GlobalRot_AngleX=T10GlobalRot.Pos[0]/pi*180;
+    AnyFloat T11GlobalRot_AngleX=T11GlobalRot.Pos[0]/pi*180;
+    AnyFloat T12GlobalRot_AngleX=T12GlobalRot.Pos[0]/pi*180;
+    AnyFloat L1GlobalRot_AngleX=L1GlobalRot.Pos[0]/pi*180;    
+    AnyFloat L2GlobalRot_AngleX=L2GlobalRot.Pos[0]/pi*180;
+    AnyFloat L3GlobalRot_AngleX=L3GlobalRot.Pos[0]/pi*180;
+    AnyFloat L4GlobalRot_AngleX=L4GlobalRot.Pos[0]/pi*180;
+    AnyFloat L5GlobalRot_AngleX=L5GlobalRot.Pos[0]/pi*180;
+    
+    AnyFloat T1GlobalRot_AngleY=T1GlobalRot.Pos[1]/pi*180;
+    AnyFloat T2GlobalRot_AngleY=T2GlobalRot.Pos[1]/pi*180;
+    AnyFloat T3GlobalRot_AngleY=T3GlobalRot.Pos[1]/pi*180;
+    AnyFloat T4GlobalRot_AngleY=T4GlobalRot.Pos[1]/pi*180;
+    AnyFloat T5GlobalRot_AngleY=T5GlobalRot.Pos[1]/pi*180;
+    AnyFloat T6GlobalRot_AngleY=T6GlobalRot.Pos[1]/pi*180;
+    AnyFloat T7GlobalRot_AngleY=T7GlobalRot.Pos[1]/pi*180;
+    AnyFloat T8GlobalRot_AngleY=T8GlobalRot.Pos[1]/pi*180;
+    AnyFloat T9GlobalRot_AngleY=T9GlobalRot.Pos[1]/pi*180;
+    AnyFloat T10GlobalRot_AngleY=T10GlobalRot.Pos[1]/pi*180;
+    AnyFloat T11GlobalRot_AngleY=T11GlobalRot.Pos[1]/pi*180;
+    AnyFloat T12GlobalRot_AngleY=T12GlobalRot.Pos[1]/pi*180;
+    AnyFloat L1GlobalRot_AngleY=L1GlobalRot.Pos[1]/pi*180;    
+    AnyFloat L2GlobalRot_AngleY=L2GlobalRot.Pos[1]/pi*180;
+    AnyFloat L3GlobalRot_AngleY=L3GlobalRot.Pos[1]/pi*180;
+    AnyFloat L4GlobalRot_AngleY=L4GlobalRot.Pos[1]/pi*180;
+    AnyFloat L5GlobalRot_AngleY=L5GlobalRot.Pos[1]/pi*180; 
+    
+  };
+  
+};
+

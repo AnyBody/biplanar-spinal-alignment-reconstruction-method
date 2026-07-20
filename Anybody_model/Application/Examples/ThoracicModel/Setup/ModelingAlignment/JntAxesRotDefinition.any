@@ -1,0 +1,15 @@
+// Get coordinates of endplates corners in global reference frame 
+// Performed in target posture 
+
+AnyVec3 Inf1 = seg_inf.PostSup.r;
+AnyVec3 Inf2 = seg_inf.AntSup.r; 
+AnyVec3 Sup1 = seg_sup.PostInf.r;
+AnyVec3 Sup2 = seg_sup.AntInf.r;    
+
+// Find orientation of the frame corresponding to this orientation, expressed in the reference system of each segment
+AnyMat33 rot_inf = seg_inf.Axes' * RotMat((Inf1 + Sup1)/2, (Inf2 + Sup2)/2, (Inf2 + Sup2)/2+{0.0,0.05,0.0});  
+AnyMat33 rot_sup = seg_sup.Axes' * RotMat((Inf1 + Sup1)/2, (Inf2 + Sup2)/2, (Inf2 + Sup2)/2+{0.0,0.05,0.0});  
+
+// Use these rotations to apply to Target measures (defined outside this file, because they vary depening on the segment)
+Source = {&rot_inf, &rot_sup}; 
+

@@ -1,0 +1,187 @@
+
+/* Data section */
+#ifndef BM_TRUNK_DATASET
+  // default dataset
+  #define BM_TRUNK_DATASET "TrunkData1.1"
+#endif
+
+#ifndef BM_TRUNK_DATASET_PATH
+  #path BM_TRUNK_DATASET_PATH "../Trunk/" + BM_TRUNK_DATASET
+#endif
+
+/// Folder containing all the data for the trunk model
+AnyFolder Data = {
+  AnyFolder unscaled = {
+    #include "<BM_TRUNK_DATASET_PATH>/ModelParameters.any"
+    #include "<BM_TRUNK_DATASET_PATH>/STL/STL.any"
+    AnyFolder StandardParameters = { #include "..\Trunk\StandardParameters.any" };
+  };
+   #include "TrunkMassDistribution.any"
+};
+
+
+/* Segment & node construction section */
+AnyFolder Segments = {
+  #include "SegmentsLumbar.any"
+  #include "SegmentsCervicalSpine.any"
+
+  // Thorax can be either rigid or deformable with more segments
+  #if BM_TRUNK_THORACIC_MODEL == _THORACIC_MODEL_RIGID_
+    #include "SegmentsThorax.any"
+  #else  
+    #include "SegmentsThoraxIndividual.any"
+    #include "SegmentsRibCage.any"
+    // Rib joint nodes on the spinal column
+    #include "RibsAttachmentNodes.any"
+    #include "RibCageNodes.any"
+  #endif
+  AnyFolder &TrunkFrame = PelvisSeg.AnatomicalFrameTrunk;
+};
+
+// nodes for muscle attachments
+#include "NodesForThoracicMuscles.any"
+#include "RibCageMuscleNodes.any"
+
+
+/* Joint muscle section */
+AnyFolder JointMuscles = {
+  AnyFolder Cervical = {};
+  AnyFolder Thorax = {};
+  AnyFolder CostoSternal = {};
+  AnyFolder Lumbar = {};
+
+  #if (BM_TRUNK_MUSCLES == _MUSCLES_NONE_) & (BM_TRUNK_THORACIC_MODEL != _THORACIC_MODEL_RIGID_) & (BM_TRUNK_THORACIC_MODEL != _THORACIC_MODEL_USERDEFINED_)
+    // TODO get jnt muscles working.
+    //Thorax = {#include "JointMusclesThoracic.any"} //Adds muscles to the joints in the thoracic spine  
+  #endif
+
+
+  #if (BM_TRUNK_THORACIC_MODEL != _THORACIC_MODEL_FLEXIBLE_)
+  // TODO get working.
+  // for now costosternal joint muscles are always on to account for residual
+  //CostoSternal = {#include "JointMusclesRibCage.any"}; //Adds muscles to the joints for the ribs
+  #endif
+
+  #if BM_TRUNK_MUSCLES == OFF
+    Lumbar = {#include "JointMusclesLumbar.any"}; //Adds muscles to the joints in the lumbar spine
+    Cervical = {#include "JointMusclesCervical.any"}; //Adds muscles to the joints in the cervical spine
+  #endif
+};
+
+
+AnyFolder Joints = {
+  AnyFolder Cervical = {#include "JointsCervical.any"};
+  AnyFolder Thorax = {};
+  AnyFolder RibCage = {};
+  AnyFolder Lumbar = {#include "JointsLumbar.any"};
+
+  #if (BM_TRUNK_THORACIC_MODEL == _THORACIC_MODEL_FLEXIBLE_ )
+    Thorax = {#include "JointsThorax.any"};
+    RibCage = {#include "JointsRibCage.any"};
+  #endif
+  #if (BM_TRUNK_MUSCLES == _MUSCLES_NONE_) & (BM_TRUNK_THORACIC_MODEL != _THORACIC_MODEL_RIGID_) & (BM_TRUNK_THORACIC_MODEL != _THORACIC_MODEL_USERDEFINED_) 
+    #include "RibcagePassiveReactions.any"
+  #endif
+
+  //Reference to mannequin folder 
+  AnyFolder &JointPos= ...Mannequin.Posture;
+}; 
+
+
+/* Muscle definition section */
+
+#if BM_TRUNK_MUSCLES
+#if BM_TRUNK_CAVITY_MODEL == _CAVITY_MODEL_VOLUME_
+   #include "MeshForWrapping.any"
+#endif
+#endif
+
+AnyFolder Muscles = {
+    #include "MusclesMid.any"
+    AnyFolder Right = {
+      #include "MusclesRight.any"
+    };
+    AnyFolder Left = {
+      #include "MusclesLeft.any"
+    };
+  };
+
+  #if (BM_TRUNK_MUSCLES == _MUSCLES_NONE_) & (BM_TRUNK_CAVITY_MODEL == _CAVITY_MODEL_VOLUME_)
+  #include "AbdomenPassiveReactions.any"
+  #endif
+  
+
+  #if BM_TRUNK_CAVITY_MODEL == _CAVITY_MODEL_VOLUME_
+  #include "Abdominal/AbdominalPressureModel.any"
+  #endif
+  #if (BM_TRUNK_CAVITY_MODEL != _CAVITY_MODEL_VOLUME_) & BM_TRUNK_MUSCLES
+  #include "Buckle.any"
+  #endif
+
+#if BM_TRUNK_THORACIC_MODEL == _THORACIC_MODEL_FLEXIBLE_
+  #include "ThoracicCavity.any"
+#endif
+  
+#if BM_TRUNK_MUSCLES | ( BM_LEG_MODEL & ((BM_LEG_MUSCLES_LEFT & BM_LEG_LEFT) | (BM_LEG_MUSCLES_RIGHT & BM_LEG_RIGHT))) 
+  AnyFolder MuscleModels = {
+    #if BM_TRUNK_MUSCLES == _MUSCLES_3E_HILL_
+      #include "muscle-models-trunk.any"
+    #else
+      #include "muscle-models-trunk-simple.any"
+    #endif
+  };
+#endif
+
+// Handle the case where the trunk is switched off but the legs are present
+#if (BM_TRUNK_MUSCLES == OFF) & ( BM_LEG_MODEL & ((BM_LEG_MUSCLES_LEFT & BM_LEG_LEFT) | (BM_LEG_MUSCLES_RIGHT & BM_LEG_RIGHT)))  
+ Muscles = {
+  #if BM_LEG_MUSCLES_RIGHT
+     Right = {#include "PsoasMajorRight.any"};
+  #endif
+  #if BM_LEG_MUSCLES_LEFT
+     Left = {#include "PsoasMajorLeft.any"};
+  #endif
+};
+#endif
+
+
+/* Soft tissue section */
+AnyFolder ElasticElements = {
+  
+  #include "LumbarLigamentNodes.any"
+  #include "LigamentsLumbar.any"
+  #include "ThoracicLigamentNodes.any" // Thoracic ligaments defined, but are not used unless defined, due to limited data in literature regarding their properties (D. Ignasiak)
+  #include "LigamentsThorax.any"
+  #include "CervicalLigamentNodes.any"
+
+  
+  AnyFolder Ligaments = {};
+  AnyFolder LigamentParameters = {};
+  #if BM_TRUNK_LUMBAR_LIGAMENTS | BM_TRUNK_THORACIC_LIGAMENTS | BM_TRUNK_CERVICAL_LIGAMENTS
+    Ligaments = {#include "Ligaments.any"};
+    LigamentParameters = {#include "SubjectLigPar.any"};
+  #endif
+
+    
+  #include "DiscStiffness.any"
+
+};
+/* Other sections */
+
+
+//Summation of masses in the spine
+AnyFolder MassSummation = {
+  AnyVar Mass = sum(
+    Obj2Num(DesignVar(ObjGetMember(ObjSearchRecursive("..Trunk", "*", "AnySeg"), "Mass")))
+  ); 
+};
+
+InterfaceFolder = {#include "Interface.any"};
+
+#ifdef DONT_USE_INITIAL_POSITION_FROM_MANNEQUIN
+#else
+  #include "InitialPositions.any"
+#endif
+
+
+MannequinValuesFolder ={ #include "MannequinValuesFromModel.any" };
