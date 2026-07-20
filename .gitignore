@@ -1,0 +1,7 @@
+# pixi environments
+.pixi/*
+!.pixi/config.toml
+
+__pycache__/
+Anybody_model/Application/Examples/ThoracicModel/Setup/OutputData
+Tests/*.txt

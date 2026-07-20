@@ -6,7 +6,10 @@
 
 // Select input file with patient-specific alignment data
 // Files are located in "InputAlignment". PatientID must match the filename (without extension)
-#define PatientID "Patient79314"
+#ifndef PatientID
+//#define PatientID "Patient79314"
+#define PatientID "Example_Patient"
+#endif
 
 // Save selected trunk outputs 
 #define SaveSelectedOutput 1

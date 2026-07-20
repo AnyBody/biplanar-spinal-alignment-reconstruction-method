@@ -1,0 +1,14 @@
+[workspace]
+authors = ["Morten Enemark Lund <melund@gmail.com>"]
+channels = ["https://prefix.dev/conda-forge", "anybody"]
+name = "biplanar-spinal-alignment-reconstruction-method"
+platforms = ["win-64"]
+version = "0.1.0"
+
+[tasks]
+test = {cmd= "pytest", cwd = "Tests"}
+
+[dependencies]
+anypytools = ">=1.20.6,<2"
+pytest = ">=9.1.1,<10"
+anybodycon = ">=8.2.1,<9"
